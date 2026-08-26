@@ -690,3 +690,4 @@
 {"source_file": "microsoft-activedirectory.md", "note_path": "detections/active-directory.md", "category": "detections", "title": "Active Directory", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:35:39.127036"}
 {"source_file": "microsoft-copilot.md", "note_path": "os/os-aliases.md", "category": "os", "title": "os/aliases", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:36:09.698890"}
 {"source_file": "microsoft-powershell-createscheduledtask.md", "note_path": "study-notes/aliases-1787782271-1787783801.md", "category": "study_notes", "title": "Aliases", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:36:41.311901"}
+{"source_file": "microsoft-entra.md", "note_path": "study-notes/aliases-1787782271-1787783801-1787783809.md", "category": "study_notes", "title": "Aliases", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:36:49.274959"}
