@@ -1,27 +1,155 @@
 ---
-title: "masscan"
+title: Masscan
 aliases: []
-tags: ['tool/masscan']
-category: "tools"
-status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
-source: "auto-generated stub (referenced by another note, not yet written)"
-related_tools: []
+tags:
+- tool/masscan
+- tool/nmap-privilege-escalation
+category: tools
+status: draft
+date_created: '2026-08-26'
+date_modified: '2026-08-26'
+source: massscan.md
+related_tools:
+- '[[masscan]]'
+- '[[nmap]]'
 related_techniques: []
 related_tactics: []
 related_services: []
 related_os: []
 related_notes: []
-mitre_tactic: ""
-mitre_technique: ""
-real_path: ""
-port: ""
-protocol: ""
-os: ""
+mitre_tactic: ''
+mitre_technique: ''
+real_path: ''
+port: ''
+protocol: ''
+os: ''
 ---
 
-# masscan
+# Masscan
 
-## Overview
-*Stub note — auto-created because another note referenced "masscan". Fill in details when you have them.*
+## Description
+Masscan is an IP port scanner that can scan the entire Internet in under 5 minutes, transmitting 10 million packets per second, from a single machine.
+
+## Target Specification
+```
+masscan 10.0.0.1
+masscan 10.0.0.0/24 192.168.1.0/24
+```
+
+## Exclude IP File
+```
+masscan 10.0.0.1/24 --excludeFile <file>
+
+# Exclude a single IP from the scan
+masscan 180.215.0.0/16 --exclude=180.215.122.120
+```
+
+## Port Specification
+```
+# Port specification
+masscan 10.0.0.0.1 -p 80
+masscan 10.0.0.0.1 -p 0-65535
+masscan 10.0.0.0.1 -p 80,443
+```
+
+## UDP Scan
+```
+masscan 10.0.0.0.1 -pU 53
+```
+
+## Timing and Performance
+```
+# Used to scan in offline mode
+# It does not send any traffic but just estimate the time length
+masscan 0.0.0.0/24 --offline
+
+# Using the rate to send X packets per second
+masscan 10.0.0.1/24 --rate 10000
+
+# Get banners from services (only few protocols supported)
+# Problem is that masscan uses his own TCP/IP stack so when the local system
+# received a SYN-ACK from the probed target, it responds with a TST packet that
+# kills the connection before the banner information can be grabbed.
+# You can use --source-ip to assign another IP to prevent
+masscan 10.0.0.1 --banners
+
+# Assign masscan to another IP
+masscan 10.0.0.1 --source-ip 192.168.1.200
+
+# Include a ping
+masscan 10.0.0.1 --ping
+
+# Change the default user agent
+masscan 10.0.0.1 --http-user-agent <user-agent>
+
+# Report only open ports
+masscan 10.0.0.1 --open-only
+
+# Save sent packet in PCAP
+masscan 10.0.0.1 --pcap <filename>
+
+# Print packets in terminal (ok in low rate but RIP terminal with high rates)
+masscan 10.0.0.1 --packet-trace
+```
+
+## Output
+```
+# Output in binary mode
+massscan 10.1.1.1/24 -p 80 -oB <filename>
+
+# Output in XML format
+massscan 10.1.1.1/24 -p 80 -oX <filename>
+
+# Output in grepable format
+massscan 10.1.1.1/24 -p 80 -oG <filename>
+
+# Output in JSON format
+masscan 10.1.1.1/24 -p 80 -oJ <filename>
+
+# Output in simple list format
+massscan 10.1.1.1/24 -p 80 -oL <filename>
+
+# Read a binary output and writes it to the console
+masscan --readscan bin-test.scan
+
+# Read a binary scan and convert it to another format
+masscan --readscan bin-test.scan -oX bin-test.xml
+```
+
+## Complete Commands
+```
+# Quick port identification
+# - Subnet target
+# - Port range
+# - High speed
+masscan 10.1.1.1/24 -p 0-65535 --rate 1000000 --open-only --http-user-agent \
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"\
+ -oL "output.txt"
+
+# Multiple targets specific scan
+# - Known ports
+# - Fast rate 100.000
+# - Banner grabbing and another source IP
+# - Only open ports
+# - Modified user-agent
+masscan <target1> <target2> <target3> -p 80,433 --rate 100000 --banners --open-only\
+--http-user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"\
+--source-ip 192.168.100.200 -oL "output.txt" 
+
+# TOP 20 ports scanning
+# Modified user-agent
+# Medium speed
+masscan <target> -p 21,22,23,25,53,80,110,111,135,139,143,443,445,993,995,1723,3306,3389,5900,8080\
+--http-user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"\
+--rate 100000 --oL "output.txt"
+
+# In some cases, masscan can be better than nmap
+# For example, when searching for a big range on some ports only
+# (Internal pentest for example) you can do multiple iterations of scans
+# XML output are interesting for db_import in metasploit
+sudo masscan <target/16> -p 22 --rate 2000 -oX output_port_22.xml
+```
+
+## References
+- https://github.com/robertdavidgraham/masscan
+

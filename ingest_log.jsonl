@@ -43,3 +43,4 @@
 {"source_file": "splunk.md", "note_path": "tools/splunk.md", "category": "study_notes", "title": "Splunk", "stubs_created": ["services-ports/ssl-http.md"], "status": "ok", "timestamp": "2026-08-26T20:16:51.123853"}
 {"source_file": "nmap.md", "note_path": "tools/nmap.md", "category": "tools", "title": "nmap", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:18:22.435743"}
 {"source_file": "jenkins.md", "note_path": "study-notes/jenkins.md", "category": "study_notes", "title": "Jenkins", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:18:51.374065"}
+{"source_file": "massscan.md", "note_path": "tools/masscan.md", "category": "tools", "title": "Masscan", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:20:14.727645"}
