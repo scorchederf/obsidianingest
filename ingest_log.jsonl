@@ -90,3 +90,4 @@
 {"source_file": "cheatsheet-19.md", "note_path": "tools/nmap-scanning-and-output-options.md", "category": "tools", "title": "Nmap Scanning and Output Options", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T21:02:14.866281"}
 {"source_file": "cheatsheet-18.md", "status": "error", "error": "'title'", "timestamp": "2026-08-26T21:03:18.199389"}
 {"source_file": "cheatsheet-15.md", "note_path": "study-notes/linux-command-usage.md", "category": "study_notes", "title": "Linux Command Usage", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T21:03:31.048944"}
+{"source_file": "cheatsheet-17.md", "note_path": "study-notes/common-web-and-network-commands.md", "category": "study_notes", "title": "Common Web and Network Commands", "stubs_created": ["tools/tree.md", "tools/wp-scan.md", "tools/html2text.md", "tools/grep.md", "tools/man.md"], "status": "ok", "timestamp": "2026-08-26T21:04:08.228873"}
