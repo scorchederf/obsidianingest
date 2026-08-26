@@ -688,3 +688,4 @@
 {"source_file": "crowdstrike-identity.md", "note_path": "study-notes/falcon-identity-protection-fundamentals.md", "category": "study_notes", "title": "Falcon Identity Protection Fundamentals", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:23:01.621880"}
 {"source_file": "crowdstrike-ngsiem-queries.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-27T08:35:02.359863"}
 {"source_file": "microsoft-activedirectory.md", "note_path": "detections/active-directory.md", "category": "detections", "title": "Active Directory", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:35:39.127036"}
+{"source_file": "microsoft-copilot.md", "note_path": "os/os-aliases.md", "category": "os", "title": "os/aliases", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:36:09.698890"}
