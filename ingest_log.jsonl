@@ -38,3 +38,4 @@
 {"source_file": "aquatone.md", "note_path": "tools/aquatone.md", "category": "tools", "title": "Aquatone", "stubs_created": ["tools/masscan.md"], "status": "ok", "timestamp": "2026-08-26T20:14:55.604569"}
 {"source_file": "linux.md", "note_path": "study-notes/file-search-commands.md", "category": "study_notes", "title": "File Search Commands", "stubs_created": ["tools/locate.md", "tools/find.md"], "status": "ok", "timestamp": "2026-08-26T20:15:09.555243"}
 {"source_file": "python2.7.md", "note_path": "study-notes/python2-7-alternative-installation.md", "category": "study_notes", "title": "Python2.7 Alternative Installation", "stubs_created": ["tools/pyenv.md"], "status": "ok", "timestamp": "2026-08-26T20:15:29.375714"}
+{"source_file": "seclists.md", "note_path": "study-notes/seclists-wordlists.md", "category": "study_notes", "title": "SecLists Wordlists", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:15:43.431147"}
