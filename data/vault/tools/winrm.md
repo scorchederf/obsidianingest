@@ -1,0 +1,35 @@
+---
+title: winrm
+aliases: []
+tags:
+- tool/crackmapexec
+- tool/evil-winrm
+category: tools
+status: draft
+date_created: '2026-08-26'
+date_modified: '2026-08-26'
+source: winrm.md
+related_tools:
+- '[[crackmapexec]]'
+- '[[evil-winrm]]'
+related_techniques: []
+related_tactics: []
+related_services: []
+related_os: []
+related_notes: []
+mitre_tactic: ''
+mitre_technique: ''
+real_path: ''
+port: ''
+protocol: ''
+os: ''
+---
+
+# winrm
+
+## Brute Force Attack
+- brute force `crackmapexec winrm $ip -p username.list -u password.list`
+
+## Evil-WinRM
+- `evil-winrm -u Administrator -i $ip`
+
