@@ -1,8 +1,8 @@
 ---
-title: "T1059.004 - Execute Commands"
+title: "rtr"
 aliases: []
-tags: ['technique/t1059-004-execute-commands']
-category: "techniques"
+tags: ['tool/rtr']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# T1059.004 - Execute Commands
+# rtr
 
 ## Overview
-*Stub note — auto-created because another note referenced "T1059.004 - Execute Commands". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "rtr". Fill in details when you have them.*

@@ -1,8 +1,8 @@
 ---
-title: "wireless-attack"
+title: "Z:\"
 aliases: []
-tags: ['technique/wireless-attack']
-category: "techniques"
+tags: ['os/z']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# wireless-attack
+# Z:\
 
 ## Overview
-*Stub note — auto-created because another note referenced "wireless-attack". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "Z:\". Fill in details when you have them.*

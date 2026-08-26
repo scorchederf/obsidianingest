@@ -1,8 +1,8 @@
 ---
-title: "hostapd"
+title: "C:\\"
 aliases: []
-tags: ['tool/hostapd']
-category: "tools"
+tags: ['os/c']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# hostapd
+# C:\\
 
 ## Overview
-*Stub note — auto-created because another note referenced "hostapd". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\\". Fill in details when you have them.*

@@ -1,8 +1,8 @@
 ---
-title: "reaver"
+title: "C:\Software\alias.txt"
 aliases: []
-tags: ['tool/reaver']
-category: "tools"
+tags: ['os/c-software-alias-txt']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# reaver
+# C:\Software\alias.txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "reaver". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\Software\alias.txt". Fill in details when you have them.*

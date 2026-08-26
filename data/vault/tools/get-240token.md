@@ -1,7 +1,7 @@
 ---
-title: "ngsiem"
+title: "Get-240Token"
 aliases: []
-tags: ['tool/ngsiem']
+tags: ['tool/get-240token']
 category: "tools"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# ngsiem
+# Get-240Token
 
 ## Overview
-*Stub note — auto-created because another note referenced "ngsiem". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "Get-240Token". Fill in details when you have them.*

@@ -1,8 +1,8 @@
 ---
-title: "xfreerdp"
+title: "C:\inetpub\wwwroot\"
 aliases: []
-tags: ['tool/xfreerdp']
-category: "tools"
+tags: ['os/c-inetpub-wwwroot']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# xfreerdp
+# C:\inetpub\wwwroot\
 
 ## Overview
-*Stub note — auto-created because another note referenced "xfreerdp". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\inetpub\wwwroot\". Fill in details when you have them.*

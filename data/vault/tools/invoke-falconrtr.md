@@ -1,8 +1,8 @@
 ---
-title: "wlan1"
+title: "Invoke-FalconRtr"
 aliases: []
-tags: ['os/wlan1']
-category: "os"
+tags: ['tool/invoke-falconrtr']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# wlan1
+# Invoke-FalconRtr
 
 ## Overview
-*Stub note — auto-created because another note referenced "wlan1". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "Invoke-FalconRtr". Fill in details when you have them.*

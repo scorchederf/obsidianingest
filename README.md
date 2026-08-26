@@ -7,6 +7,8 @@ notes (creating stub notes for anything new it references).
 ## Setup
 
 ```bash
+python3 -m venv myenv
+source myenv/bin/activate
 pip install -r requirements.txt
 ollama pull qwen2.5:7b-instruct
 ollama pull nomic-embed-text

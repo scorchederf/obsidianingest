@@ -1,7 +1,7 @@
 ---
-title: "mimecast"
+title: "psfalcon"
 aliases: []
-tags: ['tool/mimecast']
+tags: ['tool/psfalcon']
 category: "tools"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# mimecast
+# psfalcon
 
 ## Overview
-*Stub note — auto-created because another note referenced "mimecast". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "psfalcon". Fill in details when you have them.*

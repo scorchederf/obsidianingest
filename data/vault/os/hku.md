@@ -1,7 +1,7 @@
 ---
-title: "mon0"
+title: "hku"
 aliases: []
-tags: ['os/mon0']
+tags: ['os/hku']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# mon0
+# hku
 
 ## Overview
-*Stub note — auto-created because another note referenced "mon0". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "hku". Fill in details when you have them.*

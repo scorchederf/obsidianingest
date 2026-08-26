@@ -1,8 +1,8 @@
 ---
-title: "TA0003 - Defense Evasion"
+title: "hklm\software\microsoft\windows\currentversion\run"
 aliases: []
-tags: ['attack/ta0003-defense-evasion']
-category: "tactics"
+tags: ['os/hklm-software-microsoft-windows-currentversion-run']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# TA0003 - Defense Evasion
+# hklm\software\microsoft\windows\currentversion\run
 
 ## Overview
-*Stub note — auto-created because another note referenced "TA0003 - Defense Evasion". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "hklm\software\microsoft\windows\currentversion\run". Fill in details when you have them.*

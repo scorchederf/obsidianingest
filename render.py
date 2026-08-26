@@ -108,8 +108,37 @@ def resolve_entities(data: dict, index: VaultIndex, category_folders: dict[str, 
     return relations, created_stubs
 
 
-def render_note(data: dict, relations: dict, template_path: Path) -> str:
+def merge_sections(sections: list[dict]) -> list[dict]:
+    """
+    Merges sections with matching headings (case-insensitive) by
+    concatenating their content, preserving the order each heading first
+    appeared in. Used when a large document is processed chunk-by-chunk
+    and multiple chunks produce a section with the same heading (e.g.
+    "References" or a topic that spans several chunks).
+    """
+    merged: dict[str, dict] = {}
+    order: list[str] = []
+
+    for sec in sections:
+        heading = (sec.get("heading") or "Notes").strip()
+        content = (sec.get("content") or "").strip()
+        if not content:
+            continue
+
+        key = heading.lower()
+        if key not in merged:
+            merged[key] = {"heading": heading, "content": content}
+            order.append(key)
+        else:
+            merged[key]["content"] += "\n\n" + content
+
+    return [merged[k] for k in order]
+
+
+def render_note(data: dict, relations: dict, template_path: Path,
+                 date_created_override: str | None = None) -> str:
     today = date.today().isoformat()
+    created = date_created_override or today
 
     frontmatter = {
         "title": data["title"],
@@ -117,7 +146,7 @@ def render_note(data: dict, relations: dict, template_path: Path) -> str:
         "tags": data.get("tags", []),
         "category": data["category"],
         "status": data.get("status", "draft"),
-        "date_created": today,
+        "date_created": created,
         "date_modified": today,
         "source": data.get("source", ""),
         "related_tools": relations.get("related_tools", []),

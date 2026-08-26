@@ -1,8 +1,8 @@
 ---
-title: "servicenow"
+title: "C:\wallet"
 aliases: []
-tags: ['tool/servicenow']
-category: "tools"
+tags: ['os/c-wallet']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# servicenow
+# C:\wallet
 
 ## Overview
-*Stub note — auto-created because another note referenced "servicenow". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\wallet". Fill in details when you have them.*
