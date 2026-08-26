@@ -120,3 +120,5 @@
 {"source_file": "enum-method3.png", "status": "error", "error": "No extractor for '.png' files. Add one in extract.py, or convert 'enum-method3.png' manually before dropping it in the inbox.", "timestamp": "2026-08-26T21:28:43.046229"}
 {"source_file": "payloads.md", "note_path": "study-notes/payloads.md", "category": "study_notes", "title": "payloads", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T21:29:16.308767"}
 {"source_file": "linux-commands.md", "note_path": "study-notes/linux-commands-and-techniques.md", "category": "study_notes", "title": "Linux Commands and Techniques", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T21:30:33.903687"}
+{"source_file": "linux-credhunting.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-26T21:35:35.830386"}
+{"source_file": "xss.md", "note_path": "study-notes/cross-site-scripting-xss.md", "category": "study_notes", "title": "Cross-Site Scripting (XSS)", "stubs_created": ["tools/xsstrike.md", "tools/brutexss.md", "tools/xsser.md"], "status": "ok", "timestamp": "2026-08-26T21:37:04.356330"}
