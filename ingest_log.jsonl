@@ -151,3 +151,4 @@
 {"source_file": "gathid.md", "note_path": "study-notes/gathid.md", "category": "study_notes", "title": "gathid", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:25:10.952231"}
 {"source_file": "hydra.md", "note_path": "tools/hydra.md", "category": "tools", "title": "hydra", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:25:32.825513"}
 {"source_file": "hashcat.md", "note_path": "tools/hashcat.md", "category": "tools", "title": "hashcat", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:25:45.660470"}
+{"source_file": "42315-eternalblue.md", "note_path": "study-notes/smb-exploit-ms17-010.md", "category": "study_notes", "title": "SMB Exploit - MS17-010", "stubs_created": ["tools/python2.md", "tools/pip2.md", "tools/impacket.md", "tools/git.md"], "status": "ok", "timestamp": "2026-08-26T22:26:45.364692"}
