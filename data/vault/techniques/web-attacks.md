@@ -1,7 +1,7 @@
 ---
-title: "password-cracking"
+title: "web-attacks"
 aliases: []
-tags: ['technique/password-cracking']
+tags: ['technique/web-attacks']
 category: "techniques"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# password-cracking
+# web-attacks
 
 ## Overview
-*Stub note — auto-created because another note referenced "password-cracking". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "web-attacks". Fill in details when you have them.*

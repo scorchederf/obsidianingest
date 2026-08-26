@@ -1,8 +1,8 @@
 ---
-title: "password-cracking"
+title: "finalrecon"
 aliases: []
-tags: ['technique/password-cracking']
-category: "techniques"
+tags: ['tool/finalrecon']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# password-cracking
+# finalrecon
 
 ## Overview
-*Stub note — auto-created because another note referenced "password-cracking". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "finalrecon". Fill in details when you have them.*
