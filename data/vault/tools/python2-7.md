@@ -1,5 +1,5 @@
 ---
-title: "python2.7"
+title: "python2-7"
 aliases: []
 tags: ['tool/python2-7']
 category: "tools"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# python2.7
+# python2-7
 
 ## Overview
-*Stub note — auto-created because another note referenced "python2.7". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "python2-7". Fill in details when you have them.*

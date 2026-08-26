@@ -1,7 +1,7 @@
 ---
-title: "cmd-jsp"
+title: "wget"
 aliases: []
-tags: ['tool/cmd-jsp']
+tags: ['tool/wget']
 category: "tools"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# cmd-jsp
+# wget
 
 ## Overview
-*Stub note — auto-created because another note referenced "cmd-jsp". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "wget". Fill in details when you have them.*

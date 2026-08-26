@@ -1,7 +1,7 @@
 ---
-title: "cmd-jsp"
+title: "tar"
 aliases: []
-tags: ['tool/cmd-jsp']
+tags: ['tool/tar']
 category: "tools"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# cmd-jsp
+# tar
 
 ## Overview
-*Stub note — auto-created because another note referenced "cmd-jsp". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "tar". Fill in details when you have them.*
