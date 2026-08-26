@@ -159,3 +159,4 @@
 {"source_file": "mysql.md", "note_path": "services-ports/mysql-1787747546.md", "category": "services", "title": "mysql", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:32:26.321790"}
 {"source_file": "rdp.md", "note_path": "services-ports/rdp-1787747597.md", "category": "study_notes", "title": "rdp", "stubs_created": ["tools/query.md", "tools/tscon.md", "tools/sc.md", "techniques/t1020-004.md"], "status": "ok", "timestamp": "2026-08-26T22:33:17.930966"}
 {"source_file": "redis.md", "note_path": "tools/redis-1787747626.md", "category": "study_notes", "title": "redis", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:33:46.850032"}
+{"source_file": "rsync.md", "note_path": "tools/rsync-1787747637.md", "category": "tools", "title": "rsync", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:33:57.357837"}
