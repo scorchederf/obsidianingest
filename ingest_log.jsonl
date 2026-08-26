@@ -604,3 +604,6 @@
 {"source_file": "500worst.txt", "note_path": "study-notes/common-passwords-and-phrases.md", "category": "study_notes", "title": "Common Passwords and Phrases", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T06:56:07.329862"}
 {"source_file": "notes.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-27T07:02:27.551259"}
 {"source_file": "a.txt", "note_path": "vulnerabilities/flag-rar.md", "category": "vulnerabilities", "title": "flag.rar", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T07:03:10.246820"}
+{"source_file": "image.png", "status": "error", "error": "No extractor for '.png' files. Add one in extract.py, or convert 'image.png' manually before dropping it in the inbox.", "timestamp": "2026-08-27T07:03:12.485389"}
+{"source_file": "flag.zip", "status": "error", "error": "No extractor for '.zip' files. Add one in extract.py, or convert 'flag.zip' manually before dropping it in the inbox.", "timestamp": "2026-08-27T07:03:12.486075"}
+{"source_file": "megacorp-cewl.txt", "note_path": "study-notes/megacorp-website-content.md", "category": "study_notes", "title": "MegaCorp Website Content", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T07:03:46.272929"}
