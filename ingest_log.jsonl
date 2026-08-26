@@ -150,3 +150,4 @@
 {"source_file": "laZagne.md", "note_path": "tools/lazagne.md", "category": "tools", "title": "laZagne", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:24:51.545699"}
 {"source_file": "gathid.md", "note_path": "study-notes/gathid.md", "category": "study_notes", "title": "gathid", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:25:10.952231"}
 {"source_file": "hydra.md", "note_path": "tools/hydra.md", "category": "tools", "title": "hydra", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:25:32.825513"}
+{"source_file": "hashcat.md", "note_path": "tools/hashcat.md", "category": "tools", "title": "hashcat", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:25:45.660470"}
