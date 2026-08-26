@@ -165,3 +165,4 @@
 {"source_file": "smb.md", "note_path": "study-notes/smb-1787747781.md", "category": "tools", "title": "smb", "stubs_created": ["techniques/t1020.md"], "status": "ok", "timestamp": "2026-08-26T22:36:21.555277"}
 {"source_file": "ftp.md", "note_path": "services-ports/ftp-1787747806.md", "category": "study_notes", "title": "ftp", "stubs_created": ["techniques/brute-forcing.md"], "status": "ok", "timestamp": "2026-08-26T22:36:46.269000"}
 {"source_file": "dns.md", "note_path": "services-ports/dns.md", "category": "study_notes", "title": "dns", "stubs_created": ["techniques/dns-enumeration.md", "attack-methodologies/passive-subdomain-enumeration.md", "attack-methodologies/active-subdomain-enumeration.md"], "status": "ok", "timestamp": "2026-08-26T22:37:51.049866"}
+{"source_file": "winrm.md", "note_path": "tools/winrm-1787747908.md", "category": "study_notes", "title": "winrm", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:38:28.096563"}
