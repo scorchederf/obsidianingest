@@ -1,8 +1,8 @@
 ---
-title: "lateral-movement"
+title: "john"
 aliases: []
-tags: ['attack/lateral-movement']
-category: "tactics"
+tags: ['tool/john']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# lateral-movement
+# john
 
 ## Overview
-*Stub note — auto-created because another note referenced "lateral-movement". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "john". Fill in details when you have them.*

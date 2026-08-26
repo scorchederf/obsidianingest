@@ -1,8 +1,8 @@
 ---
-title: "lateral-movement"
+title: "zip2john"
 aliases: []
-tags: ['attack/lateral-movement']
-category: "tactics"
+tags: ['tool/zip2john']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# lateral-movement
+# zip2john
 
 ## Overview
-*Stub note — auto-created because another note referenced "lateral-movement". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "zip2john". Fill in details when you have them.*
