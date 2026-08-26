@@ -1,8 +1,8 @@
 ---
-title: "T1555.004"
+title: "IMAP/POP3"
 aliases: []
-tags: ['technique/t1555-004']
-category: "techniques"
+tags: ['service/imap-pop3']
+category: "services"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# T1555.004
+# IMAP/POP3
 
 ## Overview
-*Stub note — auto-created because another note referenced "T1555.004". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "IMAP/POP3". Fill in details when you have them.*

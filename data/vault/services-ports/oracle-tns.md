@@ -1,8 +1,8 @@
 ---
-title: "T1555.004"
+title: "Oracle TNS"
 aliases: []
-tags: ['technique/t1555-004']
-category: "techniques"
+tags: ['service/oracle-tns']
+category: "services"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# T1555.004
+# Oracle TNS
 
 ## Overview
-*Stub note — auto-created because another note referenced "T1555.004". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "Oracle TNS". Fill in details when you have them.*

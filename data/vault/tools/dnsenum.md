@@ -1,8 +1,8 @@
 ---
-title: "T1555.004"
+title: "dnsenum"
 aliases: []
-tags: ['technique/t1555-004']
-category: "techniques"
+tags: ['tool/dnsenum']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# T1555.004
+# dnsenum
 
 ## Overview
-*Stub note — auto-created because another note referenced "T1555.004". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "dnsenum". Fill in details when you have them.*

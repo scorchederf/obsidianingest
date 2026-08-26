@@ -1,8 +1,8 @@
 ---
-title: "T1555.004"
+title: "openssl"
 aliases: []
-tags: ['technique/t1555-004']
-category: "techniques"
+tags: ['tool/openssl']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# T1555.004
+# openssl
 
 ## Overview
-*Stub note — auto-created because another note referenced "T1555.004". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "openssl". Fill in details when you have them.*

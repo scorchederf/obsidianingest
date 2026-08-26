@@ -1,8 +1,8 @@
 ---
-title: "T1555.004"
+title: "odat.py"
 aliases: []
-tags: ['technique/t1555-004']
-category: "techniques"
+tags: ['tool/odat-py']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# T1555.004
+# odat.py
 
 ## Overview
-*Stub note — auto-created because another note referenced "T1555.004". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "odat.py". Fill in details when you have them.*

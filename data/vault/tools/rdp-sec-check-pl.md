@@ -1,8 +1,8 @@
 ---
-title: "T1555.004"
+title: "rdp-sec-check.pl"
 aliases: []
-tags: ['technique/t1555-004']
-category: "techniques"
+tags: ['tool/rdp-sec-check-pl']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# T1555.004
+# rdp-sec-check.pl
 
 ## Overview
-*Stub note — auto-created because another note referenced "T1555.004". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "rdp-sec-check.pl". Fill in details when you have them.*
