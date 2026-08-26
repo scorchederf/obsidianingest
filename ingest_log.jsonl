@@ -22,3 +22,4 @@
 {"source_file": "cyberhq.md", "note_path": "os/software-alias-txt.md", "category": "os", "title": "Software Alias TXT", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:08:46.751205"}
 {"source_file": "workday.md", "note_path": "os/software-alias-txt-1787738937.md", "category": "os", "title": "Software Alias TXT", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:08:57.740323"}
 {"source_file": "msfvenom.md", "note_path": "study-notes/apache-tomcat-malicious-war-file.md", "category": "study_notes", "title": "Apache Tomcat Malicious WAR File", "stubs_created": ["tools/msfvenom.md", "techniques/t1190.md", "services-ports/apache-tomcat.md"], "status": "ok", "timestamp": "2026-08-26T20:09:12.293508"}
+{"source_file": "palo-firewalls.md", "note_path": "study-notes/alias-files.md", "category": "study_notes", "title": "Alias Files", "stubs_created": ["os/software-alias-txt.md"], "status": "ok", "timestamp": "2026-08-26T20:09:30.855456"}

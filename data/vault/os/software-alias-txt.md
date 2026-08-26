@@ -1,30 +1,27 @@
 ---
-title: Software Alias TXT
+title: "software/alias.txt"
 aliases: []
-tags:
-- os/software-alias-txt
-category: os
-status: draft
-date_created: '2026-08-26'
-date_modified: '2026-08-26'
-source: cyberhq.md
+tags: ['os/software-alias-txt']
+category: "os"
+status: stub
+date_created: "2026-08-26"
+date_modified: "2026-08-26"
+source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
 related_tactics: []
 related_services: []
-related_os:
-- '[[c-software-alias-txt]]'
+related_os: []
 related_notes: []
-mitre_tactic: ''
-mitre_technique: ''
-real_path: C:\Software\Alias.TXT
-port: ''
-protocol: ''
-os: windows
+mitre_tactic: ""
+mitre_technique: ""
+real_path: ""
+port: ""
+protocol: ""
+os: ""
 ---
 
-# Software Alias TXT
+# software/alias.txt
 
-## Description
-This file is used to store aliases for various software applications. Administrators can use this file to map executable paths or other identifiers to more user-friendly names.
-
+## Overview
+*Stub note — auto-created because another note referenced "software/alias.txt". Fill in details when you have them.*
