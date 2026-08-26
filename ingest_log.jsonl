@@ -62,3 +62,4 @@
 {"source_file": "autorecon.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-26T20:39:17.351698"}
 {"source_file": "joomla.md", "note_path": "study-notes/joomla-cms.md", "category": "study_notes", "title": "Joomla CMS", "stubs_created": ["tools/python.md"], "status": "ok", "timestamp": "2026-08-26T20:40:00.678992"}
 {"source_file": "gobuster.md", "note_path": "tools/gobuster.md", "category": "tools", "title": "gobuster", "stubs_created": ["tools/gobuster.md"], "status": "ok", "timestamp": "2026-08-26T20:40:13.619730"}
+{"source_file": "wpscan.md", "note_path": "tools/wpscan.md", "category": "tools", "title": "wpscan", "stubs_created": ["tools/wpscan.md"], "status": "ok", "timestamp": "2026-08-26T20:42:08.085897"}
