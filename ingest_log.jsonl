@@ -41,3 +41,4 @@
 {"source_file": "seclists.md", "note_path": "study-notes/seclists-wordlists.md", "category": "study_notes", "title": "SecLists Wordlists", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:15:43.431147"}
 {"source_file": "mimecast.md", "note_path": "study-notes/alias-files-1787738997-1787739014-1787739117-1787739261-1787739362.md", "category": "study_notes", "title": "Alias Files", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:16:02.890042"}
 {"source_file": "splunk.md", "note_path": "tools/splunk.md", "category": "study_notes", "title": "Splunk", "stubs_created": ["services-ports/ssl-http.md"], "status": "ok", "timestamp": "2026-08-26T20:16:51.123853"}
+{"source_file": "nmap.md", "note_path": "tools/nmap.md", "category": "tools", "title": "nmap", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:18:22.435743"}
