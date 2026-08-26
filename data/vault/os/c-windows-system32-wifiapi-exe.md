@@ -1,5 +1,5 @@
 ---
-title: "c-windows-system32-wifiapi-exe"
+title: "C:\Windows\System32\wifiapi.exe"
 aliases: []
 tags: ['os/c-windows-system32-wifiapi-exe']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# c-windows-system32-wifiapi-exe
+# C:\Windows\System32\wifiapi.exe
 
 ## Overview
-*Stub note — auto-created because another note referenced "c-windows-system32-wifiapi-exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\Windows\System32\wifiapi.exe". Fill in details when you have them.*
