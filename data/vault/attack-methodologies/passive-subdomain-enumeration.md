@@ -1,8 +1,8 @@
 ---
-title: "dns-enumeration"
+title: "passive-subdomain-enumeration"
 aliases: []
-tags: ['technique/dns-enumeration']
-category: "techniques"
+tags: ['attack/passive-subdomain-enumeration']
+category: "tactics"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# dns-enumeration
+# passive-subdomain-enumeration
 
 ## Overview
-*Stub note — auto-created because another note referenced "dns-enumeration". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "passive-subdomain-enumeration". Fill in details when you have them.*
