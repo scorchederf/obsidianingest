@@ -1,0 +1,31 @@
+<mxfile host="65bd71144e">
+    <diagram id="qKSHoWNWYYDhksjjRL3H" name="Page-1">
+        <mxGraphModel dx="1100" dy="814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="15" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="41.3" y="80" width="278.7" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="80" width="278.7" height="330" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="M1" style="points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" vertex="1" parent="1">
+                    <mxGeometry x="240" y="120" width="42.599999999999994" height="54" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="M2" style="points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="120" width="42.599999999999994" height="54" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="M3&lt;br&gt;" style="points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="120" width="42.599999999999994" height="54" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="KALI" style="points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="120" width="42.599999999999994" height="54" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="TARGET" style="points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" vertex="1" parent="1">
+                    <mxGeometry x="720" y="120" width="42.599999999999994" height="54" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

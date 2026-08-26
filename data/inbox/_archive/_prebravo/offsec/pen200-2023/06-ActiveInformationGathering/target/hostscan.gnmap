@@ -1,0 +1,10 @@
+# Nmap 7.93 scan initiated Tue Apr 25 16:20:31 2023 as: nmap -sC -sV -T3 -oA target/hostscan -iL target/hosts.lst
+Host: 192.168.207.6 ()	Status: Up
+Host: 192.168.207.6 ()	Ports: 22/open/tcp//ssh//OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)/, 80/open/tcp//http//Apache httpd 2.4.41 ((Ubuntu))/	Ignored State: closed (998)
+Host: 192.168.207.8 ()	Status: Up
+Host: 192.168.207.8 ()	Ports: 22/open/tcp//ssh//OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)/, 25/open/tcp//smtp//Postfix smtpd/	Ignored State: closed (998)
+Host: 192.168.207.9 ()	Status: Up
+Host: 192.168.207.9 ()	Ports: 135/open/tcp//msrpc//Microsoft Windows RPC/, 139/open/tcp//netbios-ssn//Microsoft Windows netbios-ssn/, 445/open/tcp//microsoft-ds?///	Ignored State: closed (997)
+Host: 192.168.207.11 ()	Status: Up
+Host: 192.168.207.11 ()	Ports: 135/open/tcp//msrpc//Microsoft Windows RPC/, 139/open/tcp//netbios-ssn//Microsoft Windows netbios-ssn/, 445/open/tcp//microsoft-ds?///	Ignored State: closed (997)
+# Nmap done at Tue Apr 25 16:21:50 2023 -- 4 IP addresses (4 hosts up) scanned in 79.23 seconds

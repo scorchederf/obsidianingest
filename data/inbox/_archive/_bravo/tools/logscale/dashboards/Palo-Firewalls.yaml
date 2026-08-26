@@ -1,0 +1,283 @@
+name: Palo-Firewalls
+updateFrequency: never
+description: CONFIG, SYSTEM, USERID, TRAFFIC
+timeSelector: {}
+sharedTimeInterval:
+  enabled: false
+  isLive: false
+  start: 1d
+widgets:
+  68d4c2c6-1700-42c8-a41c-33a29b9f594c:
+    x: 6
+    y: 6
+    description: CONFIG, SYSTEM, TRAFFIC
+    height: 6
+    queryString: |-
+      #repo = ucq-palofirewall
+      // do we care which node it is coming from?
+      | case {
+          domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";
+          domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+          domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+          domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+          domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+          domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+          *                           | domaingroup := domain
+      }
+      | Type = ?TypeFilter
+      | domaingroup = SAW-CORE-FW
+      | domain != "syslogtest.ps1"                        //exclude my test case
+      | timechart(series=Type, span=1h)
+    end: now
+    start: 1d
+    width: 6
+    options:
+      legendPosition: bottom
+      legendLabelOverflow: truncate
+      showDataPoints: true
+      connect-points: false
+      plotType: line
+      regression: false
+      imputation: none
+    visualization: time-chart
+    title: 🏥 SAW-CORE-FW [CONFIG, SYSTEM, TRAFFIC]
+    isLive: false
+    type: query
+  53460f92-da0d-4a86-90f8-7e9555fdd87b:
+    x: 0
+    y: 6
+    height: 6
+    queryString: |-
+      #repo = ucq-palofirewall
+      // do we care which node it is coming from?
+      | case {
+          domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";
+          domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+          domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+          domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+          domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+          domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+          *                           | domaingroup := domain
+      }
+      | Type = ?TypeFilter
+      | domaingroup = TWH-CORE-FW
+      | domain != "syslogtest.ps1"                        //exclude my test case
+      | timechart(series=Type, span=1h)
+    end: now
+    start: 1d
+    width: 6
+    options:
+      legendPosition: bottom
+      legendLabelOverflow: truncate
+      showDataPoints: true
+      connect-points: false
+      plotType: line
+      regression: false
+      imputation: none
+    visualization: time-chart
+    title: 🏥 TWH-CORE-FW [CONFIG, SYSTEM, THREAT, TRAFFIC]
+    isLive: false
+    type: query
+  fffcea97-f94b-4709-bb0c-7967cb5d9a56:
+    x: 0
+    y: 24
+    height: 4
+    queryString: |-
+      match(file="PaloIngestionRulesWhichShouldBeIgnored.csv", column=RuleName, field=RuleName, include=[])
+      | groupby(field=RuleName)
+    visualization: table-view
+    end: now
+    start: 1d
+    width: 6
+    title: UCQ-FW-INT TRAFFIC Rules which should be excluded
+    isLive: false
+    type: query
+  eff25ba0-1006-48f1-98e6-0983cef608be:
+    x: 6
+    y: 18
+    height: 10
+    queryString: |-
+      #repo = ucq-palofirewall
+      // do we care which node it is coming from?
+      | case {
+          domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";
+          domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+          domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+          domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+          domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+          domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+          *                           | domaingroup := domain
+      }
+      | Type = ?TypeFilter
+      | domain != "syslogtest.ps1"                        //exclude my test case
+      //| !in(Type,values=["CONFIG", "SYSTEM"])            // do we need CONFIG or SYSTEM
+      | groupBy(field=[domaingroup, Type], function={selectLast(@timestamp)}) // the last time we saw a record based on the fields
+      | age := now() - @timestamp
+      // to see all domains, comment out the below line
+      //| age > 3000000 // 3000000 = 50 minutes in milliseconds
+      | formatDuration(field=age, as=age)
+      | rename(age, as="Time Since Seen")
+    visualization: table-view
+    end: '2023-10-11T02:34:10.413Z'
+    start: '2023-10-10T02:34:10.413Z'
+    width: 6
+    title: Last data from firewall group by type
+    isLive: false
+    type: query
+  3ec6dff3-a528-4af6-8e23-c00fc0b7a491:
+    x: 0
+    y: 12
+    height: 6
+    queryString: |-
+      #repo = ucq-palofirewall
+      // do we care which node it is coming from?
+      | case {
+          domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";
+          domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+          domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+          domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+          domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+          domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+          *                           | domaingroup := domain
+      }
+      | Type = ?TypeFilter
+      | domaingroup = SSHB-CORE-FW
+      | domain != "syslogtest.ps1"                        //exclude my test case
+      | timechart(series=Type, span=1h)
+    end: now
+    start: 1d
+    width: 6
+    options:
+      legendPosition: bottom
+      legendLabelOverflow: truncate
+      showDataPoints: true
+      connect-points: false
+      plotType: line
+      regression: false
+      imputation: none
+    visualization: time-chart
+    title: 🏥 SSHB-CORE-FW [CONFIG, SYSTEM, TRAFFIC]
+    isLive: false
+    type: query
+  2cb35bce-3fff-4633-be20-e4d1d35094d2:
+    x: 0
+    y: 18
+    height: 6
+    queryString: |-
+      #repo=ucq-palofirewall
+      | Type=CONFIG
+      | table(fields=[@timestamp,Admin, domain, Result, Command])
+    visualization: table-view
+    end: now
+    start: 1d
+    width: 6
+    title: ConfigChanges
+    isLive: false
+    type: query
+  394e14af-035a-4810-b50b-727321dba165:
+    x: 6
+    y: 12
+    height: 6
+    queryString: |-
+      #repo = ucq-palofirewall
+      // do we care which node it is coming from?
+      | case {
+          domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";
+          domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+          domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+          domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+          domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+          domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+          *                           | domaingroup := domain
+      }
+      | Type = ?TypeFilter
+      | domaingroup = TSCPH-CORE-FW
+      | domain != "syslogtest.ps1"                        //exclude my test case
+      | timechart(series=Type, span=1h)
+    end: now
+    start: 1d
+    width: 6
+    options:
+      legendPosition: bottom
+      legendLabelOverflow: truncate
+      showDataPoints: true
+      connect-points: false
+      plotType: line
+      regression: false
+      imputation: none
+    visualization: time-chart
+    title: 🏥 TSCPH-CORE-FW [CONFIG, SYSTEM, TRAFFIC]
+    isLive: false
+    type: query
+  5ac829cb-b5b0-4e48-9db3-7778fbaee79a:
+    x: 6
+    y: 0
+    height: 6
+    queryString: |-
+      #repo = ucq-palofirewall
+      // do we care which node it is coming from?
+      | case {
+          domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";
+          domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+          domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+          domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+          domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+          domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+          *                           | domaingroup := domain
+      }
+      | Type = ?TypeFilter
+      | domaingroup = UCQ-FW-INT
+      | domain != "syslogtest.ps1"                        //exclude my test case
+      | timechart(series=Type, span=1h)
+    end: now
+    start: 1d
+    width: 6
+    options:
+      legendPosition: bottom
+      legendLabelOverflow: truncate
+      showDataPoints: true
+      connect-points: false
+      plotType: line
+      regression: false
+      imputation: none
+    visualization: time-chart
+    title: UCQ-FW-INT [CONFIG, SYSTEM, USERID]
+    isLive: false
+    type: query
+  5c79691b-1733-498c-95dd-ef54651d2842:
+    x: 0
+    y: 0
+    description: CONFIG, GLOBALPROTECT, SYSTEM. THREAT, TRAFFIC, USERID
+    height: 6
+    queryString: |-
+      #repo = ucq-palofirewall
+      // do we care which node it is coming from?
+      | case {
+          domain = "UCQ-*-FW-EXT-*"   | domaingroup := "UCQ-FW-EXT";
+          domain = "UCQ-*-FW-INT-*"   | domaingroup := "UCQ-FW-INT";
+          domain = "TWH-CORE-FW-*"    | domaingroup := "TWH-CORE-FW";
+          domain = "SAW-CORE-FW-*"    | domaingroup := "SAW-CORE-FW";
+          domain = "SSHB-CORE-FW-*"   | domaingroup := "SSHB-CORE-FW";
+          domain = "TSCPH-CORE-FW-*"  | domaingroup := "TSCPH-CORE-FW";
+          *                           | domaingroup := domain
+      }
+      | Type = ?TypeFilter
+      | domaingroup = UCQ-FW-EXT
+      | domain != "syslogtest.ps1"                        //exclude my test case
+      | timechart(series=Type, span=1h)
+    end: '2023-10-11T02:18:44.167Z'
+    start: '2023-10-10T02:18:44.167Z'
+    width: 6
+    options:
+      legendPosition: bottom
+      legendLabelOverflow: truncate
+      showDataPoints: true
+      connect-points: false
+      plotType: line
+      regression: false
+      imputation: none
+    visualization: time-chart
+    title: UCQ-FW-EXT [CONFIG, GLOBALPROTECT, SYSTEM. THREAT, TRAFFIC, USERID]
+    isLive: false
+    type: query
+$schema: https://schemas.humio.com/dashboard/v0.13.0

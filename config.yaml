@@ -1,0 +1,40 @@
+# --- Paths ---
+vault_path: "/home/scorchederf/dev/obsidianingest/data/vault"
+inbox_path: "/home/scorchederf/dev/obsidianingest/data/inbox"              # drop raw files here
+processed_path: "/home/scorchederf/dev/obsidianingest/data/processed"  # originals get moved here after ingest
+template_path: "note-template.md"         # relative to this config, or absolute
+log_path: "ingest_log.jsonl"              # one JSON line per processed file, for review/undo
+
+# --- Ollama ---
+ollama_host: "http://192.168.1.69:11434"
+model_summarize: "qwen2.5:7b-instruct"    # classification + extraction
+model_embed: "nomic-embed-text"           # secondary similarity pass (link_similarity.py)
+
+# --- Embedding pass ---
+embedding_enabled: true
+embedding_db_path: "vault_embeddings.json"  # simple flat store: {path: {"vector": [...], "text": "..."}}
+similarity_threshold: 0.78                  # cosine similarity cutoff for suggesting a link
+similarity_top_k: 5
+
+# --- Category -> folder mapping (matches the vault structure) ---
+categories:
+  tools: "tools"
+  os: "os"
+  services: "services-ports"
+  techniques: "techniques"
+  tactics: "attack-methodologies"
+  detections: "detections"
+  vulnerabilities: "vulnerabilities"
+  study_notes: "study-notes"
+  engagements: "engagements"
+
+# --- Namespaces used in tags / frontmatter relation fields ---
+# Maps a category to (tag_prefix, frontmatter_relation_field)
+# Used both for classification prompting and for exact-match link resolution.
+namespaces:
+  tools: ["tool/", "related_tools"]
+  os: ["os/", "related_os"]
+  services: ["service/", "related_services"]
+  techniques: ["technique/", "related_techniques"]
+  tactics: ["attack/", "related_tactics"]
+  study_notes: ["topic/", "related_notes"]

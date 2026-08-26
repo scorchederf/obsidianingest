@@ -1,0 +1,76 @@
+Linux 78457ed72bbc 5.11.0-49-generic #55-Ubuntu SMP Wed Jan 12 17:36:34 UTC 2022 x86_64
+
+The programs included with the Kali GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Kali GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+┏━([1;31mMessage from Kali developers[00m)
+┃
+┃ This is a minimal installation of Kali Linux, you likely
+┃ want to install supplementary tools. Learn how:
+┃ ⇒ https://www.kali.org/docs/troubleshooting/common-minimum-setup/
+┃
+┗━([2;37mRun: “touch ~/.hushlogin” to hide this message[0m)
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m ls -la
+[?2004ltotal 48
+drwxr-xr-x 4 student student  4096 Dec  1  2021 [0m[01;34m.[0m
+drwxr-xr-x 1 root    root     4096 Dec  1  2021 [01;34m..[0m
+-rw-r--r-- 1 student student   220 Oct 23  2021 .bash_logout
+-rw-r--r-- 1 student student  5349 Nov 29  2021 .bashrc
+-rw-r--r-- 1 student student  3526 Oct 23  2021 .bashrc.original
+drwxr-xr-x 3 student student  4096 Nov 29  2021 [01;34m.config[0m
+drwxr-xr-x 3 student student  4096 Nov 29  2021 [01;34m.java[0m
+-rw-r--r-- 1 student student   807 Oct 23  2021 .profile
+-rw-r--r-- 1 student student 10644 Nov 18  2021 .zshrc
+
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m ls -la /challenge/
+[?2004ltotal 32
+drwxr-xr-x 2 root root  4096 Jan 25 07:40 [0m[01;34m.[0m
+drwxr-xr-x 1 root root  4096 Jan 25 07:40 [01;34m..[0m
+-r-------- 1 root root    37 Jan 25 07:40 flag.txt
+---s--x--x 1 root root 18808 Jan 25 07:40 [37;41mping-sweep-2[0m
+
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [Knano -u ilm script.py
+[?2004l[?2004h[?1049h[22;0;0t[1;48r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[?1006;1000h[39;49m(B[m[H[2J[46;89H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 5.9                                                                              script.py                                                                                I      [1;187H(B[m[47d(B[0;7m^G(B[m Help[47;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[47;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[47;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[48d(B[0;7m^X(B[m Exit[48;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[48;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[48;120H(B[0;7mM-6(B[m Copy[48;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[48;171H(B[0;7m^F(B[m Forward[2d(B[0;7m 1[C(B[m[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[1;103H(B[0;7m*[46d(B[m[K[1;187H[2;4H(B[0;1m[36mimport[39m(B[m sys[3d(B[0;7m 2(B[m (B[0;1m[36mimport[39m(B[m shlex(B[0;1m[31m #only needed if apachelogs cannot be pip'd[4d[39m(B[0;7m 3(B[m (B[0;1m[36mimport[39m(B[m os[42m [5d[49m(B[0;7m 4[6d 5(B[m (B[0;1m[31m#USAGE[7d[39m(B[0;7m 6(B[m (B[0;1m[31m#  python3 ./ApacheLogParser.py access.log output.log[8d[39m(B[0;7m 7[9d 8(B[m (B[0;1m[36mdef[34m check_ping[39m(B[m(ip):[10d(B[0;7m 9(B[m     response = os.system((B[0;1m[32m"ping -c 1 "[39m(B[m + ip)[11d(B[0;7m10(B[m    (B[0;1m[31m # and then check the response...[12d[39m(B[0;7m11(B[m     (B[0;1m[36mif[39m(B[m response == 0:[13d(B[0;7m12[13;12H(B[mpingstatus = (B[0;1m[35mTrue[14d[39m(B[0;7m13(B[m     (B[0;1m[36melse[39m(B[m:[15d(B[0;7m14[15;12H(B[mpingstatus = (B[0;1m[35mFalse[16d[39m(B[0;7m15(B[m     (B[0;1m[36mreturn[39m(B[m pingstatus[17d(B[0;7m16[18d17[19d18[20d19(B[m threeocts = sys.argv[1][21d(B[0;7m20(B[m start=int(sys.argv[2])[22d(B[0;7m21(B[m end=int(sys.argv[3])[23d(B[0;7m22[24d23[25d24(B[m (B[0;1m[36mwhile[39m(B[m start <= end:[26d(B[0;7m25(B[m     ip=threeocts+(B[0;1m[32m"."[39m(B[m+str(start)[27d(B[0;7m26(B[m     (B[0;1m[36mif[39m(B[m check_ping(ip):[28d(B[0;7m27[28;12H(B[0;1m[36mprint [39m(B[m(ip)[29d(B[0;7m28(B[m     start += 1[30d(B[0;7m29[29;18H(B[m[?12l[?25h[?25l[?12l[?25h[?25l[13;29H[?12l[?25h[?25l[46;88H(B[0;7m[ Writing... ](B[m[1;103H(B[0;7m [187G(B[m[46;86H(B[0;7m[ Wrote 28 lines ](B[m[13;29H[?12l[?25h[?25l[46d[J[48d[?12l[?25h[?1006;1000l[48;1H[?1049l[23;0;0t[?1l>[?2004l
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [Kchmod +x script.py 
+[?2004l
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [K/challenge/ping-sweep-2 script.py
+[?2004lTesting your script now
+Starting test 1.
+Error: Trying to copy too much data into a smaller buffer.
+Check to make sure your script is not outputting a large amount of text.
+Failed Test Case.
+You should just be printing the IP address of any valid responses (one per line) and nothing else.
+For more help, please check out the challenge description and hints.
+
+
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [Kd /challenge/ping-sweep-2 script.py[;32m└─[1;34m$[0m [14Pchmod +x script.py                    echo "" > sccript.p       ript.py 
+[?2004l
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [Knano -ilm script.py 
+[?2004l[?2004h[?1049h[22;0;0t[1;48r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[?1006;1000h[39;49m(B[m[H[2J[46;88H(B[0;7m[ Reading... ](B[m[46;87H(B[0;7m[ Read 1 line ](B[m[H(B[0;7m  GNU nano 5.9                                                                              script.py                                                                                I      [1;187H(B[m[47d(B[0;7m^G(B[m Help[47;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[47;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[47;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[48d(B[0;7m^X(B[m Exit[48;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[48;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[48;120H(B[0;7mM-6(B[m Copy[48;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[48;171H(B[0;7m^F(B[m Forward[2d(B[0;7m 1[3d 2[A[C(B[m[?12l[?25h[?25l[?12l[?25h[?25l[3d[?12l[?25h[?25l[?12l[?25h[?25l[1;103H(B[0;7m*[46d(B[m[K[1;187H[3;4H(B[0;1m[36mimport[39m(B[m sys[4d(B[0;7m 3(B[m (B[0;1m[36mimport[39m(B[m shlex(B[0;1m[31m #only needed if apachelogs cannot be pip'd[5d[39m(B[0;7m 4(B[m (B[0;1m[36mimport[39m(B[m os[42m [6d[49m(B[0;7m 5(B[m (B[0;1m[36mimport[39m(B[m subprocess[7d(B[0;7m 6[8d 7(B[m (B[0;1m[31m#USAGE[9d[39m(B[0;7m 8(B[m (B[0;1m[31m#  python3 ./ApacheLogParser.py access.log output.log[10d[39m(B[0;7m 9[11d10(B[m (B[0;1m[36mdef[34m check_ping[39m(B[m(ip):[12d(B[0;7m11(B[m     (B[0;1m[36mtry[39m(B[m:[13d(B[0;7m12[13;12H(B[msubprocess.check_call([14d(B[0;7m13[14;16H(B[m[(B[0;1m[32m'ping'[39m(B[m, (B[0;1m[32m'-c'[39m(B[m, (B[0;1m[32m'1'[39m(B[m, (B[0;1m[32m'-q'[39m(B[m, ip], stdout=subprocess.DEVNULL[15d(B[0;7m14[15;12H(B[m)[16d(B[0;7m15[16;11H(B[0;1m[31m #subprocess.check_call([17d[39m(B[0;7m16[17;11H(B[0;1m[31m #    ['ping', '-c', '1', ip],[18d[39m(B[0;7m17[18;11H(B[0;1m[31m #    "/dev/null",  # suppress output[19d[39m(B[0;7m18[19;11H(B[0;1m[31m #    "/dev/null"[20d[39m(B[0;7m19[20;11H(B[0;1m[31m #)[21d[39m(B[0;7m20[21;12H(B[0;1m[36mreturn[39m(B[m (B[0;1m[35mTrue[22d[39m(B[0;7m21(B[m     (B[0;1m[36mexcept[39m(B[m subprocess.CalledProcessError:[23d(B[0;7m22[23;12H(B[0;1m[36mreturn[39m(B[m (B[0;1m[35mFalse[24d[39m(B[0;7m23[25d24[26d25[27d26[28d27[29d28(B[m threeocts = sys.argv[1][30d(B[0;7m29(B[m start=int(sys.argv[2])[31d(B[0;7m30(B[m end=int(sys.argv[3])[32d(B[0;7m31[33d32[34d33(B[m (B[0;1m[36mwhile[39m(B[m start <= end:[35d(B[0;7m34(B[m     ip=threeocts+(B[0;1m[32m"."[39m(B[m+str(start)[36d(B[0;7m35(B[m     (B[0;1m[36mif[39m(B[m check_ping(ip):[37d(B[0;7m36[37;12H(B[0;1m[36mprint [39m(B[m(ip)[38d(B[0;7m37(B[m     start += 1[39d(B[0;7m38[40d39[41d40[C(B[m[?12l[?25h[?25l[?12l[?25h[?25l[29;27H[?12l[?25h[?25l[46;88H(B[0;7m[ Writing... ](B[m[1;103H(B[0;7m [187G(B[m[46;86H(B[0;7m[ Wrote 39 lines ](B[m[29;27H[?12l[?25h[?25l[46d[J[48d[?12l[?25h[?1006;1000l[48;1H[?1049l[23;0;0t[?1l>[?2004l
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [Kchomd     mod +x script.py 
+[?2004l
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [K/challenge/ping-sweep-2 script.py
+[?2004lTesting your script now
+Starting test 1.
+Starting test 2 - this one is longer and may take several seconds depending on your script.
+Great job. Here is your flag: 
+OS{780090cf61bce0be844fb2b6deb8797a}
+
+Press any key to continue...
+
+
+[?2004h]0;student@78457ed72bbc: ~[;32m┌──([1;34mstudent㉿78457ed72bbc[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [Kexit
+[?2004llogout

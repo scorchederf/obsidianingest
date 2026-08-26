@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<Computer>
+    <os_name type="str">Windows</os_name>
+    <os_version type="int">8</os_version>
+    <build_no type="int">9600</build_no>
+    <ip_address type="str">192.168.66.46</ip_address>
+    <patches_installed type="list">
+        <item type="str">KB5017398</item>
+        <item type="str">KB5018413</item>
+        <item type="str">KB5018549</item>
+    </patches_installed>
+</Computer>

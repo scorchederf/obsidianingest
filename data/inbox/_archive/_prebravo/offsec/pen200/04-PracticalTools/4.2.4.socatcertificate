@@ -1,0 +1,53 @@
+Script started on 2023-01-21 14:31:56+10:00 [TERM="xterm-256color" TTY="/dev/pts/8" COLUMNS="188" LINES="48"]
+                                                                                                                                                                                            ]0;kali@kali: ~/Documents/git/bravo/offsec/pen200/4[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿kali[0m[34m[32m)-[[1m[32m[39m~/…/bravo/offsec/pen200/4[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4m[37mo[24m[39m[4m[37mo[4m[37mp[24m[39m[4m[37mo[4m[37mp[4m[37mp[24m[39m[4m[37mo[4m[37mp[24m[39m[24m[39m [4m[37mo[4m[37mp[4m[37me[24m[39m[24m[36mo[24m[36mp[24m[36me[36mn[39m[4m[37mo[4m[37mp[4m[37me[4m[37mn[4m[37ms[24m[39m[4m[37ms[4m[37ms[24m[39m[24m[36mo[24m[36mp[24m[36me[24m[36mn[24m[36ms[24m[36ms[36ml[39m [1mr[0m[1mr[1me[0m[0mr[0meq [32m-[39m[32m-[32mn[39m[32mn[32me[39m[32me[32mw[39m[32mw[32mk[39m[32mk[32me[39m[32me[32my[39m [1mr[0m[0mrsa:203 48 [32m-[39m[32m-[32mn[39m[32mn[32mo[39m[32mo[32md[39m[32md[32me[39m[32me[32ms[39m [32m-[39m[32m-[32mk[39m[32mk[32me[39m[32me[32my[39m[32my[32mo[39m[32mo[32mu[39m[32mu[32mt[39m bind_shell.key [32m-[39m[32m-[32mx[39m[32mx[32m5[39m[32m5[32m0[39m[32m0[32m9[39m [32m-[39m[32m-[32md[39m[32md[32ma[39m[32ma[32my[39m[32my[32ms[39m 362 [32m-[39m[32m-[32mo[39m[32mo[32mu[39m[32mu[32mt[39m bind_shell.crt[?1l>[?2004l
+........+.......+..+.+.....+.......+..+......+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*.....+..+...+...+......+.+..............+.............+..+.+............+..+...+.............+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*.+.....................+.......................+....+......+..+...............+.......+..+...+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.+.+..............+....+...+..+.......+...+..+.+.....+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*........+...+.......+.....+......+....+......+..+....+.....+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*....+......+.+.........+...+...+..+......+......+.........+....+............+...+....................+...+.......+...+.........+.....+.+...+.....+.+..................+..+.+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:AH U
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:
+Email Address []:
+                                                                                                                                                                                            ]0;kali@kali: ~/Documents/git/bravo/offsec/pen200/4
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿kali[0m[34m[32m)-[[1m[32m[39m~/…/bravo/offsec/pen200/4[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[36ml[39m[36ml[39m[38;2;153;153;153ms -la[39m[36ml[36ms[39m[39m [32m-[39m[32m-[32ml[39m[32ml[32ma[39m[?1l>[?2004l
+total 404
+drwxr-xr-x 2 kali kali   4096 Jan 21 14:33 [0m[01;34m.[0m
+drwxr-xr-x 5 kali kali   4096 Jan 21 10:33 [01;34m..[0m
+-rw-r--r-- 1 kali kali    972 Jan 21 13:20 4.1.5.vm1.log
+-rw-r--r-- 1 kali kali   1475 Jan 21 13:15 4.1.5.vm3.log
+-rw-r--r-- 1 kali kali      0 Jan 21 14:31 4.2.4.socatcertificate
+-rw-r--r-- 1 kali kali   1245 Jan 21 14:33 bind_shell.crt
+-rw------- 1 kali kali   1700 Jan 21 14:32 bind_shell.key
+-rwxr-xr-x 1 kali kali  14472 Jan 21 13:15 [01;32mflag[0m
+-rw-r--r-- 1 kali kali 178413 Jan 21 11:49 [01;35mimage-1.png[0m
+-rw-r--r-- 1 kali kali 154239 Jan 21 11:49 [01;35mimage.png[0m
+-rw-r--r-- 1 kali kali   4700 Jan 21 13:20 lab.md
+-rw-r--r-- 1 kali kali   4224 Jan 21 11:53 notes.md
+-rw-r--r-- 1 kali kali  19384 Jan 21 12:35 reverse-shell
+                                                                                                                                                                                            ]0;kali@kali: ~/Documents/git/bravo/offsec/pen200/4
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿kali[0m[34m[32m)-[[1m[32m[39m~/…/bravo/offsec/pen200/4[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4m[37mc[24m[39m[4m[37mc[24m[39m[38;2;153;153;153mhmod +x flag[39m[12D[4m[37mc[4m[37ma[24m[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [11D[38;2;153;153;153mt access.log[39m[12D[24m[36mc[24m[36ma[36mt[39m[39m [39m[1mb[0m[39m [39m [39m [39m [39m [39m [39m [39m [39m [9D[1mb[1mi[0m[1mi[1mn[0m[1mn[1md[0m[1md[1m_shell.[0m[1m.[1mk[0m[1mk[1me[0m[1me[1my[0m [1mb[0m[1mb[1mi[0m[1mi[1mn[0m[1mn[1md[0m[1md[1m_[0m[1m_[1ms[0m[1ms[1mh[0m[1mh[1mell.[0m[11D[0mb[0mi[0mn[0md[0m_[0ms[0mh[0me[0ml[0ml[0m..[12D[1mb[1mi[1mn[1md[1m_[1ms[1mh[1me[1ml[1ml[1m.[0m [1m.[1mc[0m[12D[0mb[0mi[0mn[0md[0m_[0ms[0mh[0me[0ml[0ml[0m.[0mct[13D[1mb[1mi[1mn[1md[1m_[1ms[1mh[1me[1ml[1ml[1m.[1mc[0m [1mc[1mr[0m[1mr[1mt[0m [1m[34m>[0m[39m [1mb[0m[1mb[1mi[0m[1mi[1mn[0m[1mn[1md[0m[1md[1m_[0m[1m_[1ms[0m[1ms[1mh[0m[1mh[1me[0m[1me[1ml[0m[1ml[1ml[0m[10D[0mb[0mi[0mn[0md[0m_[0ms[0mh[0me[0ml[0mlp[11D[1mb[1mi[1mn[1md[1m_[1ms[1mh[1me[1ml[1ml[0m [1ml[1m.[0m[11D[0mb[0mi[0mn[0md[0m_[0ms[0mh[0me[0ml[0ml[0m.psm  em[?1l>[?2004l
+                                                                                                                                                                                            ]0;kali@kali: ~/Documents/git/bravo/offsec/pen200/4
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿kali[0m[34m[32m)-[[1m[32m[39m~/…/bravo/offsec/pen200/4[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[A[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿kali[0m[34m[32m)-[[1m[32m[39m~/…/bravo/offsec/pen200/4[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [A[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿kali[0m[34m[32m)-[[1m[32m[39m~/…/bravo/offsec/pen200/4[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [4m[37mp[24m[39m[4m[37mp[24m[39m[38;2;153;153;153ms ea[39m[4m[37mp[4m[37mi[24m[39m[39m [39m [39m [38;2;153;153;153mng -c 400 localhost > test2.txt &[39m[33D[4m[37mp[4m[37mi[4m[37mn[24m[39m[24m[36mp[24m[36mi[24m[36mn[36mg[39m[39m [39m1[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [29D[38;2;153;153;153m92.168.121.52[39m[13D[39m9[39m2[39m.[39m1[39m6[39m8[39m.[39m1[39m2[39m6[39m [39m [39m .129[?1l>[?2004l
+PING 192.168.126.129 (192.168.126.129) 56(84) bytes of data.
+^C
+--- 192.168.126.129 ping statistics ---
+13 packets transmitted, 0 received, 100% packet loss, time 12280ms
+
+                                                                                                                                                                                            ]0;kali@kali: ~/Documents/git/bravo/offsec/pen200/4
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿kali[0m[34m[32m)-[[1m[32m[39m~/…/bravo/offsec/pen200/4[0m[32m]
+└─[

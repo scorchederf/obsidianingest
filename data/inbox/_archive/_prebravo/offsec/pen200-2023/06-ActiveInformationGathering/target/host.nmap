@@ -1,0 +1,36 @@
+# Nmap 7.93 scan initiated Tue Apr 25 16:18:02 2023 as: nmap -sn -T4 -v -n -oA target/host --open 192.168.207.12/24
+Nmap scan report for 192.168.207.6
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.8
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.9
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.11
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.12
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.13
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.14
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.15
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.17
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.20
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.21
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.22
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.23
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.149
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.152
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.251
+Host is up (0.24s latency).
+Nmap scan report for 192.168.207.254
+Host is up (0.24s latency).
+# Nmap done at Tue Apr 25 16:18:10 2023 -- 256 IP addresses (17 hosts up) scanned in 8.28 seconds

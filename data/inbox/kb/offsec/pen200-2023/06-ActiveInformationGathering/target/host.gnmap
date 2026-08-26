@@ -1,0 +1,20 @@
+# Nmap 7.93 scan initiated Tue Apr 25 16:18:02 2023 as: nmap -sn -T4 -v -n -oA target/host --open 192.168.207.12/24
+# Ports scanned: TCP(0;) UDP(0;) SCTP(0;) PROTOCOLS(0;)
+Host: 192.168.207.6 ()	Status: Up
+Host: 192.168.207.8 ()	Status: Up
+Host: 192.168.207.9 ()	Status: Up
+Host: 192.168.207.11 ()	Status: Up
+Host: 192.168.207.12 ()	Status: Up
+Host: 192.168.207.13 ()	Status: Up
+Host: 192.168.207.14 ()	Status: Up
+Host: 192.168.207.15 ()	Status: Up
+Host: 192.168.207.17 ()	Status: Up
+Host: 192.168.207.20 ()	Status: Up
+Host: 192.168.207.21 ()	Status: Up
+Host: 192.168.207.22 ()	Status: Up
+Host: 192.168.207.23 ()	Status: Up
+Host: 192.168.207.149 ()	Status: Up
+Host: 192.168.207.152 ()	Status: Up
+Host: 192.168.207.251 ()	Status: Up
+Host: 192.168.207.254 ()	Status: Up
+# Nmap done at Tue Apr 25 16:18:10 2023 -- 256 IP addresses (17 hosts up) scanned in 8.28 seconds

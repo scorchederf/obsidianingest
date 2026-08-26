@@ -1,0 +1,108 @@
+
+
+
+# linux cmds
+- kill all openvpn connections `sudo killall openvpn`
+- terminal
+    - mkdir parent paths `mkdir -p storage/local/something/something`
+    - list files by date `ls -lat /var/backups`
+    - get inode number (unique identifier) `ls -li /var/backups`
+    - 
+- unzip file 
+    - `unzip filename.zip`
+    - `gzip filename.gz`
+- find 
+    - `find / -name "rockyou-30000.rule" 2>/dev/null `
+    - `find /mnt/Finance/ -name *cred*`
+    - `grep -rn /mnt/Finance/ -ie cred`
+- vpn - go ipv4 -> routes -> `use this connection only for resources on its network`
+- network
+    - listening ports `netstat -tulp`
+        - `localhost:postgresql` localhost:<service> means service is running and only accessible locally, try tunneling `ssh`
+        - `0.0.0.0:ssh` indicates externally accessible
+- look for passwords
+    - `cat * | grep -i passw*`cd 
+- can I run sudo? (requires password)
+    - `sudo -l`
+- what groups am I in
+    - `id`
+- can I find binaries within a group
+    - `find / -group $groupname 2>/dev/null`
+    - what permissions do they have?
+        - `ls -la /usr/bin/bugtracker && file /usr/bin/bugtracker`
+        - look for setuid (file is owned by root and we can execute it as root)
+            - the application calls cat which we are going to modify the path variable to call our /tmp/cat instead
+                - `echo "/bin/sh" >> /tmp/cat; chmod +x /tmp/cat; export PATH=/tmp:$PATH; echo $PATH`
+- mount
+    - `sudo mkdir /mnt/Finance && sudo mount -t cifs -o username=plaintext,password=Password123,domain=. //192.168.220.129/Finance /mnt/Finance`
+    - `mount -t cifs //192.168.220.129/Finance /mnt/Finance -o credentials=/path/credentialfile.txt`
+        - credentialfile.txt
+        - `username=plaintext`
+        - `password=Password123`
+        - `domain=.`
+- create a random file
+    - `dd if=/dev/urandom of=certificateOfIncorporation.pdf bs=1M count=30`
+    - `dd if=/dev/urandom of=reverse-shell.exe bs=1M count=10`
+- file descriptors
+    - A file descriptor (FD) in Unix/Linux operating systems is a reference, maintained by the kernel, that allows the system to manage Input/Output (I/O) operations. It acts as a unique identifier for an open file, socket, or any other I/O resource. In Windows-based operating systems, this is known as a file handle. Essentially, the file descriptor is the system's way of keeping track of active I/O connections, such as reading from or writing to a file.
+    - Data Stream for Input
+        - `STDIN – 0`
+            - `cat < filename.txt`
+    - Data Stream for Output
+        - `STDOUT – 1`
+        - redirect output to file
+            - `find /etc/ -name shadow 2>/dev/null > results.txt`
+        - can also use `|`
+            - `find /etc/ -name *.conf 2>/dev/null | grep systemd`
+            - count results using wc -l
+                - `find /etc/ -name *.conf 2>/dev/null | grep systemd | wc -l`
+    - Data Stream for Output that relates to an error occurring.
+        - `STDERR – 2`
+        - redirect error messages to /dev/null 
+            - `find /etc/ -name shadow 2>/dev/null`
+    - redirect stdout and stderr to different files
+        - `find /etc/ -name shadow 2> stderr.txt 1> stdout.txt`
+    - redirect stdout and stderr to different files but append  `>>`
+        - `find /etc/ -name passwd >> stdout.txt 2>/dev/null`
+    - redirect stdin stream to file using EOF function
+        - `cat << EOF > stream.txt`
+    - count log files on system
+        - `find / -name *.log 2>/dev/null | wc -l`
+- filter contents
+    - more
+        - `cat /etc/passwd | more`
+        - `Q` to exit
+    - less
+        - `less /etc/passwd`
+    - head
+        - `head /etc/passwd`
+    - tail
+        - `tail /etc/passwd`
+    - sort
+        - `cat /etc/passwd | sort`
+    - grep
+        - search for /bin/bash 
+            - `cat /etc/passwd | grep "/bin/bash"`
+        - exclude results `-v`
+            - `cat /etc/passwd | grep -v "false\|nologin"`
+    - cut
+        - use the option "-d" and set the delimiter to the colon character (:) and define with the option "-f" the position in the line we want to output
+            - `cat /etc/passwd | grep -v "false\|nologin" | cut -d":" -f1`
+    - tr
+        - replace certain characters from a line
+            - `cat /etc/passwd | grep -v "false\|nologin" | tr ":" " "`
+    - column
+        - shows data in a tabular form
+            - `cat /etc/passwd | grep -v "false\|nologin" | tr ":" " " | column -t`
+    - awk   
+        - `cat /etc/passwd | grep -v "false\|nologin" | tr ":" " " | awk '{print $1, $NF}'`
+    - sed
+        - used for substituting text using regular expressions
+            - replace bin with HTB
+                - `cat /etc/passwd | grep -v "false\|nologin" | tr ":" " " | awk '{print $1, $NF}' | sed 's/bin/HTB/g'`
+    - count
+        - count the lines
+            - `cat /etc/passwd | grep -v "false\|nologin" | tr ":" " " | awk '{print $1, $NF}' | wc -l`
+    - list services listening on all interfaces except for localhost and tcp6 
+        - `netstat -tunl | grep LISTEN | grep -v "tcp6" | grep -v "127.0.0"| wc -l`
+    - 

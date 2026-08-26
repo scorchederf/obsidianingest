@@ -1,0 +1,1 @@
+Usage: unshadow PASSWORD-FILE SHADOW-FILE

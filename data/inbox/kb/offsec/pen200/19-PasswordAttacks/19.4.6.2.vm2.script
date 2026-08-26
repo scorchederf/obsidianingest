@@ -1,0 +1,30 @@
+Linux 6f5d28cbcef2 5.11.0-49-generic #55-Ubuntu SMP Wed Jan 12 17:36:34 UTC 2022 x86_64
+
+The programs included with the Kali GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Kali GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+┏━([1;31mMessage from Kali developers[00m)
+┃
+┃ This is a minimal installation of Kali Linux, you likely
+┃ want to install supplementary tools. Learn how:
+┃ ⇒ https://www.kali.org/docs/troubleshooting/common-minimum-setup/
+┃
+┗━([2;37mRun: “touch ~/.hushlogin” to hide this message[0m)
+[?2004h]0;student@6f5d28cbcef2: ~[;32m┌──([1;34mstudent㉿6f5d28cbcef2[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m ls -la
+[?2004ltotal 48
+drwxr-xr-x 4 student student  4096 Dec 13  2021 [0m[01;34m.[0m
+drwxr-xr-x 1 root    root     4096 Dec 13  2021 [01;34m..[0m
+-rw-r--r-- 1 student student   220 Oct 23  2021 .bash_logout
+-rw-r--r-- 1 student student  5349 Nov 29  2021 .bashrc
+-rw-r--r-- 1 student student  3526 Oct 23  2021 .bashrc.original
+drwxr-xr-x 3 student student  4096 Nov 29  2021 [01;34m.config[0m
+drwxr-xr-x 3 student student  4096 Nov 29  2021 [01;34m.java[0m
+-rw-r--r-- 1 student student   807 Oct 23  2021 .profile
+-rw-r--r-- 1 student student 10644 Nov 18  2021 .zshrc
+
+[?2004h]0;student@6f5d28cbcef2: ~[;32m┌──([1;34mstudent㉿6f5d28cbcef2[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m 

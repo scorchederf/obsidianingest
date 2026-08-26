@@ -1,0 +1,137 @@
+Linux f77f5a85d09c 5.11.0-49-generic #55-Ubuntu SMP Wed Jan 12 17:36:34 UTC 2022 x86_64
+
+The programs included with the Kali GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Kali GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+┏━([1;31mMessage from Kali developers[00m)
+┃
+┃ This is a minimal installation of Kali Linux, you likely
+┃ want to install supplementary tools. Learn how:
+┃ ⇒ https://www.kali.org/docs/troubleshooting/common-minimum-setup/
+┃
+┗━([2;37mRun: “touch ~/.hushlogin” to hide this message[0m)
+[?2004h]0;student@f77f5a85d09c: ~[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m cd c /challenge/
+[?2004l
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./linux_enum 
+[?2004l What is your UID?
+1000
+Who is the secondary (i.e. only other non-system) username on the system?
+student
+What is the name of the Operating System (base name not pretty name)?
+debian
+Incorrect!
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m [7mcat /etc/*-release[27mcat /etc/*-release
+[?2004lPRETTY_NAME="Kali GNU/Linux Rolling"
+NAME="Kali GNU/Linux"
+ID=kali
+VERSION="2021.4"
+VERSION_ID="2021.4"
+VERSION_CODENAME="kali-rolling"
+ID_LIKE=debian
+ANSI_COLOR="1;31"
+HOME_URL="https://www.kali.org/"
+SUPPORT_URL="https://forums.kali.org/"
+BUG_REPORT_URL="https://bugs.kali.org/"
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m [Kcat /et/is    tc/issu
+[?2004lcat: /etc/issu: No such file or directory
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m cat /etc/issue
+[?2004lKali GNU/Linux Rolling \n \l
+
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./l
+[?2004l-bash: ./l: No such file or directory
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./lcat /etc/issue[K*-release[5P./linux_enum cd /challenge/[1P./linux_enum 
+[?2004l What is your UID?
+1000
+Who is the secondary (i.e. only other non-system) username on the system?
+student
+What is the name of the Operating System (base name not pretty name)?
+Kali GNU/Linux Rolling \n \l
+What is the architecture? (include, if necessary, the underscore in the answer)
+
+Incorrect!
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m Lscpy
+[?2004l-bash: Lscpy: command not found
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m Lscpy u
+[?2004l-bash: Lscpu: command not found
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m lscpu
+[?2004lArchitecture:            x86_64
+  CPU op-mode(s):        32-bit, 64-bit
+  Address sizes:         45 bits physical, 48 bits virtual
+  Byte Order:            Little Endian
+CPU(s):                  1
+  On-line CPU(s) list:   0
+Vendor ID:               AuthenticAMD
+  Model name:            AMD EPYC 7371 16-Core Processor
+    CPU family:          23
+    Model:               1
+    Thread(s) per core:  1
+    Core(s) per socket:  1
+    Socket(s):           1
+    Stepping:            2
+    BogoMIPS:            6188.37
+    Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_goo
+                         d nopl tsc_reliable nonstop_tsc cpuid extd_apicid pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm extap
+                         ic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ssbd ibpb vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsa
+                         ves clzero arat overflow_recov succor
+Virtualization features: 
+  Hypervisor vendor:     VMware
+  Virtualization type:   full
+Caches (sum of all):     
+  L1d:                   32 KiB (1 instance)
+  L1i:                   64 KiB (1 instance)
+  L2:                    512 KiB (1 instance)
+  L3:                    64 MiB (1 instance)
+NUMA:                    
+  NUMA node(s):          1
+  NUMA node0 CPU(s):     0
+Vulnerabilities:         
+  Itlb multihit:         Not affected
+  L1tf:                  Not affected
+  Mds:                   Not affected
+  Meltdown:              Not affected
+  Spec store bypass:     Mitigation; Speculative Store Bypass disabled via prctl and seccomp
+  Spectre v1:            Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+  Spectre v2:            Mitigation; Full AMD retpoline, IBPB conditional, STIBP disabled, RSB filling
+  Srbds:                 Not affected
+  Tsx async abort:       Not affected
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m lscpuLscpuy./linux_enum 
+[?2004l What is your UID?
+1000
+Who is the secondary (i.e. only other non-system) username on the system?
+student
+What is the name of the Operating System (base name not pretty name)?
+Kali GNU/Linux Rolling \n \l
+What is the architecture? (include, if necessary, the underscore in the answer)
+x86_64
+Correct! The flag is: OS{85cdc00fa18a04cdba0648d098b03af9}
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m fexit
+[?2004l-bash: fexit: command not found
+
+[?2004h]0;student@f77f5a85d09c: /challenge[;32m┌──([1;34mstudent㉿f77f5a85d09c[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m exit
+[?2004llogout

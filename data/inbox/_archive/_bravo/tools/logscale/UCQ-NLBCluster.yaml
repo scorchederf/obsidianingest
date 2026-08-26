@@ -1,0 +1,90 @@
+sources:
+  # Palo Alto firewall syslog configured for UDP 514
+  palofirewall_514_udp:
+    type: syslog
+    mode: udp
+    port: 514
+    sink: logscale_palofirewall
+
+  # Palo Alto firewall syslog configured for TCP 514
+  palofirewall_514_tcp:
+    type: syslog
+    mode: tcp
+    port: 514
+    sink: logscale_palofirewall
+
+  # Citrix Netscaler syslog configured for UDP 515
+  netscaler_515_udp:
+    type: syslog
+    mode: udp
+    port: 515
+    sink: logscale_netscaler
+
+  # Citrix Netscaler syslog configured for TCP 515
+  netscaler_515_tcp:
+    type: syslog
+    mode: tcp
+    port: 515
+    sink: logscale_netscaler
+
+  # Cisco ISE syslog configured for UDP 516
+  ise_516_udp:
+    type: syslog
+    mode: udp
+    port: 516
+    sink: logscale_ise
+
+  # Cisco ISE syslog configured for TCP 516
+  ise_516_tcp:
+    type: syslog
+    mode: tcp
+    port: 516
+    sink: logscale_ise
+
+  # NLB cluster event logs
+  windows_events:
+    type: wineventlog
+    channels:
+      - name: System
+        providers:
+        - "Microsoft-Windows-NLB"
+    includeXML: false
+    sink: system
+
+  # 20241029 AdamS new mimecast logs source
+  mimecast_logs:
+    type: file
+    include: <path>*.json
+    sink: mimecast
+
+sinks:
+  logscale_palofirewall:
+    type: humio
+    proxy: none
+    token: 390d74d9-d259-4724-8e64-cb2c880a769c   # ucq-palofirewall repo ingest token
+    url: https://ucareqld.ingest.logscale.us-2.crowdstrike.com
+
+  logscale_netscaler:
+    type: humio
+    proxy: none
+    token: a8119502-f6b1-4fc7-8bb4-f10c3ccf7b34   # ucq-netscaler repo ingest token
+    url: https://ucareqld.ingest.logscale.us-2.crowdstrike.com
+  
+  logscale_ise:
+    type: humio
+    proxy: none
+    token: 354912c2-b749-41b6-b57a-362973936067   # ucq-ise repo ingest token
+    url: https://ucareqld.ingest.logscale.us-2.crowdstrike.com
+
+  system:
+    type: humio
+    proxy: none
+    token: ac784c4d-00ef-478c-88a4-284719f4db84   # ucq-system repo ingest token
+    url: https://ucareqld.ingest.logscale.us-2.crowdstrike.com    
+  
+  # 20241029 AdamS new mimecast logs sink
+  mimecast:
+    type: humio
+    proxy: none
+    token: f35be8e1-33c6-4e29-806b-fec40b3a73f1   # ucq-mimecast repo ingest token
+    url: https://ucareqld.ingest.logscale.us-2.crowdstrike.com 

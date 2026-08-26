@@ -1,0 +1,98 @@
+[
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "6c4bb00e076a1673273f702d9184866cbcd94c016ca0d6417945386b143c1b22",
+    "release_date": "2023-06-01T22:09:30.6Z",
+    "version": "6.54.16810",
+    "file_size": 159090968,
+    "file_type": "exe"
+  },
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "399c08617ce0a5943cbe08bf00462070a4494ee2924cb3b8b4d3f707e82aafa5",
+    "release_date": "2023-03-29T00:58:19.375Z",
+    "version": "6.53.16705",
+    "file_size": 158684440,
+    "file_type": "exe"
+  },
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "ee0b30d90deb8ae001d24600279d60d5e80f9971427f049446331f93a7210e12",
+    "release_date": "2023-03-07T23:08:01.939Z",
+    "version": "6.52.16606",
+    "file_size": 158480776,
+    "file_type": "exe"
+  },
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "bb56dd003a83ba15960274603ce286a8acafb7225dc66c5a68d73bb4238d38ac",
+    "release_date": "2023-02-15T23:08:40.59Z",
+    "version": "6.51.16510",
+    "file_size": 159592072,
+    "file_type": "exe"
+  },
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "2a3c3169dbd2ae47439a5d5b2a973769ec17cc9c836a3f5c473e7e6a0fed7f92",
+    "release_date": "2023-02-28T23:42:03.68Z",
+    "version": "6.50.16411",
+    "file_size": 157085816,
+    "file_type": "exe"
+  },
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "1ff1cc2be3a92f7700a4befdfbda30cf1fe1fa3154875bac6b270adad1da1c96",
+    "release_date": "2023-02-28T23:47:49.926Z",
+    "version": "6.47.16106",
+    "file_size": 118390976,
+    "file_type": "exe"
+  },
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "0f75481b47ec935dbd6f7aa8e25c4596ee3a1e76c6719a730fb3bcc40d50ba67",
+    "release_date": "2023-02-28T23:48:54.088Z",
+    "version": "6.46.16015",
+    "file_size": 118135576,
+    "file_type": "exe"
+  },
+  {
+    "name": "WindowsSensor.MaverickGyr.exe",
+    "description": "Falcon Sensor for Windows",
+    "platform": "windows",
+    "os": "Windows",
+    "os_version": "",
+    "sha256": "fc6355dc5c4651b65bfc3c832cdb0a8f0db264c998c11fbc7702bf83091c75b4",
+    "release_date": "2023-02-28T23:49:21.131Z",
+    "version": "6.45.15910",
+    "file_size": 113383216,
+    "file_type": "exe"
+  }
+]

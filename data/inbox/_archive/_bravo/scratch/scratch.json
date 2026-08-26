@@ -1,0 +1,33 @@
+[
+    {
+        "id":   "company one",
+        "fqdn": [
+            "google.com.au",
+            "google.com"
+        ],
+        "cidr":   [
+            "10.10.10.1/8",
+            "10.11.11.1/8"
+        ],
+        "risklevel":    1,
+        "notes":    [
+            "20250110 AS creation of rule"
+        ]
+    },
+    {
+        "id":   "company two",
+        "fqdn": [
+            "bing.com.au",
+            "bing.com"
+        ],
+        "cidr":   [
+            "10.10.10.1/8",
+            "10.11.11.1/8"
+        ],
+        "risklevel":    1,
+        "notes":    [
+            "20250110 AS creation of rule"
+        ]
+    }
+
+]

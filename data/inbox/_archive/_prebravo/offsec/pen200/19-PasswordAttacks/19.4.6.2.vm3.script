@@ -1,0 +1,53 @@
+┏━([1;31mMessage from Kali developers[00m)
+┃
+┃ This is a minimal installation of Kali Linux, you likely
+┃ want to install supplementary tools. Learn how:
+┃ ⇒ https://www.kali.org/docs/troubleshooting/common-minimum-setup/
+┃
+┗━([2;37mRun “touch ~/.hushlogin” to hide this message[0m)
+]0;student@509dd9fe9817: ~[1;34mstudent@509dd9fe9817[00m:[1;32m~[00m$ ls
+]0;student@509dd9fe9817: ~[1;34mstudent@509dd9fe9817[00m:[1;32m~[00m$ ls -[K[K[K[Kcd /challenge/
+-bash: cd: /challenge/: No such file or directory
+]0;student@509dd9fe9817: ~[1;34mstudent@509dd9fe9817[00m:[1;32m~[00m$ ls -la /
+total 68
+drwxr-xr-x   1 root    root     4096 Mar  8 03:12 [0m[01;34m.[0m
+drwxr-xr-x   1 root    root     4096 Mar  8 03:12 [01;34m..[0m
+-rwxr-xr-x   1 root    root        0 Mar  8 03:12 [01;32m.dockerenv[0m
+lrwxrwxrwx   1 root    root        7 Nov  1  2020 [01;36mbin[0m -> [01;34musr/bin[0m
+drwxr-xr-x   2 root    root     4096 Jul 18  2020 [01;34mboot[0m
+drwxr-xr-x   5 root    root      340 Mar  8 03:12 [01;34mdev[0m
+drwxr-xr-x   1 root    root     4096 Mar  8 03:12 [01;34metc[0m
+drwxr-xr-x   2 ftpuser ftpgroup 4096 Dec 13  2021 [01;34mftphome[0m
+drwxr-xr-x   1 root    root     4096 Dec 13  2021 [01;34mhome[0m
+lrwxrwxrwx   1 root    root        7 Nov  1  2020 [01;36mlib[0m -> [01;34musr/lib[0m
+lrwxrwxrwx   1 root    root        9 Nov  1  2020 [01;36mlib32[0m -> [01;34musr/lib32[0m
+lrwxrwxrwx   1 root    root        9 Nov  1  2020 [01;36mlib64[0m -> [01;34musr/lib64[0m
+lrwxrwxrwx   1 root    root       10 Nov  1  2020 [01;36mlibx32[0m -> [01;34musr/libx32[0m
+drwxr-xr-x   2 root    root     4096 Nov  1  2020 [01;34mmedia[0m
+drwxr-xr-x   2 root    root     4096 Nov  1  2020 [01;34mmnt[0m
+drwxr-xr-x   1 root    root     4096 Nov  1  2020 [01;34mopt[0m
+dr-xr-xr-x 237 root    root        0 Mar  8 03:12 [01;34mproc[0m
+drwx------   2 root    root     4096 Nov  1  2020 [01;34mroot[0m
+drwxr-xr-x   1 root    root     4096 Mar  8 03:12 [01;34mrun[0m
+lrwxrwxrwx   1 root    root        8 Nov  1  2020 [01;36msbin[0m -> [01;34musr/sbin[0m
+drwxr-xr-x   2 root    root     4096 Nov  1  2020 [01;34msrv[0m
+dr-xr-xr-x  13 root    root        0 Mar  8 03:12 [01;34msys[0m
+drwxrwxrwt   1 root    root     4096 Dec 13  2021 [30;42mtmp[0m
+drwxr-xr-x   1 root    root     4096 Nov  1  2020 [01;34musr[0m
+drwxr-xr-x   1 root    root     4096 Nov  1  2020 [01;34mvar[0m
+]0;student@509dd9fe9817: ~[1;34mstudent@509dd9fe9817[00m:[1;32m~[00m$ cd ftphome
+-bash: cd: ftphome: No such file or directory
+]0;student@509dd9fe9817: ~[1;34mstudent@509dd9fe9817[00m:[1;32m~[00m$ cd /ftphome
+]0;student@509dd9fe9817: /ftphome[1;34mstudent@509dd9fe9817[00m:[1;32m/ftphome[00m$ ls
+flag.txt
+]0;student@509dd9fe9817: /ftphome[1;34mstudent@509dd9fe9817[00m:[1;32m/ftphome[00m$ cat flag.txt
+cat: flag.txt: Permission denied
+]0;student@509dd9fe9817: /ftphome[1;34mstudent@509dd9fe9817[00m:[1;32m/ftphome[00m$ ls -la
+total 12
+drwxr-xr-x 2 ftpuser ftpgroup 4096 Dec 13  2021 [0m[01;34m.[0m
+drwxr-xr-x 1 root    root     4096 Mar  8 03:12 [01;34m..[0m
+-r--r----- 1 ftpuser ftpgroup   37 Mar  8 03:12 flag.txt
+]0;student@509dd9fe9817: /ftphome[1;34mstudent@509dd9fe9817[00m:[1;32m/ftphome[00m$ \[Kru [K[K[Ksu offsec
+su: user offsec does not exist or the user entry does not contain all the required fields
+]0;student@509dd9fe9817: /ftphome[1;34mstudent@509dd9fe9817[00m:[1;32m/ftphome[00m$ exit
+logout

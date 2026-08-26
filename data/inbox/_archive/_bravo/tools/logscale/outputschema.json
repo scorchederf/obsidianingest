@@ -1,0 +1,71 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "properties": {
+      "download_url": {
+        "type": "string",
+        "title": "Full results download URL",
+        "format": "url"
+      },
+      "event_count": {
+        "type": "integer",
+        "title": "Event count",
+        "description": "Number of events retrieved from the search results"
+      },
+      "file_csv": {
+        "type": "string",
+        "title": "CSV file",
+        "description": "CSV-encoded event query results. This could be used by subsequent activities to retrieve the file content itself.",
+        "format": "downloadableFile"
+      },
+      "file_info": {
+        "type": "string",
+        "title": "JSON file",
+        "description": "JSON-encoded event query results. This could be used by subsequent activities to retrieve the file content itself.",
+        "format": "downloadableFile"
+      },
+      "logscale_search_name": {
+        "type": "string",
+        "title": "Saved search name"
+      },
+      "raw_results": {
+        "type": "string",
+        "title": "Full search results in raw JSON string",
+        "description": "Full search results in raw JSON string",
+        "format": "rawJSON"
+      },
+      "result_fields": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "title": "Result fields",
+        "description": "Field names from the event query results. This could be used as CSV headers."
+      },
+      "results": {
+        "items": {
+          "properties": {
+            "ucq": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "ucq"
+          ],
+          "type": "object",
+          "description": "Generated response schema"
+        },
+        "type": "array",
+        "title": "Event query results",
+        "description": "Array of search results. Add a loop to iterate through search results"
+      }
+    },
+    "required": [
+      "download_url",
+      "event_count",
+      "file_info",
+      "raw_results",
+      "logscale_search_name",
+      "results"
+    ],
+    "type": "object"
+  }

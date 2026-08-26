@@ -1,0 +1,127 @@
+[?2004h]0;student@e569eb35ccd8: ~[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m clear
+[?2004l[H[2J[3J[?2004h]0;student@e569eb35ccd8: ~[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m wh[K[Kls
+[?2004l[?2004h]0;student@e569eb35ccd8: ~[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m ls l[K-la
+[?2004ltotal 36
+drwxr-xr-x 2 student student 4096 Feb  2  2022 [0m[01;34m.[0m
+drwxr-xr-x 1 root    root    4096 Feb  2  2022 [01;34m..[0m
+-rw-r--r-- 1 student student  220 Oct 15  2020 .bash_logout
+-rw-r--r-- 1 student student 4365 Nov  7  2020 .bashrc
+-rw-r--r-- 1 student student 3526 Oct 15  2020 .bashrc.original
+-rw-r--r-- 1 student student  807 Oct 15  2020 .profile
+-rw-r--r-- 1 student student 8063 Nov  6  2020 .zshrc
+[?2004h]0;student@e569eb35ccd8: ~[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m~[;32m]
+[;32m└─[1;34m$[0m cd /
+[?2004l[?2004h]0;student@e569eb35ccd8: /[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/[;32m]
+[;32m└─[1;34m$[0m ls
+[?2004l[0m[01;36mbin[0m  [01;34mboot[0m  [01;34mchallenge[0m  [01;34mdev[0m  [01;34metc[0m  [01;34mhome[0m  [01;36mlib[0m  [01;36mlib32[0m  [01;36mlib64[0m  [01;36mlibx32[0m  [01;34mmedia[0m  [01;34mmnt[0m  [01;34mopt[0m  [01;34mproc[0m  [01;34mroot[0m  [01;34mrun[0m  [01;36msbin[0m  [01;34msrv[0m  [01;34msys[0m  [30;42mtmp[0m  [01;34musr[0m  [01;34mvar[0m
+[?2004h]0;student@e569eb35ccd8: /[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/[;32m]
+[;32m└─[1;34m$[0m cd challenge/
+[?2004l[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ls
+[?2004l[0m[37;41mget-flag[0m
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m get-flag
+[?2004l-bash: get-flag: command not found
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+ESP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+ESP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EIP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EAX
+Which register controls the execution flow of the program by storing the address of the next instruction to be executed?
+EIP
+Which register stores the lowest memory address (top) of the stack and is dynamic based on how much memory a function needs to store data, arguments, and pointers?
+EBP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EAX
+Which register controls the execution flow of the program by storing the address of the next instruction to be executed?
+EIP
+Which register stores the lowest memory address (top) of the stack and is dynamic based on how much memory a function needs to store data, arguments, and pointers?
+EIP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EAX
+Which register controls the execution flow of the program by storing the address of the next instruction to be executed?
+EIP
+Which register stores the lowest memory address (top) of the stack and is dynamic based on how much memory a function needs to store data, arguments, and pointers?
+EBP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ^C[?2004l[?2004h[?2004l
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EAX
+Which register controls the execution flow of the program by storing the address of the next instruction to be executed?
+EIP
+Which register stores the lowest memory address (top) of the stack and is dynamic based on how much memory a function needs to store data, arguments, and pointers?
+SP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EAX
+Which register controls the execution flow of the program by storing the address of the next instruction to be executed?
+EIP
+Which register stores the lowest memory address (top) of the stack and is dynamic based on how much memory a function needs to store data, arguments, and pointers?
+RBP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EAX
+Which register controls the execution flow of the program by storing the address of the next instruction to be executed?
+EIP
+Which register stores the lowest memory address (top) of the stack and is dynamic based on how much memory a function needs to store data, arguments, and pointers?
+RSP
+Incorrect!
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m ./get-flag 
+[?2004lWhich register allows a function to keep track of required arguments, local variables, and the return address?
+EBP
+Which register is a general purpose register that is often used to store the results of logical instructions?
+EAX
+Which register controls the execution flow of the program by storing the address of the next instruction to be executed?
+EIP
+Which register stores the lowest memory address (top) of the stack and is dynamic based on how much memory a function needs to store data, arguments, and pointers?
+ESP
+Correct! The flag is: OS{1538b7596ae08f3cf4ae6c9fb02afad3}
+[?2004h]0;student@e569eb35ccd8: /challenge[;32m┌──([1;34mstudent㉿e569eb35ccd8[;32m)-[[0;1m/challenge[;32m]
+[;32m└─[1;34m$[0m 

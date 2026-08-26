@@ -1,0 +1,10 @@
+requests
+pyyaml
+pypdf
+python-docx
+beautifulsoup4
+numpy
+
+# Optional, only needed if you process scanned/image PDFs:
+# pytesseract
+# pdf2image

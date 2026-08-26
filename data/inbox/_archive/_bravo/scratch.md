@@ -1,0 +1,23 @@
+# HOST
+- IP:
+- OS:
+- HOSTNAME:
+- WEB TECH:
+
+# USERS
+
+# PASSWORDS
+
+# CREDENTIALS
+
+# SCANS
+## NMAP
+
+
+## NMAP VULN SCAN
+
+
+## WEB SCAN
+
+# ATTACK PATH
+

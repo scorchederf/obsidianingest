@@ -1,0 +1,15 @@
+POST /case8.php HTTP/1.1
+Host: 83.136.254.47:36884
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 52
+Origin: http://83.136.254.47:36884
+Connection: keep-alive
+Referer: http://83.136.254.47:36884/case8.php
+Cookie: PHPSESSID=of2v9ae5qtumj1jc5qndjfsu8s
+Upgrade-Insecure-Requests: 1
+
+id=1&t0ken=cQiNB2dxD217AxgMI8KF4YzSbrO6gYNaxoGWDnmcU

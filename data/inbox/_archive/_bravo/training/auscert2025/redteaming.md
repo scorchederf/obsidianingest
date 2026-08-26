@@ -1,0 +1,64 @@
+# Red teamnig with Chris Gatsford
+## 20250520
+
+ - people will take the shortest path always, if they can bypass it they will
+    - "how can I reduce my stress?"
+    - sneakers - human buffer overflow (scene where they are brute forcing the front desk)
+ - cctv is no longer monitored in real time by humans, instead based on alerting and facial recognition
+ - interacting with social media allows a profile to be built
+    - profiling allows threat actors to target you specifically
+- technology/people/physical = red teaming
+- delivering a package always looks less suspicious as nobody is expecting a threat actor to deliver something
+- highlighter and uv light can show keypad entry codes
+    - alternative is uv powder
+- gaining access
+    - blue staff lanyard
+    - look for social media to duplicate 
+    - heat warming pad for bypassing door sensors
+    - look like you belong
+        - can you acquire any work wear
+- never underestimate the power of user training
+    - educate
+-   rfid cards
+    - key fob can detect low or high frequency
+    - combination of low frequency and high frequency means it falls to the lowest common demonitor
+    - low frequency has the poorest security and are the cheapest
+    - the card number is usually written on the card
+        - building number and card number
+        - target the lowest card numbers, may 
+    - long range rfid reader can have batteries added and made portable
+        - can be placed beside a standard card reader
+            - added points for adding a post it not saying "test card reader, please ignore"
+-  hacking of mat
+-  hawaii missle alert story
+    -  old headsets used to broadcast voice in the clear and you could hear the passwords being reset from the carpark
+-  shred-x brands its own keys which are all the same
+-  shredding bins are a gold mine
+-  dumpster diving
+    -  floor plans
+    -  user lists
+    -  memos
+    -  board papers
+    -  equipment/software 
+    -  policies/regulations
+    -  hostnames
+-  IT people especially love to correct you and talk about their environments
+    -  Vendors use this to their advantage
+-  Langer experiment
+    -  the shortcut is using the "because"
+        -  Can I use the photocopier because I am in a rush
+        -  Can I use the photocopier because I have only 5 copies to do
+-  printing out a logo and attaching to a commonly used car the organisation uses
+-  authority 
+    -  look like you are supposed to be there
+    -  dress the part
+    -  high vis
+    -  holding a clipboard
+-  disconnect a users network cable, then ask if they are having network issues. Pretend to be a IT technician
+-  Social engineering toolkit www
+-  staff and their badges of honour
+    -  usually the cheapest solution
+    -  are they tracked/time period?
+-  council padlocks can be bypassed by getting the code from the padlock and going to mr mint and ask them to create the key
+-  bypass tailgates by using crutches, wheelchairs
+-  

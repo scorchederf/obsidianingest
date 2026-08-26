@@ -1,0 +1,151 @@
+<table style="width: 100%; height: 937px;" border="1"><colgroup> <col style="width: 24.3547%;" align="left"> <col style="width: 24.3547%;" align="left"> </colgroup>
+    <thead>
+    <tr >
+    <th  align="left">Placeholders</th>
+    <th >Value</th>
+    <th  align="left">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr >
+    <td  align="left"><code class="literal">{field:$FIELD_NAME}</code></td>
+    <td  align="left"><code class="literal">field:$FIELD_NAME</code></td>
+    <td  align="left">Extracts the value of <code class="literal">$FIELD_NAME</code> from the field in the first event from the trigger. Put field names with spaces in double quotes, <code class="literal">{field:"My Field"}</code>.</td>
+    </tr>
+    <tr>
+    <td align="left"><code class="literal">{field_raw:$FIELD_NAME}</code></td>
+    <td align="left"><code class="literal">field_raw:$FIELD_NAME</code></td>
+    <td align="left">Extracts the value of <code class="literal">$FIELD_NAME</code> from the field in the first event from the trigger without JSON escaping it. Put field names with spaces in double quotes, <code class="literal">{field_raw:"My Field"}</code>.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{name}</code>, <code class="literal">{alert_name}</code></td>
+    <td  align="left"><code class="literal">name</code>, <code class="literal">{alert_name}</code></td>
+    <td  align="left">The user-made name of the trigger.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{description}</code>, <code class="literal">{alert_description}</code></td>
+    <td  align="left"><code class="literal">description</code>, <code class="literal">{alert_description}</code></td>
+    <td  align="left">A user-made description of the trigger.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{triggered_timestamp}</code>, <code class="literal">{alert_triggered_timestamp}</code></td>
+    <td  align="left"><code class="literal">triggered_timestamp</code>, <code class="literal">{alert_triggered_timestamp}</code></td>
+    <td  align="left">The time at which the trigger was triggered, formatted as <a class="ulink" href="https://en.wikipedia.org/wiki/ISO_8601" target="_top">ISO 8601</a>.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{id}</code>, <code class="literal">{alert_id}</code></td>
+    <td  align="left"><code class="literal">id</code>, <code class="literal">{alert_id}</code></td>
+    <td  align="left">The id of the trigger.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{action_id}</code>, <code class="literal">{alert_notifier_id}</code></td>
+    <td  align="left"><code class="literal">action_id</code>, <code class="literal">{alert_notifier_id}</code></td>
+    <td  align="left">The id of the Action used to deliver this message.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{event_count}</code></td>
+    <td  align="left"><code class="literal">event_count</code></td>
+    <td  align="left">The number of events from the trigger.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{url}</code></td>
+    <td  align="left"><code class="literal">url</code></td>
+    <td  align="left">A URL to open LogScale with the trigger's query.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_result_summary}</code></td>
+    <td  align="left"><code class="literal">query_result_summary</code></td>
+    <td  align="left">Events encoded as a string.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_string}</code></td>
+    <td  align="left"><code class="literal">query_string</code></td>
+    <td  align="left">The query of the trigger.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_start_s}</code></td>
+    <td  align="left"><code class="literal">query_start_s</code></td>
+    <td  align="left">The actual query start time as Unix Time in seconds with 3 decimals.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_end_s}</code></td>
+    <td  align="left"><code class="literal">query_end_s</code></td>
+    <td  align="left">The actual query end time as Unix Time in seconds with 3 decimals.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_time_start}</code></td>
+    <td  align="left"><code class="literal">query_time_start</code></td>
+    <td  align="left">The specified query start time (e.g. 10m).</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_time_end}</code></td>
+    <td  align="left"><code class="literal">query_time_end</code></td>
+    <td  align="left">The specified query end time (e.g. now).</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_time_interval}</code></td>
+    <td  align="left"><code class="literal">query_time_interval</code></td>
+    <td  align="left">The specified time interval for the Alert's query (e.g. 10m -&gt; now).</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_start_ms}</code></td>
+    <td  align="left"><code class="literal">query_start_ms</code></td>
+    <td  align="left">The actual query start time as Unix Time in milliseconds.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_end_ms}</code></td>
+    <td  align="left"><code class="literal">query_end_ms</code></td>
+    <td  align="left">The actual query end time as Unix Time in milliseconds.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_start_datetime}</code></td>
+    <td  align="left"><code class="literal">query_start_datetime</code></td>
+    <td  align="left">The actual query start time formatted as ISO 8601.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{query_end_datetime}</code></td>
+    <td  align="left"><code class="literal">query_end_datetime</code></td>
+    <td  align="left">The actual query end time formatted as ISO 8601.</td>
+    </tr>
+    <tr>
+    <td align="left"><code class="literal">{warnings}</code></td>
+    <td align="left"><code class="literal">warnings</code></td>
+    <td align="left">Any warnings that were generated by the query. Note that by default, triggers will not trigger if there are warnings from the query, see <a class="xref" title="Setting Alert Throttle Period" href="automated-alerts-throttle-period.html" aria-invalid="true">Setting Alert Throttle Period</a> and <a class="xref" title="Scheduled Searches" href="automated-scheduled-searches.html" aria-invalid="true">Scheduled Searches</a>.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{repo_name}</code></td>
+    <td  align="left"><code class="literal">repo_name</code></td>
+    <td  align="left">The name of the repository in which the query was executed.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{events_str}</code></td>
+    <td  align="left"><code class="literal">events_str</code></td>
+    <td  align="left">Events encoded as a string.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{events}</code></td>
+    <td  align="left"><code class="literal">events</code></td>
+    <td  align="left">Events encoded as a JSON array of event objects.</td>
+    </tr>
+    <tr >
+    <td id="events_html" style="height: 126px;" align="left"><code class="literal">{events_html}</code></td>
+    <td  align="left"><code class="literal">events_html</code></td>
+    <td  align="left">Events encoded as an HTML table inside &lt;table&gt; tags. All fields from all events are shown as columns. The columns are ordered by the order the fields are encountered, starting with the fields from the first event. If you want fewer fields, remove them in the Alert or Scheduled Search query using e.g. <a class="link" title="table()" href="functions-table.html" aria-invalid="true"><code class="function">table()</code></a>, <a class="link" title="select()" href="functions-select.html" aria-invalid="true"><code class="function">select()</code></a> or <a class="link" title="drop()" href="functions-drop.html" aria-invalid="true"><code class="function">drop()</code></a> You can also specify the order of the fields using <a class="link" title="table()" href="functions-table.html" aria-invalid="true"><code class="function">table()</code></a> or <a class="link" title="select()" href="functions-select.html" aria-invalid="true"><code class="function">select()</code></a></td>
+    </tr>
+    <tr>
+    <td align="left"><code class="literal">{schedule}</code></td>
+    <td align="left"><code class="literal">schedule</code></td>
+    <td align="left">The cron schedule which the triggering search was executed according to. Only applicable when triggered by a <a class="xref" title="Scheduled Searches" href="automated-scheduled-searches.html" aria-invalid="true">Scheduled Searches</a>.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{time_zone}</code></td>
+    <td  align="left"><code class="literal">time_zone</code></td>
+    <td  align="left">The time zone that the triggering search is performed within. Only applicable when triggered by a <a class="xref" title="Scheduled Searches" href="automated-scheduled-searches.html" aria-invalid="true">Scheduled Searches</a>.</td>
+    </tr>
+    <tr >
+    <td  align="left"><code class="literal">{trigger_type}</code></td>
+    <td  align="left"><code class="literal">trigger_type</code></td>
+    <td  align="left">Can either be 'Alert' or 'Scheduled Search' depending on which triggered the action.</td>
+    </tr>
+    </tbody>
+    </table>

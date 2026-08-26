@@ -1,0 +1,6 @@
+[*] std: Performing General Enumeration against: dc.MAILMAN.com...
+[-] DNSSEC is not configured for dc.MAILMAN.com
+[*] 	 A dc.MAILMAN.com 192.168.176.149
+[*] 	 TXT dc.MAILMAN.com OS{6d8a534b161a66160a55fc3159ddf8bb}
+[*] Enumerating SRV Records
+[+] 0 Records Found

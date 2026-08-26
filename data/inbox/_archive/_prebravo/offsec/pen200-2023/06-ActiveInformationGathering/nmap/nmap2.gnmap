@@ -1,0 +1,4 @@
+# Nmap 7.93 scan initiated Mon Apr 24 20:52:20 2023 as: nmap -sC -sV -oA nmap/nmap2 -p 1-1000 -v 192.168.50.151
+# Ports scanned: TCP(1000;1-1000) UDP(0;) SCTP(0;) PROTOCOLS(0;)
+Host: 192.168.50.151 ()	Status: Down
+# Nmap done at Mon Apr 24 20:52:23 2023 -- 1 IP address (0 hosts up) scanned in 3.41 seconds

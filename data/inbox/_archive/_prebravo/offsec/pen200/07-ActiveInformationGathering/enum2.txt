@@ -1,0 +1,212 @@
+Starting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:43:04 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.9
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ===========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.9[0m[34m )===========================
+
+[0m[33m
+[E] [0m[31mCan't find workgroup/domain
+
+[0m
+
+[34m ===================================( [0m[32mSession Check on 192.168.165.9[0m[34m )===================================
+
+[0m[33m
+[E] [0m[31mServer doesn't allow session using username '', password ''.  Aborting remainder of tests.
+
+[0mStarting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:43:16 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.11
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ===========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.11[0m[34m )===========================
+
+[0m[33m
+[E] [0m[31mCan't find workgroup/domain
+
+[0m
+
+[34m ==================================( [0m[32mSession Check on 192.168.165.11[0m[34m )==================================
+
+[0m[33m
+[E] [0m[31mServer doesn't allow session using username '', password ''.  Aborting remainder of tests.
+
+[0mStarting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:43:27 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.12
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ===========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.12[0m[34m )===========================
+
+[0m[33m
+[E] [0m[31mCan't find workgroup/domain
+
+[0m
+
+[34m ==================================( [0m[32mSession Check on 192.168.165.12[0m[34m )==================================
+
+[0m[33m
+[E] [0m[31mServer doesn't allow session using username '', password ''.  Aborting remainder of tests.
+
+[0mStarting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:43:40 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.13
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ===========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.13[0m[34m )===========================
+
+[0m[33m
+[+] [0m[32mGot domain/workgroup name: WORKGROUP
+
+[0m
+[34m ==================================( [0m[32mSession Check on 192.168.165.13[0m[34m )==================================
+
+[0m[33m
+[+] [0m[32mServer 192.168.165.13 allows sessions using username '', password ''
+
+[0m
+[34m ===============================( [0m[32mGetting domain SID for 192.168.165.13[0m[34m )===============================
+
+[0mDomain Name: WORKGROUP
+Domain Sid: (NULL SID)
+[33m
+[+] [0m[32mCan't determine if host is part of domain or part of a workgroup
+
+[0menum4linux complete on Tue Feb  7 19:43:46 2023
+
+Starting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:43:47 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.14
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ===========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.14[0m[34m )===========================
+
+[0m[33m
+[E] [0m[31mCan't find workgroup/domain
+
+[0m
+
+[34m ==================================( [0m[32mSession Check on 192.168.165.14[0m[34m )==================================
+
+[0m[33m
+[E] [0m[31mServer doesn't allow session using username '', password ''.  Aborting remainder of tests.
+
+[0mStarting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:43:58 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.15
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ===========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.15[0m[34m )===========================
+
+[0m[33m
+[E] [0m[31mCan't find workgroup/domain
+
+[0m
+
+[34m ==================================( [0m[32mSession Check on 192.168.165.15[0m[34m )==================================
+
+[0m[33m
+[E] [0m[31mServer doesn't allow session using username '', password ''.  Aborting remainder of tests.
+
+[0mStarting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:44:10 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.20
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ===========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.20[0m[34m )===========================
+
+[0m[33m
+[+] [0m[32mGot domain/workgroup name: WORKGROUP
+
+[0m
+[34m ==================================( [0m[32mSession Check on 192.168.165.20[0m[34m )==================================
+
+[0m[33m
+[+] [0m[32mServer 192.168.165.20 allows sessions using username '', password ''
+
+[0m
+[34m ===============================( [0m[32mGetting domain SID for 192.168.165.20[0m[34m )===============================
+
+[0mDomain Name: WORKGROUP
+Domain Sid: (NULL SID)
+[33m
+[+] [0m[32mCan't determine if host is part of domain or part of a workgroup
+
+[0menum4linux complete on Tue Feb  7 19:44:17 2023
+
+Starting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Tue Feb  7 19:44:17 2023
+
+[34m =========================================( [0m[32mTarget Information[0m[34m )=========================================
+
+[0mTarget ........... 192.168.165.149
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. alfred
+
+
+[34m ==========================( [0m[32mEnumerating Workgroup/Domain on 192.168.165.149[0m[34m )==========================
+
+[0m[33m
+[E] [0m[31mCan't find workgroup/domain
+
+[0m
+
+[34m ==================================( [0m[32mSession Check on 192.168.165.149[0m[34m )==================================
+
+[0m[33m
+[+] [0m[32mServer 192.168.165.149 allows sessions using username '', password ''
+
+[0m
+[34m ===============================( [0m[32mGetting domain SID for 192.168.165.149[0m[34m )===============================
+
+[0mDomain Name: MAILMAN
+Domain Sid: S-1-5-21-2956169125-3171408646-1808990038
+[33m
+[+] [0m[32mHost is part of a domain (not a workgroup)
+
+[0menum4linux complete on Tue Feb  7 19:44:33 2023
+

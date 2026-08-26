@@ -1,0 +1,9 @@
+# Nmap 7.93 scan initiated Mon Apr 24 20:50:37 2023 as: nmap -sC -sV -oA nmap/nmap -v 192.168.50.151
+Nmap scan report for 192.168.50.151
+Host is up (0.00057s latency).
+All 1000 scanned ports on 192.168.50.151 are in ignored states.
+Not shown: 1000 filtered tcp ports (no-response)
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Apr 24 20:51:00 2023 -- 1 IP address (1 host up) scanned in 22.70 seconds

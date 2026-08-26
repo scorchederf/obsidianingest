@@ -1,0 +1,1 @@
+![alt text](../media/crowdstrike/image.png)

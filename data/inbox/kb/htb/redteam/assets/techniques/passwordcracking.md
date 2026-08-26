@@ -1,0 +1,87 @@
+---
+title: password cracking
+---
+
+# password cracking
+
+
+- use rules
+    - `/usr/share/hashcat/rules/best64.rule`
+    - `/usr/share/john/rules/best64.rule`
+- username-anarchy 
+    - `~/git/username-anarchy/username-anarchy John Marston > john.lst`
+- john
+    - `john --wordlist=/usr/sh[[_archive/_bravo/redteam/assets/techniques/passwordcracking]]are/wordlists/rockyou.txt hashes.txt`
+    - `john --wordlist -rules C:\dev\share\bruteforcing\john\run\rules\best64.rule`
+- hashcat 
+    - detect hash type `hashid -m "mssqlsvc::WIN-02:6e1fb81beae990e6:C11<snip>"`
+    - run on root host, magnitudes faster
+    - `cd C:\dev\software\hashcat-6.2.6` 
+    - ` .\hashcat.exe -a 0 -m 9500 C:\dev\software\bruteforcing\hashes.txt C:\dev\software\bruteforcing\realhuman_phill.txt --session=testsession --status`
+        - `hashcat -m 1000 c:\dev\share\bruteforcing\hashestocrack.txt C:\dev\share\bruteforcing\wordlists\rockyou.txt`
+        - ntlm hash -m 5600 (responder)
+        - sam database dump -m 1000 (sam)
+        - ` -r rules/best64.rule`
+    - shadow
+        - `unshadow passwd.bak shadow.bak > unshadowed.hashes`
+        -  `cd c:\dev\crack\hashcat && hashcat.exe -m 1800 -a 0 C:\dev\crack\unshadow.hashes C:\dev\crack\mut_password.list -o C:\dev\crack\unshadowed.cracked`
+    - build a mutated list
+        - `hashcat --force password.list -r custom.rule --stdout | sort -u > mut_password.list`
+    - modes
+        - bitlocker `-m 22100`
+            - `bitlocker2john -i Backup.vhd > backup.hashes`
+            - `grep "bitlocker\$0" backup.hashes > backup.hash`
+            - `hashcat -m 22100 backup.hash /opt/useful/seclists/Passwords/Leaked-Databases/rockyou.txt -o backup.cracked`
+            - `cat backup.cracked`
+- generate wordlists
+    - cewl
+        - `cewl -m5 --lowercase -w wordlist.txt http://192.168.10.10`
+    - username-anarchy
+        - `/usr/share/username-anarchy/username-anarchy Jane Smith`
+    - cupp (Common User Passwords Profiler)
+        - `sudo apt install cupp -y`
+        - `cupp -i`
+
+- Generate a rule based word list
+    - `hashcat --force password.list -r custom.rule --stdout > mut_password.list`
+- password policies 
+    - get list `wget https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Passwords/darkweb2017-top10000.txt`
+    - password min length 8 `grep -E '^.{8,}$' darkweb2017-top10000.txt > darkweb2017-minlength.txt`
+    - must contain upper `grep -E '[A-Z]' darkweb2017-minlength.txt > darkweb2017-uppercase.txt`
+    - must contain lower `grep -E '[a-z]' darkweb2017-uppercase.txt > darkweb2017-lowercase.txt`
+    - must contain number `grep -E '[0-9]' darkweb2017-lowercase.txt > darkweb2017-number.txt`
+    - 
+- cracking
+    - keepass `https://github.com/patecm/cracking_keepass`
+- protected files
+    - `for ext in $(echo ".xls .xls* .xltx .csv .od* .doc .doc* .pdf .pot .pot* .pp*");do echo -e "\nFile extension: " $ext; find / -name *$ext 2>/dev/null | grep -v "lib\|fonts\|share\|core" ;done`
+    - searching for ssh keys
+        - `grep -rnw "PRIVATE KEY" /* 2>/dev/null | grep ":1"`
+            - if it contains `Proc-Type: 4,ENCRYPTED` then we need the password
+        - use ssh2john to transform so john can decrypt it
+            - `ssh2john.py SSH.private > ssh.hash`
+        - john
+            - `john --wordlist=rockyou.txt ssh.hash`
+            - show results `john ssh.hash --show`
+    - transform file to john hash format
+        - identify file
+            - `file GZIP.gzip`
+            - `openssl enc'd data with salted password`
+                - safest way to do is via bash loop (watch for files extracted to the dir)
+                    - `for i in $(cat rockyou.txt);do openssl enc -aes-256-cbc -d -in GZIP.gzip -k $i 2>/dev/null| tar xz;done`
+                    - `for i in $(cat /home/kali/passwordattacks/mut_password.list);do unzip -P $i Notes.zip 2>/dev/null;done`
+        - msoffice documents
+                - `office2john.py Protected.docx > protected-docx.hash`
+        - .pdf
+            - ` pdf2john.py PDF.pdf > pdf.hash`
+        - .zip
+            - `zip2john ZIP.zip > zip.hash`
+        - bitlocker
+            - `bitlocker2john -i Backup.vhd > backup.hashes`
+            - `grep "bitlocker\$0" backup.hashes > backup.hash`
+        - keepass
+            - `keepass2john Logins.kdbx | grep -o "$keepass$.*" >  crack.hash`
+ 
+    - crack
+        - `john --wordlist=rockyou.txt protected-docx.hash`
+        - show results `john protected-docx.hash --show`

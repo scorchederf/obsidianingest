@@ -1,0 +1,10 @@
+---
+name: http
+port: [80,443]
+category:
+  - search:
+    - "https://www.google.com"
+    - "https://www.bing.com"
+
+
+

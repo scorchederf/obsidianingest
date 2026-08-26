@@ -1,0 +1,2 @@
+# Nmap 7.94SVN scan initiated Sun Jan 12 13:07:15 2025 as: /usr/lib/nmap/nmap --privileged -sV -sC -p- -vv -oA nmap 10.129.239.18
+# Ports scanned: TCP(65535;1-65535) UDP(0;) SCTP(0;) PROTOCOLS(0;)
