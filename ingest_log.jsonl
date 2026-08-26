@@ -371,3 +371,4 @@
 {"source_file": "11-115-AttackingCommonServices-11-AttackingRDP.pdf", "status": "error", "error": "'category'", "timestamp": "2026-08-27T03:06:50.700990"}
 {"source_file": "11-115-AttackingCommonServices-02-TheConceptOfAttacks.pdf", "status": "error", "error": "'category'", "timestamp": "2026-08-27T03:08:08.730922"}
 {"source_file": "07-024-filetransfers-04-TransferingFileswithCode.pdf", "note_path": "study-notes/hack-the-box-academy-module-24-section-1574.md", "category": "study_notes", "title": "Hack The Box - Academy Module 24 Section 1574", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T03:08:44.584459"}
+{"source_file": "27-162-documentation-03-TypesOfReports.pdf", "note_path": "study-notes/documentation-reporting-1787761266-1787764159.md", "category": "study_notes", "title": "Documentation & Reporting", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T03:09:19.311786"}
