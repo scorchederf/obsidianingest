@@ -136,3 +136,4 @@
 {"source_file": "bruteforcing.md", "note_path": "techniques/brute-forcing.md", "category": "techniques", "title": "Brute Forcing", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T21:55:16.354606"}
 {"source_file": "win-privesc.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-26T22:00:22.633847"}
 {"source_file": "sqlinjection.md", "note_path": "study-notes/sqlinjections.md", "category": "study_notes", "title": "sqlinjections", "stubs_created": ["techniques/t1077.md", "attack-methodologies/ta0005.md"], "status": "ok", "timestamp": "2026-08-26T22:01:12.358535"}
+{"source_file": "win-commands.md", "note_path": "os/windows-version-and-ping.md", "category": "os", "title": "Windows Version and Ping", "stubs_created": ["tools/ping-exe.md", "tools/get-wmiobject.md"], "status": "ok", "timestamp": "2026-08-26T22:01:46.741024"}
