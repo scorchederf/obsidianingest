@@ -155,3 +155,4 @@
 {"source_file": "httpapi.md", "note_path": "study-notes/http-api-1787747280.md", "category": "study_notes", "title": "http api", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:28:00.226653"}
 {"source_file": "mongodb.md", "note_path": "study-notes/mongodb-1787747318.md", "category": "study_notes", "title": "mongodb", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:28:38.355144"}
 {"source_file": "postgresql.md", "note_path": "study-notes/postgresql-1787747341.md", "category": "study_notes", "title": "postgresql", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:29:01.066284"}
+{"source_file": "smtp.md", "note_path": "services-ports/smtp-1787747375.md", "category": "study_notes", "title": "smtp", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:29:35.215849"}
