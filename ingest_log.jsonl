@@ -161,3 +161,4 @@
 {"source_file": "redis.md", "note_path": "tools/redis-1787747626.md", "category": "study_notes", "title": "redis", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:33:46.850032"}
 {"source_file": "rsync.md", "note_path": "tools/rsync-1787747637.md", "category": "tools", "title": "rsync", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:33:57.357837"}
 {"source_file": "http.md", "note_path": "study-notes/http-s-1787747699.md", "category": "study_notes", "title": "http/s", "stubs_created": ["tools/feroxbuster.md", "tools/finalrecon.md", "techniques/password-cracking.md", "techniques/web-attacks.md"], "status": "ok", "timestamp": "2026-08-26T22:34:59.507972"}
+{"source_file": "ssh.md", "note_path": "services-ports/ssh-1787747728.md", "category": "study_notes", "title": "ssh", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T22:35:28.434476"}
