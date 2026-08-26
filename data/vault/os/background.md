@@ -1,8 +1,8 @@
 ---
-title: "t1003-003"
+title: "background"
 aliases: []
-tags: ['technique/t1003-003']
-category: "techniques"
+tags: ['os/background']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# t1003-003
+# background
 
 ## Overview
-*Stub note — auto-created because another note referenced "t1003-003". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "background". Fill in details when you have them.*

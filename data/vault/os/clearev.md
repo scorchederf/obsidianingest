@@ -1,8 +1,8 @@
 ---
-title: "t1003-003"
+title: "clearev"
 aliases: []
-tags: ['technique/t1003-003']
-category: "techniques"
+tags: ['os/clearev']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# t1003-003
+# clearev
 
 ## Overview
-*Stub note — auto-created because another note referenced "t1003-003". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "clearev". Fill in details when you have them.*
