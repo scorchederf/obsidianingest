@@ -1,27 +1,35 @@
 ---
-title: "hydra"
+title: hydra
 aliases: []
-tags: ['tool/hydra']
-category: "tools"
-status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
-source: "auto-generated stub (referenced by another note, not yet written)"
-related_tools: []
+tags:
+- tool/hydra
+category: tools
+status: draft
+date_created: '2026-08-26'
+date_modified: '2026-08-26'
+source: hydra.md
+related_tools:
+- '[[hydra]]'
 related_techniques: []
 related_tactics: []
 related_services: []
 related_os: []
 related_notes: []
-mitre_tactic: ""
-mitre_technique: ""
-real_path: ""
-port: ""
-protocol: ""
-os: ""
+mitre_tactic: ''
+mitre_technique: ''
+real_path: ''
+port: ''
+protocol: ''
+os: ''
 ---
 
 # hydra
 
-## Overview
-*Stub note — auto-created because another note referenced "hydra". Fill in details when you have them.*
+## Usage
+- `hydra -L users.list -P passwords.list ftp://$ip:2121 -vv -I -t 40 -f -u`
+
+## Flags
+- `-f`      stop at first hit
+- `-t 40`   increase threads (may cause breaking)
+- `-u`      loop around users, not passwords (effective! implied with -x)
+
