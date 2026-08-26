@@ -525,3 +525,13 @@
 {"source_file": "21844", "status": "error", "error": "No extractor for '' files. Add one in extract.py, or convert '21844' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:51:37.614863"}
 {"source_file": "39525", "status": "error", "error": "No extractor for '' files. Add one in extract.py, or convert '39525' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:51:37.615549"}
 {"source_file": "notes.md", "note_path": "study-notes/kali-linux-bash-scripting.md", "category": "study_notes", "title": "Kali Linux Bash Scripting", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T05:53:37.146114"}
+{"source_file": "39446", "status": "error", "error": "No extractor for '' files. Add one in extract.py, or convert '39446' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.966869"}
+{"source_file": "5.7.4.vm9.script", "status": "error", "error": "No extractor for '.script' files. Add one in extract.py, or convert '5.7.4.vm9.script' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.967648"}
+{"source_file": "exercise1.txt", "status": "error", "error": "Extracted text is empty \u2014 nothing to file.", "timestamp": "2026-08-27T05:53:38.969211"}
+{"source_file": "image.png", "status": "error", "error": "No extractor for '.png' files. Add one in extract.py, or convert 'image.png' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.970567"}
+{"source_file": "17133", "status": "error", "error": "No extractor for '' files. Add one in extract.py, or convert '17133' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.971500"}
+{"source_file": "18755", "status": "error", "error": "No extractor for '' files. Add one in extract.py, or convert '18755' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.972901"}
+{"source_file": "42009", "status": "error", "error": "No extractor for '' files. Add one in extract.py, or convert '42009' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.973507"}
+{"source_file": "5.7.4.vm8script", "status": "error", "error": "No extractor for '.vm8script' files. Add one in extract.py, or convert '5.7.4.vm8script' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.973881"}
+{"source_file": "6757", "status": "error", "error": "No extractor for '' files. Add one in extract.py, or convert '6757' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:53:38.974570"}
+{"source_file": "index.html", "note_path": "study-notes/megacorp-one.md", "category": "study_notes", "title": "MegaCorp One", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T05:54:32.958291"}
