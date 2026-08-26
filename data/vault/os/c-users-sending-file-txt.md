@@ -1,5 +1,5 @@
 ---
-title: "C:\Users\sending_file.txt"
+title: "C:\Users\Sending-File.txt"
 aliases: []
 tags: ['os/c-users-sending-file-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Users\sending_file.txt
+# C:\Users\Sending-File.txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Users\sending_file.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\Users\Sending-File.txt". Fill in details when you have them.*

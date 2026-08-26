@@ -1,7 +1,7 @@
 ---
-title: "C:\Windows\System32\net.use.exe"
+title: "C:\Windows"
 aliases: []
-tags: ['os/c-windows-system32-net-use-exe']
+tags: ['os/c-windows']
 category: "os"
 status: stub
 date_created: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Windows\System32\net.use.exe
+# C:\Windows
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Windows\System32\net.use.exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\Windows". Fill in details when you have them.*
