@@ -78,3 +78,4 @@
 {"source_file": "rsync.md", "note_path": "tools/rsync.md", "category": "tools", "title": "rsync", "stubs_created": ["tools/rsync.md"], "status": "ok", "timestamp": "2026-08-26T20:49:17.759550"}
 {"source_file": "http.md", "note_path": "study-notes/http-s.md", "category": "study_notes", "title": "http/s", "stubs_created": ["tools/recon-ng.md", "tools/theharvester.md", "tools/spiderfoot.md", "services-ports/s3.md"], "status": "ok", "timestamp": "2026-08-26T20:50:52.264801"}
 {"source_file": "ssh.md", "note_path": "services-ports/ssh.md", "category": "tools", "title": "ssh", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:51:18.881155"}
+{"source_file": "smb.md", "note_path": "study-notes/smb.md", "category": "study_notes", "title": "smb", "stubs_created": ["tools/smbmap.md", "tools/smbclient.md", "tools/enum4linux.md", "tools/responder.md", "tools/rpcclient.md", "tools/impacket-psexec.md"], "status": "ok", "timestamp": "2026-08-26T20:51:56.822231"}
