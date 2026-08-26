@@ -435,3 +435,5 @@
 {"source_file": "09-039-metasploit-10-Sessions.pdf", "note_path": "study-notes/hack-the-box-academy-module-39-section-415.md", "category": "study_notes", "title": "Hack The Box - Academy Module 39 Section 415", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T04:25:47.327350"}
 {"source_file": "23-134-WebAttacks-13-IntroToXXE.pdf", "status": "error", "error": "'title'", "timestamp": "2026-08-27T04:27:12.768020"}
 {"source_file": "16-57-BruteForcing-05-HydraModules.pdf", "note_path": "study-notes/login-brute-forcing-1787756658-1787768876.md", "category": "study_notes", "title": "Login Brute Forcing", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T04:27:56.198836"}
+{"source_file": "16-57-BruteForcing-10-HybridAttacks.pdf", "status": "error", "error": "'category'", "timestamp": "2026-08-27T04:29:26.474401"}
+{"source_file": "17-33-SqlInjectionFundamentals-05-QueryResults.pdf", "note_path": "study-notes/hack-the-box-academy-module-33-section-191.md", "category": "study_notes", "title": "Hack The Box - Academy Module 33 Section 191", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T04:29:56.282803"}
