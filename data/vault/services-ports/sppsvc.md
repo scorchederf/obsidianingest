@@ -1,7 +1,7 @@
 ---
-title: "DispBrokerDeskt"
+title: "sppsvc"
 aliases: []
-tags: ['service/dispbrokerdeskt']
+tags: ['service/sppsvc']
 category: "services"
 status: stub
 date_created: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# DispBrokerDeskt
+# sppsvc
 
 ## Overview
-*Stub note — auto-created because another note referenced "DispBrokerDeskt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "sppsvc". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "WinHttpAutoProx..."
+title: "WinHttpAutoProx"
 aliases: []
 tags: ['service/winhttpautoprox']
 category: "services"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# WinHttpAutoProx...
+# WinHttpAutoProx
 
 ## Overview
-*Stub note — auto-created because another note referenced "WinHttpAutoProx...". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "WinHttpAutoProx". Fill in details when you have them.*

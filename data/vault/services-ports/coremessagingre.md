@@ -1,5 +1,5 @@
 ---
-title: "CoreMessagingRe..."
+title: "CoreMessagingRe"
 aliases: []
 tags: ['service/coremessagingre']
 category: "services"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# CoreMessagingRe...
+# CoreMessagingRe
 
 ## Overview
-*Stub note — auto-created because another note referenced "CoreMessagingRe...". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "CoreMessagingRe". Fill in details when you have them.*

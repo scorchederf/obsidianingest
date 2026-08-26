@@ -1,7 +1,7 @@
 ---
-title: "DispBrokerDeskt"
+title: "CDPUserSvc_1bd1d3"
 aliases: []
-tags: ['service/dispbrokerdeskt']
+tags: ['service/cdpusersvc-1bd1d3']
 category: "services"
 status: stub
 date_created: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# DispBrokerDeskt
+# CDPUserSvc_1bd1d3
 
 ## Overview
-*Stub note — auto-created because another note referenced "DispBrokerDeskt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "CDPUserSvc_1bd1d3". Fill in details when you have them.*

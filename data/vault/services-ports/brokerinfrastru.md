@@ -1,5 +1,5 @@
 ---
-title: "BrokerInfrastru..."
+title: "BrokerInfrastru"
 aliases: []
 tags: ['service/brokerinfrastru']
 category: "services"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# BrokerInfrastru...
+# BrokerInfrastru
 
 ## Overview
-*Stub note — auto-created because another note referenced "BrokerInfrastru...". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "BrokerInfrastru". Fill in details when you have them.*

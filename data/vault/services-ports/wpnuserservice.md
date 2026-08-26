@@ -1,5 +1,5 @@
 ---
-title: "WpnUserService_..."
+title: "WpnUserService_"
 aliases: []
 tags: ['service/wpnuserservice']
 category: "services"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# WpnUserService_...
+# WpnUserService_
 
 ## Overview
-*Stub note — auto-created because another note referenced "WpnUserService_...". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "WpnUserService_". Fill in details when you have them.*
