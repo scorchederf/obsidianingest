@@ -63,3 +63,4 @@
 {"source_file": "joomla.md", "note_path": "study-notes/joomla-cms.md", "category": "study_notes", "title": "Joomla CMS", "stubs_created": ["tools/python.md"], "status": "ok", "timestamp": "2026-08-26T20:40:00.678992"}
 {"source_file": "gobuster.md", "note_path": "tools/gobuster.md", "category": "tools", "title": "gobuster", "stubs_created": ["tools/gobuster.md"], "status": "ok", "timestamp": "2026-08-26T20:40:13.619730"}
 {"source_file": "wpscan.md", "note_path": "tools/wpscan.md", "category": "tools", "title": "wpscan", "stubs_created": ["tools/wpscan.md"], "status": "ok", "timestamp": "2026-08-26T20:42:08.085897"}
+{"source_file": "citrix.md", "note_path": "study-notes/alias-files-1787738997-1787739014-1787739117-1787739261-1787739362-1787739712-1787739734-1787739857-1787740288-1787740309-1787740948.md", "category": "study_notes", "title": "Alias Files", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:42:28.835331"}
