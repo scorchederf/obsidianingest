@@ -36,3 +36,4 @@
 {"source_file": "abnormal.md", "note_path": "study-notes/alias-files-1787738997-1787739014-1787739117-1787739261.md", "category": "study_notes", "title": "Alias Files", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:14:21.489963"}
 {"source_file": "windows.md", "note_path": "tools/whoami.md", "category": "tools", "title": "whoami", "stubs_created": ["tools/whoami.md"], "status": "ok", "timestamp": "2026-08-26T20:14:32.086832"}
 {"source_file": "aquatone.md", "note_path": "tools/aquatone.md", "category": "tools", "title": "Aquatone", "stubs_created": ["tools/masscan.md"], "status": "ok", "timestamp": "2026-08-26T20:14:55.604569"}
+{"source_file": "linux.md", "note_path": "study-notes/file-search-commands.md", "category": "study_notes", "title": "File Search Commands", "stubs_created": ["tools/locate.md", "tools/find.md"], "status": "ok", "timestamp": "2026-08-26T20:15:09.555243"}
