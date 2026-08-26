@@ -507,3 +507,4 @@
 {"source_file": "admin.txt", "note_path": "study-notes/admin.md", "category": "study_notes", "title": "admin", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T05:41:44.725117"}
 {"source_file": "9.2.6.vm2.script", "status": "error", "error": "No extractor for '.script' files. Add one in extract.py, or convert '9.2.6.vm2.script' manually before dropping it in the inbox.", "timestamp": "2026-08-27T05:41:46.729176"}
 {"source_file": "evil.txt", "note_path": "study-notes/cross-site-scripting-xss-example.md", "category": "study_notes", "title": "Cross-Site Scripting (XSS) Example", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T05:42:11.817741"}
+{"source_file": "rockyou_50.txt", "note_path": "study-notes/common-passwords-and-password-lists.md", "category": "study_notes", "title": "Common Passwords and Password Lists", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T05:42:39.050326"}
