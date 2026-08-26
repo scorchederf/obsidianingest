@@ -34,3 +34,4 @@
 {"source_file": "osTicket.md", "note_path": "tools/osticket.md", "category": "study_notes", "title": "osTicket", "stubs_created": ["tools/osticket.md"], "status": "ok", "timestamp": "2026-08-26T20:13:52.198583"}
 {"source_file": "shells.md", "note_path": "study-notes/webshell.md", "category": "study_notes", "title": "webshell", "stubs_created": ["tools/cmd-jsp.md"], "status": "ok", "timestamp": "2026-08-26T20:14:03.349270"}
 {"source_file": "abnormal.md", "note_path": "study-notes/alias-files-1787738997-1787739014-1787739117-1787739261.md", "category": "study_notes", "title": "Alias Files", "stubs_created": [], "status": "ok", "timestamp": "2026-08-26T20:14:21.489963"}
+{"source_file": "windows.md", "note_path": "tools/whoami.md", "category": "tools", "title": "whoami", "stubs_created": ["tools/whoami.md"], "status": "ok", "timestamp": "2026-08-26T20:14:32.086832"}
