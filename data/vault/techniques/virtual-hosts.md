@@ -1,11 +1,11 @@
 ---
-title: "Virtual Hosts"
+title: "virtual-hosts"
 aliases: []
 tags: ['technique/virtual-hosts']
 category: "techniques"
 status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
 source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# Virtual Hosts
+# virtual-hosts
 
 ## Overview
-*Stub note — auto-created because another note referenced "Virtual Hosts". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "virtual-hosts". Fill in details when you have them.*
