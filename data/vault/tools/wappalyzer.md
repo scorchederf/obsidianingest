@@ -1,8 +1,8 @@
 ---
-title: "t1132-001"
+title: "wappalyzer"
 aliases: []
-tags: ['technique/t1132-001']
-category: "techniques"
+tags: ['tool/wappalyzer']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# t1132-001
+# wappalyzer
 
 ## Overview
-*Stub note — auto-created because another note referenced "t1132-001". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "wappalyzer". Fill in details when you have them.*

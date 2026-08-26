@@ -1,8 +1,8 @@
 ---
-title: "t1132-001"
+title: "/opt/useful/seclists/Web-Shells"
 aliases: []
-tags: ['technique/t1132-001']
-category: "techniques"
+tags: ['os/opt-useful-seclists-web-shells']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# t1132-001
+# /opt/useful/seclists/Web-Shells
 
 ## Overview
-*Stub note — auto-created because another note referenced "t1132-001". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/opt/useful/seclists/Web-Shells". Fill in details when you have them.*

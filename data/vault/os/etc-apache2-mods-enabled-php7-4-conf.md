@@ -1,8 +1,8 @@
 ---
-title: "t1132-001"
+title: "/etc/apache2/mods-enabled/php7.4.conf"
 aliases: []
-tags: ['technique/t1132-001']
-category: "techniques"
+tags: ['os/etc-apache2-mods-enabled-php7-4-conf']
+category: "os"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# t1132-001
+# /etc/apache2/mods-enabled/php7.4.conf
 
 ## Overview
-*Stub note — auto-created because another note referenced "t1132-001". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/etc/apache2/mods-enabled/php7.4.conf". Fill in details when you have them.*
