@@ -681,3 +681,4 @@
 {"source_file": "exam.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-27T08:05:41.680952"}
 {"source_file": "crowdstrike-ngsiem-queries-2.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-27T08:10:46.459725"}
 {"source_file": "crowdstrike-falcon.md", "note_path": "study-notes/falcon-uninstallation-tokens.md", "category": "study_notes", "title": "Falcon Uninstallation Tokens", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:10:54.066559"}
+{"source_file": "crowdstrike-cloud.md", "note_path": "study-notes/aliases.md", "category": "study_notes", "title": "aliases", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T08:11:02.275692"}
