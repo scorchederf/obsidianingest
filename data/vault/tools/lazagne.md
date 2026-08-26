@@ -1,27 +1,38 @@
 ---
-title: "LaZagne"
+title: laZagne
 aliases: []
-tags: ['tool/lazagne']
-category: "tools"
-status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
-source: "auto-generated stub (referenced by another note, not yet written)"
-related_tools: []
+tags:
+- tool/lazagne
+category: tools
+status: draft
+date_created: '2026-08-26'
+date_modified: '2026-08-26'
+source: laZagne.md
+related_tools:
+- '[[lazagne]]'
 related_techniques: []
 related_tactics: []
 related_services: []
 related_os: []
 related_notes: []
-mitre_tactic: ""
-mitre_technique: ""
-real_path: ""
-port: ""
-protocol: ""
-os: ""
+mitre_tactic: ''
+mitre_technique: ''
+real_path: ''
+port: ''
+protocol: ''
+os: linux
 ---
 
-# LaZagne
+# laZagne
 
-## Overview
-*Stub note — auto-created because another note referenced "LaZagne". Fill in details when you have them.*
+## Description
+- [laZagne github](https://github.com/AlessandroZ/LaZagne.git)
+    - releases [https://github.com/AlessandroZ/LaZagne/releases/](https://github.com/AlessandroZ/LaZagne/releases/)
+    - install `sudo git clone https://github.com/AlessandroZ/LaZagne.git`
+    - linux
+        - `sudo python3 /usr/share/LaZagne/Linux/laZagne.py`
+
+## References
+- https://github.com/AlessandroZ/LaZagne.git
+- https://github.com/AlessandroZ/LaZagne/releases/
+
