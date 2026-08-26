@@ -269,3 +269,4 @@
 {"source_file": "14-110-UsingWebProxies-12-BurpScanner.pdf", "note_path": "study-notes/using-web-proxies-1787756565.md", "category": "study_notes", "title": "Using Web Proxies", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T01:02:45.369404"}
 {"source_file": "10-147-passwordattacks-14-passtheticket.pdf", "status": "error", "error": "'title'", "timestamp": "2026-08-27T01:03:18.537002"}
 {"source_file": "27-162-documentation-06-ReportingTipsAndTricks.pdf", "note_path": "study-notes/documentation-reporting.md", "category": "study_notes", "title": "Documentation & Reporting", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T01:03:39.872979"}
+{"source_file": "16-57-BruteForcing-06-DetermineLoginParameters.pdf", "note_path": "study-notes/login-brute-forcing-1787756658.md", "category": "study_notes", "title": "Login Brute Forcing", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T01:04:18.209991"}
