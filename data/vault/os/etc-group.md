@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/etc/group"
 aliases: []
-tags: ['os/home']
+tags: ['os/etc-group']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /etc/group
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/etc/group". Fill in details when you have them.*

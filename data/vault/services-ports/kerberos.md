@@ -1,8 +1,8 @@
 ---
-title: "/home/*"
+title: "Kerberos"
 aliases: []
-tags: ['os/home']
-category: "os"
+tags: ['service/kerberos']
+category: "services"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# Kerberos
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "Kerberos". Fill in details when you have them.*

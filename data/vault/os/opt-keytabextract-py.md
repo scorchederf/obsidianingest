@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/opt/keytabextract.py"
 aliases: []
-tags: ['os/home']
+tags: ['os/opt-keytabextract-py']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /opt/keytabextract.py
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/opt/keytabextract.py". Fill in details when you have them.*

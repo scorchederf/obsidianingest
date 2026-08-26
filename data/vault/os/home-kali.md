@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/home/kali"
 aliases: []
-tags: ['os/home']
+tags: ['os/home-kali']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /home/kali
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/home/kali". Fill in details when you have them.*

@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/home/*/.ssh/id_rsa"
 aliases: []
-tags: ['os/home']
+tags: ['os/home-ssh-id-rsa']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /home/*/.ssh/id_rsa
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/home/*/.ssh/id_rsa". Fill in details when you have them.*

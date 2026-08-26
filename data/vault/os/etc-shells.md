@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/etc/shells"
 aliases: []
-tags: ['os/home']
+tags: ['os/etc-shells']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /etc/shells
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/etc/shells". Fill in details when you have them.*

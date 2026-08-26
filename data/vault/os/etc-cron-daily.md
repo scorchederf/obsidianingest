@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/etc/cron.daily/"
 aliases: []
-tags: ['os/home']
+tags: ['os/etc-cron-daily']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /etc/cron.daily/
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/etc/cron.daily/". Fill in details when you have them.*

@@ -1,8 +1,8 @@
 ---
-title: "/home/*"
+title: "linikatz"
 aliases: []
-tags: ['os/home']
-category: "os"
+tags: ['tool/linikatz']
+category: "tools"
 status: stub
 date_created: "2026-08-26"
 date_modified: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# linikatz
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "linikatz". Fill in details when you have them.*

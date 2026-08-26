@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/opt/linikatz.sh"
 aliases: []
-tags: ['os/home']
+tags: ['os/opt-linikatz-sh']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /opt/linikatz.sh
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/opt/linikatz.sh". Fill in details when you have them.*

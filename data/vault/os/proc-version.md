@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/proc/version"
 aliases: []
-tags: ['os/home']
+tags: ['os/proc-version']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /proc/version
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/proc/version". Fill in details when you have them.*

@@ -1,7 +1,7 @@
 ---
-title: "/home/*"
+title: "/var/log/*"
 aliases: []
-tags: ['os/home']
+tags: ['os/var-log']
 category: "os"
 status: stub
 date_created: "2026-08-26"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/*
+# /var/log/*
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "/var/log/*". Fill in details when you have them.*
