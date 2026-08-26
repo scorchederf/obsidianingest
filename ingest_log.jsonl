@@ -602,3 +602,5 @@
 {"source_file": "2.crunch.tar.gz", "status": "error", "error": "No extractor for '.gz' files. Add one in extract.py, or convert '2.crunch.tar.gz' manually before dropping it in the inbox.", "timestamp": "2026-08-27T06:54:26.203646"}
 {"source_file": "19.4.6.2.vm1.script", "status": "error", "error": "No extractor for '.script' files. Add one in extract.py, or convert '19.4.6.2.vm1.script' manually before dropping it in the inbox.", "timestamp": "2026-08-27T06:54:26.204339"}
 {"source_file": "500worst.txt", "note_path": "study-notes/common-passwords-and-phrases.md", "category": "study_notes", "title": "Common Passwords and Phrases", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T06:56:07.329862"}
+{"source_file": "notes.md", "status": "error", "error": "HTTPConnectionPool(host='192.168.1.69', port=11434): Read timed out. (read timeout=300)", "timestamp": "2026-08-27T07:02:27.551259"}
+{"source_file": "a.txt", "note_path": "vulnerabilities/flag-rar.md", "category": "vulnerabilities", "title": "flag.rar", "stubs_created": [], "status": "ok", "timestamp": "2026-08-27T07:03:10.246820"}
