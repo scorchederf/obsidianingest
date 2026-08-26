@@ -1,5 +1,5 @@
 ---
-title: "una.txt"
+title: "una-txt"
 aliases: []
 tags: ['os/una-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# una.txt
+# una-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "una.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "una-txt". Fill in details when you have them.*

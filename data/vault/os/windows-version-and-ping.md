@@ -1,40 +1,27 @@
 ---
-title: Windows Version and Ping
+title: "windows-version-and-ping"
 aliases: []
-tags:
-- os/windows
-- tool/ping
-- tool/get-wmiobject
-category: os
-status: draft
-date_created: '2026-08-26'
-date_modified: '2026-08-26'
-source: win-commands.md
-related_tools:
-- '[[ping.exe]]'
-- '[[Get-WmiObject]]'
+tags: ['os/windows-version-and-ping']
+category: "os"
+status: stub
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
+source: "auto-generated stub (referenced by another note, not yet written)"
+related_tools: []
 related_techniques: []
 related_tactics: []
 related_services: []
 related_os: []
 related_notes: []
-mitre_tactic: ''
-mitre_technique: ''
-real_path: ''
-port: ''
-protocol: ''
-os: windows
+mitre_tactic: ""
+mitre_technique: ""
+real_path: ""
+port: ""
+protocol: ""
+os: ""
 ---
 
-# Windows Version and Ping
+# windows-version-and-ping
 
-## Ping Command
-```powershell
-ping.exe -t ucq-cyber-p001 |Foreach{"{0} - {1}" -f (Get-Date),$_}
-```
-
-## Get Windows Version
-```powershell
-Get-WmiObject -Class win32_OperatingSystem | select Version,BuildNumber
-```
-
+## Overview
+*Stub note — auto-created because another note referenced "windows-version-and-ping". Fill in details when you have them.*

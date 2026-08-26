@@ -1,11 +1,11 @@
 ---
-title: "/var/log/apache2/access.log"
+title: "var-log-apache2-access-log"
 aliases: []
 tags: ['os/var-log-apache2-access-log']
 category: "os"
 status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
 source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/log/apache2/access.log
+# var-log-apache2-access-log
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/log/apache2/access.log". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-log-apache2-access-log". Fill in details when you have them.*

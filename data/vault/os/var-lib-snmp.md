@@ -1,5 +1,5 @@
 ---
-title: "/var/lib/snmp"
+title: "var-lib-snmp"
 aliases: []
 tags: ['os/var-lib-snmp']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/lib/snmp
+# var-lib-snmp
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/lib/snmp". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-lib-snmp". Fill in details when you have them.*

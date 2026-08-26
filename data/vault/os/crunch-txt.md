@@ -1,5 +1,5 @@
 ---
-title: "crunch.txt"
+title: "crunch-txt"
 aliases: []
 tags: ['os/crunch-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# crunch.txt
+# crunch-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "crunch.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "crunch-txt". Fill in details when you have them.*

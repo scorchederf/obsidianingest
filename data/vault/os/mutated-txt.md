@@ -1,5 +1,5 @@
 ---
-title: "mutated.txt"
+title: "mutated-txt"
 aliases: []
 tags: ['os/mutated-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# mutated.txt
+# mutated-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "mutated.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "mutated-txt". Fill in details when you have them.*

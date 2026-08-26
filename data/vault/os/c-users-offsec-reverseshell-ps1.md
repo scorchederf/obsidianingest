@@ -1,5 +1,5 @@
 ---
-title: "C:\Users\offsec\reverseshell.ps1"
+title: "c-users-offsec-reverseshell-ps1"
 aliases: []
 tags: ['os/c-users-offsec-reverseshell-ps1']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Users\offsec\reverseshell.ps1
+# c-users-offsec-reverseshell-ps1
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Users\offsec\reverseshell.ps1". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-users-offsec-reverseshell-ps1". Fill in details when you have them.*

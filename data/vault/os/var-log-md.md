@@ -1,7 +1,7 @@
 ---
-title: "c-windows-system32-mimikatz-exe"
+title: "var-log.md"
 aliases: []
-tags: ['os/c-windows-system32-mimikatz-exe']
+tags: ['os/var-log-md']
 category: "os"
 status: stub
 date_created: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# c-windows-system32-mimikatz-exe
+# var-log.md
 
 ## Overview
-*Stub note — auto-created because another note referenced "c-windows-system32-mimikatz-exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-log.md". Fill in details when you have them.*

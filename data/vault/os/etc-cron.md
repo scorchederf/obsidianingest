@@ -1,5 +1,5 @@
 ---
-title: "/etc/cron*"
+title: "etc-cron"
 aliases: []
 tags: ['os/etc-cron']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /etc/cron*
+# etc-cron
 
 ## Overview
-*Stub note — auto-created because another note referenced "/etc/cron*". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "etc-cron". Fill in details when you have them.*

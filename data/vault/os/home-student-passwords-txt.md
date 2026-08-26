@@ -1,5 +1,5 @@
 ---
-title: "/home/student/passwords.txt"
+title: "home-student-passwords-txt"
 aliases: []
 tags: ['os/home-student-passwords-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/student/passwords.txt
+# home-student-passwords-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/student/passwords.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "home-student-passwords-txt". Fill in details when you have them.*

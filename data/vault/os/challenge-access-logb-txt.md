@@ -1,5 +1,5 @@
 ---
-title: "/challenge/access-logB.txt"
+title: "challenge-access-logb-txt"
 aliases: []
 tags: ['os/challenge-access-logb-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /challenge/access-logB.txt
+# challenge-access-logb-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "/challenge/access-logB.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "challenge-access-logb-txt". Fill in details when you have them.*

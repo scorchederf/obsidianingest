@@ -1,5 +1,5 @@
 ---
-title: "values_and_flags.txt"
+title: "values-and-flags-txt"
 aliases: []
 tags: ['os/values-and-flags-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# values_and_flags.txt
+# values-and-flags-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "values_and_flags.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "values-and-flags-txt". Fill in details when you have them.*

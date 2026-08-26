@@ -1,5 +1,5 @@
 ---
-title: "/var/scripts/user_backups.sh"
+title: "var-scripts-user-backups-sh"
 aliases: []
 tags: ['os/var-scripts-user-backups-sh']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/scripts/user_backups.sh
+# var-scripts-user-backups-sh
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/scripts/user_backups.sh". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-scripts-user-backups-sh". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "/challenge/to-redirect-and-search"
+title: "challenge-to-redirect-and-search"
 aliases: []
 tags: ['os/challenge-to-redirect-and-search']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /challenge/to-redirect-and-search
+# challenge-to-redirect-and-search
 
 ## Overview
-*Stub note — auto-created because another note referenced "/challenge/to-redirect-and-search". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "challenge-to-redirect-and-search". Fill in details when you have them.*

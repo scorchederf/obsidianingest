@@ -1,5 +1,5 @@
 ---
-title: "/challenge/watchman"
+title: "challenge-watchman"
 aliases: []
 tags: ['os/challenge-watchman']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /challenge/watchman
+# challenge-watchman
 
 ## Overview
-*Stub note — auto-created because another note referenced "/challenge/watchman". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "challenge-watchman". Fill in details when you have them.*

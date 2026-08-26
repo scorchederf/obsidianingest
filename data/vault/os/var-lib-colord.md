@@ -1,5 +1,5 @@
 ---
-title: "/var/lib/colord"
+title: "var-lib-colord"
 aliases: []
 tags: ['os/var-lib-colord']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/lib/colord
+# var-lib-colord
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/lib/colord". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-lib-colord". Fill in details when you have them.*

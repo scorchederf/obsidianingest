@@ -1,5 +1,5 @@
 ---
-title: "/challenge/end"
+title: "challenge-end"
 aliases: []
 tags: ['os/challenge-end']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /challenge/end
+# challenge-end
 
 ## Overview
-*Stub note — auto-created because another note referenced "/challenge/end". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "challenge-end". Fill in details when you have them.*

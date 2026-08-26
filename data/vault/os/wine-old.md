@@ -1,5 +1,5 @@
 ---
-title: "~/.wine.old"
+title: "wine-old"
 aliases: []
 tags: ['os/wine-old']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# ~/.wine.old
+# wine-old
 
 ## Overview
-*Stub note — auto-created because another note referenced "~/.wine.old". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "wine-old". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "/var/lib/tpm"
+title: "var-lib-tpm"
 aliases: []
 tags: ['os/var-lib-tpm']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/lib/tpm
+# var-lib-tpm
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/lib/tpm". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-lib-tpm". Fill in details when you have them.*

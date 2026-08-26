@@ -1,5 +1,5 @@
 ---
-title: "/home/student/logs/access-log2.txt"
+title: "home-student-logs-access-log2-txt"
 aliases: []
 tags: ['os/home-student-logs-access-log2-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/student/logs/access-log2.txt
+# home-student-logs-access-log2-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/student/logs/access-log2.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "home-student-logs-access-log2-txt". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "megacorp-cewl.txt"
+title: "megacorp-cewl-txt"
 aliases: []
 tags: ['os/megacorp-cewl-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# megacorp-cewl.txt
+# megacorp-cewl-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "megacorp-cewl.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "megacorp-cewl-txt". Fill in details when you have them.*

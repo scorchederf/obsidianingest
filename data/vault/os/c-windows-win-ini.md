@@ -1,5 +1,5 @@
 ---
-title: "C:\Windows\win.ini"
+title: "c-windows-win-ini"
 aliases: []
 tags: ['os/c-windows-win-ini']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Windows\win.ini
+# c-windows-win-ini
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Windows\win.ini". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-windows-win-ini". Fill in details when you have them.*

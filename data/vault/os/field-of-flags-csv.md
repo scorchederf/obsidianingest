@@ -1,5 +1,5 @@
 ---
-title: "field_of_flags.csv"
+title: "field-of-flags-csv"
 aliases: []
 tags: ['os/field-of-flags-csv']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# field_of_flags.csv
+# field-of-flags-csv
 
 ## Overview
-*Stub note — auto-created because another note referenced "field_of_flags.csv". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "field-of-flags-csv". Fill in details when you have them.*

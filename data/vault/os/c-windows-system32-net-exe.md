@@ -1,5 +1,5 @@
 ---
-title: "C:\Windows\System32\net.exe"
+title: "c-windows-system32-net-exe"
 aliases: []
 tags: ['os/c-windows-system32-net-exe']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Windows\System32\net.exe
+# c-windows-system32-net-exe
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Windows\System32\net.exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-windows-system32-net-exe". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "notes.md"
+title: "notes-md"
 aliases: []
 tags: ['os/notes-md']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# notes.md
+# notes-md
 
 ## Overview
-*Stub note — auto-created because another note referenced "notes.md". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "notes-md". Fill in details when you have them.*

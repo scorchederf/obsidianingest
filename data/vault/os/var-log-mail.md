@@ -1,11 +1,11 @@
 ---
-title: "/var/log/mail"
+title: "var-log-mail"
 aliases: []
 tags: ['os/var-log-mail']
 category: "os"
 status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
 source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/log/mail
+# var-log-mail
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/log/mail". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-log-mail". Fill in details when you have them.*

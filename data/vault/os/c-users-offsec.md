@@ -1,5 +1,5 @@
 ---
-title: "C:\Users\offsec"
+title: "c-users-offsec"
 aliases: []
 tags: ['os/c-users-offsec']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Users\offsec
+# c-users-offsec
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Users\offsec". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-users-offsec". Fill in details when you have them.*

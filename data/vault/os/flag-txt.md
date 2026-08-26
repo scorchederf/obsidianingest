@@ -1,5 +1,5 @@
 ---
-title: "flag.txt"
+title: "flag-txt"
 aliases: []
 tags: ['os/flag-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# flag.txt
+# flag-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "flag.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "flag-txt". Fill in details when you have them.*

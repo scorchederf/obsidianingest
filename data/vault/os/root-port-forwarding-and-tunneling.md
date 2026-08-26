@@ -1,5 +1,5 @@
 ---
-title: "/root/port_forwarding_and_tunneling/"
+title: "root-port-forwarding-and-tunneling"
 aliases: []
 tags: ['os/root-port-forwarding-and-tunneling']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /root/port_forwarding_and_tunneling/
+# root-port-forwarding-and-tunneling
 
 ## Overview
-*Stub note — auto-created because another note referenced "/root/port_forwarding_and_tunneling/". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "root-port-forwarding-and-tunneling". Fill in details when you have them.*

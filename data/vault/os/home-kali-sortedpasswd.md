@@ -1,5 +1,5 @@
 ---
-title: "/home/kali/sortedpasswd"
+title: "home-kali-sortedpasswd"
 aliases: []
 tags: ['os/home-kali-sortedpasswd']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/kali/sortedpasswd
+# home-kali-sortedpasswd
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/kali/sortedpasswd". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "home-kali-sortedpasswd". Fill in details when you have them.*

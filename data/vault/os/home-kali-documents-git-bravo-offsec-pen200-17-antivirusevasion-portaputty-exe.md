@@ -1,5 +1,5 @@
 ---
-title: "/home/kali/Documents/git/bravo/offsec/pen200/17-AntivirusEvasion/portaputty.exe"
+title: "home-kali-documents-git-bravo-offsec-pen200-17-antivirusevasion-portaputty-exe"
 aliases: []
 tags: ['os/home-kali-documents-git-bravo-offsec-pen200-17-antivirusevasion-portaputty-exe']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/kali/Documents/git/bravo/offsec/pen200/17-AntivirusEvasion/portaputty.exe
+# home-kali-documents-git-bravo-offsec-pen200-17-antivirusevasion-portaputty-exe
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/kali/Documents/git/bravo/offsec/pen200/17-AntivirusEvasion/portaputty.exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "home-kali-documents-git-bravo-offsec-pen200-17-antivirusevasion-portaputty-exe". Fill in details when you have them.*

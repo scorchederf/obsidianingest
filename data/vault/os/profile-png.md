@@ -1,11 +1,11 @@
 ---
-title: "profile.png"
+title: "profile-png"
 aliases: []
 tags: ['os/profile-png']
 category: "os"
 status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
 source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# profile.png
+# profile-png
 
 ## Overview
-*Stub note — auto-created because another note referenced "profile.png". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "profile-png". Fill in details when you have them.*

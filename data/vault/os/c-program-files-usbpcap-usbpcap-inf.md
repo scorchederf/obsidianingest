@@ -1,5 +1,5 @@
 ---
-title: "C:\Program Files\USBPcap\USBPcap.inf"
+title: "c-program-files-usbpcap-usbpcap-inf"
 aliases: []
 tags: ['os/c-program-files-usbpcap-usbpcap-inf']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Program Files\USBPcap\USBPcap.inf
+# c-program-files-usbpcap-usbpcap-inf
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Program Files\USBPcap\USBPcap.inf". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-program-files-usbpcap-usbpcap-inf". Fill in details when you have them.*

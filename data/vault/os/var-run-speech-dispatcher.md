@@ -1,5 +1,5 @@
 ---
-title: "/var/run/speech-dispatcher"
+title: "var-run-speech-dispatcher"
 aliases: []
 tags: ['os/var-run-speech-dispatcher']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/run/speech-dispatcher
+# var-run-speech-dispatcher
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/run/speech-dispatcher". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-run-speech-dispatcher". Fill in details when you have them.*

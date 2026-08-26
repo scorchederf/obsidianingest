@@ -1,5 +1,5 @@
 ---
-title: "rar.hashes"
+title: "rar-hashes"
 aliases: []
 tags: ['os/rar-hashes']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# rar.hashes
+# rar-hashes
 
 ## Overview
-*Stub note — auto-created because another note referenced "rar.hashes". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "rar-hashes". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "~/.hushlogin"
+title: "hushlogin"
 aliases: []
 tags: ['os/hushlogin']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# ~/.hushlogin
+# hushlogin
 
 ## Overview
-*Stub note — auto-created because another note referenced "~/.hushlogin". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "hushlogin". Fill in details when you have them.*

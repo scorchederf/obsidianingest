@@ -1,5 +1,5 @@
 ---
-title: "/var/lib/lightdm"
+title: "var-lib-lightdm"
 aliases: []
 tags: ['os/var-lib-lightdm']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /var/lib/lightdm
+# var-lib-lightdm
 
 ## Overview
-*Stub note — auto-created because another note referenced "/var/lib/lightdm". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "var-lib-lightdm". Fill in details when you have them.*

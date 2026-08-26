@@ -1,5 +1,5 @@
 ---
-title: "/home/flag.txt"
+title: "home-flag-txt"
 aliases: []
 tags: ['os/home-flag-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/flag.txt
+# home-flag-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/flag.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "home-flag-txt". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "/challenge/scans.tar.gz"
+title: "challenge-scans-tar-gz"
 aliases: []
 tags: ['os/challenge-scans-tar-gz']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /challenge/scans.tar.gz
+# challenge-scans-tar-gz
 
 ## Overview
-*Stub note — auto-created because another note referenced "/challenge/scans.tar.gz". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "challenge-scans-tar-gz". Fill in details when you have them.*

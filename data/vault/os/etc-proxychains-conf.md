@@ -1,5 +1,5 @@
 ---
-title: "/etc/proxychains.conf"
+title: "etc-proxychains-conf"
 aliases: []
 tags: ['os/etc-proxychains-conf']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /etc/proxychains.conf
+# etc-proxychains-conf
 
 ## Overview
-*Stub note — auto-created because another note referenced "/etc/proxychains.conf". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "etc-proxychains-conf". Fill in details when you have them.*

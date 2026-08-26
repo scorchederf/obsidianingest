@@ -1,5 +1,5 @@
 ---
-title: "C:\Program Files\Serviio\bin\ServiioService.exe"
+title: "c-program-files-serviio-bin-serviioservice-exe"
 aliases: []
 tags: ['os/c-program-files-serviio-bin-serviioservice-exe']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Program Files\Serviio\bin\ServiioService.exe
+# c-program-files-serviio-bin-serviioservice-exe
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Program Files\Serviio\bin\ServiioService.exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-program-files-serviio-bin-serviioservice-exe". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "C:\Windows"
+title: "c-windows"
 aliases: []
 tags: ['os/c-windows']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Windows
+# c-windows
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Windows". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-windows". Fill in details when you have them.*

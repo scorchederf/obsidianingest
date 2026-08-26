@@ -1,11 +1,11 @@
 ---
-title: "C:\Windows\boot.ini"
+title: "c-windows-boot-ini"
 aliases: []
 tags: ['os/c-windows-boot-ini']
 category: "os"
 status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
 source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Windows\boot.ini
+# c-windows-boot-ini
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Windows\boot.ini". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-windows-boot-ini". Fill in details when you have them.*

@@ -1,5 +1,5 @@
 ---
-title: "words.lst"
+title: "words-lst"
 aliases: []
 tags: ['os/words-lst']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# words.lst
+# words-lst
 
 ## Overview
-*Stub note — auto-created because another note referenced "words.lst". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "words-lst". Fill in details when you have them.*

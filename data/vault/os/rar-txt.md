@@ -1,5 +1,5 @@
 ---
-title: "rar.txt"
+title: "rar-txt"
 aliases: []
 tags: ['os/rar-txt']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# rar.txt
+# rar-txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "rar.txt". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "rar-txt". Fill in details when you have them.*

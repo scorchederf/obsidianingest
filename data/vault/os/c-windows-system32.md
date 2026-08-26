@@ -1,5 +1,5 @@
 ---
-title: "C:\WINDOWS\system32"
+title: "c-windows-system32"
 aliases: []
 tags: ['os/c-windows-system32']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\WINDOWS\system32
+# c-windows-system32
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\WINDOWS\system32". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-windows-system32". Fill in details when you have them.*

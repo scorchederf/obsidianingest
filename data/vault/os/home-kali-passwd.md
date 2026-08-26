@@ -1,5 +1,5 @@
 ---
-title: "/home/kali/passwd"
+title: "home-kali-passwd"
 aliases: []
 tags: ['os/home-kali-passwd']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/kali/passwd
+# home-kali-passwd
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/kali/passwd". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "home-kali-passwd". Fill in details when you have them.*

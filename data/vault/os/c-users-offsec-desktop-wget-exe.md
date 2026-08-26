@@ -1,5 +1,5 @@
 ---
-title: "C:\Users\offsec\Desktop\wget.exe"
+title: "c-users-offsec-desktop-wget-exe"
 aliases: []
 tags: ['os/c-users-offsec-desktop-wget-exe']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Users\offsec\Desktop\wget.exe
+# c-users-offsec-desktop-wget-exe
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Users\offsec\Desktop\wget.exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-users-offsec-desktop-wget-exe". Fill in details when you have them.*

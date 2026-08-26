@@ -1,5 +1,5 @@
 ---
-title: "C:\Windows\System32\ping.exe"
+title: "c-windows-system32-ping-exe"
 aliases: []
 tags: ['os/c-windows-system32-ping-exe']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\Windows\System32\ping.exe
+# c-windows-system32-ping-exe
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\Windows\System32\ping.exe". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "c-windows-system32-ping-exe". Fill in details when you have them.*

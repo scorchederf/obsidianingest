@@ -1,5 +1,5 @@
 ---
-title: "rev.sh"
+title: "rev-sh"
 aliases: []
 tags: ['os/rev-sh']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# rev.sh
+# rev-sh
 
 ## Overview
-*Stub note — auto-created because another note referenced "rev.sh". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "rev-sh". Fill in details when you have them.*

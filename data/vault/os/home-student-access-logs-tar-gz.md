@@ -1,5 +1,5 @@
 ---
-title: "/home/student/access-logs.tar.gz"
+title: "home-student-access-logs-tar-gz"
 aliases: []
 tags: ['os/home-student-access-logs-tar-gz']
 category: "os"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# /home/student/access-logs.tar.gz
+# home-student-access-logs-tar-gz
 
 ## Overview
-*Stub note — auto-created because another note referenced "/home/student/access-logs.tar.gz". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "home-student-access-logs-tar-gz". Fill in details when you have them.*

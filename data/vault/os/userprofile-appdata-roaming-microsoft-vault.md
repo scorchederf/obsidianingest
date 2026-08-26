@@ -1,11 +1,11 @@
 ---
-title: "%UserProfile%\AppData\Roaming\Microsoft\Vault\"
+title: "userprofile-appdata-roaming-microsoft-vault"
 aliases: []
 tags: ['os/userprofile-appdata-roaming-microsoft-vault']
 category: "os"
 status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
 source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# %UserProfile%\AppData\Roaming\Microsoft\Vault\
+# userprofile-appdata-roaming-microsoft-vault
 
 ## Overview
-*Stub note — auto-created because another note referenced "%UserProfile%\AppData\Roaming\Microsoft\Vault\". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "userprofile-appdata-roaming-microsoft-vault". Fill in details when you have them.*
