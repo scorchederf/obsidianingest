@@ -1,8 +1,8 @@
 ---
-title: "C:\"
+title: "System.Net.WebClient"
 aliases: []
-tags: ['os/c']
-category: "os"
+tags: ['tool/system-net-webclient']
+category: "tools"
 status: stub
 date_created: "2026-08-27"
 date_modified: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\
+# System.Net.WebClient
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "System.Net.WebClient". Fill in details when you have them.*

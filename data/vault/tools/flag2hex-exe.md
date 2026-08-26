@@ -1,8 +1,8 @@
 ---
-title: "C:\"
+title: "flag2hex.exe"
 aliases: []
-tags: ['os/c']
-category: "os"
+tags: ['tool/flag2hex-exe']
+category: "tools"
 status: stub
 date_created: "2026-08-27"
 date_modified: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\
+# flag2hex.exe
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "flag2hex.exe". Fill in details when you have them.*

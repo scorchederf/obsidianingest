@@ -1,8 +1,8 @@
 ---
-title: "C:\"
+title: "New-Object"
 aliases: []
-tags: ['os/c']
-category: "os"
+tags: ['tool/new-object']
+category: "tools"
 status: stub
 date_created: "2026-08-27"
 date_modified: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\
+# New-Object
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "New-Object". Fill in details when you have them.*

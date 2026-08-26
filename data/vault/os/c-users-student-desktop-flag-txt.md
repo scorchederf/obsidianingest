@@ -1,7 +1,7 @@
 ---
-title: "C:\"
+title: "C:\Users\student\Desktop\flag.txt"
 aliases: []
-tags: ['os/c']
+tags: ['os/c-users-student-desktop-flag-txt']
 category: "os"
 status: stub
 date_created: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# C:\
+# C:\Users\student\Desktop\flag.txt
 
 ## Overview
-*Stub note — auto-created because another note referenced "C:\". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "C:\Users\student\Desktop\flag.txt". Fill in details when you have them.*
