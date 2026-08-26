@@ -1,0 +1,35 @@
+---
+title: mongodb
+aliases: []
+tags:
+- study-notes
+category: study_notes
+status: draft
+date_created: '2026-08-26'
+date_modified: '2026-08-26'
+source: mongodb.md
+related_tools:
+- '[[mongo]]'
+related_techniques: []
+related_tactics: []
+related_services: []
+related_os: []
+related_notes: []
+mitre_tactic: ''
+mitre_technique: ''
+real_path: ''
+port: ''
+protocol: ''
+os: ''
+---
+
+# mongodb
+
+## Commands
+- `mongo $ip`
+- list all databases `show dbs`
+- show all users `show users`
+- use database `use dbname`
+- show collections `show collections`
+- get item `db.flag.find().pretty()`
+
