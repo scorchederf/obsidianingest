@@ -1,8 +1,8 @@
 ---
-title: "defense-evasion"
+title: "ssh_remote_port_forward.sh"
 aliases: []
-tags: ['attack/defense-evasion']
-category: "tactics"
+tags: ['tool/ssh-remote-port-forward-sh']
+category: "tools"
 status: stub
 date_created: "2026-08-27"
 date_modified: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# defense-evasion
+# ssh_remote_port_forward.sh
 
 ## Overview
-*Stub note — auto-created because another note referenced "defense-evasion". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "ssh_remote_port_forward.sh". Fill in details when you have them.*

@@ -1,8 +1,8 @@
 ---
-title: "defense-evasion"
+title: "clear_rules.sh"
 aliases: []
-tags: ['attack/defense-evasion']
-category: "tactics"
+tags: ['tool/clear-rules-sh']
+category: "tools"
 status: stub
 date_created: "2026-08-27"
 date_modified: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# defense-evasion
+# clear_rules.sh
 
 ## Overview
-*Stub note — auto-created because another note referenced "defense-evasion". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "clear_rules.sh". Fill in details when you have them.*

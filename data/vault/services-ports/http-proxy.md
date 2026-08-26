@@ -1,11 +1,11 @@
 ---
-title: "HTTP proxy"
+title: "http-proxy"
 aliases: []
 tags: ['service/http-proxy']
 category: "services"
 status: stub
-date_created: "2026-08-26"
-date_modified: "2026-08-26"
+date_created: "2026-08-27"
+date_modified: "2026-08-27"
 source: "auto-generated stub (referenced by another note, not yet written)"
 related_tools: []
 related_techniques: []
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# HTTP proxy
+# http-proxy
 
 ## Overview
-*Stub note — auto-created because another note referenced "HTTP proxy". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "http-proxy". Fill in details when you have them.*

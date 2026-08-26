@@ -1,8 +1,8 @@
 ---
-title: "defense-evasion"
+title: "rev.sh"
 aliases: []
-tags: ['attack/defense-evasion']
-category: "tactics"
+tags: ['os/rev-sh']
+category: "os"
 status: stub
 date_created: "2026-08-27"
 date_modified: "2026-08-27"
@@ -21,7 +21,7 @@ protocol: ""
 os: ""
 ---
 
-# defense-evasion
+# rev.sh
 
 ## Overview
-*Stub note — auto-created because another note referenced "defense-evasion". Fill in details when you have them.*
+*Stub note — auto-created because another note referenced "rev.sh". Fill in details when you have them.*
